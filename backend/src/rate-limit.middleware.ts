@@ -14,7 +14,14 @@ export class RateLimitMiddleware implements NestMiddleware {
   private counters = new Map<string, Counter>();
 
   use(req: Request, res: Response, next: NextFunction): void {
-    const windowMs = Number(process.env.RATE_LIMIT_WINDOW_MS || DEFAULT_WINDOW_MS);
+    if (!this.shouldLimit(req)) {
+      next();
+      return;
+    }
+
+    const windowMs = Number(
+      process.env.RATE_LIMIT_WINDOW_MS || DEFAULT_WINDOW_MS,
+    );
     const max = Number(process.env.RATE_LIMIT_MAX || DEFAULT_MAX);
     const key = req.ip || "unknown";
     const now = Date.now();
@@ -27,14 +34,27 @@ export class RateLimitMiddleware implements NestMiddleware {
 
     counter.count += 1;
     res.setHeader("X-RateLimit-Limit", String(max));
-    res.setHeader("X-RateLimit-Remaining", String(Math.max(0, max - counter.count)));
+    res.setHeader(
+      "X-RateLimit-Remaining",
+      String(Math.max(0, max - counter.count)),
+    );
     res.setHeader("X-RateLimit-Reset", String(counter.resetAt));
 
     if (counter.count > max) {
-      res.status(429).json({ code: "RATE_LIMIT", message: "Too many requests" });
+      res
+        .status(429)
+        .json({ error: { code: "RATE_LIMIT", message: "Too many requests" } });
       return;
     }
 
     next();
+  }
+
+  private shouldLimit(req: Request): boolean {
+    const method = req.method.toUpperCase();
+    if (method === "GET" || method === "HEAD" || method === "OPTIONS") {
+      return false;
+    }
+    return true;
   }
 }
