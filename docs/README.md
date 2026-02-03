@@ -1,7 +1,7 @@
 # Solvera Markets Documentation (agent-first)
 
 ## Purpose
-This folder contains sequential, agent-first documentation for Solvera Markets based on `_in/` materials. It is designed for autonomous agent development without human intervention.
+This folder contains sequential, agent-first documentation for Solvera Markets. It is designed for autonomous agent development without human intervention.
 
 ## Change policy
 - Any code change must be reflected in documentation.
@@ -35,8 +35,5 @@ This folder contains sequential, agent-first documentation for Solvera Markets b
 
 ## Sources
 All factual statements are based on:
-- `_in/Roadmap.md`
-- `_in/PRD v0.1 MVP Stage 1.md`
-- `_in/Spec v0.md`
 
 If a section is marked as an inference or hypothesis, it is explicitly labeled.
