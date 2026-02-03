@@ -1,40 +1,40 @@
-# Документация Intent Marketplace (для агентной разработки)
+# Intent Marketplace Documentation (agent-first)
 
-## Назначение
-Эта папка — последовательная, агент‑ориентированная документация по проекту Intent Marketplace на базе материалов из `_in/`. Она предназначена для разработки смарт‑контракта и агентной инфраструктуры без участия человека.
+## Purpose
+This folder contains sequential, agent-first documentation for Intent Marketplace based on `_in/` materials. It is designed for autonomous agent development without human intervention.
 
-## Политика изменений
-- Любые изменения в коде фиксируются в документации.
-- Любой новый или изменённый код покрывается тестами для минимизации ошибок.
-- Весь код проходит линтеры и автофиксаторы перед коммитом.
+## Change policy
+- Any code change must be reflected in documentation.
+- Any new or modified code must be covered by tests to minimize errors.
+- All code must pass linters and auto-formatters before commit.
 
-## Навигация
-1. `docs/01-vision-roadmap.md` — продуктовая рамка и этапы развития.
-2. `docs/02-mvp-scope.md` — точный scope MVP (Этап 1).
-3. `docs/03-roles-intents.md` — роли, типы интентов, параметры.
-4. `docs/04-state-machine.md` — state machine, переходы, запреты.
-5. `docs/05-contract-spec.md` — спецификация функций и правил.
-6. `docs/06-economics-fees-bond.md` — экономика, комиссии, bond.
-7. `docs/07-events-sdk.md` — событийный API для SDK.
-8. `docs/08-testing-invariants.md` — тест‑план и инварианты.
-9. `docs/09-risks-metrics.md` — риски и метрики успеха.
-10. `docs/10-open-parameters.md` — конфигурация и открытые параметры.
-11. `docs/11-assumptions-gaps.md` — явные допущения и пробелы.
-12. `docs/12-abi-events.md` — ABI и payload‑схемы событий.
-13. `docs/12-repo-structure.md` — структура репозитория и проверки.
-14. `docs/13-audit-checklist.md` — аудит‑чеклист.
-15. `docs/14-deployments.md` — деплои и адреса.
-16. `docs/15-mainnet-checklist.md` — чеклист mainnet деплоя.
-17. `docs/16-indexer-model.md` — модель индексатора.
-18. `docs/17-backend-api.md` — спецификация backend API.
-19. `docs/18-ops-indexer-backend.md` — эксплуатация indexer/backend.
+## Navigation
+1. `docs/01-vision-roadmap.md` — product vision and phases.
+2. `docs/02-mvp-scope.md` — MVP scope (Stage 1).
+3. `docs/03-roles-intents.md` — roles, intent types, parameters.
+4. `docs/04-state-machine.md` — state machine, transitions, prohibitions.
+5. `docs/05-contract-spec.md` — function and rules specification.
+6. `docs/06-economics-fees-bond.md` — economics, fees, bond.
+7. `docs/07-events-sdk.md` — event-based API for SDK.
+8. `docs/08-testing-invariants.md` — test plan and invariants.
+9. `docs/09-risks-metrics.md` — risks and success metrics.
+10. `docs/10-open-parameters.md` — configuration parameters.
+11. `docs/11-assumptions-gaps.md` — assumptions and gaps.
+12. `docs/12-abi-events.md` — ABI and event payloads.
+13. `docs/12-repo-structure.md` — repo structure and checks.
+14. `docs/13-audit-checklist.md` — audit checklist.
+15. `docs/14-deployments.md` — deployments and addresses.
+16. `docs/15-mainnet-checklist.md` — mainnet deployment checklist.
+17. `docs/16-indexer-model.md` — indexer data model.
+18. `docs/17-backend-api.md` — backend API specification.
+19. `docs/18-ops-indexer-backend.md` — indexer/backend operations.
 20. `docs/19-subgraph-endpoints.md` — subgraph endpoints.
-21. `docs/20-engineering-standards.md` — инженерные стандарты.
+21. `docs/20-engineering-standards.md` — engineering standards.
 
-## Источник фактов
-Все фактические утверждения взяты из:
+## Sources
+All factual statements are based on:
 - `_in/Roadmap.md`
 - `_in/PRD v0.1 MVP Stage 1.md`
 - `_in/Spec v0.md`
 
-Если раздел помечен как «вывод» или «гипотеза», это явно указано внутри документа.
+If a section is marked as an inference or hypothesis, it is explicitly labeled.

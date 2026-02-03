@@ -1,4 +1,4 @@
-.PHONY: check fmt lint test validate
+.PHONY: check fmt lint test validate fix
 
 check: validate fmt lint test
 
@@ -13,3 +13,5 @@ lint:
 
 test:
 	@./scripts/test.sh
+
+fix: fmt lint

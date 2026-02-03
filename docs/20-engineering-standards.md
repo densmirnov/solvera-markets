@@ -1,20 +1,20 @@
-# Инженерные стандарты
+# Engineering Standards
 
-## Обязательные требования
-- Весь код проходит линтеры и автофиксаторы перед коммитом.
-- Любые изменения в коде фиксируются в документации.
-- Изменения должны сопровождаться тестами или явным обоснованием, почему тест не нужен.
+## Mandatory Requirements
+- All code must pass linters and auto-formatters before any commit.
+- Any code change must be reflected in documentation.
+- Changes must include tests or an explicit, documented reason why tests are not required.
 
-## Линтеры и фиксаторы
-- Использовать самые строгие безопасные режимы по умолчанию.
-- Форматирование выполняется автоматически.
-- Запрещено отключать правила без документированного обоснования.
+## Linters and Formatters
+- Use the safest strict modes by default.
+- Formatting is automated and non-optional.
+- Disabling rules is forbidden without documented justification.
 
-## Контроль качества
-- `make check` — единая команда проверки.
-- CI должен повторять локальные проверки без исключений.
+## Quality Control
+- `make check` is the single entrypoint for validation.
+- CI must run the same checks as local workflows.
 
-## Минимизация ошибок
-- Предпочитать детерминированные зависимости (lockfile).
-- Минимизировать глобальные состояния и скрытые side effects.
-- Логировать отказоустойчивые ошибки (backend).
+## Error Minimization
+- Prefer deterministic dependencies (lockfiles).
+- Avoid hidden global state and side effects.
+- Log recoverable errors in the backend.
