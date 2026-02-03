@@ -109,6 +109,7 @@
 - Task: define API for intents, offers, statuses, reputation.
 - Dependencies: 2.1.
 - Verify: `docs/17-backend-api.md`.
+ - Note: API must be agent-first and include endpoints for automated agent integration.
 
 ### 3.2 Backend implementation
 - Task: REST/GraphQL over indexer.
@@ -138,6 +139,11 @@
 - Task: view events and state.
 - Dependencies: 4.1.
 - Verify: correct state machine rendering.
+
+### 4.2a Agent integration guide (SKILL.md)
+- Task: create `frontend/SKILL.md` with best practices for AI agents to connect and use the market.
+- Dependencies: 4.2.
+- Verify: `frontend/SKILL.md` published and referenced in docs.
 
 ### 4.3 Frontend deploy
 - Task: deploy (CDN/Pages) + basic analytics.
