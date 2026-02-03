@@ -1,4 +1,4 @@
-# Intent Marketplace — SPEC v0.1 (Stage 1, Base)
+# Solvera Markets — SPEC v0.1 (Stage 1, Base)
 
 > Goal: unambiguous behavior specification for contract implementation and tests.
 

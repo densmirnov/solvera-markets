@@ -1,4 +1,4 @@
-# ROADMAP — path to published MVP
+# ROADMAP — path to published MVP (Solvera Markets)
 
 ## Key principles
 - Code is covered by tests to minimize errors.

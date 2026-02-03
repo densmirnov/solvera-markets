@@ -1,5 +1,4 @@
 .DS_Store
-.agentplane/
 node_modules/
 .cache/
 .dist/

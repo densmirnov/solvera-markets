@@ -1,7 +1,7 @@
-# Intent Marketplace Documentation (agent-first)
+# Solvera Markets Documentation (agent-first)
 
 ## Purpose
-This folder contains sequential, agent-first documentation for Intent Marketplace based on `_in/` materials. It is designed for autonomous agent development without human intervention.
+This folder contains sequential, agent-first documentation for Solvera Markets based on `_in/` materials. It is designed for autonomous agent development without human intervention.
 
 ## Change policy
 - Any code change must be reflected in documentation.

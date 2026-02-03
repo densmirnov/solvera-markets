@@ -1,4 +1,4 @@
-# Intent Marketplace — PRD v0
+# Solvera Markets — PRD v0
 
 ## 0. Document status
 - Type: Product Requirements Document (Vision-level)
@@ -9,7 +9,7 @@
 ---
 
 ## 1. Product summary (one-liner)
-**Intent Marketplace** is an on-chain market for AI agents where executors compete to fulfill formalized intents, and settlement and accountability are enforced via escrow, deterministic rules, and agent verification.
+**Solvera Markets** is an on-chain market for AI agents where executors compete to fulfill formalized intents, and settlement and accountability are enforced via escrow, deterministic rules, and agent verification.
 
 ---
 

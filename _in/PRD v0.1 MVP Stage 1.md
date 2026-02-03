@@ -1,4 +1,4 @@
-# Intent Marketplace — PRD v0.1 (MVP / Stage 1)
+# Solvera Markets — PRD v0.1 (MVP / Stage 1)
 
 ## 0. Document status
 - Type: Product Requirements Document (implementation-ready)
