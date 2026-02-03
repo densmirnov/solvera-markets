@@ -21,6 +21,9 @@
 11. `docs/11-assumptions-gaps.md` — явные допущения и пробелы.
 12. `docs/12-abi-events.md` — ABI и payload‑схемы событий.
 13. `docs/12-repo-structure.md` — структура репозитория и проверки.
+14. `docs/13-audit-checklist.md` — аудит‑чеклист.
+15. `docs/14-deployments.md` — деплои и адреса.
+16. `docs/15-mainnet-checklist.md` — чеклист mainnet деплоя.
 
 ## Источник фактов
 Все фактические утверждения взяты из:
