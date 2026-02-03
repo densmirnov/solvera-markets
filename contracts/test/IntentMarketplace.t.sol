@@ -50,11 +50,11 @@ contract IntentMarketplaceTest is Test {
   MockERC20 private reward;
   MockERC20 private tokenOut;
 
-  address private feeRecipient = address(0xFEE);
-  address private payer = address(0xP1);
-  address private initiator = address(0xP2);
-  address private verifier = address(0xP3);
-  address private solver = address(0xP4);
+  address private feeRecipient = address(0xFEE1);
+  address private payer = address(0x1001);
+  address private initiator = address(0x1002);
+  address private verifier = address(0x1003);
+  address private solver = address(0x1004);
 
   uint16 private feeBps = 50; // 0.5%
   uint256 private fixedFee = 1e6;
