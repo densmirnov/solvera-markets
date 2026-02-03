@@ -45,8 +45,8 @@ export function handleIntentCreated(event: IntentCreatedEvent): void {
   intent.payer = event.params.payer;
   intent.initiator = event.params.initiator;
   intent.verifier = event.params.verifier;
-  intent.ttlSubmit = BigInt.fromU64(event.params.ttlSubmit);
-  intent.ttlAccept = BigInt.fromU64(event.params.ttlAccept);
+  intent.ttlSubmit = event.params.ttlSubmit;
+  intent.ttlAccept = event.params.ttlAccept;
   intent.state = "OPEN";
   intent.createdAt = event.block.timestamp;
   intent.updatedAt = event.block.timestamp;
