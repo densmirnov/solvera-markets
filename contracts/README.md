@@ -1,66 +1,18 @@
-## Foundry
+# Contracts
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+## Purpose
+This folder contains the Solidity implementation of the Solvera Markets protocol and its tests. The core contract is `IntentMarketplace` and enforces the MVP state machine, economic rules, and reputation updates.
 
-Foundry consists of:
+## Structure
+- `src/` — Solidity sources (`IntentMarketplace.sol`).
+- `test/` — Foundry tests for scenario and invariant coverage.
+- `script/` — deployment scripts (Foundry).
+- `foundry.toml` — Foundry configuration.
 
-- **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
-- **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
-- **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
-- **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+## Key flows
+- Intent creation, solver offers, winner selection, fulfillment, acceptance, and expiry are implemented on-chain.
+- All critical transitions emit events for the indexer and SDKs.
 
-## Documentation
-
-https://book.getfoundry.sh/
-
-## Usage
-
-### Build
-
-```shell
-$ forge build
-```
-
-### Test
-
-```shell
-$ forge test
-```
-
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+## Entry points
+- Build/test: `forge test`
+- Deploy: `forge script script/DeployIntentMarketplace.s.sol --rpc-url <RPC> --broadcast`
