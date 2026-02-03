@@ -24,6 +24,9 @@
 14. `docs/13-audit-checklist.md` — аудит‑чеклист.
 15. `docs/14-deployments.md` — деплои и адреса.
 16. `docs/15-mainnet-checklist.md` — чеклист mainnet деплоя.
+17. `docs/16-indexer-model.md` — модель индексатора.
+18. `docs/17-backend-api.md` — спецификация backend API.
+19. `docs/18-ops-indexer-backend.md` — эксплуатация indexer/backend.
 
 ## Источник фактов
 Все фактические утверждения взяты из:
