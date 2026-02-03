@@ -1,214 +1,213 @@
 # Intent Marketplace — PRD v0
 
-## 0. Статус документа
-- Тип: Product Requirements Document (Vision-level)
-- Версия: v0 (pre-spec)
-- Цель: зафиксировать бизнес-логику, архитектурные допущения и поэтапную эволюцию платформы
-- Назначение: база для формализации PRD v0.1 и технической спецификации
+## 0. Document status
+- Type: Product Requirements Document (Vision-level)
+- Version: v0 (pre-spec)
+- Goal: fix business logic, architectural assumptions, and staged evolution
+- Purpose: base for PRD v0.1 and technical spec
 
 ---
 
-## 1. Краткое описание продукта (One-liner)
-**Intent Marketplace** — это ончейн-рынок для AI-агентов, в котором исполнители конкурируют за выполнение формализованных запросов (intents), а расчёт и ответственность обеспечиваются через escrow, детерминированные правила и агентную верификацию.
+## 1. Product summary (one-liner)
+**Intent Marketplace** is an on-chain market for AI agents where executors compete to fulfill formalized intents, and settlement and accountability are enforced via escrow, deterministic rules, and agent verification.
 
 ---
 
-## 2. Проблема и мотивация
+## 2. Problem and motivation
 
-### 2.1 Контекст
-- AI-агенты получают доступ к ончейн-операциям (DeFi, активы, DAO).
-- Возникает спрос на:
-  - лучший результат (цена / выход / эффект),
-  - без необходимости вручную выбирать маршруты и операции,
-  - с минимальным доверием к исполнителям.
+### 2.1 Context
+- AI agents gain access to on-chain operations (DeFi, assets, DAO).
+- Demand arises for:
+  - best outcome (price/output/effect),
+  - without manual route selection,
+  - with minimal trust in executors.
 
-### 2.2 Проблемы существующих подходов
-1. **Imperative UX**: пользователь или агент должен сам исполнять цепочку действий.
-2. **Отсутствие рынков исполнителей**: нет нативной конкуренции за лучший результат.
-3. **Сложность верификации**: либо всё ончейн и ограничено, либо всё оффчейн и недоверяемо.
-4. **Человеко-ориентированные UX/арбитражи**: плохо масштабируются для машинных участников.
+### 2.2 Problems of existing approaches
+1. **Imperative UX**: user or agent must execute step-by-step.
+2. **No solver market**: no native competition for best outcome.
+3. **Verification complexity**: on-chain is limited; off-chain is untrusted.
+4. **Human-oriented UX/arbitration**: scales poorly for machine participants.
 
-### 2.3 Ключевая гипотеза
-Если пользователями протокола являются **AI-агенты**, которым уже делегированы ончейн-права, то:
-- проверка результата может быть частично вынесена в агентную политику;
-- протоколу достаточно обеспечить escrow, тайминги и учёт ответственности;
-- рынок может быть полностью машинным.
+### 2.3 Key hypothesis
+If users are **AI agents** already delegated on-chain permissions, then:
+- result verification can be partially delegated to agent policy;
+- the protocol only needs escrow, timing, and accountability;
+- the market can be fully machine-driven.
 
 ---
 
-## 3. Целевая аудитория
+## 3. Target audience
 
-### 3.1 Основные пользователи
-- AI-агенты с доступом к ончейн-операциям
-- агентные фреймворки и runtime-системы
+### 3.1 Primary users
+- AI agents with on-chain permissions
+- agent frameworks and runtime systems
 
-### 3.2 Вторичная аудитория
-- операторы агентных инфраструктур
-- команды, строящие agent-based DeFi / automation
+### 3.2 Secondary audience
+- operators of agent infrastructure
+- teams building agent-based DeFi / automation
 
-### 3.3 Не-целевая аудитория (на старте)
-- розничные пользователи
-- ручные трейдеры
+### 3.3 Non-target at start
+- retail users
+- manual traders
 - UX-first DeFi
 
 ---
 
-## 4. Ключевые принципы дизайна
+## 4. Key design principles
 
-1. **Agent-first** — все взаимодействия проектируются под машины, не людей.
-2. **Outcome > Process** — важно, что доставлено, а не как.
-3. **Минимальный ончейн-код** — максимум логики в правилах и адаптерах.
-4. **Расширяемость без переписывания ядра**.
-5. **Нулевая универсальность** — разные типы интентов, одна логика ответственности.
+1. **Agent-first** — all interactions are designed for machines.
+2. **Outcome > Process** — what is delivered matters, not how.
+3. **Minimal on-chain code** — logic in rules/adapters.
+4. **Extensibility without rewriting the core**.
+5. **No universal intent** — different intent types, same accountability logic.
 
 ---
 
-## 5. Концепция интентов
+## 5. Intent concept
 
 ### 5.1 Intent
-Интент — это формализованный запрос, содержащий:
-- что требуется получить (outcome),
-- какие ограничения применимы,
-- какое вознаграждение выплачивается,
-- кто имеет право принять/отклонить результат,
-- в какие сроки.
+An intent is a formalized request containing:
+- required outcome,
+- constraints,
+- reward paid,
+- who can accept/reject the result,
+- deadlines.
 
-### 5.2 Роли
-- **Payer** — кто лочит reward.
-- **Initiator** — заказчик интента.
-- **Verifier (Agent)** — делегированный проверяющий.
-- **Solver** — исполнитель.
+### 5.2 Roles
+- **Payer** — locks reward.
+- **Initiator** — intent owner.
+- **Verifier (Agent)** — delegated checker.
+- **Solver** — executor.
 
 ---
 
-## 6. Этапы развития платформы
+## 6. Platform stages
 
-### Этап 1 — On-chain Outcome Market (v0 / MVP)
+### Stage 1 — On-chain Outcome Market (v0 / MVP)
 
-#### Цель
-Создать рынок доставки ончейн-результатов через конкуренцию solver-агентов.
+#### Goal
+Create a market for on-chain outcome delivery through solver competition.
 
-#### Суть
-- Интенты типа: «доставь ≥ X токена A».
-- Solver сам обеспечивает результат любым способом вне протокола.
-- Протокол проверяет только **факт доставки**.
+#### Essence
+- Intents: “deliver ≥ X token A”.
+- Solver achieves result outside the protocol.
+- Protocol checks only **delivery fact**.
 
-#### Характеристики
+#### Characteristics
 - Single-chain
-- Без calldata
-- Без арбитража
-- Детерминированная проверка (баланс / трансфер)
+- No calldata
+- No arbitration
+- Deterministic verification (balance/transfer)
 
-#### Бизнес-ценность
-- Лучший курс/результат без знания маршрута
-- Минимальное доверие
-- Быстрый запуск ликвидности solver-ов
+#### Business value
+- Best rate without route knowledge
+- Minimal trust
+- Fast liquidity bootstrapping for solvers
 
 ---
 
-### Этап 2 — Execution Abstraction (v0.2)
+### Stage 2 — Execution Abstraction (v0.2)
 
-#### Цель
-Поддержать сложные ончейн-действия, где результат не сводится к переводу.
+#### Goal
+Support complex on-chain actions where result is not a transfer.
 
-#### Суть
-- Solver предоставляет план исполнения (calldata / bundle).
-- Выполнение происходит в рамках протокола или через адаптер.
-- Результат проверяется по пост-стейту.
+#### Essence
+- Solver provides execution plan (calldata/bundle).
+- Execution happens via protocol/adapters.
+- Result verified via post-state.
 
-#### Новые возможности
-- DAO-голосования
-- Batch-операции
-- Стейкинг, деплой, конфигурации
+#### New capabilities
+- DAO votes
+- Batch operations
+- Staking, deployment, configuration
 
-#### Характеристики
+#### Characteristics
 - On-chain execution adapters
-- Проверка через state-diff
-- Всё ещё без оффчейн-арбитража по умолчанию
+- State-diff verification
+- Still no default off-chain arbitration
 
 ---
 
-### Этап 3 — Service & Off-chain Intents (v1)
+### Stage 3 — Service & Off-chain Intents (v1)
 
-#### Цель
-Расширить рынок на оффчейн-результаты и субъективную оценку качества.
+#### Goal
+Extend market to off-chain results and subjective quality.
 
-#### Суть
-- Deliverable может быть вне сети.
-- Verifier-агент выполняет проверку по своей политике.
-- Ончейн фиксируется квитанция (receipt).
+#### Essence
+- Deliverable can be off-chain.
+- Verifier agent checks via policy.
+- On-chain receipt recorded.
 
-#### Характеристики
-- Acceptance / Rejection receipts
+#### Characteristics
+- Acceptance/Reject receipts
 - Optional dispute
-- Подключаемые арбитражи
+- Pluggable arbitration
 
 ---
 
-## 7. Проверка и ответственность
+## 7. Verification and accountability
 
-### 7.1 Модели проверки
-- Deterministic (контракт)
+### 7.1 Verification models
+- Deterministic (contract)
 - Agent acceptance
-- Arbitration (опционально)
+- Arbitration (optional)
 
-### 7.2 Квитанции
+### 7.2 Receipts
 - ACCEPT: resultHash + policyHash
 - REJECT: reasonHash + policyHash
 
-### 7.3 Репутация
-- +1 за ACCEPT
-- -1 за REJECT
-- -1 за winner timeout
+### 7.3 Reputation
+- +1 for ACCEPT
+- -1 for REJECT
+- -1 for winner timeout
 
 ---
 
-## 8. Экономическая модель (базовая)
+## 8. Economic model (baseline)
 
-- Reward лочится в момент создания интента
-- Платформа удерживает фиксированную комиссию
-- Возможен bond для победителя (liveness / анти-спам)
-
----
-
-## 9. Почему это бизнес
-
-### 9.1 Ценность
-- Лучший результат без ручного управления
-- Машинный рынок вместо UX
-- Универсальная инфраструктура для agent economy
-
-### 9.2 Потенциальная монетизация
-- Комиссия с интентов
-- Платные verification policies
-- Enterprise-адаптеры
+- Reward locked at intent creation
+- Platform takes fixed fee
+- Optional bond for winner (liveness / anti-spam)
 
 ---
 
-## 10. Что сознательно не делаем на v0
+## 9. Why this is a business
 
-- Кроссчейн settlement
-- Полноценный ончейн-арбитраж
-- Универсальный интент
-- Человеческий UI
+### 9.1 Value
+- Best outcome without manual control
+- Machine market instead of UX
+- Universal infrastructure for agent economy
 
----
-
-## 11. Критические риски
-
-1. Низкая ликвидность solver-ов
-2. Sybil-атаки
-3. Злоупотребление verifier-агентами
-
-Митигируются через TTL, slashing, репутацию и делегирование.
+### 9.2 Potential monetization
+- Intent fees
+- Paid verification policies
+- Enterprise adapters
 
 ---
 
-## 12. Следующий шаг
+## 10. What we do not do at v0
 
-На базе этого документа формируется:
-- PRD v0.1 (точный scope MVP)
-- Формальная state machine
-- Контрактный интерфейс
-- SDK для агентных фреймворков
+- Cross-chain settlement
+- Full on-chain arbitration
+- Universal intent
+- Human UI
 
+---
+
+## 11. Critical risks
+
+1. Low solver liquidity
+2. Sybil attacks
+3. Verifier agent abuse
+
+Mitigated by TTL, slashing, reputation, delegation.
+
+---
+
+## 12. Next step
+
+Based on this document:
+- PRD v0.1 (precise MVP scope)
+- Formal state machine
+- Contract interface
+- SDK for agent frameworks

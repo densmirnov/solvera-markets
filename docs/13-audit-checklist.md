@@ -1,31 +1,31 @@
-# Аудит‑чеклист (MVP)
+# Audit checklist (MVP)
 
-## Контракт
-- Соответствие state machine спецификации.
-- Проверка доступа для `selectWinner` и `fulfill`.
-- Валидация времени (`ttlSubmit`, `ttlAccept`).
-- Экономика: fee, fixed fee, bond, корректные выплаты.
-- Репутация меняется только по правилам.
-- Защита от повторных выплат.
-- Отсутствие запрещённых переходов.
+## Contract
+- State machine matches specification.
+- Access control for `selectWinner` and `fulfill`.
+- Time validation (`ttlSubmit`, `ttlAccept`).
+- Economics: fee, fixed fee, bond, correct payouts.
+- Reputation changes only per rules.
+- No double payout.
+- Forbidden transitions prevented.
 
-## Токены
-- Корректная обработка `transfer`/`transferFrom` с безопасной проверкой результата.
-- Отсутствие зависимостей от нестандартных ERC‑20.
+## Tokens
+- Safe handling of `transfer`/`transferFrom` results.
+- No assumptions on non-standard ERC-20 behavior.
 
-## Экономические риски
-- Значения fee/bond зафиксированы и проверены.
-- Edge‑кейсы: `rewardAmount < fixedFeeOnExpire`.
+## Economic risks
+- Fee/bond values are fixed and reviewed.
+- Edge case: `rewardAmount < fixedFeeOnExpire`.
 
-## Тесты
+## Tests
 - Happy path.
 - No offers → expire.
 - Winner timeout → expire.
-- Неверные вызывающие.
-- Нарушение TTL.
-- Edge‑кейсы комиссий.
+- Wrong callers.
+- TTL violations.
+- Fee edge cases.
 
-## Инварианты
-- Reward выплачивается ровно один раз.
-- Балансы корректны во всех ветках.
-- Репутация меняется только в `_accept` и `expire`.
+## Invariants
+- Reward paid exactly once.
+- Balances correct in all branches.
+- Reputation changes only in `_accept` and `expire`.

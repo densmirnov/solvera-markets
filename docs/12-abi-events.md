@@ -1,6 +1,6 @@
-# ABI и события (MVP)
+# ABI and events (MVP)
 
-## Функции
+## Functions
 - `createIntent(tokenOut, minAmountOut, rewardToken, rewardAmount, payer, initiator, verifier, ttlSubmit, ttlAccept) -> id`
 - `submitOffer(id, amountOut)`
 - `selectWinner(id, solver, amountOut)`
@@ -8,7 +8,7 @@
 - `expire(id)`
 - `getIntent(id) -> Intent`
 
-## События и payload
+## Events and payloads
 
 ### IntentCreated
 - `id`

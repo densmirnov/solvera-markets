@@ -30,6 +30,8 @@ This folder contains sequential, agent-first documentation for Intent Marketplac
 19. `docs/18-ops-indexer-backend.md` — indexer/backend operations.
 20. `docs/19-subgraph-endpoints.md` — subgraph endpoints.
 21. `docs/20-engineering-standards.md` — engineering standards.
+22. `docs/21-implementation-principles.md` — implementation principles.
+23. `docs/22-devops-dokploy.md` — DevOps and Dokploy.
 
 ## Sources
 All factual statements are based on:

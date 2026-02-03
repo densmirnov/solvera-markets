@@ -1,26 +1,26 @@
 # State Machine
 
-## Состояния
-1. `OPEN` — приём офферов.
-2. `SELECTED` — выбран победитель.
-3. `FULFILLED` — результат доставлен.
-4. `ACCEPTED` — выплата выполнена.
-5. `EXPIRED` — завершён по таймауту.
+## States
+1. `OPEN` — accepting offers.
+2. `SELECTED` — winner selected.
+3. `FULFILLED` — result delivered.
+4. `ACCEPTED` — payout completed.
+5. `EXPIRED` — terminated by timeout.
 
-## Разрешённые переходы
-- `OPEN → SELECTED` через `selectWinner`.
-- `SELECTED → FULFILLED` через `fulfill`.
-- `FULFILLED → ACCEPTED` через `_accept` (internal).
-- `OPEN → EXPIRED` через `expire` (по `ttlSubmit`).
-- `SELECTED → EXPIRED` через `expire` (по `ttlAccept`, если не `FULFILLED`).
+## Allowed transitions
+- `OPEN → SELECTED` via `selectWinner`.
+- `SELECTED → FULFILLED` via `fulfill`.
+- `FULFILLED → ACCEPTED` via internal `_accept`.
+- `OPEN → EXPIRED` via `expire` (by `ttlSubmit`).
+- `SELECTED → EXPIRED` via `expire` (by `ttlAccept` if not `FULFILLED`).
 
-## Запрещённые переходы
-- Любые переходы из `ACCEPTED` и `EXPIRED`.
-- `OPEN → FULFILLED` или `OPEN → ACCEPTED`.
-- `SELECTED → ACCEPTED` без `FULFILLED`.
+## Forbidden transitions
+- Any transition from `ACCEPTED` or `EXPIRED`.
+- `OPEN → FULFILLED` or `OPEN → ACCEPTED`.
+- `SELECTED → ACCEPTED` without `FULFILLED`.
 
-## Временные ограничения
-- При создании: `now < ttlSubmit < ttlAccept`.
-- `submitOffer`: только `now <= ttlSubmit`.
-- `selectWinner`: только `now <= ttlSubmit`.
-- `fulfill`: только `now <= ttlAccept`.
+## Time constraints
+- At creation: `now < ttlSubmit < ttlAccept`.
+- `submitOffer`: only `now <= ttlSubmit`.
+- `selectWinner`: only `now <= ttlSubmit`.
+- `fulfill`: only `now <= ttlAccept`.

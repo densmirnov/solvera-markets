@@ -1,249 +1,238 @@
-# Intent Marketplace — SPEC v0.1 (Этап 1, Base)
+# Intent Marketplace — SPEC v0.1 (Stage 1, Base)
 
-> Цель: однозначная спецификация поведения для реализации контракта и тестов.
+> Goal: unambiguous behavior specification for contract implementation and tests.
 
 ---
 
-## 1. Термины
-- **Intent**: запрос на доставку on-chain результата (токенов) с escrow вознаграждения.
-- **Offer**: предложение solver-а доставить `amountOut` токена `tokenOut`.
-- **Winner**: solver, выбранный verifier-агентом.
-- **Bond**: возвратный залог победителя, слэшится при winner-timeout.
+## 1. Terms
+- **Intent**: request for on-chain outcome delivery (tokens) with escrow reward.
+- **Offer**: solver’s offer to deliver `amountOut` of `tokenOut`.
+- **Winner**: solver selected by verifier agent.
+- **Bond**: refundable winner deposit, slashed on winner timeout.
 - **Fee**:
-  - `feeBpsOnAccept`: комиссия в bps, удерживаемая из reward при успехе.
-  - `fixedFeeOnExpire`: фиксированная комиссия, удерживаемая при EXPIRED (anti-spam).
+  - `feeBpsOnAccept`: fee in bps taken from reward on success.
+  - `fixedFeeOnExpire`: fixed fee taken on EXPIRED (anti-spam).
 
 ---
 
-## 2. Роли
-- `payer`: адрес, который лочит reward и получает рефанд при EXPIRED.
-- `initiator`: адрес получателя доставленного `tokenOut`.
-- `verifier`: адрес, который имеет право выбирать победителя (`selectWinner`).
-- `solver`: адрес исполнителя.
+## 2. Roles
+- `payer`: locks reward and receives refund on EXPIRED.
+- `initiator`: recipient of delivered `tokenOut`.
+- `verifier`: can select winner (`selectWinner`).
+- `solver`: executor.
 
-В MVP:
-- `selectWinner` — только `verifier`.
-- `fulfill` — только `winner`.
+In MVP:
+- `selectWinner` — only `verifier`.
+- `fulfill` — only `winner`.
 - `expire` — permissionless.
 
 ---
 
-## 3. Ограничения MVP
-- Сеть: **Base**.
-- Только ERC-20.
-- Только `TRANSFER_OUTCOME`.
-- Только single-chain (без кроссчейна).
-- Без calldata, без оффчейн deliverables, без арбитража.
+## 3. MVP constraints
+- Network: **Base**.
+- ERC-20 only.
+- `TRANSFER_OUTCOME` only.
+- Single-chain only (no cross-chain).
+- No calldata, no off-chain deliverables, no arbitration.
 
 ---
 
-## 4. Состояния и переходы
+## 4. States and transitions
 
-### 4.1 Состояния
+### 4.1 States
 - `OPEN`
 - `SELECTED`
 - `FULFILLED`
 - `ACCEPTED`
 - `EXPIRED`
 
-### 4.2 Переходы
+### 4.2 Transitions
 - `OPEN → SELECTED` via `selectWinner`
 - `SELECTED → FULFILLED` via `fulfill`
-- `FULFILLED → ACCEPTED` via internal `_accept` (вызывается внутри `fulfill`)
-- `OPEN → EXPIRED` via `expire` (по `ttlSubmit`)
-- `SELECTED → EXPIRED` via `expire` (по `ttlAccept`, если не `FULFILLED`)
+- `FULFILLED → ACCEPTED` via internal `_accept` (called inside `fulfill`)
+- `OPEN → EXPIRED` via `expire` (by `ttlSubmit`)
+- `SELECTED → EXPIRED` via `expire` (by `ttlAccept` if not `FULFILLED`)
 
-### 4.3 Запрещённые переходы
-- Любые переходы из `ACCEPTED` и `EXPIRED`.
+### 4.3 Forbidden transitions
+- Any transition from `ACCEPTED` or `EXPIRED`.
 - `OPEN → FULFILLED/ACCEPTED`.
-- `SELECTED → ACCEPTED` без `FULFILLED`.
+- `SELECTED → ACCEPTED` without `FULFILLED`.
 
 ---
 
-## 5. Время
+## 5. Time
 
-- `ttlSubmit`: дедлайн подачи офферов и выбора победителя.
-- `ttlAccept`: дедлайн исполнения победителем.
+- `ttlSubmit`: deadline for offers and winner selection.
+- `ttlAccept`: deadline for winner fulfillment.
 
-Правила:
-- При создании: `now < ttlSubmit < ttlAccept`.
-- `submitOffer` допустим только если `now <= ttlSubmit`.
-- `selectWinner` допустим только если `now <= ttlSubmit`.
-- `fulfill` допустим только если `now <= ttlAccept`.
+Rules:
+- At creation: `now < ttlSubmit < ttlAccept`.
+- `submitOffer` only if `now <= ttlSubmit`.
+- `selectWinner` only if `now <= ttlSubmit`.
+- `fulfill` only if `now <= ttlAccept`.
 
 ---
 
-## 6. Экономика (MVP)
+## 6. Economics (MVP)
 
 ### 6.1 Fee
-- При `ACCEPTED`: удержать `feeBpsOnAccept` из `rewardAmount` и перевести в `feeRecipient`.
-- При `EXPIRED` из `OPEN` (нет winner): удержать `fixedFeeOnExpire` из `rewardAmount` и вернуть остаток payer.
-- При `EXPIRED` из `SELECTED` (winner timeout): удержать `fixedFeeOnExpire` из `rewardAmount` и вернуть остаток payer.
+- On `ACCEPTED`: take `feeBpsOnAccept` from `rewardAmount` to `feeRecipient`.
+- On `EXPIRED` from `OPEN`: take `fixedFeeOnExpire` and refund rest to payer.
+- On `EXPIRED` from `SELECTED`: take `fixedFeeOnExpire` and refund rest to payer.
 
 Edge:
-- Если `rewardAmount < fixedFeeOnExpire`, то `fixedFeeOnExpire` ограничивается `rewardAmount` (т.е. вернуть 0).
+- If `rewardAmount < fixedFeeOnExpire`, cap `fixedFeeOnExpire` to `rewardAmount` (refund 0).
 
 ### 6.2 Bond
-- Bond лочится **только у победителя** в момент `selectWinner`.
-- Размер bond:
+- Bond is locked **only for winner** at `selectWinner`.
+- Bond size:
   - `bondAmount = max(bondMin, rewardAmount * bondBpsOfReward / 10_000)`
-  - в MVP bond вносится в `rewardToken` (для простоты).
-- При успехе (`ACCEPTED`): bond возвращается winner.
-- При winner-timeout (`SELECTED → EXPIRED`): bond слэшится и переводится в `feeRecipient` (или отдельный `slashRecipient`, если появится).
+  - In MVP bond is paid in `rewardToken`.
+- On success (`ACCEPTED`): bond returned to winner.
+- On winner timeout (`SELECTED → EXPIRED`): bond slashed to `feeRecipient`.
 
 ---
 
-## 7. Данные интента
+## 7. Events (MVP)
 
-Поля `Intent`:
-- `id: bytes32`
-- `payer: address`
-- `initiator: address`
-- `verifier: address`
-- `tokenOut: address`
-- `minAmountOut: uint256`
-- `rewardToken: address`
-- `rewardAmount: uint256`
-- `ttlSubmit: uint64`
-- `ttlAccept: uint64`
-- `state: IntentState`
-- `winner: address`
-- `winnerAmountOut: uint256`
-- `bondAmount: uint256`
+- `IntentCreated`
+- `OfferSubmitted`
+- `WinnerSelected`
+- `Fulfilled`
+- `Accepted`
+- `Expired`
+- `ReputationUpdated`
 
 ---
 
-## 8. Функции и требования
+## 8. Functions
 
-### 8.1 `createIntent(p)`
-Вход:
-- все поля из раздела 7, кроме `id/state/winner/*`.
-
-Требования:
-- валидировать времена: `now < ttlSubmit < ttlAccept`.
-- валидировать адреса: `payer != 0`, `initiator != 0`, `verifier != 0`, `tokenOut != 0`, `rewardToken != 0`.
+### 8.1 `createIntent(...)`
+Requirements:
+- validate time: `now < ttlSubmit < ttlAccept`.
+- validate addresses: `payer != 0`, `initiator != 0`, `verifier != 0`, `tokenOut != 0`, `rewardToken != 0`.
 - `rewardAmount > 0`, `minAmountOut > 0`.
 
-Действия:
+Actions:
 - `transferFrom(payer, this, rewardAmount)`.
-- создать `id` (например, keccak256(payer, initiator, nonce, block.chainid)).
+- create `id` (e.g., keccak256(payer, initiator, nonce, block.chainid)).
 - state = `OPEN`.
-- эмит `IntentCreated`.
+- emit `IntentCreated`.
 
 ### 8.2 `submitOffer(id, amountOut)`
-Требования:
+Requirements:
 - state == `OPEN`.
 - `now <= ttlSubmit`.
 - `amountOut > 0`.
 
-Действия:
-- эмит `OfferSubmitted`.
+Actions:
+- emit `OfferSubmitted`.
 
-Примечание:
-- В MVP офферы можно не хранить в storage (только events). Выбор победителя делает verifier оффчейн.
+Note:
+- In MVP offers need not be stored (events only). Winner selection is off-chain.
 
 ### 8.3 `selectWinner(id, solver, amountOut)`
-Требования:
+Requirements:
 - `msg.sender == verifier`.
 - state == `OPEN`.
 - `now <= ttlSubmit`.
 - `solver != 0`, `amountOut > 0`.
 
-Действия:
-- вычислить `bondAmount`.
-- если `bondAmount > 0`: `transferFrom(solver, this, bondAmount)`.
-- записать `winner = solver`, `winnerAmountOut = amountOut`, `bondAmount`.
+Actions:
+- compute `bondAmount`.
+- if `bondAmount > 0`: `transferFrom(solver, this, bondAmount)`.
+- store `winner = solver`, `winnerAmountOut = amountOut`, `bondAmount`.
 - state = `SELECTED`.
-- эмит `WinnerSelected`.
+- emit `WinnerSelected`.
 
 ### 8.4 `fulfill(id)`
-Требования:
+Requirements:
 - state == `SELECTED`.
 - `msg.sender == winner`.
 - `now <= ttlAccept`.
 - `winnerAmountOut >= minAmountOut`.
 
-Действия:
-- `transferFrom(winner, this, winnerAmountOut)` по `tokenOut`.
-- `transfer(initiator, winnerAmountOut)` по `tokenOut`.
+Actions:
+- `transferFrom(winner, this, winnerAmountOut)` in `tokenOut`.
+- `transfer(initiator, winnerAmountOut)` in `tokenOut`.
 - state = `FULFILLED`.
-- эмит `Fulfilled`.
-- вызвать `_accept(id)`.
+- emit `Fulfilled`.
+- call `_accept(id)`.
 
 ### 8.5 `_accept(id)` (internal)
-Требования:
+Requirements:
 - state == `FULFILLED`.
 
-Действия:
+Actions:
 - fee = `rewardAmount * feeBpsOnAccept / 10_000`.
 - pay = `rewardAmount - fee`.
-- `transfer(winner, pay)` по `rewardToken`.
-- `transfer(feeRecipient, fee)` по `rewardToken`.
-- вернуть bond (если >0): `transfer(winner, bondAmount)` по `rewardToken`.
-- обновить репутацию: `rep[winner] += 1`.
-- эмит `ReputationUpdated(... reason=ACCEPTED)`.
+- `transfer(winner, pay)` in `rewardToken`.
+- `transfer(feeRecipient, fee)` in `rewardToken`.
+- return bond (if >0): `transfer(winner, bondAmount)` in `rewardToken`.
+- `rep[winner] += 1`.
+- emit `ReputationUpdated(... reason=ACCEPTED)`.
 - state = `ACCEPTED`.
-- эмит `Accepted`.
+- emit `Accepted`.
 
 ### 8.6 `expire(id)`
-Требования:
+Requirements:
 - state ∈ {`OPEN`, `SELECTED`}.
 
-Ветка A: истечение из `OPEN`
-- условие: `now > ttlSubmit` и `winner == 0`.
+Branch A: expire from `OPEN`
+- condition: `now > ttlSubmit` and `winner == 0`.
 - fee = `min(fixedFeeOnExpire, rewardAmount)`.
 - refund = `rewardAmount - fee`.
-- перевести fee в `feeRecipient`, refund в `payer`.
+- fee → `feeRecipient`, refund → `payer`.
 - state = `EXPIRED`.
-- эмит `Expired`.
+- emit `Expired`.
 
-Ветка B: истечение из `SELECTED` (winner timeout)
-- условие: `now > ttlAccept` и state != `FULFILLED`.
-- fee_exp = `min(fixedFeeOnExpire, rewardAmount)`.
-- refund = `rewardAmount - fee_exp`.
-- fee_exp → `feeRecipient`, refund → `payer`.
-- если bond>0: bond слэшится → `feeRecipient`.
-- репутация winner: `rep[winner] -= 1`.
-- эмит `ReputationUpdated(... reason=WINNER_TIMEOUT)`.
+Branch B: expire from `SELECTED` (winner timeout)
+- condition: `now > ttlAccept` and state != `FULFILLED`.
+- fee = `min(fixedFeeOnExpire, rewardAmount)`.
+- refund = `rewardAmount - fee`.
+- fee → `feeRecipient`, refund → `payer`.
+- if bond>0: bond slashed → `feeRecipient`.
+- reputation winner: `rep[winner] -= 1`.
+- emit `ReputationUpdated(... reason=WINNER_TIMEOUT)`.
 - state = `EXPIRED`.
-- эмит `Expired`.
+- emit `Expired`.
 
 ---
 
-## 9. Инварианты (тест-ориентированные)
+## 9. Invariants (test-oriented)
 
-1. Reward может быть выплачен ровно один раз.
-2. При `ACCEPTED`:
-   - инициатор получил `winnerAmountOut` `tokenOut`.
-   - winner получил `rewardAmount - fee`.
-   - feeRecipient получил `fee`.
-   - bond возвращён.
-3. При `EXPIRED`:
-   - payer получил `rewardAmount - fee_exp`.
-   - feeRecipient получил `fee_exp`.
-   - если winner timeout: bond слэшен.
-4. Невозможны вызовы `selectWinner/fulfill/expire` из финальных состояний.
-5. `rep` меняется только в `_accept` (+1) и `expire` ветка B (-1).
+1. Reward can be paid exactly once.
+2. On `ACCEPTED`:
+   - initiator received `winnerAmountOut` `tokenOut`.
+   - winner received `rewardAmount - fee`.
+   - feeRecipient received `fee`.
+   - bond returned.
+3. On `EXPIRED`:
+   - payer received `rewardAmount - fee_exp`.
+   - feeRecipient received `fee_exp`.
+   - if winner timeout: bond slashed.
+4. `selectWinner/fulfill/expire` cannot be called from final states.
+5. `rep` changes only in `_accept` (+1) and `expire` branch B (-1).
 
 ---
 
-## 10. Открытые параметры (конфиг)
+## 10. Open parameters (config)
 
 - `feeRecipient`
-- `feeBpsOnAccept` (например 20–50 bps)
-- `fixedFeeOnExpire` (например 0.10 USDC)
-- `bondBpsOfReward` (например 200 bps = 2%)
-- `bondMin` (например 1 USDC)
+- `feeBpsOnAccept` (e.g., 20–50 bps)
+- `fixedFeeOnExpire` (e.g., 0.10 USDC)
+- `bondBpsOfReward` (e.g., 200 bps = 2%)
+- `bondMin` (e.g., 1 USDC)
 
-Все параметры должны быть:
-- либо immutable (конструктор)
-- либо изменяемы через owner, но **не требуется для MVP**.
+All parameters should be either:
+- immutable (constructor)
+- or owner-adjustable (not required for MVP).
 
 ---
 
-## 11. Тест-план (минимум)
+## 11. Test plan (minimum)
 
-Сценарные тесты:
+Scenario tests:
 - happy path
 - no offers → expire from OPEN
 - selected winner doesn’t fulfill → expire from SELECTED
@@ -254,6 +243,5 @@ Edge:
 
 Property/invariant tests:
 - no double payout
-- balances conservation per branch
+- balance conservation per branch
 - monotonic state transitions
-

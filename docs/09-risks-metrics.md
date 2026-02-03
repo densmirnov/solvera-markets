@@ -1,20 +1,20 @@
-# Риски и метрики
+# Risks and metrics
 
-## Риски MVP
-- Низкая ликвидность solver‑ов.
-- Спам офферами.
-- Саботаж победителей.
-- Sybil‑атаки.
-- Злоупотребление verifier‑агентами.
+## MVP risks
+- Low solver liquidity.
+- Offer spam.
+- Winner sabotage.
+- Sybil attacks.
+- Verifier agent abuse.
 
-## Митигирующие механизмы
+## Mitigations
 - TTL.
 - Bond.
-- Репутация.
-- Фиксированная комиссия на expire.
+- Reputation.
+- Fixed fee on expire.
 
-## Метрики успеха
-- Количество созданных интентов.
-- % интентов с успешным `fulfill`.
-- Среднее время до `fulfill`.
-- Количество активных solver‑агентов.
+## Success metrics
+- Number of created intents.
+- % of intents with successful `fulfill`.
+- Average time to `fulfill`.
+- Number of active solver agents.

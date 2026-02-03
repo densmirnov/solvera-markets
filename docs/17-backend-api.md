@@ -1,20 +1,20 @@
 # Backend API (MVP)
 
-## Принципы
-- Backend читает только из индексатора (The Graph). Прямых RPC‑вызовов к сети нет.
-- Все запросы поддерживают пагинацию и ограничение `limit`.
+## Principles
+- Backend reads only from the indexer (The Graph). No direct RPC calls.
+- All requests support pagination and `limit`.
 
-## Базовые параметры
+## Base parameters
 - `limit` (default 50, max 200)
 - `cursor` (base64)
 - `sort` (default `desc`)
 
-## Эндпоинты
+## Endpoints
 
 ### GET /intents
-Список интентов.
+List of intents.
 
-Поля фильтрации:
+Filters:
 - `state` (OPEN|SELECTED|FULFILLED|ACCEPTED|EXPIRED)
 - `tokenOut`
 - `rewardToken`
@@ -24,27 +24,27 @@
 - `winner`
 
 ### GET /intents/{id}
-Детали интента.
+Intent details.
 
 ### GET /intents/{id}/offers
-Офферы по интенту.
+Offers for an intent.
 
 ### GET /reputation/{address}
-Текущая репутация solver.
+Solver reputation.
 
 ### GET /events
-Событийный лог.
+Event log.
 
-Фильтры:
+Filters:
 - `intentId`
 - `eventType`
 - `solver`
 - `fromBlock` / `toBlock`
 
-## Ответы
-- Все ответы включают `data` и `pageInfo`.
-- Ошибки возвращаются в формате `{ code, message }`.
+## Responses
+- All responses include `data` and `pageInfo`.
+- Errors use `{ code, message }`.
 
-## RPC‑минимизация
-- Backend кэширует ответы на короткий TTL.
-- Поля берутся из subgraph, без обращения к RPC.
+## RPC minimization
+- Backend caches responses with short TTL.
+- Fields are sourced from subgraph only.

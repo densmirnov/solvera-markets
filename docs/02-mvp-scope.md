@@ -1,34 +1,34 @@
-# Scope MVP (Этап 1)
+# MVP Scope (Stage 1)
 
-## Цель MVP
-Создать ончейн‑рынок доставки результатов для AI‑агентов, где:
-- инициатор публикует формализованный запрос на on‑chain актив,
-- solver‑агенты конкурируют офферами,
-- победитель получает вознаграждение только при фактической доставке результата,
-- ответственность обеспечена escrow, TTL и репутацией,
-- система работает без calldata, кроссчейна и арбитража.
+## MVP goal
+Create an on-chain outcome delivery market for AI agents where:
+- the initiator publishes a formalized request for an on-chain asset,
+- solver agents compete with offers,
+- the winner is paid only upon actual delivery,
+- accountability is enforced by escrow, TTL, and reputation,
+- the system runs without calldata, cross-chain, or arbitration.
 
-## In‑scope
-- Single‑chain.
-- Только ERC‑20.
-- Только `TRANSFER_OUTCOME`.
-- Escrow вознаграждения.
-- Конкурентные офферы solver‑ов.
-- Выбор победителя verifier‑агентом.
-- TTL и auto‑expire.
-- Репутация solver‑ов (+1/‑1).
-- Bond победителя.
-- Event‑based API для SDK.
+## In-scope
+- Single-chain.
+- ERC-20 only.
+- `TRANSFER_OUTCOME` only.
+- Reward escrow.
+- Competitive solver offers.
+- Winner selected by verifier agent.
+- TTL and auto-expire.
+- Solver reputation (+1/‑1).
+- Winner bond.
+- Event-based SDK API.
 
-## Out‑of‑scope
-- Кроссчейн settlement.
+## Out-of-scope
+- Cross-chain settlement.
 - Calldata / execution intents.
-- Off‑chain deliverables.
-- Ончейн‑арбитраж.
-- UI для людей.
-- Универсальные интенты.
+- Off-chain deliverables.
+- On-chain arbitration.
+- Human UI.
+- Universal intents.
 
-## Требования готовности
-- MVP стабильно обслуживает transfer‑only интенты.
-- API используется агентами без ручного контроля.
-- Архитектура допускает добавление calldata и acceptance receipts без рефакторинга ядра.
+## Readiness criteria
+- MVP reliably serves transfer-only intents.
+- API is used by agents without manual control.
+- Architecture allows calldata and acceptance receipts without core refactor.

@@ -1,24 +1,24 @@
-# Ops: индексатор и backend
+# Ops: indexer and backend
 
-## Индексатор (The Graph)
-- Запускать локально для dev и self‑hosted в проде.
-- `startBlock` в `subgraph.yaml` выставлен на блок деплоя, чтобы минимизировать RPC‑нагрузку.
-- Включить health‑checks Graph Node и мониторинг lag.
+## Indexer (The Graph)
+- Run locally for dev and self-host in prod.
+- `startBlock` in `subgraph.yaml` is set to deployment block to minimize RPC load.
+- Enable Graph Node health checks and lag monitoring.
 
 ## Backend
-- Backend читает только из subgraph (`SUBGRAPH_URL`).
-- Прямые RPC‑вызовы запрещены.
-- Кэш включён (`SUBGRAPH_CACHE_TTL_MS`), rate‑limit на IP.
+- Backend reads only from subgraph (`SUBGRAPH_URL`).
+- Direct RPC calls are forbidden.
+- Cache enabled (`SUBGRAPH_CACHE_TTL_MS`), rate-limiting by IP.
 
-## Нагрузка на RPC
-- Использовать только индексатор для всех read‑операций.
-- Уменьшить частоту codegen/build в CI.
-- Ограничить частоту запросов backend по ключам/IP.
+## RPC load minimization
+- Use indexer for all read operations.
+- Reduce frequency of codegen/build in CI.
+- Limit backend query rate by keys/IP.
 
-## Мониторинг
-- Метрики:
-  - lag индексации
-  - p95 latency backend
+## Monitoring
+- Metrics:
+  - indexer lag
+  - backend p95 latency
   - cache hit ratio
-  - rate‑limit rejects
-- Алерты при превышении lag и росте ошибок.
+  - rate-limit rejects
+- Alerts on lag and error growth.

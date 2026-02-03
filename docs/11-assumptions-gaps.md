@@ -1,17 +1,17 @@
-# Допущения и пробелы
+# Assumptions and gaps
 
-## Явные допущения
-1. Verifier‑агент способен оффчейн выбирать победителя по событийным данным и исполнять `selectWinner`.
-2. Solver‑агенты способны оперативно реагировать на `WinnerSelected` и исполнять `fulfill` до `ttlAccept`.
-3. Параметры fee/bond будут подобраны эмпирически без изменения логики ядра.
+## Explicit assumptions
+1. Verifier agent can select winners off-chain from event data and call `selectWinner`.
+2. Solver agents can react to `WinnerSelected` and fulfill before `ttlAccept`.
+3. Fee/bond parameters can be tuned empirically without core logic changes.
 
-## Незаполненные детали
-- Формат ABI и строгие схемы событий (payload) не зафиксированы.
-- Детерминированная схема `id` описана примером, но не закреплена нормативно.
-- Не описан анти‑фрод для verifier‑агента.
-- Нет описания механики лимитов/квот на офферы.
+## Missing details
+- Event payload schemas (ABI) were initially unspecified.
+- Deterministic `id` scheme is described by example but not normative.
+- No anti-fraud mechanics for verifier agent.
+- No offer rate limits or quotas specified.
 
-## Риски слабых мест
-- Если verifier‑агент деградирует, рынок замирает на `OPEN`.
-- Неправильные параметры `fixedFeeOnExpire` могут либо стимулировать спам, либо блокировать легитимные интенты.
-- При низком `bondMin` возможно систематическое неисполнение победителями.
+## Weak points
+- If verifier agent degrades, the market stalls at `OPEN`.
+- Incorrect `fixedFeeOnExpire` can either allow spam or block legitimate intents.
+- Low `bondMin` may enable systematic non-fulfillment by winners.

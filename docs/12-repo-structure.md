@@ -1,14 +1,14 @@
-# Структура репозитория и проверки
+# Repository structure and checks
 
-## Структура
-- `contracts/` — смарт‑контракты и тесты.
-- `indexer/` — индексатор событий.
-- `backend/` — API‑слой.
-- `frontend/` — интерфейс оператора.
-- `docs/` — проектная документация.
-- `scripts/` — утилиты и проверки.
-- `tests/` — кросс‑проектные тесты.
+## Structure
+- `contracts/` — smart contracts and tests.
+- `indexer/` — event indexer.
+- `backend/` — API layer.
+- `frontend/` — operator UI.
+- `docs/` — project documentation.
+- `scripts/` — utilities and checks.
+- `tests/` — cross-project tests.
 
-## Проверки
-- `make check` запускает структурную валидацию и наборы fmt/lint/test.
-- Скрипты автоматически запускают подходящие инструменты, если в подпроекте обнаружена конфигурация.
+## Checks
+- `make check` runs structural validation and fmt/lint/test.
+- Scripts run relevant tools when configuration exists.

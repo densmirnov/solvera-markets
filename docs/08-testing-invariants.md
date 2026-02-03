@@ -1,29 +1,29 @@
-# Тест‑план и инварианты
+# Test plan and invariants
 
-## Сценарные тесты (минимум)
+## Scenario tests (minimum)
 - Happy path.
-- No offers → `expire` из `OPEN`.
-- Winner не исполняет → `expire` из `SELECTED`.
-- Неверный вызывающий для `selectWinner`/`fulfill`.
-- `fulfill` после `ttlAccept`.
-- `selectWinner` после `ttlSubmit`.
+- No offers → `expire` from `OPEN`.
+- Winner does not fulfill → `expire` from `SELECTED`.
+- Wrong caller for `selectWinner`/`fulfill`.
+- `fulfill` after `ttlAccept`.
+- `selectWinner` after `ttlSubmit`.
 - Edge: `rewardAmount < fixedFeeOnExpire`.
 
 ## Property/invariant tests
-1. Никаких двойных выплат reward.
-2. Балансы сохраняются по веткам.
-3. Монотонные переходы состояний.
+1. No double reward payout.
+2. Balance conservation per branch.
+3. Monotonic state transitions.
 
-## Инварианты протокола
-1. Reward может быть выплачен ровно один раз.
-2. При `ACCEPTED`:
-- инициатор получил `winnerAmountOut` `tokenOut`.
-- winner получил `rewardAmount - fee`.
-- `feeRecipient` получил `fee`.
-- bond возвращён.
-3. При `EXPIRED`:
-- payer получил `rewardAmount - fee_exp`.
-- `feeRecipient` получил `fee_exp`.
-- при winner timeout bond слэшен.
-4. Нет вызовов `selectWinner/fulfill/expire` из финальных состояний.
-5. `rep` меняется только в `_accept` (+1) и `expire` (ветка B, ‑1).
+## Protocol invariants
+1. Reward can be paid exactly once.
+2. On `ACCEPTED`:
+- initiator received `winnerAmountOut` `tokenOut`.
+- winner received `rewardAmount - fee`.
+- `feeRecipient` received `fee`.
+- bond returned.
+3. On `EXPIRED`:
+- payer received `rewardAmount - fee_exp`.
+- `feeRecipient` received `fee_exp`.
+- on winner timeout bond is slashed.
+4. No `selectWinner/fulfill/expire` calls from final states.
+5. `rep` changes only in `_accept` (+1) and `expire` branch B (‑1).

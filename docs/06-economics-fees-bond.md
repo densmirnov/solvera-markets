@@ -1,18 +1,18 @@
-# Экономика, комиссии и bond
+# Economics, fees, and bond
 
-## Комиссии
-- `feeBpsOnAccept`: удерживается из `rewardAmount` при успехе.
-- `fixedFeeOnExpire`: удерживается при `EXPIRED` (anti‑spam).
+## Fees
+- `feeBpsOnAccept`: charged from `rewardAmount` on success.
+- `fixedFeeOnExpire`: charged on `EXPIRED` (anti-spam).
 
 Edge:
-- если `rewardAmount < fixedFeeOnExpire`, то `fixedFeeOnExpire` ограничивается `rewardAmount`.
+- if `rewardAmount < fixedFeeOnExpire`, charge `rewardAmount`.
 
-## Bond победителя
-- Лочится только у победителя в момент `selectWinner`.
-- Размер bond:
+## Winner bond
+- Locked only for the winner at `selectWinner`.
+- Amount:
   - `bondAmount = max(bondMin, rewardAmount * bondBpsOfReward / 10_000)`.
-- В MVP bond вносится в `rewardToken`.
+- In MVP bond is paid in `rewardToken`.
 
-## Возврат и слэш
-- При `ACCEPTED`: bond возвращается winner.
-- При winner‑timeout (`SELECTED → EXPIRED`): bond слэшится и переводится в `feeRecipient`.
+## Return and slash
+- On `ACCEPTED`: bond returned to winner.
+- On winner timeout (`SELECTED → EXPIRED`): bond slashed to `feeRecipient`.

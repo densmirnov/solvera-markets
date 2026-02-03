@@ -1,198 +1,193 @@
-# ROADMAP — путь к опубликованному MVP
+# ROADMAP — path to published MVP
 
-## Ключевые принципы
-- Код покрыт тестами для минимизации ошибок.
-- Любые изменения в коде фиксируются в документации.
-- Все проверки и валидации выполняются до релиза.
+## Key principles
+- Code is covered by tests to minimize errors.
+- Any code change must be reflected in documentation.
+- All checks and validations must pass before release.
 
-## Факты / выводы / гипотезы
-- Факты: scope MVP, роли, state machine, экономика, функции контракта — см. `docs/`.
-- Вывод: для релиза нужны независимые контуры — контракт, индексатор, backend, frontend, CI/CD, публикация и валидация.
-- Гипотеза: MVP целесообразно развернуть сначала в тестовой сети, затем в основной сети. Неподтверждено, зависит от стратегии проекта.
+## Facts / inferences / hypotheses
+- Facts: MVP scope, roles, state machine, economics, contract functions — see `docs/`.
+- Inference: release requires independent tracks — contract, indexer, backend, frontend, CI/CD, publication, verification.
+- Hypothesis: testnet-first deployment is recommended before mainnet. Unverified and depends on strategy.
 
-## Зависимости (общее правило)
-- Каждая задача имеет входные артефакты и проверку готовности.
-- Блок «Проверка» закрывает задачу и разблокирует зависимые.
-
----
-
-## Этап 0. Базовая организация репозитория
-
-### 0.1 Стандартизировать структуру проекта
-- Задача: определить и зафиксировать каталоги: `contracts/`, `indexer/`, `backend/`, `frontend/`, `docs/`, `scripts/`, `tests/`.
-- Зависимости: нет.
-- Проверка: структура каталогов создана, в `docs/README.md` добавлена навигация.
-
-### 0.2 Политика документации
-- Задача: ввести правило «каждое изменение в коде сопровождается обновлением документации».
-- Зависимости: 0.1.
-- Проверка: правило описано в `docs/README.md` и `CONTRIBUTING.md`.
-
-### 0.3 Базовые инструменты качества
-- Задача: выбрать и настроить единые инструменты форматирования, линтинга и тестов для всех подпроектов.
-- Зависимости: 0.1.
-- Проверка: есть единый `make`/`task`/`npm`/`pnpm` entrypoint с проверками.
-
-### 0.4 Инженерные стандарты
-- Задача: закрепить обязательное использование линтеров и автофиксаторов для всего кода.
-- Зависимости: 0.3.
-- Проверка: правила отражены в `CONTRIBUTING.md` и `docs/20-engineering-standards.md`.
+## Dependencies (general rule)
+- Each task has input artifacts and completion verification.
+- The “Verify” block closes the task and unlocks dependents.
 
 ---
 
-## Этап 1. Контракты (MVP)
+## Stage 0. Base repository setup
 
-### 1.1 Спецификация ABI и событий
-- Задача: зафиксировать ABI и payload схемы событий.
-- Зависимости: 0.1.
-- Проверка: опубликован документ `docs/12-abi-events.md`.
+### 0.1 Standardize project structure
+- Task: define and create directories: `contracts/`, `indexer/`, `backend/`, `frontend/`, `docs/`, `scripts/`, `tests/`.
+- Dependencies: none.
+- Verify: structure exists, navigation added to `docs/README.md`.
 
-### 1.2 Реализация контракта
-- Задача: реализовать функции `createIntent`, `submitOffer`, `selectWinner`, `fulfill`, `_accept`, `expire`, хранение state и параметров.
-- Зависимости: 1.1.
-- Проверка: контракт компилируется, ABI соответствует документации.
+### 0.2 Documentation policy
+- Task: enforce rule “any code change must update documentation.”
+- Dependencies: 0.1.
+- Verify: rule documented in `docs/README.md` and `CONTRIBUTING.md`.
 
-### 1.3 Экономика и репутация
-- Задача: реализовать fee‑механику, bond, `rep`.
-- Зависимости: 1.2.
-- Проверка: unit‑тесты покрывают все ветки экономики.
+### 0.3 Base quality tooling
+- Task: choose and wire formatting, linting, and tests for all subprojects.
+- Dependencies: 0.1.
+- Verify: a single `make`/`task`/`npm` entrypoint exists for checks.
 
-### 1.4 Инварианты и тест‑набор
-- Задача: реализовать сценарные тесты и property/invariant тесты.
-- Зависимости: 1.2.
-- Проверка: все тесты проходят в CI и локально.
-
-### 1.5 Статический анализ и аудит‑готовность
-- Задача: статический анализ (slither/solhint), чек‑лист аудита, документ угроз.
-- Зависимости: 1.2.
-- Проверка: отчёт проверок сохранён в `docs/`.
-
-### 1.6 Деплой в тестовую сеть
-- Задача: деплой контракта и запись адреса/chainId.
-- Зависимости: 1.4.
-- Проверка: транзакции доступны в обозревателе, адреса сохранены в `docs/13-deployments.md`.
-
-### 1.7 Верификация контракта
-- Задача: верифицировать исходники в обозревателе.
-- Зависимости: 1.6.
-- Проверка: контракт полностью верифицирован.
-
-### 1.8 Деплой в основную сеть
-- Задача: деплой в Base mainnet (или выбранную сеть).
-- Зависимости: 1.7, 2.4, 3.4, 4.3.
-- Проверка: адреса и версии сохранены, верификация успешна.
+### 0.4 Engineering standards
+- Task: enforce mandatory linters and auto-formatters across all code.
+- Dependencies: 0.3.
+- Verify: rules in `CONTRIBUTING.md` and `docs/20-engineering-standards.md`.
 
 ---
 
-## Этап 2. Индексатор
+## Stage 1. Contracts (MVP)
 
-### 2.1 Модель данных
-- Задача: описать сущности (Intent, Offer, Winner, Reputation, EventLog).
-- Зависимости: 1.1.
-- Проверка: схема описана в `docs/14-indexer-model.md`.
+### 1.1 ABI and events
+- Task: define ABI and event payloads.
+- Dependencies: 0.1.
+- Verify: `docs/12-abi-events.md` published.
 
-### 2.2 Реализация индексатора
-- Задача: парсинг событий и построение состояния.
-- Зависимости: 2.1, 1.6.
-- Проверка: локальный прогон на тестовой сети, корректные агрегаты.
+### 1.2 Contract implementation
+- Task: implement `createIntent`, `submitOffer`, `selectWinner`, `fulfill`, `_accept`, `expire`.
+- Dependencies: 1.1.
+- Verify: contract compiles; ABI matches docs.
 
-### 2.3 Валидация данных
-- Задача: проверка консистентности, дедупликация, idempotency.
-- Зависимости: 2.2.
-- Проверка: тест‑набор для edge‑кейсов событий.
+### 1.3 Economics and reputation
+- Task: implement fee mechanics, bond, and `rep` updates.
+- Dependencies: 1.2.
+- Verify: unit tests cover all fee/bond branches.
 
-### 2.4 Публикация индексатора
-- Задача: развернуть индексатор (self‑hosted или managed).
-- Зависимости: 2.3.
-- Проверка: SLA/health‑endpoint и мониторинг.
+### 1.4 Invariants and tests
+- Task: implement scenario tests and property/invariant tests.
+- Dependencies: 1.2.
+- Verify: all tests pass in CI and locally.
 
----
+### 1.5 Static analysis and audit readiness
+- Task: static analysis (slither/solhint), audit checklist, threat doc.
+- Dependencies: 1.2.
+- Verify: reports stored in `docs/`.
 
-## Этап 3. Backend (API)
+### 1.6 Deploy to testnet
+- Task: deploy contract and record address/chainId.
+- Dependencies: 1.4.
+- Verify: tx visible in explorer; addresses in `docs/14-deployments.md`.
 
-### 3.1 Контракт API
-- Задача: определить API для чтения интентов, офферов, статусов и репутации.
-- Зависимости: 2.1.
-- Проверка: спецификация `docs/15-backend-api.md`.
+### 1.7 Verify contract
+- Task: verify sources in explorer.
+- Dependencies: 1.6.
+- Verify: contract verified.
 
-### 3.2 Реализация backend
-- Задача: REST/GraphQL слой над индексатором.
-- Зависимости: 3.1, 2.4.
-- Проверка: интеграционные тесты API.
-
-### 3.3 Безопасность и лимиты
-- Задача: rate‑limits, ключи доступа, защита от abuse.
-- Зависимости: 3.2.
-- Проверка: тесты лимитов и политики доступа.
-
-### 3.4 Публикация backend
-- Задача: деплой backend, настройка доменов/сертификатов.
-- Зависимости: 3.3.
-- Проверка: prod healthcheck, мониторинг и алерты.
+### 1.8 Deploy to mainnet
+- Task: deploy to Base mainnet (or chosen chain).
+- Dependencies: 1.7, 2.4, 3.4, 4.3.
+- Verify: addresses and versions recorded; verification successful.
 
 ---
 
-## Этап 4. Frontend (минимальный для верификации)
+## Stage 2. Indexer
 
-### 4.1 Минимальные экраны
-- Задача: список интентов, детали интента, статусы.
-- Зависимости: 3.2.
-- Проверка: данные соответствуют backend.
+### 2.1 Data model
+- Task: define entities (Intent, Offer, Winner, Reputation, EventLog).
+- Dependencies: 1.1.
+- Verify: schema in `docs/16-indexer-model.md`.
 
-### 4.2 Инструменты для операторов
-- Задача: простые инструменты просмотра событий и состояния.
-- Зависимости: 4.1.
-- Проверка: корректная визуализация state machine.
+### 2.2 Indexer implementation
+- Task: parse events and build state.
+- Dependencies: 2.1, 1.6.
+- Verify: local run on testnet with correct aggregates.
 
-### 4.3 Публикация frontend
-- Задача: деплой (CDN/Pages), базовая аналитика.
-- Зависимости: 4.2.
-- Проверка: доступность и стабильность в проде.
+### 2.3 Publish indexer
+- Task: deploy indexer (self-hosted or managed).
+- Dependencies: 2.2.
+- Verify: SLA/health endpoint and monitoring.
 
 ---
 
-## Этап 5. CI/CD и релизный контур
+## Stage 3. Backend API
 
-### 5.1 CI пайплайн
-- Задача: автоматический запуск тестов для контрактов, индексатора, backend, frontend.
-- Зависимости: 1.4, 2.3, 3.2, 4.2.
-- Проверка: все проверки проходят на каждом PR.
+### 3.1 API contract
+- Task: define API for intents, offers, statuses, reputation.
+- Dependencies: 2.1.
+- Verify: `docs/17-backend-api.md`.
 
-### 5.1a Докеризация и Dokploy
-- Задача: проект поднимается одной командой `docker compose up`.
-- Зависимости: 0.4.
-- Проверка: `docker-compose.yml` собирает и запускает сервисы без ручных шагов.
+### 3.2 Backend implementation
+- Task: REST/GraphQL over indexer.
+- Dependencies: 3.1, 2.3.
+- Verify: API integration tests.
+
+### 3.3 Security and limits
+- Task: rate limits, access keys, abuse protection.
+- Dependencies: 3.2.
+- Verify: tests for limits and access policy.
+
+### 3.4 Backend deploy
+- Task: deploy backend, setup domains/certs.
+- Dependencies: 3.3.
+- Verify: prod healthcheck and monitoring.
+
+---
+
+## Stage 4. Frontend (minimal)
+
+### 4.1 Minimum screens
+- Task: intent list, intent detail, statuses.
+- Dependencies: 3.2.
+- Verify: data matches backend output.
+
+### 4.2 Operator tools
+- Task: view events and state.
+- Dependencies: 4.1.
+- Verify: correct state machine rendering.
+
+### 4.3 Frontend deploy
+- Task: deploy (CDN/Pages) + basic analytics.
+- Dependencies: 4.2.
+- Verify: prod availability and stability.
+
+---
+
+## Stage 5. CI/CD and release
+
+### 5.1 CI pipeline
+- Task: run tests for contracts, indexer, backend, frontend.
+- Dependencies: 1.4, 2.3, 3.2, 4.2.
+- Verify: checks pass on every PR.
+
+### 5.1a Dockerization and Dokploy
+- Task: project must start with `docker compose up`.
+- Dependencies: 0.4.
+- Verify: `docker-compose.yml` builds and starts services without manual steps.
 
 ### 5.1b Dokploy pipeline
-- Задача: деплой через автоматическую сборку из GitHub в Dokploy.
-- Зависимости: 5.1a.
-- Проверка: Dokploy успешно строит и запускает сервисы из репозитория.
+- Task: deploy via GitHub auto-build in Dokploy.
+- Dependencies: 5.1a.
+- Verify: Dokploy builds and runs services from the repo.
 
-### 5.2 Политика релизов
-- Задача: версия релиза, changelog, тегирование.
-- Зависимости: 5.1.
-- Проверка: релизный процесс описан в `docs/16-release-process.md`.
+### 5.2 Release policy
+- Task: versioning, changelog, tags.
+- Dependencies: 5.1.
+- Verify: process in `docs/16-release-process.md`.
 
-### 5.3 Предрелизная валидация
-- Задача: повторяемая проверка по чек‑листу (контракт, индексатор, backend, frontend).
-- Зависимости: 5.2.
-- Проверка: чек‑лист выполнен и подписан.
+### 5.3 Pre-release validation
+- Task: repeatable checklist (contract, indexer, backend, frontend).
+- Dependencies: 5.2.
+- Verify: checklist completed and signed.
 
 ---
 
-## Этап 6. Финальный релиз MVP
+## Stage 6. Final MVP release
 
-### 6.1 Комплексное тестирование
-- Задача: интеграционное тестирование end‑to‑end.
-- Зависимости: 1.8, 2.4, 3.4, 4.3.
-- Проверка: отчёт E2E в `docs/17-e2e-report.md`.
+### 6.1 End-to-end testing
+- Task: integration testing end-to-end.
+- Dependencies: 1.8, 2.3, 3.4, 4.3.
+- Verify: report in `docs/17-e2e-report.md`.
 
-### 6.2 Публикация MVP
-- Задача: объявление релиза, публикация адресов контрактов, API и ссылок.
-- Зависимости: 6.1.
-- Проверка: `docs/13-deployments.md` и `docs/16-release-process.md` обновлены.
+### 6.2 Publish MVP
+- Task: announce release, publish contract addresses, API, and links.
+- Dependencies: 6.1.
+- Verify: `docs/14-deployments.md` and `docs/16-release-process.md` updated.
 
-### 6.3 Мониторинг и пост‑релиз
-- Задача: метрики SLA, ошибки, отклонения инвариантов.
-- Зависимости: 6.2.
-- Проверка: мониторинг активен, алерты настроены.
+### 6.3 Monitoring and post-release
+- Task: SLA metrics, errors, invariant deviations.
+- Dependencies: 6.2.
+- Verify: monitoring and alerts enabled.

@@ -1,82 +1,82 @@
-# Intent Marketplace — PRD v0.1 (MVP / Этап 1)
+# Intent Marketplace — PRD v0.1 (MVP / Stage 1)
 
-## 0. Статус документа
-- Тип: Product Requirements Document (Implementation-ready)
-- Версия: v0.1
-- Этап: 1 — On-chain Outcome Market (transfer-only)
-- Основание: PRD v0 (Vision & Phased Roadmap)
-- Цель: зафиксировать точный scope MVP для начала разработки
+## 0. Document status
+- Type: Product Requirements Document (implementation-ready)
+- Version: v0.1
+- Stage: 1 — On-chain Outcome Market (transfer-only)
+- Basis: PRD v0 (Vision & Phased Roadmap)
+- Goal: lock exact MVP scope to start development
 
 ---
 
-## 1. Цель MVP
+## 1. MVP goal
 
-Создать **он-чейн рынок доставки результатов** для AI-агентов, в котором:
-- инициатор публикует формализованный запрос на получение ончейн-актива,
-- исполнители (solver-агенты) конкурируют, предлагая лучший результат,
-- победитель получает вознаграждение **только при фактической доставке результата**,
-- ответственность и расчёт обеспечиваются через escrow, TTL и репутацию,
-- вся система работает **без calldata, без кроссчейна, без арбитража**.
+Build an **on-chain outcome delivery market** for AI agents where:
+- the initiator publishes a formalized request for an on-chain asset,
+- solvers compete with offers,
+- the winner is paid **only after actual delivery**,
+- accountability and settlement via escrow, TTL, and reputation,
+- system runs **without calldata, cross-chain, or arbitration**.
 
-MVP должен быть пригоден для реального использования агентами без ручного участия человека.
+MVP must be usable by agents without manual human involvement.
 
 ---
 
 ## 2. In-scope / Out-of-scope
 
-### 2.1 In-scope (обязательно)
-- Single-chain (одна сеть)
-- Transfer-only интенты (проверка по факту получения токенов)
-- Escrow вознаграждения
-- Конкурентные офферы solver-ов
-- Выбор победителя verifier-агентом
-- TTL и авто-рефанд
-- Репутация solver-ов (+1 / -1)
-- Минимальный bond победителя (liveness)
-- Event-based API для SDK
+### 2.1 In-scope (required)
+- Single-chain
+- Transfer-only intents (check by token receipt)
+- Reward escrow
+- Competitive solver offers
+- Winner selection by verifier agent
+- TTL and auto-refund
+- Solver reputation (+1 / -1)
+- Winner bond (liveness)
+- Event-based SDK API
 
-### 2.2 Out-of-scope (запрещено в MVP)
-- Кроссчейн settlement
+### 2.2 Out-of-scope (forbidden in MVP)
+- Cross-chain settlement
 - Calldata / execution intents
 - Off-chain deliverables
-- Ончейн-арбитраж
-- UI для людей
-- Универсальные интенты
+- On-chain arbitration
+- Human UI
+- Universal intents
 
 ---
 
-## 3. Ключевые пользовательские сценарии (agent-first)
+## 3. Key user scenarios (agent-first)
 
-### Сценарий 1: Успешная доставка
-1. Initiator-agent создаёт интент: «получи ≥ X токенов A».
-2. Solver-агенты публикуют офферы (числовые значения).
-3. Verifier-агент выбирает победителя.
-4. Победитель доставляет токены в контракт.
-5. Контракт пересылает токены инициатору.
-6. Контракт выплачивает reward solver-у.
-7. Репутация solver-а увеличивается.
+### Scenario 1: Successful delivery
+1. Initiator agent creates intent: “receive ≥ X tokens A”.
+2. Solver agents submit offers.
+3. Verifier agent selects winner.
+4. Winner delivers tokens to the contract.
+5. Contract forwards tokens to initiator.
+6. Contract pays reward to solver.
+7. Solver reputation increases.
 
-### Сценарий 2: Победитель не исполняет
-1. Победитель выбран, но не доставляет результат до ttlAccept.
-2. Любой агент вызывает expire.
-3. Победитель получает -1 к репутации и/или теряет bond.
-4. Интент возвращается в OPEN или завершается.
+### Scenario 2: Winner does not execute
+1. Winner selected, but does not deliver before `ttlAccept`.
+2. Any agent calls `expire`.
+3. Winner gets -1 reputation and/or loses bond.
+4. Intent returns to OPEN or ends.
 
-### Сценарий 3: Нет подходящих офферов
-1. Интент истекает по ttlSubmit.
-2. Reward возвращается payer-у за вычетом комиссии.
+### Scenario 3: No suitable offers
+1. Intent expires by `ttlSubmit`.
+2. Reward refunded to payer minus fee.
 
 ---
 
-## 4. Тип интента (MVP)
+## 4. Intent type (MVP)
 
 ### 4.1 IntentKind
 - `TRANSFER_OUTCOME`
 
-### 4.2 Параметры интента
-- `tokenOut` — адрес ERC-20 токена
-- `minAmountOut` — минимально допустимое количество
-- `rewardToken` — токен вознаграждения
+### 4.2 Intent parameters
+- `tokenOut` — ERC-20 address
+- `minAmountOut` — minimum acceptable amount
+- `rewardToken` — reward token
 - `rewardAmount`
 - `payer`
 - `initiator`
@@ -86,29 +86,29 @@ MVP должен быть пригоден для реального испол�
 
 ---
 
-## 5. Роли и полномочия
+## 5. Roles and permissions
 
-- **Payer**: лочит reward, получает рефанд
-- **Initiator**: владелец интента
+- **Payer**: locks reward, receives refund
+- **Initiator**: intent owner
 - **Verifier (agent)**:
-  - выбирает победителя
-  - подписывает ACCEPT / REJECT
+  - selects winner
+  - signs ACCEPT / REJECT
 - **Solver**:
-  - подаёт офферы
-  - исполняет доставку
+  - submits offers
+  - delivers result
 
 ---
 
 ## 6. State Machine (MVP)
 
-Состояния:
-1. `OPEN` — приём офферов
-2. `SELECTED` — выбран победитель
-3. `FULFILLED` — результат доставлен
-4. `ACCEPTED` — выплата выполнена
-5. `EXPIRED` — завершён по таймауту
+States:
+1. `OPEN` — accept offers
+2. `SELECTED` — winner selected
+3. `FULFILLED` — result delivered
+4. `ACCEPTED` — payout executed
+5. `EXPIRED` — timeout finalization
 
-Переходы:
+Transitions:
 - OPEN → SELECTED
 - SELECTED → FULFILLED
 - FULFILLED → ACCEPTED
@@ -117,106 +117,105 @@ MVP должен быть пригоден для реального испол�
 
 ---
 
-## 7. Офферы solver-ов
+## 7. Solver offers
 
-### 7.1 Формат оффера
+### 7.1 Offer format
 - `solver`
 - `amountOut`
 - `timestamp`
 
-Хранятся ончейн или оффчейн (MVP: onchain storage допустим).
+Stored on-chain or off-chain (MVP: on-chain storage is acceptable).
 
 ---
 
-## 8. Выбор победителя
+## 8. Winner selection
 
-- Выполняется verifier-агентом
-- Фиксирует solver и amountOut
-- Запускает ttlAccept
-- Может требовать bond от победителя
-
----
-
-## 9. Выполнение (fulfill)
-
-- Вызывается победителем
-- Solver переводит `amountOut` токенов в контракт
-- Контракт проверяет `amountOut >= minAmountOut`
-- Контракт пересылает токены инициатору
-- Контракт фиксирует FULFILLED
+- Performed by verifier agent
+- Fixes solver and amountOut
+- Starts `ttlAccept`
+- May require bond from winner
 
 ---
 
-## 10. Acceptance и расчёт
+## 9. Fulfillment
 
-- Для MVP acceptance может быть implicit (после fulfill)
-- Контракт:
-  - выплачивает reward solver-у
-  - увеличивает репутацию solver-а (+1)
+- Called by winner
+- Solver transfers `amountOut` to contract
+- Contract checks `amountOut >= minAmountOut`
+- Contract forwards tokens to initiator
+- Contract marks FULFILLED
 
 ---
 
-## 11. Таймауты и slashing
+## 10. Acceptance and settlement
+
+- For MVP acceptance can be implicit (after fulfill)
+- Contract:
+  - pays reward to solver
+  - increases solver reputation (+1)
+
+---
+
+## 11. Timeouts and slashing
 
 - `ttlSubmit`:
-  - если истёк и нет победителя → EXPIRED + refund
+  - if expired and no winner → EXPIRED + refund
 - `ttlAccept`:
-  - если истёк и нет fulfill → EXPIRED + penalty solver-у
+  - if expired and no fulfill → EXPIRED + penalty for solver
 
 Penalty:
-- -1 к репутации
-- (опционально) потеря bond
+- -1 reputation
+- optional bond loss
 
 ---
 
-## 12. Репутация (MVP)
+## 12. Reputation (MVP)
 
-- Хранится on-chain как счётчик
-- +1 при ACCEPTED
-- -1 при winner expiration
+- Stored on-chain as counter
+- +1 on ACCEPTED
+- -1 on winner timeout
 
 ---
 
-## 13. Экономика MVP
+## 13. MVP economics
 
 - Reward escrow
-- Платформа удерживает комиссию (фикс %)
-- Bond победителя (небольшой, возвращаемый при успехе)
+- Platform fee (fixed %)
+- Winner bond (small, refundable on success)
 
 ---
 
-## 14. Метрики успеха MVP
+## 14. MVP success metrics
 
-- Количество созданных интентов
-- % интентов с успешным fulfill
-- Среднее время до fulfill
-- Количество активных solver-агентов
-
----
-
-## 15. Нефункциональные требования
-
-- Минимальный gas footprint
-- Простая модель хранения
-- Детерминированное поведение
-- Совместимость с agent SDK
+- Number of created intents
+- % of intents fulfilled successfully
+- Avg time to fulfill
+- Number of active solver agents
 
 ---
 
-## 16. Риски MVP
+## 15. Non-functional requirements
 
-1. Низкая ликвидность solver-ов
-2. Спам офферами
-3. Саботаж победителей
-
-Митигируются через TTL, bond, репутацию.
+- Minimal gas footprint
+- Simple storage model
+- Deterministic behavior
+- Agent SDK compatibility
 
 ---
 
-## 17. Готовность к следующему этапу
+## 16. MVP risks
 
-PRD v0.1 считается выполненным, если:
-- MVP стабильно обслуживает transfer-only интенты
-- API используется агентами без ручного контроля
-- Архитектура допускает добавление calldata и acceptance receipts без рефакторинга ядра
+1. Low solver liquidity
+2. Offer spam
+3. Winner sabotage
 
+Mitigated via TTL, bond, reputation.
+
+---
+
+## 17. Readiness for next stage
+
+PRD v0.1 is complete if:
+- MVP reliably serves transfer-only intents
+- API is used by agents without manual control
+- Architecture allows calldata and acceptance receipts without core refactor

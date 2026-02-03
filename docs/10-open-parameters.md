@@ -1,12 +1,12 @@
-# Открытые параметры и конфиг
+# Open parameters and config
 
-## Параметры
+## Parameters
 - `feeRecipient`.
-- `feeBpsOnAccept` (например 20–50 bps).
-- `fixedFeeOnExpire` (например 0.10 USDC).
-- `bondBpsOfReward` (например 200 bps = 2%).
-- `bondMin` (например 1 USDC).
+- `feeBpsOnAccept` (e.g. 20–50 bps).
+- `fixedFeeOnExpire` (e.g. 0.10 USDC).
+- `bondBpsOfReward` (e.g. 200 bps = 2%).
+- `bondMin` (e.g. 1 USDC).
 
-## Управление параметрами
-- Параметры могут быть immutable (конструктор) либо изменяемыми через owner.
-- Для MVP изменения owner не обязательны.
+## Parameter management
+- Parameters may be immutable (constructor) or owner-mutable.
+- Owner changes are not required for MVP.

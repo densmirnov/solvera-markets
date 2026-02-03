@@ -1,6 +1,6 @@
-# Event‑based API для SDK
+# Event-based API for SDK
 
-## События (факт из spec)
+## Events (fact from spec)
 - `IntentCreated`
 - `OfferSubmitted`
 - `WinnerSelected`
@@ -9,10 +9,10 @@
 - `Expired`
 - `ReputationUpdated`
 
-## Семантика
-- Все критические переходы фиксируются событиями.
-- В MVP офферы могут быть доступными только через `OfferSubmitted`.
+## Semantics
+- All critical transitions are emitted as events.
+- In MVP offers can be read only from `OfferSubmitted` events.
 
-## Режим работы SDK (вывод)
-- SDK слушает события и строит off‑chain индекс интентов.
-- Verifier‑агент выбирает победителя, ориентируясь на событийный поток.
+## SDK operation (inference)
+- SDK listens to events and builds off-chain intent index.
+- Verifier agent selects winners based on the event stream.

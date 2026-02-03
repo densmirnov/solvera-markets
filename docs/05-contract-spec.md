@@ -1,91 +1,91 @@
-# Спецификация контракта (MVP)
+# Contract specification (MVP)
 
 ## createIntent(...)
-Требования:
+Requirements:
 - `now < ttlSubmit < ttlAccept`.
-- валидные адреса: `payer`, `initiator`, `verifier`, `tokenOut`, `rewardToken` не равны `0`.
+- valid addresses: `payer`, `initiator`, `verifier`, `tokenOut`, `rewardToken` not zero.
 - `rewardAmount > 0`, `minAmountOut > 0`.
 
-Действия:
+Actions:
 - `transferFrom(payer, this, rewardAmount)`.
-- создать `id` (например, `keccak256(payer, initiator, nonce, block.chainid)`).
+- create `id` (e.g., `keccak256(payer, initiator, nonce, block.chainid)`).
 - `state = OPEN`.
-- эмит `IntentCreated`.
+- emit `IntentCreated`.
 
 ## submitOffer(id, amountOut)
-Требования:
+Requirements:
 - `state == OPEN`.
 - `now <= ttlSubmit`.
 - `amountOut > 0`.
 
-Действия:
-- эмит `OfferSubmitted`.
+Actions:
+- emit `OfferSubmitted`.
 
-Примечание:
-- В MVP офферы можно не хранить в storage, только events.
+Note:
+- In MVP offers may be event-only (no storage).
 
 ## selectWinner(id, solver, amountOut)
-Требования:
+Requirements:
 - `msg.sender == verifier`.
 - `state == OPEN`.
 - `now <= ttlSubmit`.
 - `solver != 0`, `amountOut > 0`.
 
-Действия:
-- вычислить `bondAmount`.
-- если `bondAmount > 0`: `transferFrom(solver, this, bondAmount)`.
-- записать `winner = solver`, `winnerAmountOut = amountOut`, `bondAmount`.
+Actions:
+- compute `bondAmount`.
+- if `bondAmount > 0`: `transferFrom(solver, this, bondAmount)`.
+- store `winner`, `winnerAmountOut`, `bondAmount`.
 - `state = SELECTED`.
-- эмит `WinnerSelected`.
+- emit `WinnerSelected`.
 
 ## fulfill(id)
-Требования:
+Requirements:
 - `state == SELECTED`.
 - `msg.sender == winner`.
 - `now <= ttlAccept`.
 - `winnerAmountOut >= minAmountOut`.
 
-Действия:
-- `transferFrom(winner, this, winnerAmountOut)` по `tokenOut`.
-- `transfer(initiator, winnerAmountOut)` по `tokenOut`.
+Actions:
+- `transferFrom(winner, this, winnerAmountOut)` in `tokenOut`.
+- `transfer(initiator, winnerAmountOut)` in `tokenOut`.
 - `state = FULFILLED`.
-- эмит `Fulfilled`.
-- вызвать `_accept(id)`.
+- emit `Fulfilled`.
+- call `_accept(id)`.
 
 ## _accept(id) (internal)
-Требования:
+Requirements:
 - `state == FULFILLED`.
 
-Действия:
+Actions:
 - `fee = rewardAmount * feeBpsOnAccept / 10_000`.
 - `pay = rewardAmount - fee`.
-- `transfer(winner, pay)` по `rewardToken`.
-- `transfer(feeRecipient, fee)` по `rewardToken`.
-- вернуть bond: `transfer(winner, bondAmount)` по `rewardToken`.
+- `transfer(winner, pay)` in `rewardToken`.
+- `transfer(feeRecipient, fee)` in `rewardToken`.
+- return bond: `transfer(winner, bondAmount)` in `rewardToken`.
 - `rep[winner] += 1`.
-- эмит `ReputationUpdated(... reason=ACCEPTED)`.
+- emit `ReputationUpdated(... reason=ACCEPTED)`.
 - `state = ACCEPTED`.
-- эмит `Accepted`.
+- emit `Accepted`.
 
 ## expire(id)
-Требования:
+Requirements:
 - `state ∈ {OPEN, SELECTED}`.
 
-Ветка A: истечение из `OPEN`
-- условие: `now > ttlSubmit` и `winner == 0`.
+Branch A: expire from `OPEN`
+- condition: `now > ttlSubmit` and `winner == 0`.
 - `fee_exp = min(fixedFeeOnExpire, rewardAmount)`.
 - `refund = rewardAmount - fee_exp`.
 - `fee_exp → feeRecipient`, `refund → payer`.
 - `state = EXPIRED`.
-- эмит `Expired`.
+- emit `Expired`.
 
-Ветка B: истечение из `SELECTED` (winner timeout)
-- условие: `now > ttlAccept` и `state != FULFILLED`.
+Branch B: expire from `SELECTED` (winner timeout)
+- condition: `now > ttlAccept` and `state != FULFILLED`.
 - `fee_exp = min(fixedFeeOnExpire, rewardAmount)`.
 - `refund = rewardAmount - fee_exp`.
 - `fee_exp → feeRecipient`, `refund → payer`.
-- если `bond > 0`: bond слэшится → `feeRecipient`.
+- if bond>0: bond slashed → `feeRecipient`.
 - `rep[winner] -= 1`.
-- эмит `ReputationUpdated(... reason=WINNER_TIMEOUT)`.
+- emit `ReputationUpdated(... reason=WINNER_TIMEOUT)`.
 - `state = EXPIRED`.
-- эмит `Expired`.
+- emit `Expired`.

@@ -1,4 +1,4 @@
-# Деплои и адреса
+# Deployments and addresses
 
 ## Base Sepolia (testnet)
 - RPC env: `BASE_SEPOLIA_RPC_URL`

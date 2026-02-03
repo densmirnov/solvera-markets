@@ -1,35 +1,35 @@
-# Модель индексатора
+# Indexer data model
 
-## Сущности
+## Entities
 
 ### Intent
-- `id`: bytes32 интента.
-- `tokenOut`, `rewardToken`: адреса токенов.
-- `minAmountOut`, `rewardAmount`: числовые параметры.
-- `payer`, `initiator`, `verifier`: адреса ролей.
-- `ttlSubmit`, `ttlAccept`: дедлайны.
-- `state`: строковое состояние (`OPEN`, `SELECTED`, `FULFILLED`, `ACCEPTED`, `EXPIRED`).
+- `id`: intent bytes32.
+- `tokenOut`, `rewardToken`: token addresses.
+- `minAmountOut`, `rewardAmount`: numeric parameters.
+- `payer`, `initiator`, `verifier`: role addresses.
+- `ttlSubmit`, `ttlAccept`: deadlines.
+- `state`: string state (`OPEN`, `SELECTED`, `FULFILLED`, `ACCEPTED`, `EXPIRED`).
 - `winner`, `winnerAmountOut`, `bondAmount`.
 - `createdAt`, `updatedAt`, `txHash`.
 
 ### Offer
 - `id`: `${intentId}-${txHash}`.
-- `intent`: ссылка на Intent.
+- `intent`: link to Intent.
 - `solver`, `amountOut`, `timestamp`, `txHash`.
 
 ### Reputation
-- `id`: адрес solver.
-- `value`: текущее значение.
+- `id`: solver address.
+- `value`: current value.
 - `updatedAt`, `txHash`.
 
 ### EventLog
 - `id`: `${txHash}-${logIndex}`.
-- `intent`: ссылка на Intent (nullable для событий без intent).
-- `eventType`: тип события.
+- `intent`: link to Intent (nullable for events without intent).
+- `eventType`: event type.
 - `solver`, `amountOut`, `feeAmount`, `refundAmount`, `bondAmount`, `rewardAmount`, `reason`.
 - `blockNumber`, `blockTimestamp`, `txHash`.
 
-## Принципы
-- Индексатор не выполняет RPC‑чтений состояния контракта.
-- Все поля строятся детерминированно из событий.
-- Backend читает только индексатор, не обращаясь к RPC.
+## Principles
+- Indexer performs no RPC reads of contract state.
+- All fields are derived deterministically from events.
+- Backend reads only from the indexer, never from RPC.

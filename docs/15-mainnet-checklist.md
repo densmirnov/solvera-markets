@@ -1,27 +1,27 @@
-# Mainnet деплой: чеклист
+# Mainnet deployment checklist
 
-## Конфигурация
-- Определены точные параметры: `feeRecipient`, `feeBpsOnAccept`, `fixedFeeOnExpire`, `bondBpsOfReward`, `bondMin`.
-- Проверен RPC URL для Base mainnet.
-- Указан `BASE_DEPLOYER_PRIVATE_KEY`.
-- Подготовлен `ETHERSCAN_API_KEY` для верификации.
+## Configuration
+- Final parameters set: `feeRecipient`, `feeBpsOnAccept`, `fixedFeeOnExpire`, `bondBpsOfReward`, `bondMin`.
+- Base mainnet RPC verified.
+- `BASE_DEPLOYER_PRIVATE_KEY` provided.
+- `ETHERSCAN_API_KEY` available for verification.
 
-## Контракт
-- Контракт скомпилирован без предупреждений.
-- Хэш байткода совпадает с тестнет‑версией (если применимо).
-- ABI согласован с `docs/12-abi-events.md`.
+## Contract
+- Contract compiles without warnings.
+- Bytecode matches testnet version (if applicable).
+- ABI matches `docs/12-abi-events.md`.
 
-## Тесты и анализ
-- `forge test` успешен.
-- Статический анализ выполнен (solhint/slither).
-- Все сценарные тесты закрывают MVP.
+## Tests and analysis
+- `forge test` successful.
+- Static analysis executed (solhint/slither).
+- All MVP scenarios covered.
 
-## Операционные проверки
-- Адрес `feeRecipient` подтверждён.
-- Балансы deployer‑адреса достаточны для газа.
-- Подготовлен план post‑deploy проверки.
+## Operational checks
+- `feeRecipient` confirmed.
+- Deployer balance sufficient for gas.
+- Post-deploy validation plan ready.
 
-## Публикация
-- Деплой выполнен через `DeployIntentMarketplace`.
-- Контракт верифицирован в обозревателе.
-- `docs/14-deployments.md` обновлён.
+## Publication
+- Deploy via `DeployIntentMarketplace`.
+- Contract verified in explorer.
+- `docs/14-deployments.md` updated.

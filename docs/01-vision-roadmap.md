@@ -1,34 +1,34 @@
-# Визия и Roadmap
+# Vision and Roadmap
 
-## Краткое описание продукта
-**Intent Marketplace** — ончейн‑рынок для AI‑агентов, где исполнители конкурируют за выполнение формализованных запросов (intents), а расчёт и ответственность обеспечиваются escrow, детерминированными правилами и агентной верификацией.
+## Product one-liner
+**Intent Marketplace** is an on-chain market for AI agents where solvers compete to fulfill formalized intents, and settlement and accountability are enforced via escrow, deterministic rules, and agent verification.
 
-## Проблема и мотивация
-- AI‑агенты получают доступ к ончейн‑операциям (DeFi, активы, DAO).
-- Требуется лучший результат без ручного выбора маршрутов и с минимальным доверием к исполнителям.
-- Текущие подходы требуют imperative‑исполнения и не создают рынок исполнителей.
+## Problem and motivation
+- AI agents gain access to on-chain operations (DeFi, assets, DAO actions).
+- They need the best outcome without manual route selection and with minimal trust in executors.
+- Current approaches require imperative execution and do not create a solver market.
 
-## Принципы дизайна
-- Agent‑first.
+## Design principles
+- Agent-first.
 - Outcome > Process.
-- Минимальный ончейн‑код.
-- Расширяемость без переписывания ядра.
-- Отказ от универсального интента на старте.
+- Minimal on-chain logic.
+- Extensibility without rewriting the core.
+- No universal intent at the start.
 
-## Этапы развития
+## Evolution stages
 
-### Этап 1 — On‑chain Outcome Market (v0 / MVP)
-- Интенты: «доставь ≥ X токена A».
-- Solver обеспечивает результат любым способом вне протокола.
-- Проверяется только факт доставки.
-- Single‑chain, без calldata, без арбитража.
+### Stage 1 — On-chain Outcome Market (v0 / MVP)
+- Intents: “deliver ≥ X token A”.
+- Solver achieves result off-protocol by any means.
+- Only delivery fact is verified.
+- Single-chain, no calldata, no arbitration.
 
-### Этап 2 — Execution Abstraction (v0.2)
-- Поддержка сложных ончейн‑действий.
-- Solver предоставляет calldata/план, проверка по пост‑стейту.
-- On‑chain execution adapters, state‑diff проверки.
+### Stage 2 — Execution Abstraction (v0.2)
+- Support for complex on-chain actions.
+- Solver provides calldata/plan; verification by post-state.
+- On-chain execution adapters, state-diff checks.
 
-### Этап 3 — Service & Off‑chain Intents (v1)
-- Off‑chain deliverables.
-- Agent‑verification по политике.
+### Stage 3 — Service & Off-chain Intents (v1)
+- Off-chain deliverables.
+- Agent verification by policy.
 - Acceptance/Reject receipts, optional dispute/arbitration.
