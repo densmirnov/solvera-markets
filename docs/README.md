@@ -27,6 +27,7 @@
 17. `docs/16-indexer-model.md` — модель индексатора.
 18. `docs/17-backend-api.md` — спецификация backend API.
 19. `docs/18-ops-indexer-backend.md` — эксплуатация indexer/backend.
+20. `docs/19-subgraph-endpoints.md` — subgraph endpoints.
 
 ## Источник фактов
 Все фактические утверждения взяты из:
