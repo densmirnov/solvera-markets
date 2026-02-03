@@ -1,0 +1,14 @@
+.DS_Store
+.agentplane/
+node_modules/
+.cache/
+.dist/
+dist/
+build/
+out/
+coverage/
+.env
+.env.*
+*.log
+contracts/.git.bak/
+contracts/lib/forge-std/.git.bak/
