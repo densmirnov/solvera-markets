@@ -1,0 +1,17 @@
+{
+  "name": "intent-marketplace-indexer",
+  "version": "0.1.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "deploy:local": "graph deploy --node http://localhost:8020 --ipfs http://localhost:5001 intent/marketplace",
+    "deploy:base": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ intent/marketplace"
+  },
+  "devDependencies": {
+    "@graphprotocol/graph-cli": "0.73.0",
+    "@graphprotocol/graph-ts": "0.33.0",
+    "typescript": "5.4.5"
+  }
+}
