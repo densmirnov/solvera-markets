@@ -33,7 +33,7 @@ dataSources:
           handler: handleFulfilled
         - event: Accepted(indexed bytes32,indexed address,uint256,uint256,uint256)
           handler: handleAccepted
-        - event: Expired(indexed bytes32,uint8,uint256,uint256)
+        - event: Expired(indexed bytes32,indexed uint8,uint256,uint256)
           handler: handleExpired
         - event: ReputationUpdated(indexed address,int256,uint8)
           handler: handleReputationUpdated

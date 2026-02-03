@@ -1,4 +1,4 @@
-type Intent @entity {
+type Intent @entity(immutable: false) {
   id: ID!
   tokenOut: Bytes!
   minAmountOut: BigInt!
@@ -18,7 +18,7 @@ type Intent @entity {
   txHash: Bytes!
 }
 
-type Offer @entity {
+type Offer @entity(immutable: true) {
   id: ID!
   intent: Intent!
   solver: Bytes!
@@ -27,14 +27,14 @@ type Offer @entity {
   txHash: Bytes!
 }
 
-type Reputation @entity {
+type Reputation @entity(immutable: false) {
   id: ID!
   value: BigInt!
   updatedAt: BigInt!
   txHash: Bytes!
 }
 
-type EventLog @entity {
+type EventLog @entity(immutable: true) {
   id: ID!
   intent: Intent
   eventType: String!
