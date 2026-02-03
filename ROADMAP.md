@@ -106,18 +106,27 @@
 ## Stage 3. Backend API
 
 ### 3.1 API contract
-- Task: define API for intents, offers, statuses, reputation.
+- Task: define agent-first API for intents, offers, statuses, reputation, and config.
+- Task: formalize read-first design with stateless responses and event-derived data only.
+- Task: include `next_steps` in every successful response (agent guidance).
+- Task: publish error model with explicit codes and messages.
+- Task: include cursor pagination and discovery filters (status, token_out, reward_token).
 - Dependencies: 2.1.
 - Verify: `docs/17-backend-api.md`.
  - Note: API must be agent-first and include endpoints for automated agent integration.
 
 ### 3.2 Backend implementation
-- Task: REST/GraphQL over indexer.
+- Task: REST over indexer (no server-side sessions).
+- Task: implement tx-builder endpoints (create intent, submit offer, select winner, fulfill, expire).
+- Task: return calldata only; do not sign or submit transactions.
+- Task: expose `GET /api/config` for contract address, fee params, bond params, and network.
 - Dependencies: 3.1, 2.3.
 - Verify: API integration tests.
 
 ### 3.3 Security and limits
-- Task: rate limits, access keys, abuse protection.
+- Task: rate limits for write endpoints and abuse protection.
+- Task: optional auth for tx-builder endpoints (read remains public).
+- Task: confirm API is not a source of truth; all state must be verifiable on-chain.
 - Dependencies: 3.2.
 - Verify: tests for limits and access policy.
 
