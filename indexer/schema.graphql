@@ -1,0 +1,51 @@
+type Intent @entity {
+  id: ID!
+  tokenOut: Bytes!
+  minAmountOut: BigInt!
+  rewardToken: Bytes!
+  rewardAmount: BigInt!
+  payer: Bytes!
+  initiator: Bytes!
+  verifier: Bytes!
+  ttlSubmit: BigInt!
+  ttlAccept: BigInt!
+  state: String!
+  winner: Bytes
+  winnerAmountOut: BigInt
+  bondAmount: BigInt
+  createdAt: BigInt!
+  updatedAt: BigInt!
+  txHash: Bytes!
+}
+
+type Offer @entity {
+  id: ID!
+  intent: Intent!
+  solver: Bytes!
+  amountOut: BigInt!
+  timestamp: BigInt!
+  txHash: Bytes!
+}
+
+type Reputation @entity {
+  id: ID!
+  value: BigInt!
+  updatedAt: BigInt!
+  txHash: Bytes!
+}
+
+type EventLog @entity {
+  id: ID!
+  intent: Intent!
+  eventType: String!
+  solver: Bytes
+  amountOut: BigInt
+  feeAmount: BigInt
+  refundAmount: BigInt
+  bondAmount: BigInt
+  rewardAmount: BigInt
+  reason: String
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  txHash: Bytes!
+}
