@@ -15,6 +15,11 @@ contract IntentMarketplace {
     EXPIRED
   }
 
+  enum ReputationReason {
+    ACCEPTED,
+    WINNER_TIMEOUT
+  }
+
   struct Intent {
     address tokenOut;
     uint256 minAmountOut;
@@ -28,6 +33,7 @@ contract IntentMarketplace {
     State state;
     address winner;
     uint256 winnerAmountOut;
+    uint256 bondAmount;
   }
 
   event IntentCreated(
@@ -53,7 +59,8 @@ contract IntentMarketplace {
   event WinnerSelected(
     bytes32 indexed id,
     address indexed solver,
-    uint256 amountOut
+    uint256 amountOut,
+    uint256 bondAmount
   );
 
   event Fulfilled(
@@ -65,17 +72,33 @@ contract IntentMarketplace {
   event Accepted(
     bytes32 indexed id,
     address indexed solver,
-    uint256 rewardAmount
+    uint256 rewardAmount,
+    uint256 feeAmount,
+    uint256 bondAmount
   );
 
   event Expired(
     bytes32 indexed id,
     State indexed fromState,
+    uint256 feeAmount,
     uint256 refundAmount
   );
 
+  event ReputationUpdated(
+    address indexed solver,
+    int256 newValue,
+    ReputationReason reason
+  );
+
+  address public immutable feeRecipient;
+  uint16 public immutable feeBpsOnAccept;
+  uint256 public immutable fixedFeeOnExpire;
+  uint16 public immutable bondBpsOfReward;
+  uint256 public immutable bondMin;
+
   uint256 private _nonce;
   mapping(bytes32 => Intent) private _intents;
+  mapping(address => int256) public reputation;
 
   error InvalidTime();
   error InvalidAddress();
@@ -83,6 +106,21 @@ contract IntentMarketplace {
   error InvalidState();
   error Unauthorized();
   error TransferFailed();
+
+  constructor(
+    address feeRecipient_,
+    uint16 feeBpsOnAccept_,
+    uint256 fixedFeeOnExpire_,
+    uint16 bondBpsOfReward_,
+    uint256 bondMin_
+  ) {
+    if (feeRecipient_ == address(0)) revert InvalidAddress();
+    feeRecipient = feeRecipient_;
+    feeBpsOnAccept = feeBpsOnAccept_;
+    fixedFeeOnExpire = fixedFeeOnExpire_;
+    bondBpsOfReward = bondBpsOfReward_;
+    bondMin = bondMin_;
+  }
 
   function createIntent(
     address tokenOut,
@@ -152,11 +190,17 @@ contract IntentMarketplace {
     if (block.timestamp > intent.ttlSubmit) revert InvalidTime();
     if (solver == address(0) || amountOut == 0) revert InvalidAmount();
 
+    uint256 bondAmount = _calcBondAmount(intent.rewardAmount);
+    if (bondAmount > 0) {
+      _safeTransferFrom(IERC20(intent.rewardToken), solver, address(this), bondAmount);
+    }
+
     intent.winner = solver;
     intent.winnerAmountOut = amountOut;
+    intent.bondAmount = bondAmount;
     intent.state = State.SELECTED;
 
-    emit WinnerSelected(id, solver, amountOut);
+    emit WinnerSelected(id, solver, amountOut, bondAmount);
   }
 
   function fulfill(bytes32 id) external {
@@ -183,24 +227,43 @@ contract IntentMarketplace {
       if (block.timestamp <= intent.ttlSubmit) revert InvalidTime();
       if (intent.winner != address(0)) revert InvalidState();
 
-      if (intent.rewardAmount > 0) {
-        _safeTransfer(IERC20(intent.rewardToken), intent.payer, intent.rewardAmount);
+      uint256 feeAmount = _min(intent.rewardAmount, fixedFeeOnExpire);
+      uint256 refundAmount = intent.rewardAmount - feeAmount;
+
+      if (feeAmount > 0) {
+        _safeTransfer(IERC20(intent.rewardToken), feeRecipient, feeAmount);
+      }
+      if (refundAmount > 0) {
+        _safeTransfer(IERC20(intent.rewardToken), intent.payer, refundAmount);
       }
 
       intent.state = State.EXPIRED;
-      emit Expired(id, State.OPEN, intent.rewardAmount);
+      emit Expired(id, State.OPEN, feeAmount, refundAmount);
       return;
     }
 
     if (block.timestamp <= intent.ttlAccept) revert InvalidTime();
     if (intent.state == State.FULFILLED) revert InvalidState();
 
-    if (intent.rewardAmount > 0) {
-      _safeTransfer(IERC20(intent.rewardToken), intent.payer, intent.rewardAmount);
+    uint256 feeAmount = _min(intent.rewardAmount, fixedFeeOnExpire);
+    uint256 refundAmount = intent.rewardAmount - feeAmount;
+
+    if (feeAmount > 0) {
+      _safeTransfer(IERC20(intent.rewardToken), feeRecipient, feeAmount);
+    }
+    if (refundAmount > 0) {
+      _safeTransfer(IERC20(intent.rewardToken), intent.payer, refundAmount);
     }
 
+    if (intent.bondAmount > 0) {
+      _safeTransfer(IERC20(intent.rewardToken), feeRecipient, intent.bondAmount);
+    }
+
+    reputation[intent.winner] -= 1;
+    emit ReputationUpdated(intent.winner, reputation[intent.winner], ReputationReason.WINNER_TIMEOUT);
+
     intent.state = State.EXPIRED;
-    emit Expired(id, State.SELECTED, intent.rewardAmount);
+    emit Expired(id, State.SELECTED, feeAmount, refundAmount);
   }
 
   function getIntent(bytes32 id) external view returns (Intent memory) {
@@ -211,12 +274,34 @@ contract IntentMarketplace {
     Intent storage intent = _intents[id];
     if (intent.state != State.FULFILLED) revert InvalidState();
 
-    if (intent.rewardAmount > 0) {
-      _safeTransfer(IERC20(intent.rewardToken), intent.winner, intent.rewardAmount);
+    uint256 feeAmount = (intent.rewardAmount * feeBpsOnAccept) / 10_000;
+    uint256 payAmount = intent.rewardAmount - feeAmount;
+
+    if (payAmount > 0) {
+      _safeTransfer(IERC20(intent.rewardToken), intent.winner, payAmount);
+    }
+    if (feeAmount > 0) {
+      _safeTransfer(IERC20(intent.rewardToken), feeRecipient, feeAmount);
+    }
+    if (intent.bondAmount > 0) {
+      _safeTransfer(IERC20(intent.rewardToken), intent.winner, intent.bondAmount);
     }
 
+    reputation[intent.winner] += 1;
+    emit ReputationUpdated(intent.winner, reputation[intent.winner], ReputationReason.ACCEPTED);
+
     intent.state = State.ACCEPTED;
-    emit Accepted(id, intent.winner, intent.rewardAmount);
+    emit Accepted(id, intent.winner, intent.rewardAmount, feeAmount, intent.bondAmount);
+  }
+
+  function _calcBondAmount(uint256 rewardAmount) internal view returns (uint256) {
+    uint256 byBps = (rewardAmount * bondBpsOfReward) / 10_000;
+    if (bondMin > byBps) return bondMin;
+    return byBps;
+  }
+
+  function _min(uint256 a, uint256 b) private pure returns (uint256) {
+    return a < b ? a : b;
   }
 
   function _safeTransfer(IERC20 token, address to, uint256 amount) private {
