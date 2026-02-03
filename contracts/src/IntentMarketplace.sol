@@ -3,7 +3,12 @@ pragma solidity ^0.8.20;
 
 interface IERC20 {
   function transfer(address to, uint256 amount) external returns (bool);
-  function transferFrom(address from, address to, uint256 amount) external returns (bool);
+
+  function transferFrom(
+    address from,
+    address to,
+    uint256 amount
+  ) external returns (bool);
 }
 
 contract IntentMarketplace {
@@ -133,7 +138,8 @@ contract IntentMarketplace {
     uint64 ttlSubmit,
     uint64 ttlAccept
   ) external returns (bytes32 id) {
-    if (block.timestamp >= ttlSubmit || ttlSubmit >= ttlAccept) revert InvalidTime();
+    if (block.timestamp >= ttlSubmit || ttlSubmit >= ttlAccept)
+      revert InvalidTime();
     if (
       payer == address(0) ||
       initiator == address(0) ||
@@ -146,7 +152,9 @@ contract IntentMarketplace {
     _safeTransferFrom(IERC20(rewardToken), payer, address(this), rewardAmount);
 
     _nonce += 1;
-    id = keccak256(abi.encode(payer, initiator, _nonce, block.chainid, address(this)));
+    id = keccak256(
+      abi.encode(payer, initiator, _nonce, block.chainid, address(this))
+    );
 
     Intent storage intent = _intents[id];
     intent.tokenOut = tokenOut;
@@ -183,7 +191,11 @@ contract IntentMarketplace {
     emit OfferSubmitted(id, msg.sender, amountOut, block.timestamp);
   }
 
-  function selectWinner(bytes32 id, address solver, uint256 amountOut) external {
+  function selectWinner(
+    bytes32 id,
+    address solver,
+    uint256 amountOut
+  ) external {
     Intent storage intent = _intents[id];
     if (intent.verifier != msg.sender) revert Unauthorized();
     if (intent.state != State.OPEN) revert InvalidState();
@@ -192,7 +204,12 @@ contract IntentMarketplace {
 
     uint256 bondAmount = _calcBondAmount(intent.rewardAmount);
     if (bondAmount > 0) {
-      _safeTransferFrom(IERC20(intent.rewardToken), solver, address(this), bondAmount);
+      _safeTransferFrom(
+        IERC20(intent.rewardToken),
+        solver,
+        address(this),
+        bondAmount
+      );
     }
 
     intent.winner = solver;
@@ -210,8 +227,17 @@ contract IntentMarketplace {
     if (block.timestamp > intent.ttlAccept) revert InvalidTime();
     if (intent.winnerAmountOut < intent.minAmountOut) revert InvalidAmount();
 
-    _safeTransferFrom(IERC20(intent.tokenOut), msg.sender, address(this), intent.winnerAmountOut);
-    _safeTransfer(IERC20(intent.tokenOut), intent.initiator, intent.winnerAmountOut);
+    _safeTransferFrom(
+      IERC20(intent.tokenOut),
+      msg.sender,
+      address(this),
+      intent.winnerAmountOut
+    );
+    _safeTransfer(
+      IERC20(intent.tokenOut),
+      intent.initiator,
+      intent.winnerAmountOut
+    );
 
     intent.state = State.FULFILLED;
     emit Fulfilled(id, msg.sender, intent.winnerAmountOut);
@@ -221,49 +247,70 @@ contract IntentMarketplace {
 
   function expire(bytes32 id) external {
     Intent storage intent = _intents[id];
-    if (intent.state != State.OPEN && intent.state != State.SELECTED) revert InvalidState();
+    if (intent.state != State.OPEN && intent.state != State.SELECTED)
+      revert InvalidState();
 
     if (intent.state == State.OPEN) {
       if (block.timestamp <= intent.ttlSubmit) revert InvalidTime();
       if (intent.winner != address(0)) revert InvalidState();
 
-      uint256 feeAmount = _min(intent.rewardAmount, fixedFeeOnExpire);
-      uint256 refundAmount = intent.rewardAmount - feeAmount;
+      uint256 feeAmountOpen = _min(intent.rewardAmount, fixedFeeOnExpire);
+      uint256 refundAmountOpen = intent.rewardAmount - feeAmountOpen;
 
-      if (feeAmount > 0) {
-        _safeTransfer(IERC20(intent.rewardToken), feeRecipient, feeAmount);
+      if (feeAmountOpen > 0) {
+        _safeTransfer(IERC20(intent.rewardToken), feeRecipient, feeAmountOpen);
       }
-      if (refundAmount > 0) {
-        _safeTransfer(IERC20(intent.rewardToken), intent.payer, refundAmount);
+      if (refundAmountOpen > 0) {
+        _safeTransfer(
+          IERC20(intent.rewardToken),
+          intent.payer,
+          refundAmountOpen
+        );
       }
 
       intent.state = State.EXPIRED;
-      emit Expired(id, State.OPEN, feeAmount, refundAmount);
+      emit Expired(id, State.OPEN, feeAmountOpen, refundAmountOpen);
       return;
     }
 
     if (block.timestamp <= intent.ttlAccept) revert InvalidTime();
     if (intent.state == State.FULFILLED) revert InvalidState();
 
-    uint256 feeAmount = _min(intent.rewardAmount, fixedFeeOnExpire);
-    uint256 refundAmount = intent.rewardAmount - feeAmount;
+    uint256 feeAmountSelected = _min(intent.rewardAmount, fixedFeeOnExpire);
+    uint256 refundAmountSelected = intent.rewardAmount - feeAmountSelected;
 
-    if (feeAmount > 0) {
-      _safeTransfer(IERC20(intent.rewardToken), feeRecipient, feeAmount);
+    if (feeAmountSelected > 0) {
+      _safeTransfer(
+        IERC20(intent.rewardToken),
+        feeRecipient,
+        feeAmountSelected
+      );
     }
-    if (refundAmount > 0) {
-      _safeTransfer(IERC20(intent.rewardToken), intent.payer, refundAmount);
+    if (refundAmountSelected > 0) {
+      _safeTransfer(
+        IERC20(intent.rewardToken),
+        intent.payer,
+        refundAmountSelected
+      );
     }
 
     if (intent.bondAmount > 0) {
-      _safeTransfer(IERC20(intent.rewardToken), feeRecipient, intent.bondAmount);
+      _safeTransfer(
+        IERC20(intent.rewardToken),
+        feeRecipient,
+        intent.bondAmount
+      );
     }
 
     reputation[intent.winner] -= 1;
-    emit ReputationUpdated(intent.winner, reputation[intent.winner], ReputationReason.WINNER_TIMEOUT);
+    emit ReputationUpdated(
+      intent.winner,
+      reputation[intent.winner],
+      ReputationReason.WINNER_TIMEOUT
+    );
 
     intent.state = State.EXPIRED;
-    emit Expired(id, State.SELECTED, feeAmount, refundAmount);
+    emit Expired(id, State.SELECTED, feeAmountSelected, refundAmountSelected);
   }
 
   function getIntent(bytes32 id) external view returns (Intent memory) {
@@ -284,17 +331,33 @@ contract IntentMarketplace {
       _safeTransfer(IERC20(intent.rewardToken), feeRecipient, feeAmount);
     }
     if (intent.bondAmount > 0) {
-      _safeTransfer(IERC20(intent.rewardToken), intent.winner, intent.bondAmount);
+      _safeTransfer(
+        IERC20(intent.rewardToken),
+        intent.winner,
+        intent.bondAmount
+      );
     }
 
     reputation[intent.winner] += 1;
-    emit ReputationUpdated(intent.winner, reputation[intent.winner], ReputationReason.ACCEPTED);
+    emit ReputationUpdated(
+      intent.winner,
+      reputation[intent.winner],
+      ReputationReason.ACCEPTED
+    );
 
     intent.state = State.ACCEPTED;
-    emit Accepted(id, intent.winner, intent.rewardAmount, feeAmount, intent.bondAmount);
+    emit Accepted(
+      id,
+      intent.winner,
+      intent.rewardAmount,
+      feeAmount,
+      intent.bondAmount
+    );
   }
 
-  function _calcBondAmount(uint256 rewardAmount) internal view returns (uint256) {
+  function _calcBondAmount(
+    uint256 rewardAmount
+  ) internal view returns (uint256) {
     uint256 byBps = (rewardAmount * bondBpsOfReward) / 10_000;
     if (bondMin > byBps) return bondMin;
     return byBps;
@@ -308,13 +371,20 @@ contract IntentMarketplace {
     (bool success, bytes memory data) = address(token).call(
       abi.encodeWithSelector(IERC20.transfer.selector, to, amount)
     );
-    if (!success || (data.length != 0 && !abi.decode(data, (bool)))) revert TransferFailed();
+    if (!success || (data.length != 0 && !abi.decode(data, (bool))))
+      revert TransferFailed();
   }
 
-  function _safeTransferFrom(IERC20 token, address from, address to, uint256 amount) private {
+  function _safeTransferFrom(
+    IERC20 token,
+    address from,
+    address to,
+    uint256 amount
+  ) private {
     (bool success, bytes memory data) = address(token).call(
       abi.encodeWithSelector(IERC20.transferFrom.selector, from, to, amount)
     );
-    if (!success || (data.length != 0 && !abi.decode(data, (bool)))) revert TransferFailed();
+    if (!success || (data.length != 0 && !abi.decode(data, (bool))))
+      revert TransferFailed();
   }
 }

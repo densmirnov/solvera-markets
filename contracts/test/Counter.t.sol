@@ -5,7 +5,7 @@ import "forge-std/Test.sol";
 
 // Deprecated placeholder from forge init. Not used by the project.
 contract CounterTest is Test {
-  function test_placeholder() public {
+  function test_placeholder() public pure {
     assertTrue(true);
   }
 }
