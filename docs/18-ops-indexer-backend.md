@@ -9,6 +9,7 @@
 - Backend reads only from subgraph (`SUBGRAPH_URL`).
 - Direct RPC calls are forbidden.
 - Cache enabled (`SUBGRAPH_CACHE_TTL_MS`), rate-limiting by IP.
+- Healthcheck: `GET /api/health` returns status and timestamp for deployment probes.
 
 ## RPC load minimization
 - Use indexer for all read operations.

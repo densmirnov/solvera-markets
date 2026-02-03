@@ -246,6 +246,18 @@ export class IntentsController {
     };
   }
 
+  @Get("/health")
+  async getHealth() {
+    return {
+      data: {
+        status: "ok",
+        subgraphUrl: process.env.SUBGRAPH_URL || null,
+        timestamp: new Date().toISOString(),
+      },
+      next_steps: [],
+    };
+  }
+
   @Post("/intents")
   async buildCreateIntent(@Body() body: Record<string, unknown>) {
     const required = [
