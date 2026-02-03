@@ -6,7 +6,7 @@
 - Deployer: `0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d`
 - IntentMarketplace: `0x758eF66c27Ed02620a30552eAf1F0AC141f1E361`
 - Tx hash: `0x8b14c45643ee98e07f8e2d4f5b938fbf6a639854f9f44942752815598843bffc`
-- Verification: pending
+- Verification: verified (Base Sepolia)
 - Params:
   - feeRecipient: `0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d`
   - feeBpsOnAccept: `50`
