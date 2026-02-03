@@ -17,8 +17,13 @@
 ## Base mainnet
 - RPC env: `BASE_RPC_URL`
 - Chain ID: `8453`
-- Deployer: TBD
-- IntentMarketplace: TBD
-- Tx hash: TBD
+- Deployer: `0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d`
+- IntentMarketplace: `0x442D68de43B37a0B2F975dc8dEfEfC349070Fb3A`
+- Tx hash: `0x0c6cfa1c41f9f64e295446d5748893abcf611db0db932b31fd5b8498a7688a70`
 - Verification: pending
-- Params: TBD
+- Params:
+  - feeRecipient: `0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d`
+  - feeBpsOnAccept: `50`
+  - fixedFeeOnExpire: `1000000`
+  - bondBpsOfReward: `200`
+  - bondMin: `1000000`
