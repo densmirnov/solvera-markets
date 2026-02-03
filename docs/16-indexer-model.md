@@ -24,7 +24,7 @@
 
 ### EventLog
 - `id`: `${txHash}-${logIndex}`.
-- `intent`: ссылка на Intent.
+- `intent`: ссылка на Intent (nullable для событий без intent).
 - `eventType`: тип события.
 - `solver`, `amountOut`, `feeAmount`, `refundAmount`, `bondAmount`, `rewardAmount`, `reason`.
 - `blockNumber`, `blockTimestamp`, `txHash`.
