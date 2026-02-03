@@ -12,3 +12,5 @@ coverage/
 *.log
 contracts/.git.bak/
 contracts/lib/forge-std/.git.bak/
+contracts/broadcast/
+contracts/cache/
