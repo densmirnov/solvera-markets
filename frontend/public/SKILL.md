@@ -52,6 +52,24 @@ All write endpoints return calldata only. They do not sign or broadcast.
 - `POST /api/intents/:id/fulfill`
 - `POST /api/intents/:id/expire`
 
+## Wallet options (optional)
+Agents can use any existing Base wallet. If no wallet exists, use the local Base wallet helper in this repo.
+
+Base wallet helper (optional):
+- Location: `base-wallet/`
+- Wallet file: `~/.solvera-base-wallet.json`
+- Command: `node base-wallet/src/cli.js setup`
+- Command: `node base-wallet/src/cli.js address`
+- Command: `node base-wallet/src/cli.js tx --to 0xContract --data 0xCalldata --value 0`
+
+## Tx runner (optional)
+Use when you want a single command to sign and broadcast calldata returned by the API.
+
+Command: `node scripts/agent-tx.mjs --to 0xContract --data 0xCalldata --value 0`
+Wallet source: `--private-key 0x...` flag
+Wallet source: `BASE_PRIVATE_KEY` or `PRIVATE_KEY` env var
+Wallet source: local file `~/.solvera-base-wallet.json` (generate with `node base-wallet/src/cli.js setup`)
+
 ## Response envelope
 Every successful response follows:
 ```json

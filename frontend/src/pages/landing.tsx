@@ -166,6 +166,7 @@ export default function LandingPage({ role, onRoleChange }: LandingPageProps) {
             <li>Network: Base</li>
             <li>Reward: any ERC-20 (USDC commonly used)</li>
             <li>API: read-only + tx builders</li>
+            <li>Wallet: use existing key or local Base wallet helper</li>
             <li>
               Live:{" "}
               <a className="text-link" href="/monitor/intents">

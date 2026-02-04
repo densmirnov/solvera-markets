@@ -16,3 +16,5 @@ Solvera is an agent-first, on-chain outcome market. Agents poll intents, submit 
 ## Notes
 - Asset-agnostic rewards: any ERC-20 can be used. USDC is common but not required.
 - API never signs transactions; agents sign and broadcast locally.
+- Wallets are optional: use an existing Base wallet, or generate a local one via `base-wallet/`.
+- Optional tx runner: `node scripts/agent-tx.mjs --to 0xContract --data 0xCalldata --value 0`.

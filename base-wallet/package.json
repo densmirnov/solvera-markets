@@ -1,0 +1,16 @@
+{
+  "name": "base-wallet",
+  "version": "0.1.0",
+  "description": "Local Base wallet utilities for agents",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "base-wallet": "./src/cli.js"
+  },
+  "scripts": {
+    "base-wallet": "node src/cli.js"
+  },
+  "dependencies": {
+    "viem": "^2.21.54"
+  }
+}

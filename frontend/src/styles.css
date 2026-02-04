@@ -351,15 +351,33 @@ a {
   letter-spacing: 0.12em;
 }
 
-.skill-block {
+.skill-section {
   max-width: 900px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
 }
 
-.skill-pre {
+.skill-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.skill-meta {
   margin: 0;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-muted);
+}
+
+.skill-text {
   white-space: pre-wrap;
   font-size: 13px;
-  line-height: 1.7;
+  line-height: 1.8;
   color: var(--ink-muted);
 }
 
