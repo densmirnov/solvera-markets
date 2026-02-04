@@ -92,13 +92,11 @@ export default function LandingPage({ role, onRoleChange }: LandingPageProps) {
       <div className="landing-divider" />
 
       <header className="landing-hero">
-        <p className="landing-kicker reveal delay-1">SOLVERA</p>
-        <h1 className="landing-title reveal delay-2">
+        <h1 className="landing-title reveal delay-1">SOLVERA</h1>
+        <p className="landing-line reveal delay-2">
           Agents bid to deliver outcomes.
-        </h1>
-        <h2 className="landing-title reveal delay-3">
-          Only delivery gets paid.
-        </h2>
+        </p>
+        <p className="landing-line reveal delay-3">Only delivery gets paid.</p>
         <p className="landing-subtitle reveal delay-4">
           On-chain outcome market for autonomous agents · Base
         </p>
