@@ -3025,12 +3025,83 @@
       "dirty": false,
       "id_source": "generated",
       "doc": "## Summary\n\nRemoved host port bindings in docker-compose and documented Dokploy isolation/routing to prevent port conflicts.\n\n## Scope\n\nUpdated docker-compose.yml to use expose for backend/frontend and added Dokploy isolation guidance in docs/22-devops-dokploy.md.\n\n## Risks\n\nRemoving host port bindings means local access requires explicit port publishing or a reverse proxy; ensure Dokploy domain routing is configured.\n\n## Verify Steps\n\ndocker compose up -d --build\n\n## Rollback Plan\n\nRevert docker-compose.yml and docs/22-devops-dokploy.md to restore host port bindings."
+    },
+    {
+      "id": "202602040726-8T34T5",
+      "title": "Normalize env files for solvera.markets",
+      "description": "Fix production domain to solvera.markets, align env.example, and complete .env with required variables.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "DOCS",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "rg -n \"solvera\\.markets|CORS_ORIGIN|VITE_API_BASE|SUBGRAPH_URL\" env.example .env"
+      ],
+      "commit": {
+        "hash": "aaf0ca4e951fa2c55d228ef2d2ddcacf96173e12",
+        "message": "🧾 8T34T5 fix env domain and defaults"
+      },
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: normalize env files for solvera.markets and ensure required variables are present."
+        },
+        {
+          "author": "DOCS",
+          "body": "Verified: env.example updated to solvera.markets and .env contains required production variables."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T07:28:43.814Z",
+      "doc_updated_by": "DOCS",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nUpdated env.example/.env to solvera.markets and completed missing production variables.\n\n## Scope\n\nUpdated env.example domain values and filled .env with required backend/indexer variables.\n\n## Risks\n\nEnsure .env secrets remain protected; production domain changes require updating CORS_ORIGIN and VITE_API_BASE.\n\n## Verify Steps\n\nrg -n \"solvera\\.markets|CORS_ORIGIN|VITE_API_BASE|SUBGRAPH_URL\" env.example .env\n\n## Rollback Plan\n\nRevert env.example and .env to previous values."
+    },
+    {
+      "id": "202602040732-VZVAN9",
+      "title": "Fix indexer build and update contract address",
+      "description": "Ensure graph codegen runs before build in indexer container and update env files with deployed contract address.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "npm --prefix indexer run build",
+        "rg -n \"CONTRACT_ADDRESS\" env.example .env"
+      ],
+      "commit": {
+        "hash": "f7f98311d35873d8992335d0139a3948632dfd1f",
+        "message": "🛠️ VZVAN9 fix indexer build and contract address"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: fix indexer build order and update deployed contract address in env files."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: indexer build now runs codegen, and env files reference the deployed Base contract address."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T07:35:02.505Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nUpdated indexer build to run graph codegen first and set deployed contract address in env files.\n\n## Scope\n\nUpdated indexer build script to include codegen; set CONTRACT_ADDRESS to the deployed Base mainnet address in env.example and .env.\n\n## Risks\n\nIndexer build now runs codegen on each build; keep graph schema and ABI in sync to avoid build failures.\n\n## Verify Steps\n\n1) npm --prefix indexer run build\\n2) rg -n \"CONTRACT_ADDRESS\" env.example .env\n\n## Rollback Plan\n\nRevert indexer/package.json and env files to previous values."
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "341f3e9ff7ed7bceebb71fa8f15204faf39e12092f602f75e840db91fead0797"
+    "checksum": "a4ea7b11d5d140501945d7e01dc0ceb11921cc09e13ec4b9305b39b5a404d77e"
   }
 }
