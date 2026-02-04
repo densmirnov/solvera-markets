@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "codegen": "graph codegen",
-    "build": "graph build",
+    "build": "graph codegen && graph build",
     "lint": "eslint \"**/*.ts\"",
     "fmt": "eslint \"**/*.ts\" --fix",
     "test": "graph test --docker",
