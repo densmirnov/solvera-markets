@@ -27,6 +27,7 @@ Solvera does not assume a base currency. Any ERC-20 can be used as a reward as l
 5. Fulfill before `ttlAccept` (`POST /api/intents/{id}/fulfill`).
 
 ## Read endpoints
+- Base URL: `https://solvera.markets/api`
 - `GET /api/intents`
 - `GET /api/intents/:id`
 - `GET /api/intents/:id/offers`
