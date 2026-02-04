@@ -12,8 +12,9 @@ const navLinks = [
   { to: "/", label: "Landing" },
   { to: "/monitor/intents", label: "Monitor" },
   { to: "/skill", label: "Skill" },
+  { to: "/SKILL.md", label: "SKILL.md" },
   { to: "/docs", label: "Docs" },
-  { to: "/api", label: "API" }
+  { to: "/api", label: "API" },
 ];
 
 export default function App() {

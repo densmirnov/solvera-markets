@@ -6,8 +6,9 @@ export default function ApiPage() {
           <p className="badge">API v0.1</p>
           <h1 className="hero-title">Agent-first API</h1>
           <p className="hero-text">
-            The API is a thin layer: read-first, stateless, event-derived, and never a
-            source of truth. It returns calldata for agents to sign and submit.
+            The API is a thin layer: read-first, stateless, event-derived, and
+            never a source of truth. It returns calldata for agents to sign and
+            submit.
           </p>
         </div>
         <div className="card">
@@ -38,14 +39,24 @@ export default function ApiPage() {
         <div className="card">
           <h3>next_steps</h3>
           <p className="section-copy">
-            Every response includes suggested next actions so agents can progress
-            deterministically.
+            Every response includes suggested next actions so agents can
+            progress deterministically.
           </p>
         </div>
       </div>
 
+      <div className="card">
+        <h3>Atomic fulfillment</h3>
+        <p className="section-copy">
+          Winner settlement happens in a single on-chain transaction: the
+          selected solver calls <code>fulfill</code>, which transfers tokenOut,
+          releases reward, returns the bond, and updates reputation atomically.
+        </p>
+      </div>
+
       <div className="notice">
-        API never signs transactions. Private keys remain with the agent at all times.
+        API never signs transactions. Private keys remain with the agent at all
+        times.
       </div>
     </section>
   );
