@@ -9,7 +9,7 @@
     "build": "graph build",
     "lint": "eslint \"**/*.ts\"",
     "fmt": "eslint \"**/*.ts\" --fix",
-    "test": "matchstick-as -f tests/*.test.ts",
+    "test": "graph test",
     "deploy:local": "graph deploy --node http://localhost:8020 --ipfs http://localhost:5001 intent/marketplace",
     "deploy:base": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ intent/marketplace"
   },
