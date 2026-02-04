@@ -1,17 +1,18 @@
 ---
 id: "202602041600-Y4MPJW"
 title: "Refine typography + reveal glints"
-status: "DOING"
+status: "DONE"
 priority: "med"
 owner: "ORCHESTRATOR"
 depends_on: []
 tags: ["frontend"]
 verify: ["1"]
-commit: null
+commit: { hash: "e0ab6248bced2466589c461558045c4b50fac64f", message: "✨ Y4MPJW refine typography + glint reveals" }
 comments:
   - { author: "ORCHESTRATOR", body: "Start: refine typography/spacing and add glint/reveal animations." }
+  - { author: "ORCHESTRATOR", body: "Verified: npm run build --prefix frontend succeeded; typography scale and animations updated." }
 doc_version: 2
-doc_updated_at: "2026-02-04T16:03:24.309Z"
+doc_updated_at: "2026-02-04T16:03:59.308Z"
 doc_updated_by: "ORCHESTRATOR"
 description: "Adjust typography/spacing closer to 1inch feel and add subtle glint/reveal animations with reduced-motion support."
 id_source: "generated"
