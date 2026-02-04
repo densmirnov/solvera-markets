@@ -2882,12 +2882,49 @@
       "dirty": false,
       "id_source": "generated",
       "doc": "## Summary\n\nAdded a formal npm audit check with a documented exception for indexer moderate advisories.\n\n## Scope\n\nAdded scripts/audit.sh, wired audit into Makefile and scripts/check.sh, and documented audit exception in docs/20-engineering-standards.md and docs/13-audit-checklist.md.\n\n## Risks\n\nAudit exceptions may mask emerging issues; must be revisited when Graph CLI or transitive dependencies update.\n\n## Verify Steps\n\nmake check\n\n## Rollback Plan\n\nRevert audit script and documentation updates; restore previous Makefile/scripts/check.sh."
+    },
+    {
+      "id": "202602040653-D35R4Q",
+      "title": "Switch compose to prod subgraph and validate frontend",
+      "description": "Remove mock subgraph from compose, set production SUBGRAPH_URL, update ops docs, and verify frontend/API availability.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "docker compose up -d --build",
+        "curl -s -o /dev/null -w \"%{http_code}\" http://localhost:4173",
+        "curl -s http://localhost:3000/api/health"
+      ],
+      "commit": {
+        "hash": "eafd7b70d0478ae718cb1616fcc7fe684edc31c4",
+        "message": "🚀 D35R4Q set prod subgraph in compose"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: switch docker-compose to production subgraph endpoint and validate frontend/API availability."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: docker compose up uses production subgraph URL; frontend returns 200 and backend health responds."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T06:57:15.048Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nSwitched docker-compose to production subgraph endpoint and documented the default URL.\n\n## Scope\n\nUpdated docker-compose.yml to remove mock-subgraph and default SUBGRAPH_URL to the deployed subgraph; updated docs/22-devops-dokploy.md.\n\n## Risks\n\nIf the subgraph endpoint changes or is rate-limited, backend API availability will degrade until SUBGRAPH_URL is updated.\n\n## Verify Steps\n\n1) docker compose up -d --build\\n2) curl -s -o /dev/null -w \"%{http_code}\" http://localhost:4173\\n3) curl -s http://localhost:3000/api/health\n\n## Rollback Plan\n\nRevert docker-compose.yml and docs/22-devops-dokploy.md; re-run docker compose up -d --build."
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "d67460dcc974d6125decf0095b3c760fbd8a7fbe1cdf4d0d4d382a22f8e42446"
+    "checksum": "f59bd3b1815378917baba11a3b7f46bbd421d859f59feed561c1f94c03d765d3"
   }
 }
