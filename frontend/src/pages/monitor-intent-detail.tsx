@@ -28,18 +28,25 @@ export default function IntentDetailPage() {
   const { id } = useParams();
   const [intent, setIntent] = useState<IntentDetail | null>(null);
   const [offers, setOffers] = useState<Offer[]>([]);
+  const [nextSteps, setNextSteps] = useState<
+    { action: string; role?: string; description?: string }[]
+  >([]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!id) return;
     let active = true;
     Promise.all([
-      apiGet<{ data: IntentDetail }>(`/intents/${id}`),
-      apiGet<{ data: Offer[] }>(`/intents/${id}/offers`)
+      apiGet<{
+        data: IntentDetail;
+        next_steps?: { action: string; role?: string; description?: string }[];
+      }>(`/intents/${id}`),
+      apiGet<{ data: Offer[] }>(`/intents/${id}/offers`),
     ])
       .then(([intentPayload, offersPayload]) => {
         if (!active) return;
         setIntent(intentPayload.data);
+        setNextSteps(intentPayload.next_steps || []);
         setOffers(offersPayload.data || []);
       })
       .catch((err) => {
@@ -80,6 +87,11 @@ export default function IntentDetailPage() {
           <h3>Verifier</h3>
           <p className="section-copy">{formatAddress(intent.verifier)}</p>
         </div>
+        <div className="card">
+          <h3>Winner</h3>
+          <p className="section-copy">{formatAddress(intent.winner)}</p>
+          <p className="section-copy">{formatAmount(intent.winnerAmountOut)}</p>
+        </div>
       </div>
 
       <h3>Offers</h3>
@@ -96,12 +108,28 @@ export default function IntentDetailPage() {
             <tr key={offer.id}>
               <td>{formatAddress(offer.solver)}</td>
               <td>{formatAmount(offer.amountOut)}</td>
-              <td>{new Date(Number(offer.timestamp) * 1000).toLocaleString()}</td>
+              <td>
+                {new Date(Number(offer.timestamp) * 1000).toLocaleString()}
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
       {!offers.length && <div className="notice">No offers yet.</div>}
+
+      {nextSteps.length ? (
+        <div className="card">
+          <h3>next_steps</h3>
+          <ul>
+            {nextSteps.map((step) => (
+              <li key={`${step.role || "agent"}-${step.action}`}>
+                <strong>{step.role || "agent"}:</strong> {step.action}
+                {step.description ? ` — ${step.description}` : ""}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
     </div>
   );
 }
