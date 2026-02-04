@@ -3716,12 +3716,46 @@
       "doc_updated_by": "CODER",
       "dirty": false,
       "id_source": "generated"
+    },
+    {
+      "id": "202602041135-CACEFM",
+      "title": "Add base URL to SKILL.md",
+      "description": "Document API base URL in SKILL.md for Clawhub upload.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "DOCS",
+      "depends_on": [],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "docker compose up -d --build"
+      ],
+      "commit": {
+        "hash": "366e83bbd5c5a5a9c72942516bf2d741c1d208a8",
+        "message": "📝 CACEFM add API base URL to SKILL"
+      },
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: Add explicit API base URL in SKILL.md and sync to public copy."
+        },
+        {
+          "author": "DOCS",
+          "body": "Verified: docker compose up -d --build; SKILL.md now includes base API URL."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T11:36:35.364Z",
+      "doc_updated_by": "DOCS",
+      "dirty": false,
+      "id_source": "generated"
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "6baac2fb4b962cf183cead6199ee6c97fd5763ad7a0d57895059ed67f24de9fc"
+    "checksum": "5d7137ecf355ebf1fac3da43b76e74c9626554dfeb0c67f9c4f4c7ee4f6df692"
   }
 }
