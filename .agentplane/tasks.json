@@ -3784,12 +3784,46 @@
       "doc_updated_by": "CODER",
       "dirty": false,
       "id_source": "generated"
+    },
+    {
+      "id": "202602041154-4NY958",
+      "title": "Clarify SKILL base URL",
+      "description": "Add explicit base URL section near the top of SKILL.md and sync public copy.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "DOCS",
+      "depends_on": [],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "docker compose up -d --build"
+      ],
+      "commit": {
+        "hash": "0f33347c43015035081eef78e79f7bbc0967c52b",
+        "message": "📝 4NY958 add base URL section to SKILL"
+      },
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: Add explicit base URL section to SKILL.md for external agents."
+        },
+        {
+          "author": "DOCS",
+          "body": "Verified: docker compose up -d --build; SKILL.md now has explicit base URL section."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T11:55:24.918Z",
+      "doc_updated_by": "DOCS",
+      "dirty": false,
+      "id_source": "generated"
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "6abbc0e6ed9ff875626e90d26194f68521917ae1b486f75bd105f79f8c0d7e82"
+    "checksum": "d3e31ecb30598620cf8f6407945da145bc1e91fa08c5a7ecd7b877530b0be3ea"
   }
 }
