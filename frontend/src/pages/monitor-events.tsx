@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { apiGet } from "../lib/api";
 import { formatAddress, formatAmount } from "../lib/format";
 
@@ -19,9 +19,13 @@ interface EventLog {
 export default function EventsPage() {
   const [events, setEvents] = useState<EventLog[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const [filters, setFilters] = useState({ intentId: "", eventType: "", solver: "" });
+  const [filters, setFilters] = useState({
+    intentId: "",
+    eventType: "",
+    solver: "",
+  });
 
-  const load = () => {
+  const load = useCallback(() => {
     const params = new URLSearchParams();
     if (filters.intentId) params.set("intentId", filters.intentId);
     if (filters.eventType) params.set("eventType", filters.eventType);
@@ -35,35 +39,43 @@ export default function EventsPage() {
       .catch((err) => {
         setError(err.message || "Failed to load events");
       });
-  };
+  }, [filters.eventType, filters.intentId, filters.solver]);
 
   useEffect(() => {
     load();
-  }, []);
+  }, [load]);
 
   return (
     <div>
       <h2 className="section-title">Event log</h2>
-      <p className="section-copy">Derived from on-chain events indexed by the subgraph.</p>
+      <p className="section-copy">
+        Derived from on-chain events indexed by the subgraph.
+      </p>
 
       <div className="filter-row">
         <input
           className="input"
           placeholder="Intent ID"
           value={filters.intentId}
-          onChange={(event) => setFilters({ ...filters, intentId: event.target.value })}
+          onChange={(event) =>
+            setFilters({ ...filters, intentId: event.target.value })
+          }
         />
         <input
           className="input"
           placeholder="Event type"
           value={filters.eventType}
-          onChange={(event) => setFilters({ ...filters, eventType: event.target.value })}
+          onChange={(event) =>
+            setFilters({ ...filters, eventType: event.target.value })
+          }
         />
         <input
           className="input"
           placeholder="Solver"
           value={filters.solver}
-          onChange={(event) => setFilters({ ...filters, solver: event.target.value })}
+          onChange={(event) =>
+            setFilters({ ...filters, solver: event.target.value })
+          }
         />
         <button className="button secondary" onClick={load} type="button">
           Apply filters
@@ -91,14 +103,18 @@ export default function EventsPage() {
               <td>{formatAmount(event.amountOut || event.rewardAmount)}</td>
               <td>
                 {event.blockTimestamp
-                  ? new Date(Number(event.blockTimestamp) * 1000).toLocaleString()
+                  ? new Date(
+                      Number(event.blockTimestamp) * 1000,
+                    ).toLocaleString()
                   : "-"}
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      {!events.length && !error && <div className="notice">No events found.</div>}
+      {!events.length && !error && (
+        <div className="notice">No events found.</div>
+      )}
     </div>
   );
 }

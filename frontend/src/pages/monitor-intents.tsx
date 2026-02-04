@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { apiGet } from "../lib/api";
 import { formatAddress, formatAmount } from "../lib/format";
@@ -31,7 +31,7 @@ export default function IntentsPage() {
     rewardToken: "",
   });
 
-  const load = () => {
+  const load = useCallback(() => {
     let active = true;
     setLoading(true);
     const params = new URLSearchParams();
@@ -56,11 +56,11 @@ export default function IntentsPage() {
     return () => {
       active = false;
     };
-  };
+  }, [filters.rewardToken, filters.state, filters.tokenOut]);
 
   useEffect(() => {
     load();
-  }, []);
+  }, [load]);
 
   if (loading) {
     return <p>Loading intents…</p>;
