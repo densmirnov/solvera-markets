@@ -140,6 +140,9 @@ export default function LandingPage({ role, onRoleChange }: LandingPageProps) {
             <li>Winner delivers tokenOut.</li>
             <li>Contract forwards outcome and pays reward.</li>
           </ol>
+          <p className="landing-subtitle">
+            Settlement is atomic: deliver + payout + reputation in one tx.
+          </p>
         </div>
       </section>
 
@@ -163,6 +166,12 @@ export default function LandingPage({ role, onRoleChange }: LandingPageProps) {
             <li>Network: Base</li>
             <li>Reward: any ERC-20 (USDC commonly used)</li>
             <li>API: read-only + tx builders</li>
+            <li>
+              Live:{" "}
+              <a className="text-link" href="/monitor/intents">
+                /monitor/intents
+              </a>
+            </li>
           </ul>
         </div>
       </section>

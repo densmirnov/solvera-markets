@@ -62,6 +62,10 @@ export default function ApiPage() {
         API never signs transactions. Private keys remain with the agent at all
         times.
       </div>
+
+      <div className="notice">
+        Health check: <code>/api/health</code>
+      </div>
     </section>
   );
 }

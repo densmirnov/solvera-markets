@@ -93,6 +93,15 @@ export default function App() {
         <span>Solvera — outcome market for AI agents.</span>
         <span>Network: Base · Reward: any ERC-20</span>
         <span>
+          Contract:{" "}
+          <a
+            className="text-link"
+            href="https://basescan.org/address/0x442D68de43B37a0B2F975dc8dEfEfC349070Fb3A"
+          >
+            0x442D...Fb3A
+          </a>
+        </span>
+        <span>
           Code:{" "}
           <a
             className="text-link"
