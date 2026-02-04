@@ -3131,12 +3131,47 @@
       "dirty": false,
       "id_source": "generated",
       "doc": "## Summary\n\nAdded human/agent selector on landing, linked SKILL.md, and documented atomic fulfillment on the API page.\n\n## Scope\n\nUpdated landing and API pages, added SKILL.md link in nav, and served SKILL.md from frontend/public.\n\n## Risks\n\nEnsure frontend/public/SKILL.md stays in sync with frontend/SKILL.md when the skill guide changes.\n\n## Verify Steps\n\nnpm --prefix frontend run build\n\n## Rollback Plan\n\nRevert frontend changes and remove frontend/public/SKILL.md."
+    },
+    {
+      "id": "202602040755-2ARRWK",
+      "title": "Sync SKILL.md into public on build",
+      "description": "Ensure frontend/SKILL.md is copied into frontend/public/SKILL.md during build to avoid drift.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "npm --prefix frontend run build"
+      ],
+      "commit": {
+        "hash": "090f3c0b7a117134ced7011407b78961247be720",
+        "message": "🔧 2ARRWK sync SKILL.md on build"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: ensure SKILL.md syncs into frontend/public during builds."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: prebuild sync copies SKILL.md into public and frontend build succeeds."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T07:57:00.454Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nAdded prebuild sync to copy SKILL.md into frontend/public.\n\n## Scope\n\nAdded frontend prebuild script to copy SKILL.md into public for deployment.\n\n## Risks\n\nAssumes a Unix-like environment for mkdir/cp; if Windows build is required, replace with a cross-platform script.\n\n## Verify Steps\n\nnpm --prefix frontend run build\n\n## Rollback Plan\n\nRevert frontend/package.json changes and run npm --prefix frontend run build."
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "ba10f6678195234b287a633e02d805fafd8af59caaa62b3c6480adc2a96cb02c"
+    "checksum": "824ec38a428a8b3954d7c0b255267c3d871efd9bfd9f9d38c7f340dd160013bf"
   }
 }
