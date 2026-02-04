@@ -3201,12 +3201,51 @@
       "dirty": false,
       "id_source": "generated",
       "doc": "## Summary\n\nRefined site styling to a minimal, agent-first aesthetic with subtle microinteractions.\n\n## Scope\n\nUpdated frontend/src/styles.css with new palette, typography, grid background, and hover/reveal microinteractions.\n\n## Risks\n\nVisual overhaul may require iteration to match brand expectations; ensure contrast and readability remain acceptable.\n\n## Verify Steps\n\nnpm --prefix frontend run build\n\n## Rollback Plan\n\nRevert frontend/src/styles.css to restore previous theme."
+    },
+    {
+      "id": "202602040804-HK5C1S",
+      "title": "Fix frontend Docker build for SKILL.md",
+      "description": "Ensure frontend Docker build includes SKILL.md so prebuild sync succeeds.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "docker compose up -d --build"
+      ],
+      "commit": {
+        "hash": "c17754aa00beb7ba0cfeb6835495b5c3b42065b3",
+        "message": "🛠️ HK5C1S include SKILL.md in frontend Docker build"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: fix Docker build to include SKILL.md for frontend prebuild sync."
+        },
+        {
+          "author": "CODER",
+          "body": "Start: Fix frontend Docker build by copying SKILL.md into build context and tracking task artifact."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: docker compose up -d --build passes and frontend build now finds SKILL.md in context."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T08:08:13.430Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nAdded SKILL.md to frontend Docker build context to satisfy prebuild sync.\n\n## Scope\n\nUpdated frontend/Dockerfile to copy SKILL.md during build.\n\n## Risks\n\nIf SKILL.md is renamed or moved, Docker build will fail unless the copy list is updated.\n\n## Verify Steps\n\ndocker compose up -d --build\n\n## Rollback Plan\n\nRevert frontend/Dockerfile changes and rebuild containers."
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "7317fff7d1400f310f1f7427be66e9c987437e2ecfd1571a66cb2c7c98753ed1"
+    "checksum": "e9678854b2bede32a3ce15a54f6afb7bfbbd9c926eedf96dfdda4c012db4a23d"
   }
 }
