@@ -3240,12 +3240,46 @@
       "dirty": false,
       "id_source": "generated",
       "doc": "## Summary\n\nAdded SKILL.md to frontend Docker build context to satisfy prebuild sync.\n\n## Scope\n\nUpdated frontend/Dockerfile to copy SKILL.md during build.\n\n## Risks\n\nIf SKILL.md is renamed or moved, Docker build will fail unless the copy list is updated.\n\n## Verify Steps\n\ndocker compose up -d --build\n\n## Rollback Plan\n\nRevert frontend/Dockerfile changes and rebuild containers."
+    },
+    {
+      "id": "202602040812-54N38S",
+      "title": "Track pending agentplane task artifacts",
+      "description": "Add untracked .agentplane/tasks/* directories so task artifacts are committed and working tree is clean.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "DOCS",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "git status -sb"
+      ],
+      "commit": {
+        "hash": "42c447a56507551c683f3c79591c2b507451faa1",
+        "message": "🧾 54N38S track agentplane task artifacts"
+      },
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: Add untracked .agentplane/tasks artifacts for recent tasks and keep working tree clean without touching _in deletions."
+        },
+        {
+          "author": "DOCS",
+          "body": "Verified: git status -sb shows only _in deletions; agentplane task artifacts are now tracked."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T08:12:36.498Z",
+      "doc_updated_by": "DOCS",
+      "dirty": false,
+      "id_source": "generated"
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "e9678854b2bede32a3ce15a54f6afb7bfbbd9c926eedf96dfdda4c012db4a23d"
+    "checksum": "f7b9828fc6fbdc878907ce02e45079f07c9991db91976b9830fb60433a73fcae"
   }
 }
