@@ -12,8 +12,7 @@ import EventsPage from "./pages/monitor-events.tsx";
 const navLinks = [
   { to: "/", label: "Landing" },
   { to: "/monitor/intents", label: "Monitor" },
-  { to: "/skill", label: "Skill" },
-  { to: "/skill.md", label: "SKILL.md" },
+  { to: "/skill.md", label: "Skill" },
   { to: "/docs", label: "Docs" },
   { to: "/api", label: "API" },
 ];

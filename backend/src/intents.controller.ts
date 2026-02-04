@@ -31,6 +31,22 @@ export class IntentsController {
     private readonly txBuilder: TxBuilderService,
   ) {}
 
+  @Get()
+  async apiRoot() {
+    return {
+      status: "ok",
+      message: "Solvera API v0.1",
+      endpoints: [
+        "/api/intents",
+        "/api/intents/:id",
+        "/api/intents/:id/offers",
+        "/api/events",
+        "/api/config",
+        "/api/health",
+      ],
+    };
+  }
+
   @Get("/intents")
   async listIntents(@Query() query: Record<string, string>) {
     const limit = this.subgraph.normalizeLimit(query.limit);

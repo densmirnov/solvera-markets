@@ -241,6 +241,8 @@ a {
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
 }
 
 .persona-button {
@@ -253,6 +255,7 @@ a {
   letter-spacing: 0.12em;
   font-size: 12px;
   border-radius: 0;
+  margin-bottom: -6px;
   transition:
     border-color var(--motion-fast) ease,
     color var(--motion-fast) ease;
@@ -261,6 +264,8 @@ a {
 .persona-button.active {
   border-color: var(--accent);
   color: var(--accent);
+  background: var(--paper);
+  border-bottom-color: var(--paper);
 }
 
 .landing-columns,
