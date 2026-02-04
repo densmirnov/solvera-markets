@@ -141,11 +141,14 @@
 
 ### 4.1 Minimum screens
 - Task: intent list, intent detail, statuses.
+- Task: landing page content aligned with site sources (no hackathon mentions).
+- Task: publish `/skill`, `/docs`, `/api` static pages matching agent-first copy.
 - Dependencies: 3.2.
 - Verify: data matches backend output.
 
 ### 4.2 Operator tools
 - Task: view events and state.
+- Task: operator filters for intents/events and empty/error states.
 - Dependencies: 4.1.
 - Verify: correct state machine rendering.
 
