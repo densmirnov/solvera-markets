@@ -1,17 +1,18 @@
 ---
 id: "202602040501-5K9HTY"
 title: "Track agentplane artifacts"
-status: "DOING"
+status: "DONE"
 priority: "low"
 owner: "DOCS"
 depends_on: []
 tags: ["backend"]
 verify: ["git status --short"]
-commit: null
+commit: { hash: "3ea4cfe091e100b906cbeb917855e89ffbc138b9", message: "🧾 5K9HTY track agentplane artifacts" }
 comments:
   - { author: "DOCS", body: "Start: add .agentplane artifacts to git as requested." }
+  - { author: "DOCS", body: "Verified: .agentplane artifacts are staged and committed for tracking." }
 doc_version: 2
-doc_updated_at: "2026-02-04T05:02:23.577Z"
+doc_updated_at: "2026-02-04T05:02:54.375Z"
 doc_updated_by: "DOCS"
 description: "Add .agentplane generated artifacts to git as requested."
 id_source: "generated"

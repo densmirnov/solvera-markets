@@ -2452,12 +2452,47 @@
       "dirty": false,
       "id_source": "generated",
       "doc": "## Summary\n\nIgnore graph test artifacts and remove generated files.\n\n## Scope\n\nUpdate indexer/.gitignore for graph test artifacts and delete current test output files.\n\n## Risks\n\nOver-ignoring could hide relevant test assets; only ignore generated artifacts.\n\n## Verify Steps\n\n1) git status --short\\n2) rg \"tests/.docker\" indexer/.gitignore\n\n## Rollback Plan\n\nRemove ignore entries if artifacts should be tracked for debugging."
+    },
+    {
+      "id": "202602040501-5K9HTY",
+      "title": "Track agentplane artifacts",
+      "description": "Add .agentplane generated artifacts to git as requested.",
+      "status": "DONE",
+      "priority": "low",
+      "owner": "DOCS",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "git status --short"
+      ],
+      "commit": {
+        "hash": "3ea4cfe091e100b906cbeb917855e89ffbc138b9",
+        "message": "🧾 5K9HTY track agentplane artifacts"
+      },
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: add .agentplane artifacts to git as requested."
+        },
+        {
+          "author": "DOCS",
+          "body": "Verified: .agentplane artifacts are staged and committed for tracking."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T05:02:54.375Z",
+      "doc_updated_by": "DOCS",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nTrack .agentplane artifacts in git.\n\n## Scope\n\nStage .agentplane/bin, .agentplane/tasks.json, and .agentplane/tasks for version control.\n\n## Risks\n\nTracking agentplane artifacts may include local metadata; review contents before sharing.\n\n## Verify Steps\n\n1) git status --short\\n2) ensure .agentplane files are staged\n\n## Rollback Plan\n\nRemove .agentplane entries from git if tracking should be disabled."
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "8a2735d6533f9399ea0a9f2861da1ae6a58535eec6545c02f4ac0bad5edd96a5"
+    "checksum": "fa20a67845bdc030762284ec5fbb59787b8b0793e8de5076e1a8dcd910fd9314"
   }
 }
