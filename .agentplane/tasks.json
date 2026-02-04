@@ -3274,12 +3274,46 @@
       "doc_updated_by": "DOCS",
       "dirty": false,
       "id_source": "generated"
+    },
+    {
+      "id": "202602040816-ED0GAP",
+      "title": "Minimalist CLI landing refresh",
+      "description": "Make landing page ultra-minimal: CLI vibe, large typography, lots of whitespace, no cards, shadows, or rounded blocks.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "docker compose up -d --build"
+      ],
+      "commit": {
+        "hash": "502a39caea535597995e00b451c210e89b4c6d0b",
+        "message": "🎨 ED0GAP minimalist CLI landing redesign"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: Redesign landing to ultra-minimal CLI aesthetic with large type and whitespace; remove card/block styling."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: docker compose up -d --build; landing now minimal with CLI typography and no card blocks."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T08:19:34.551Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated"
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "f7b9828fc6fbdc878907ce02e45079f07c9991db91976b9830fb60433a73fcae"
+    "checksum": "6d4e7e3571907cb29111556adaddee819f6a77b7b152838aebc4c972482db282"
   }
 }
