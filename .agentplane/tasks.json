@@ -3953,12 +3953,47 @@
       "dirty": false,
       "id_source": "generated",
       "doc": "## Summary\n\nRestored backend build output path to dist/main.js and resolved TS rootDir warnings by separating test tsconfig and ESLint project.\n\n## Scope\n\nUpdated backend/tsconfig.json to compile src only, added backend/tsconfig.test.json for tests, pointed ESLint to test tsconfig.\n\n## Risks\n\nESLint now uses tsconfig.test.json; ensure any tooling that relied on tsconfig.json for tests is updated if needed.\n\n## Verify Steps\n\n1. npm run build --prefix backend\n\n## Rollback Plan\n\nRevert backend tsconfig/eslint changes and remove tsconfig.test.json via agentplane commit or git revert."
+    },
+    {
+      "id": "202602041529-KG98HA",
+      "title": "Fix frontend Docker CSS build",
+      "description": "Include PostCSS config in frontend Docker build so Tailwind CSS compiles in container.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "ORCHESTRATOR",
+      "depends_on": [],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "1"
+      ],
+      "commit": {
+        "hash": "fb4ea91537af5b2f1751b7df1a4a3f463c31f99d",
+        "message": "🐛 KG98HA include postcss config in frontend build"
+      },
+      "comments": [
+        {
+          "author": "ORCHESTRATOR",
+          "body": "Start: fix frontend Docker CSS build (postcss config)."
+        },
+        {
+          "author": "ORCHESTRATOR",
+          "body": "Verified: Dockerfile now copies postcss.config.js so Tailwind compiles in container; rebuild frontend image to apply."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T15:30:45.330Z",
+      "doc_updated_by": "ORCHESTRATOR",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nInclude PostCSS config in frontend Docker build so Tailwind styles compile in container.\n\n## Scope\n\nUpdated frontend/Dockerfile to copy postcss.config.js into build stage.\n\n## Risks\n\nIf container is built from cache without invalidation, stale dist may persist; ensure rebuild with --no-cache if needed.\n\n## Verify Steps\n\nNot run (docker build not executed in this environment).\n\n## Rollback Plan\n\nRevert frontend/Dockerfile change via agentplane commit or git revert."
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "2dcf24fbe50a9c655f844d9e7c9bf626305ee1680ce4b0b00dafd64cfd339b85"
+    "checksum": "6fca966c833c44b35126e0cf85b8c5fb69523fdec005434c0e7029991c5e286f"
   }
 }

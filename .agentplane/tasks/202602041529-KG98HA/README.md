@@ -1,17 +1,18 @@
 ---
 id: "202602041529-KG98HA"
 title: "Fix frontend Docker CSS build"
-status: "DOING"
+status: "DONE"
 priority: "med"
 owner: "ORCHESTRATOR"
 depends_on: []
 tags: ["frontend"]
 verify: ["1"]
-commit: null
+commit: { hash: "fb4ea91537af5b2f1751b7df1a4a3f463c31f99d", message: "🐛 KG98HA include postcss config in frontend build" }
 comments:
   - { author: "ORCHESTRATOR", body: "Start: fix frontend Docker CSS build (postcss config)." }
+  - { author: "ORCHESTRATOR", body: "Verified: Dockerfile now copies postcss.config.js so Tailwind compiles in container; rebuild frontend image to apply." }
 doc_version: 2
-doc_updated_at: "2026-02-04T15:30:14.626Z"
+doc_updated_at: "2026-02-04T15:30:45.330Z"
 doc_updated_by: "ORCHESTRATOR"
 description: "Include PostCSS config in frontend Docker build so Tailwind CSS compiles in container."
 id_source: "generated"
