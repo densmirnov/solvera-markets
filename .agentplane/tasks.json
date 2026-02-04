@@ -3444,12 +3444,46 @@
       "doc_updated_by": "CODER",
       "dirty": false,
       "id_source": "generated"
+    },
+    {
+      "id": "202602040910-6B63P3",
+      "title": "Remove USDC lock-in messaging",
+      "description": "Replace USDC-only wording with asset-agnostic messaging, add pricing sentence, and update skill/api docs.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "DOCS",
+      "depends_on": [],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "docker compose up -d --build"
+      ],
+      "commit": {
+        "hash": "880a991f1147ba8d473df6725ef48e6a687f65e4",
+        "message": "📝 6B63P3 clarify asset-agnostic rewards"
+      },
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: Remove USDC-only wording; add asset-agnostic messaging and execution pricing sentence across UI + skill/api docs."
+        },
+        {
+          "author": "DOCS",
+          "body": "Verified: docker compose up -d --build; UI and skill/api docs now describe asset-agnostic rewards."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T09:12:46.776Z",
+      "doc_updated_by": "DOCS",
+      "dirty": false,
+      "id_source": "generated"
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "7ae38ea8c01aa4e2c112815d996c30c32ad6ccdd59ef19b0bd8598d234d9e637"
+    "checksum": "ce8107cb5569940eec0d547be5c73434d7d51dc723944381e6cfc6e5bbcfdd33"
   }
 }
