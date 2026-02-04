@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import { test, describe, before, after } from "node:test";
 import assert from "node:assert/strict";
 import request from "supertest";
@@ -98,6 +99,12 @@ describe("backend API", () => {
       buildExpire: () => ({ to: "0xcontract", calldata: "0x789", value: "0" }),
     };
 
+    Reflect.defineMetadata(
+      "design:paramtypes",
+      [SubgraphService, TxBuilderService],
+      IntentsController,
+    );
+
     const moduleRef = await Test.createTestingModule({
       controllers: [IntentsController],
       providers: [
@@ -132,14 +139,14 @@ describe("backend API", () => {
 
   test("GET /api/intents returns next_steps", async () => {
     const res = await request(app.getHttpServer()).get("/api/intents");
-    assert.equal(res.status, 200);
+    assert.equal(res.status, 200, JSON.stringify(res.body));
     assert.equal(res.body.data.length, 1);
     assert.ok(res.body.next_steps.length > 0);
   });
 
   test("GET /api/intents/:id includes next_steps", async () => {
     const res = await request(app.getHttpServer()).get("/api/intents/0xintent");
-    assert.equal(res.status, 200);
+    assert.equal(res.status, 200, JSON.stringify(res.body));
     assert.equal(res.body.data.state, "OPEN");
     assert.ok(res.body.next_steps.length > 0);
   });
@@ -148,7 +155,7 @@ describe("backend API", () => {
     const res = await request(app.getHttpServer()).get(
       "/api/intents/0xintent/offers",
     );
-    assert.equal(res.status, 200);
+    assert.equal(res.status, 200, JSON.stringify(res.body));
     assert.equal(res.body.data.length, 1);
   });
 
@@ -156,13 +163,13 @@ describe("backend API", () => {
     const res = await request(app.getHttpServer()).get(
       "/api/reputation/0xsolver",
     );
-    assert.equal(res.status, 200);
+    assert.equal(res.status, 200, JSON.stringify(res.body));
     assert.equal(res.body.data.id, "0xsolver");
   });
 
   test("GET /api/events returns empty list", async () => {
     const res = await request(app.getHttpServer()).get("/api/events");
-    assert.equal(res.status, 200);
+    assert.equal(res.status, 200, JSON.stringify(res.body));
     assert.deepEqual(res.body.data, []);
   });
 
@@ -186,7 +193,7 @@ describe("backend API", () => {
       initiator: "0xinit",
       verifier: "0xverifier",
     });
-    assert.equal(res.status, 201);
+    assert.equal(res.status, 201, JSON.stringify(res.body));
     assert.ok(res.body.data.calldata);
     assert.ok(res.body.next_steps.length > 0);
   });
@@ -195,7 +202,7 @@ describe("backend API", () => {
     const res = await request(app.getHttpServer())
       .post("/api/intents/0xintent/offers")
       .send({ amountOut: "110" });
-    assert.equal(res.status, 201);
+    assert.equal(res.status, 201, JSON.stringify(res.body));
     assert.ok(res.body.data.calldata);
   });
 
@@ -203,7 +210,7 @@ describe("backend API", () => {
     const res = await request(app.getHttpServer())
       .post("/api/intents/0xintent/select-winner")
       .send({ solver: "0xsolver", amountOut: "110" });
-    assert.equal(res.status, 201);
+    assert.equal(res.status, 201, JSON.stringify(res.body));
     assert.ok(res.body.data.calldata);
   });
 
@@ -211,7 +218,7 @@ describe("backend API", () => {
     const res = await request(app.getHttpServer()).post(
       "/api/intents/0xintent/fulfill",
     );
-    assert.equal(res.status, 201);
+    assert.equal(res.status, 201, JSON.stringify(res.body));
     assert.ok(res.body.data.calldata);
   });
 
@@ -219,7 +226,7 @@ describe("backend API", () => {
     const res = await request(app.getHttpServer()).post(
       "/api/intents/0xintent/expire",
     );
-    assert.equal(res.status, 201);
+    assert.equal(res.status, 201, JSON.stringify(res.body));
     assert.ok(res.body.data.calldata);
   });
 
