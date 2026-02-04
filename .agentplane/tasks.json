@@ -3166,12 +3166,47 @@
       "dirty": false,
       "id_source": "generated",
       "doc": "## Summary\n\nAdded prebuild sync to copy SKILL.md into frontend/public.\n\n## Scope\n\nAdded frontend prebuild script to copy SKILL.md into public for deployment.\n\n## Risks\n\nAssumes a Unix-like environment for mkdir/cp; if Windows build is required, replace with a cross-platform script.\n\n## Verify Steps\n\nnpm --prefix frontend run build\n\n## Rollback Plan\n\nRevert frontend/package.json changes and run npm --prefix frontend run build."
+    },
+    {
+      "id": "202602040758-R4R6KF",
+      "title": "Minimalist agent-first UI refresh",
+      "description": "Make the UI more minimal and technical, and add microinteractions for the agent-first site.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "npm --prefix frontend run build"
+      ],
+      "commit": {
+        "hash": "c0941415c695b7ca8176feb0321df96be38b6a8e",
+        "message": "🎛️ R4R6KF minimal tech UI refresh"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: rework UI styling for a minimal, tech-first agent experience with microinteractions."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: frontend build passes with minimal, agent-first styling and microinteractions."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T08:01:46.334Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nRefined site styling to a minimal, agent-first aesthetic with subtle microinteractions.\n\n## Scope\n\nUpdated frontend/src/styles.css with new palette, typography, grid background, and hover/reveal microinteractions.\n\n## Risks\n\nVisual overhaul may require iteration to match brand expectations; ensure contrast and readability remain acceptable.\n\n## Verify Steps\n\nnpm --prefix frontend run build\n\n## Rollback Plan\n\nRevert frontend/src/styles.css to restore previous theme."
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "824ec38a428a8b3954d7c0b255267c3d871efd9bfd9f9d38c7f340dd160013bf"
+    "checksum": "7317fff7d1400f310f1f7427be66e9c987437e2ecfd1571a66cb2c7c98753ed1"
   }
 }
