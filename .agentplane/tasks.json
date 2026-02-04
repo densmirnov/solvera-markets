@@ -3818,12 +3818,77 @@
       "doc_updated_by": "DOCS",
       "dirty": false,
       "id_source": "generated"
+    },
+    {
+      "id": "202602041216-3FW9FA",
+      "title": "Base wallet for agents",
+      "description": "Implement optional Base wallet support for agents with generation flow; integrate dependencies; update docs; remove Wallet folder after replacement.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "ORCHESTRATOR",
+      "depends_on": [],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "1"
+      ],
+      "commit": {
+        "hash": "855d8b8f47a2f141dd86bacc92acfe8880b346bf",
+        "message": "🐛 3FW9FA fix frontend docs import + track task doc"
+      },
+      "comments": [
+        {
+          "author": "ORCHESTRATOR",
+          "body": "Start: inspect Wallet integration, design Base optional wallet feature, update SKILL, remove Wallet."
+        },
+        {
+          "author": "ORCHESTRATOR",
+          "body": "Verified: base wallet + tx runner delivered in prior commit; fixed docs import case; npm run build --prefix frontend succeeded."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T15:11:17.370Z",
+      "doc_updated_by": "ORCHESTRATOR",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nImplemented optional Base wallet helper (base-wallet) with local key storage, tx broadcasting, balance checks, and contract calls; updated SKILL documentation; removed legacy wallet folder from repo.\n\nImplemented optional Base wallet helper (base-wallet) and a tx runner script for signing/broadcasting API calldata; updated SKILL documentation; removed legacy wallet folder from repo.\n\nImplemented optional Base wallet helper and tx runner, updated SKILL docs, refreshed landing and skill pages to mention wallet support and provide direct SKILL.md link.\n\n## Scope\n\nAdded base-wallet package (CLI + docs), created root SKILL.md and updated frontend/SKILL.md with wallet guidance, removed wallet directory from the repo.\n\nAdded base-wallet package (CLI + docs), added scripts/agent-tx.mjs for calldata signing/broadcast, created root SKILL.md and updated frontend/public docs, removed wallet directory from the repo.\n\nAdded base-wallet package and scripts/agent-tx.mjs; updated SKILL documentation, landing page, skill page, and frontend README; removed legacy wallet directory earlier.\n\n## Risks\n\nDefault public RPC endpoints may degrade or rate-limit; operators should override via BASE_RPC_URL(S). Wallet file security depends on host filesystem protections.\n\n## Verify Steps\n\n1. cd base-wallet\\n2. npm install\\n3. node src/cli.js help\n\n1. cd base-wallet\\n2. npm install\\n3. node src/cli.js help\\n4. node ../scripts/agent-tx.mjs --help\n\n## Rollback Plan\n\nRemove base-wallet directory and SKILL.md updates; restore previous wallet folder if needed from version control; revert to prior commit via agentplane guard commit."
+    },
+    {
+      "id": "202602041504-E818HN",
+      "title": "Frontend Redesign with Tailwind CSS",
+      "description": "Redesign the frontend to be minimalist, consolidated, and agent-first using Tailwind CSS v4 and Manrope font.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "npm run build --prefix frontend"
+      ],
+      "commit": {
+        "hash": "60db340df49eb4c29b35655dceafefe8317bc75a",
+        "message": "🧾 E818HN track task doc"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Verified: task documentation tracked per request; no implementation changes performed for frontend redesign."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T15:11:25.044Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated"
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "d3e31ecb30598620cf8f6407945da145bc1e91fa08c5a7ecd7b877530b0be3ea"
+    "checksum": "da8f2cd0a17f27f94741a8a8ce73cac54abf8fa746077a6d85c4107206cff000"
   }
 }

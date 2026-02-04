@@ -1,17 +1,18 @@
 ---
 id: "202602041216-3FW9FA"
 title: "Base wallet for agents"
-status: "DOING"
+status: "DONE"
 priority: "high"
 owner: "ORCHESTRATOR"
 depends_on: []
 tags: ["code"]
 verify: ["1"]
-commit: null
+commit: { hash: "855d8b8f47a2f141dd86bacc92acfe8880b346bf", message: "🐛 3FW9FA fix frontend docs import + track task doc" }
 comments:
   - { author: "ORCHESTRATOR", body: "Start: inspect Wallet integration, design Base optional wallet feature, update SKILL, remove Wallet." }
+  - { author: "ORCHESTRATOR", body: "Verified: base wallet + tx runner delivered in prior commit; fixed docs import case; npm run build --prefix frontend succeeded." }
 doc_version: 2
-doc_updated_at: "2026-02-04T13:31:52.140Z"
+doc_updated_at: "2026-02-04T15:11:17.370Z"
 doc_updated_by: "ORCHESTRATOR"
 description: "Implement optional Base wallet support for agents with generation flow; integrate dependencies; update docs; remove Wallet folder after replacement."
 id_source: "generated"
