@@ -53,7 +53,7 @@ export function Layout({ children }: LayoutProps) {
         </div>
       </header>
 
-      <main className="flex-1 py-8 md:py-12">
+      <main className="flex-1 py-10 md:py-14">
         <div className="layout-shell-wide">{children}</div>
       </main>
 

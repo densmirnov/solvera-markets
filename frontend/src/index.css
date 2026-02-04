@@ -74,6 +74,10 @@
   --space-3: calc(var(--space-2) * var(--phi));
   --space-4: calc(var(--space-3) * var(--phi));
   --space-5: calc(var(--space-4) * var(--phi));
+  --display-size: clamp(2.8rem, 6vw, 5.25rem);
+  --display-line: 1.04;
+  --body-size: 1rem;
+  --body-line: 1.7;
 }
 
 .dark {
@@ -123,6 +127,8 @@
     -webkit-font-smoothing: antialiased;
     position: relative;
     min-height: 100vh;
+    font-size: var(--body-size);
+    line-height: var(--body-line);
     background-image:
       radial-gradient(
         1200px 650px at 6% -10%,
@@ -203,10 +209,13 @@
   font-variation-settings: "wght" 760;
   animation: type-breathe 12s ease-in-out infinite;
   font-family: var(--font-display);
+  font-size: var(--display-size);
+  line-height: var(--display-line);
+  position: relative;
 }
 
 .hero-copy {
-  font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
 }
 
 .brand-mark {
@@ -214,6 +223,24 @@
   font-variation-settings: "wght" 640;
   animation: brand-shift 16s ease-in-out infinite;
   font-family: var(--font-display);
+}
+
+.hero-glint::after {
+  content: "";
+  position: absolute;
+  inset: -6% -20% auto;
+  height: 120%;
+  background: linear-gradient(
+    110deg,
+    transparent 30%,
+    hsla(18, 94%, 80%, 0.35) 48%,
+    transparent 60%
+  );
+  opacity: 0.7;
+  transform: translateX(-20%);
+  animation: glint-sweep 10s ease-in-out infinite;
+  pointer-events: none;
+  mix-blend-mode: screen;
 }
 
 .brand-mark::after {
@@ -436,6 +463,24 @@
   gap: var(--space-2);
 }
 
+.reveal {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: reveal-in 700ms ease forwards;
+}
+
+.reveal.delay-1 {
+  animation-delay: 120ms;
+}
+
+.reveal.delay-2 {
+  animation-delay: 220ms;
+}
+
+.reveal.delay-3 {
+  animation-delay: 320ms;
+}
+
 .grid-phi {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -482,9 +527,39 @@
   }
 }
 
+@keyframes glint-sweep {
+  0%,
+  70% {
+    transform: translateX(-40%);
+    opacity: 0;
+  }
+  80% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateX(40%);
+    opacity: 0;
+  }
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-title,
   .brand-mark {
+    animation: none;
+  }
+  .hero-glint::after,
+  .reveal {
     animation: none;
   }
   .button-base,

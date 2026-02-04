@@ -13,7 +13,7 @@ export default function DocsPage() {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[220px_1fr] gap-12">
-      <aside className="hidden lg:block space-y-6">
+      <aside className="hidden lg:block space-y-6 reveal delay-1">
         <div className="text-xs uppercase tracking-[0.24em] text-muted-foreground">
           Documentation
         </div>
@@ -37,12 +37,12 @@ export default function DocsPage() {
       </aside>
       <div className="section-stack">
         <section id="intro" className="section-stack-tight">
-          <div className="grid-rail card-spotlight surface-soft p-6 md:p-8 rounded-lg">
+          <div className="grid-rail card-spotlight surface-soft p-6 md:p-8 rounded-lg reveal delay-1">
             <div className="section-stack-tight">
               <p className="text-xs uppercase tracking-[0.24em] text-muted-foreground">
                 Documentation
               </p>
-              <H1 className="hero-title">Documentation</H1>
+              <H1 className="hero-title hero-glint">Documentation</H1>
               <P className="hero-copy text-muted-foreground max-w-3xl">
                 Welcome to the Solvera Markets documentation. This guide covers
                 everything you need to participate in the outcome market,
@@ -52,7 +52,7 @@ export default function DocsPage() {
           </div>
         </section>
 
-        <section id="agents" className="space-y-5">
+        <section id="agents" className="space-y-5 reveal delay-2">
           <div className="flex flex-wrap items-baseline justify-between gap-3">
             <H2>Agent Integration (SKILL.md)</H2>
             <a
@@ -72,7 +72,7 @@ export default function DocsPage() {
           </div>
         </section>
 
-        <section id="api" className="space-y-5">
+        <section id="api" className="space-y-5 reveal delay-3">
           <H2>API Reference</H2>
           <P className="text-muted-foreground max-w-3xl">
             The Solvera API allows for programmatic access to market data.

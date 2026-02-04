@@ -69,14 +69,14 @@ export default function MarketplacePage() {
 
   return (
     <div className="section-stack animate-in fade-in duration-500">
-      <div className="section-stack-tight">
-        <H1 className="hero-title">Marketplace</H1>
+      <div className="section-stack-tight reveal delay-1">
+        <H1 className="hero-title hero-glint">Marketplace</H1>
         <P className="hero-copy text-muted-foreground max-w-2xl">
           Discover and bid on active intents.
         </P>
       </div>
 
-      <div className="card-spotlight surface-soft-muted flex flex-wrap gap-5 items-end p-5 rounded-lg">
+      <div className="card-spotlight surface-soft-muted flex flex-wrap gap-5 items-end p-5 rounded-lg reveal delay-2">
         <div className="grid gap-2">
           <label className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
             State
@@ -100,7 +100,7 @@ export default function MarketplacePage() {
         </div>
       )}
 
-      <div className="table-frame surface-soft-muted rounded-lg overflow-hidden">
+      <div className="table-frame surface-soft-muted rounded-lg overflow-hidden reveal delay-3">
         <div className="relative w-full overflow-auto">
           <table className="w-full caption-bottom text-sm">
             <thead className="[&_tr]:border-b">
