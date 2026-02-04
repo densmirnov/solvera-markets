@@ -3750,12 +3750,46 @@
       "doc_updated_by": "DOCS",
       "dirty": false,
       "id_source": "generated"
+    },
+    {
+      "id": "202602041148-DAMTR3",
+      "title": "Human-friendly amounts and explorer links",
+      "description": "Format token amounts with units/explanations, link addresses/txs to BaseScan, and increase table spacing.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "docker compose up -d --build"
+      ],
+      "commit": {
+        "hash": "6f5fa02ca795d0e2a95ff2e0b3b66cf5323ba9cb",
+        "message": "🧮 DAMTR3 add human amounts and explorer links"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: Add human-readable amounts with explanations, explorer links, and more vertical spacing in tables."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: docker compose up -d --build; amounts formatted with units + raw, explorer links added, tables spaced."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T11:53:10.944Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated"
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "5d7137ecf355ebf1fac3da43b76e74c9626554dfeb0c67f9c4f4c7ee4f6df692"
+    "checksum": "6abbc0e6ed9ff875626e90d26194f68521917ae1b486f75bd105f79f8c0d7e82"
   }
 }
