@@ -76,7 +76,7 @@ export default function MarketplacePage() {
         </P>
       </div>
 
-      <div className="card-spotlight flex flex-wrap gap-5 items-end bg-card/80 p-5 rounded-lg border border-border/60">
+      <div className="card-spotlight surface-soft-muted flex flex-wrap gap-5 items-end p-5 rounded-lg">
         <div className="grid gap-2">
           <label className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
             State
@@ -100,7 +100,7 @@ export default function MarketplacePage() {
         </div>
       )}
 
-      <div className="table-frame rounded-lg border border-border/60 bg-card/80 overflow-hidden">
+      <div className="table-frame surface-soft-muted rounded-lg overflow-hidden">
         <div className="relative w-full overflow-auto">
           <table className="w-full caption-bottom text-sm">
             <thead className="[&_tr]:border-b">

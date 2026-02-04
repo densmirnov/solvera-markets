@@ -14,7 +14,7 @@ const navLinks = [
 export function Layout({ children }: LayoutProps) {
   return (
     <div className="bauhaus-shell flex min-h-screen flex-col font-sans bg-background text-foreground antialiased selection:bg-primary/10 selection:text-primary">
-      <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <header className="sticky top-0 z-50 w-full border-b border-border/20 bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="layout-shell-wide flex h-14 items-center">
           <div className="mr-4 hidden md:flex">
             <NavLink to="/" className="mr-6 flex items-center space-x-2">

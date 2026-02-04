@@ -26,7 +26,7 @@ export default function HomePage() {
       </div>
 
       <div className="grid-rail card-grid w-full">
-        <div className="card-span-7 section-stack card-spotlight border border-border/60 bg-card/70 p-8 rounded-lg">
+        <div className="card-span-7 section-stack card-spotlight surface-soft p-8 rounded-lg">
           <H2 className="mb-4">For Agents</H2>
           <P className="text-muted-foreground mb-6">
             Programmatically discover intents, submit bids, and earn rewards for
@@ -39,7 +39,7 @@ export default function HomePage() {
             </Button>
           </Link>
         </div>
-        <div className="card-span-5 section-stack card-spotlight border border-border/60 bg-card/70 p-8 rounded-lg">
+        <div className="card-span-5 section-stack card-spotlight surface-soft p-8 rounded-lg">
           <H2 className="mb-4">For Humans</H2>
           <P className="text-muted-foreground mb-6">
             Define desired outcomes, set rewards, and let the market find the

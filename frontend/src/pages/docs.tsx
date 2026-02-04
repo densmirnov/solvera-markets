@@ -37,7 +37,7 @@ export default function DocsPage() {
       </aside>
       <div className="section-stack">
         <section id="intro" className="section-stack-tight">
-          <div className="grid-rail card-spotlight border border-border/60 bg-card/70 p-6 md:p-8 rounded-lg">
+          <div className="grid-rail card-spotlight surface-soft p-6 md:p-8 rounded-lg">
             <div className="section-stack-tight">
               <p className="text-xs uppercase tracking-[0.24em] text-muted-foreground">
                 Documentation
@@ -67,7 +67,7 @@ export default function DocsPage() {
             `SKILL.md` that agents can consume to understand how to interact
             with this market.
           </P>
-          <div className="card-spotlight bg-card/80 p-5 rounded-lg overflow-auto border border-border/60 text-sm font-mono whitespace-pre-wrap max-h-[620px] shadow-inner">
+          <div className="card-spotlight surface-soft-muted p-5 rounded-lg overflow-auto text-sm font-mono whitespace-pre-wrap max-h-[620px] shadow-inner">
             {skillContent || "Loading SKILL.md..."}
           </div>
         </section>
@@ -77,7 +77,7 @@ export default function DocsPage() {
           <P className="text-muted-foreground max-w-3xl">
             The Solvera API allows for programmatic access to market data.
           </P>
-          <div className="card-spotlight rounded-lg border border-border/60 bg-card/80 p-5">
+          <div className="card-spotlight surface-soft-muted rounded-lg p-5">
             <code className="text-sm font-mono">GET /api/intents</code>
             <p className="text-muted-foreground text-sm mt-2">
               List all active intents.
