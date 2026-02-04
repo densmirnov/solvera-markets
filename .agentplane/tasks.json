@@ -3096,12 +3096,47 @@
       "dirty": false,
       "id_source": "generated",
       "doc": "## Summary\n\nUpdated indexer build to run graph codegen first and set deployed contract address in env files.\n\n## Scope\n\nUpdated indexer build script to include codegen; set CONTRACT_ADDRESS to the deployed Base mainnet address in env.example and .env.\n\n## Risks\n\nIndexer build now runs codegen on each build; keep graph schema and ABI in sync to avoid build failures.\n\n## Verify Steps\n\n1) npm --prefix indexer run build\\n2) rg -n \"CONTRACT_ADDRESS\" env.example .env\n\n## Rollback Plan\n\nRevert indexer/package.json and env files to previous values."
+    },
+    {
+      "id": "202602040750-7135YA",
+      "title": "Update site role selector and SKILL.md link",
+      "description": "Add human/agent selector on landing, link to SKILL.md, and document atomic fulfill on API page.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "npm --prefix frontend run build"
+      ],
+      "commit": {
+        "hash": "fd6d79e7b66a0f457fc2a47dfa2980faa29fc5ac",
+        "message": "✨ 7135YA add role selector and SKILL.md link"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: add role selector, SKILL.md link, and atomic fulfill description on the site."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: landing role selector and SKILL.md link added; API page documents atomic fulfillment."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T07:53:31.929Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nAdded human/agent selector on landing, linked SKILL.md, and documented atomic fulfillment on the API page.\n\n## Scope\n\nUpdated landing and API pages, added SKILL.md link in nav, and served SKILL.md from frontend/public.\n\n## Risks\n\nEnsure frontend/public/SKILL.md stays in sync with frontend/SKILL.md when the skill guide changes.\n\n## Verify Steps\n\nnpm --prefix frontend run build\n\n## Rollback Plan\n\nRevert frontend changes and remove frontend/public/SKILL.md."
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "a4ea7b11d5d140501945d7e01dc0ceb11921cc09e13ec4b9305b39b5a404d77e"
+    "checksum": "ba10f6678195234b287a633e02d805fafd8af59caaa62b3c6480adc2a96cb02c"
   }
 }
