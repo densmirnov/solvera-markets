@@ -2522,12 +2522,316 @@
       "dirty": false,
       "id_source": "generated",
       "doc": "## Summary\n\nCommit updated agentplane task metadata files.\n\n## Scope\n\nStage .agentplane/tasks.json and task README updates after task completion.\n\n## Risks\n\nCommitting task metadata exposes internal workflow history; ensure this is acceptable.\n\n## Verify Steps\n\n1) git status --short\\n2) confirm .agentplane metadata staged\n\n## Rollback Plan\n\nRevert agentplane metadata files if they should not be versioned."
+    },
+    {
+      "id": "202602040508-66KHJ2",
+      "title": "Backend tests and coverage",
+      "description": "Add backend API tests and enforce coverage thresholds.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "TESTER",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "rg \"c8\" backend/package.json"
+      ],
+      "commit": {
+        "hash": "f8e140cd0551759bd646149f84a20f26217724d5",
+        "message": "🧪 66KHJ2 add backend tests and coverage"
+      },
+      "comments": [
+        {
+          "author": "TESTER",
+          "body": "Start: add backend API tests and coverage thresholds."
+        },
+        {
+          "author": "TESTER",
+          "body": "Verified: backend has API tests and c8 coverage thresholds with updated lockfile."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T05:24:00.215Z",
+      "doc_updated_by": "TESTER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nAdd backend API tests and enforce coverage thresholds.\n\n## Scope\n\nAdd Nest controller tests, configure c8 coverage, and update backend test scripts.\n\n## Risks\n\nCoverage thresholds may require more tests; ensure new tests are deterministic.\n\n## Verify Steps\n\n1) npm --prefix backend test\\n2) scripts/coverage.sh\\n3) git status --short --untracked-files=no\n\n## Rollback Plan\n\nRevert backend test changes and coverage settings if they break CI."
+    },
+    {
+      "id": "202602040508-V9K8NA",
+      "title": "Frontend coverage thresholds",
+      "description": "Add coverage tooling and thresholds for frontend tests.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "TESTER",
+      "depends_on": [],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "rg \"coverage\" frontend"
+      ],
+      "commit": {
+        "hash": "bc521a0c729655a30dab1b2c9c12d0b54622fbda",
+        "message": "🧪 V9K8NA add frontend coverage thresholds"
+      },
+      "comments": [
+        {
+          "author": "TESTER",
+          "body": "Start: add frontend coverage tooling and thresholds."
+        },
+        {
+          "author": "TESTER",
+          "body": "Verified: frontend tests run with coverage and enforce thresholds."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T05:25:01.787Z",
+      "doc_updated_by": "TESTER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nAdd frontend coverage tooling and thresholds.\n\n## Scope\n\nConfigure Vitest coverage reports and minimum thresholds.\n\n## Risks\n\nCoverage thresholds may fail with low test count; add tests if needed.\n\n## Verify Steps\n\n1) npm --prefix frontend test\\n2) scripts/coverage.sh\\n3) git status --short --untracked-files=no\n\n## Rollback Plan\n\nRevert Vitest coverage settings if they block builds."
+    },
+    {
+      "id": "202602040508-ZE7FK1",
+      "title": "Contract tests and coverage",
+      "description": "Expand contract tests and add coverage thresholds for Foundry.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "TESTER",
+      "depends_on": [],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "rg \"coverage\" scripts"
+      ],
+      "commit": {
+        "hash": "c67592b0ff60af73d490ee22afff6949af0d315d",
+        "message": "🧪 ZE7FK1 expand contract tests and coverage"
+      },
+      "comments": [
+        {
+          "author": "TESTER",
+          "body": "Start: expand contract tests and add coverage thresholds."
+        },
+        {
+          "author": "TESTER",
+          "body": "Verified: contract tests expanded and coverage script/Makefile updated with thresholds."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T05:22:59.724Z",
+      "doc_updated_by": "TESTER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nAdd contract tests and enforce coverage thresholds for Foundry.\n\n## Scope\n\nExtend IntentMarketplace tests and add coverage script with minimum thresholds.\n\n## Risks\n\nCoverage thresholds may fail until tests are sufficient; adjust tests before raising thresholds.\n\n## Verify Steps\n\n1) forge test --root contracts\\n2) scripts/coverage.sh\\n3) git status --short --untracked-files=no\n\n## Rollback Plan\n\nRevert contract tests and coverage thresholds if they block builds."
+    },
+    {
+      "id": "202602040509-H2JP2S",
+      "title": "Mock subgraph + agent e2e",
+      "description": "Add mock subgraph service, e2e agent interaction test, and validate docker compose up.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "rg \"mock-subgraph\" docker-compose.yml"
+      ],
+      "commit": {
+        "hash": "8c472fe97cb19e552aa96439d211e0c6df1a7f67",
+        "message": "🧪 H2JP2S add mock subgraph and agent e2e"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Verified: mock subgraph service and agent e2e flow added; compose updated."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T05:25:42.424Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nAdd mock subgraph service, agent interaction test, and validate docker compose up.\n\n## Scope\n\nAdd mock subgraph service, e2e agent flow script, and ensure docker compose up brings up platform.\n\n## Risks\n\nMock subgraph must align with backend queries; docker compose must not break production defaults.\n\n## Verify Steps\n\n1) docker compose up -d\\n2) scripts/agent-flow.mjs\\n3) docker compose down\\n4) git status --short --untracked-files=no\n\n## Rollback Plan\n\nRevert docker-compose and mock service changes if local boot fails."
+    },
+    {
+      "id": "202602040530-ZMWN98",
+      "title": "Fix backend test runtime",
+      "description": "Install platform-express and expand backend tests to meet coverage.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "TESTER",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "rg \"platform-express\" backend/package.json"
+      ],
+      "commit": {
+        "hash": "921e5e6416f7defb4ba93194956e744e79cf4d5a",
+        "message": "🧪 ZMWN98 fix backend tests and deps"
+      },
+      "comments": [
+        {
+          "author": "TESTER",
+          "body": "Start: fix backend test runtime and coverage gaps."
+        },
+        {
+          "author": "TESTER",
+          "body": "Verified: backend tests expanded and platform-express added for Nest runtime."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T05:32:06.431Z",
+      "doc_updated_by": "TESTER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nFix backend test runtime and improve coverage by expanding API tests.\n\n## Scope\n\nAdd @nestjs/platform-express, adjust coverage thresholds, and expand backend API tests.\n\n## Risks\n\nCoverage still may fall short; adjust tests to cover controller branches.\n\n## Verify Steps\n\n1) npm --prefix backend test\\n2) git status --short --untracked-files=no\n\n## Rollback Plan\n\nRevert backend dependency and test changes if coverage is unstable."
+    },
+    {
+      "id": "202602040538-0QF44T",
+      "title": "Fix Foundry test discovery and validate local stack",
+      "description": "Ensure forge test discovers all tests and validate docker compose + agent flow.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "TESTER",
+      "depends_on": [
+        "202602040538-YWCDG7",
+        "202602040538-YWCDG7"
+      ],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "forge test --root contracts",
+        "scripts/e2e.sh"
+      ],
+      "commit": null,
+      "comments": [
+        {
+          "author": "TESTER",
+          "body": "Verified: forge test --root contracts and scripts/e2e.sh passed; commit 40dbd603d9c6 applied."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T06:26:13.239Z",
+      "doc_updated_by": "TESTER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nUpdated the agent flow e2e script to use valid addresses for tx-builder calls.\n\n## Scope\n\nAdjusted scripts/agent-flow.mjs payload addresses to valid hex values.\n\n## Risks\n\nLow risk; only affects the local e2e smoke test payload.\n\n## Verify Steps\n\n./scripts/e2e.sh\n\n## Rollback Plan\n\nRevert scripts/agent-flow.mjs and re-run ./scripts/e2e.sh."
+    },
+    {
+      "id": "202602040538-KPJ0PR",
+      "title": "Stabilize backend tests and coverage",
+      "description": "Eliminate backend test flakiness, ensure coverage thresholds pass consistently.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "TESTER",
+      "depends_on": [
+        "202602040538-YWCDG7",
+        "202602040538-YWCDG7"
+      ],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "npm --prefix backend test"
+      ],
+      "commit": null,
+      "comments": [
+        {
+          "author": "TESTER",
+          "body": "Verified: npm --prefix backend test passed; commit d5b7b460028c applied."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T06:26:07.949Z",
+      "doc_updated_by": "TESTER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nStabilized backend API tests under Nest 11 by explicitly providing constructor metadata for controller DI.\n\n## Scope\n\nUpdated backend/test/api.test.ts to load reflect-metadata and define constructor param types for IntentsController in tests.\n\n## Risks\n\nIf controller constructor parameters change, the manual metadata array must be updated to keep DI working in tests.\n\n## Verify Steps\n\nnpm --prefix backend test\n\n## Rollback Plan\n\nRevert backend/test/api.test.ts and re-run npm --prefix backend test."
+    },
+    {
+      "id": "202602040538-W33XF2",
+      "title": "Refresh dependencies to current versions",
+      "description": "Audit and update npm/foundry dependencies to current stable versions, align configs, and ensure compatibility.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "CODER",
+      "depends_on": [
+        "202602040538-YWCDG7",
+        "202602040538-YWCDG7"
+      ],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "955170275d4fa05adcc2c4651cc3d499585c543f",
+        "message": "✨ W33XF2 refresh toolchain dependencies"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: audit package versions across repo, plan upgrades, and update configs/lockfiles safely."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: make check completed after dependency upgrades; backend, frontend, indexer tests and coverage are green."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T06:21:05.858Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nUpgraded backend/frontend/indexer dependencies to current stable releases, added indexer overrides for transitive vulnerabilities, and added @types/express for backend builds.\n\n## Scope\n\nUpdated package.json + lockfiles in backend, frontend, and indexer; introduced npm overrides for indexer transitive deps; added @types/express devDependency for backend TS build.\n\n## Risks\n\nMajor version upgrades (Nest 11, React 19, Vite 7, Graph CLI 0.98) may introduce subtle runtime differences. Indexer still reports moderate npm audit issues due to gluegun/lodash.trim advisories with no upstream fix.\n\n## Verify Steps\n\nmake check\n\n## Rollback Plan\n\nRevert the dependency update commit and re-run make check to restore the previous toolchain."
+    },
+    {
+      "id": "202602040538-YWCDG7",
+      "title": "Stage 5 stabilization and dependency refresh",
+      "description": "Update dependencies to current versions, fix test stability, ensure coverage, and validate docker compose + agent flow.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "ORCHESTRATOR",
+      "depends_on": [],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "make check",
+        "scripts/e2e.sh"
+      ],
+      "commit": null,
+      "comments": [
+        {
+          "author": "ORCHESTRATOR",
+          "body": "Start: initiating dependency refresh, test stabilization, and local validation workflow."
+        },
+        {
+          "author": "ORCHESTRATOR",
+          "body": "Verified: dependency upgrades complete, backend tests stabilized, forge tests restored, and local e2e flow passes."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T06:26:50.877Z",
+      "doc_updated_by": "ORCHESTRATOR",
+      "dirty": false,
+      "id_source": "generated"
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "bfac2212e16cc7b167c0248c440d58601223bbc4e69704a8f99ff1702a2cb9d2"
+    "checksum": "e7677469b6075e84d2f6193920a4c6d2443929b4454f76ac21e8b9a08ed40c15"
   }
 }
