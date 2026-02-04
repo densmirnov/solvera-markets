@@ -2990,12 +2990,47 @@
       "dirty": false,
       "id_source": "generated",
       "doc": "## Summary\n\nUpdated env.example and .env with production solvera.market settings for CORS and API base.\n\n## Scope\n\nUpdated env.example and .env with production SUBGRAPH_URL, CORS_ORIGIN, and VITE_API_BASE.\n\n## Risks\n\nEnsure production secrets in .env remain protected; domain changes require updating CORS_ORIGIN and VITE_API_BASE.\n\n## Verify Steps\n\nrg -n \"CORS_ORIGIN|VITE_API_BASE|SUBGRAPH_URL\" env.example .env\n\n## Rollback Plan\n\nRevert env.example and .env to previous values."
+    },
+    {
+      "id": "202602040717-N9JZFC",
+      "title": "Dokploy port isolation and compose adjustments",
+      "description": "Remove host port bindings in docker-compose for Dokploy isolation, document isolated deployments/Traefik routing, and avoid port conflicts.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "docker compose up -d --build"
+      ],
+      "commit": {
+        "hash": "bf12ace282130a966b6e1c8acfafafc80484d1e2",
+        "message": "🧩 N9JZFC adjust compose for Dokploy isolation"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: adjust compose for Dokploy isolation and document port conflict avoidance."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: compose uses internal ports and Dokploy isolation guidance documented; build succeeds without host port conflicts."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T07:22:21.706Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nRemoved host port bindings in docker-compose and documented Dokploy isolation/routing to prevent port conflicts.\n\n## Scope\n\nUpdated docker-compose.yml to use expose for backend/frontend and added Dokploy isolation guidance in docs/22-devops-dokploy.md.\n\n## Risks\n\nRemoving host port bindings means local access requires explicit port publishing or a reverse proxy; ensure Dokploy domain routing is configured.\n\n## Verify Steps\n\ndocker compose up -d --build\n\n## Rollback Plan\n\nRevert docker-compose.yml and docs/22-devops-dokploy.md to restore host port bindings."
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "6540b49ae4262c71affb82d7898649e61c5c0e6e3b490cd512d8c23cd075d067"
+    "checksum": "341f3e9ff7ed7bceebb71fa8f15204faf39e12092f602f75e840db91fead0797"
   }
 }
