@@ -5,7 +5,7 @@ const base = process.env.AGENT_API_BASE || "http://localhost:3000/api";
 async function requestJson(path, options) {
   const response = await fetch(`${base}${path}`, {
     headers: { "content-type": "application/json" },
-    ...options
+    ...options,
   });
   const payload = await response.json();
   if (!response.ok) {
@@ -38,16 +38,16 @@ async function run() {
   const tx = await requestJson("/intents", {
     method: "POST",
     body: JSON.stringify({
-      tokenOut: "0xtoken",
+      tokenOut: "0x0000000000000000000000000000000000000001",
       minAmountOut: "100",
-      rewardToken: "0xreward",
+      rewardToken: "0x0000000000000000000000000000000000000002",
       rewardAmount: "10",
       ttlSubmit: 100,
       ttlAccept: 200,
-      payer: "0xpayer",
-      initiator: "0xinitiator",
-      verifier: "0xverifier"
-    })
+      payer: "0x0000000000000000000000000000000000000003",
+      initiator: "0x0000000000000000000000000000000000000004",
+      verifier: "0x0000000000000000000000000000000000000005",
+    }),
   });
   assert.ok(tx.data.calldata);
   assert.ok(tx.next_steps.length > 0);
