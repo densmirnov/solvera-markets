@@ -10,6 +10,8 @@
 
 ## Environment
 - `SUBGRAPH_URL` is required for backend.
+- Default production `SUBGRAPH_URL` points to the deployed subgraph:
+  `https://api.studio.thegraph.com/query/17884/solvera/version/latest`
 - Caching and rate limits are configurable via env.
 
 ## Reliability
