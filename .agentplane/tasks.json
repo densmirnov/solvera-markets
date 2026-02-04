@@ -2712,15 +2712,22 @@
         "forge test --root contracts",
         "scripts/e2e.sh"
       ],
-      "commit": null,
+      "commit": {
+        "hash": "40dbd603d9c6e2013d5e9ad636a77aa9979a1494",
+        "message": "🔧 0QF44T fix agent flow payload"
+      },
       "comments": [
         {
           "author": "TESTER",
           "body": "Verified: forge test --root contracts and scripts/e2e.sh passed; commit 40dbd603d9c6 applied."
+        },
+        {
+          "author": "TESTER",
+          "body": "Verified: forge test --root contracts and scripts/e2e.sh passed; agent flow now uses valid addresses."
         }
       ],
       "doc_version": 2,
-      "doc_updated_at": "2026-02-04T06:26:13.239Z",
+      "doc_updated_at": "2026-02-04T06:36:35.390Z",
       "doc_updated_by": "TESTER",
       "dirty": false,
       "id_source": "generated",
@@ -2743,15 +2750,22 @@
       "verify": [
         "npm --prefix backend test"
       ],
-      "commit": null,
+      "commit": {
+        "hash": "d5b7b460028c76da4fbf7f5a59b3090a6d0cbd0b",
+        "message": "🧪 KPJ0PR stabilize backend test DI"
+      },
       "comments": [
         {
           "author": "TESTER",
           "body": "Verified: npm --prefix backend test passed; commit d5b7b460028c applied."
+        },
+        {
+          "author": "TESTER",
+          "body": "Verified: backend test suite passes with updated DI metadata; coverage and API tests remain green."
         }
       ],
       "doc_version": 2,
-      "doc_updated_at": "2026-02-04T06:26:07.949Z",
+      "doc_updated_at": "2026-02-04T06:35:41.802Z",
       "doc_updated_by": "TESTER",
       "dirty": false,
       "id_source": "generated",
@@ -2810,7 +2824,10 @@
         "make check",
         "scripts/e2e.sh"
       ],
-      "commit": null,
+      "commit": {
+        "hash": "24fbbf8eaf23e742023a20239e0108c209df217a",
+        "message": "🧭 YWCDG7 record task state"
+      },
       "comments": [
         {
           "author": "ORCHESTRATOR",
@@ -2819,19 +2836,58 @@
         {
           "author": "ORCHESTRATOR",
           "body": "Verified: dependency upgrades complete, backend tests stabilized, forge tests restored, and local e2e flow passes."
+        },
+        {
+          "author": "ORCHESTRATOR",
+          "body": "Verified: dependency refresh and test stabilization completed; make check and e2e validations are green."
         }
       ],
       "doc_version": 2,
-      "doc_updated_at": "2026-02-04T06:26:50.877Z",
+      "doc_updated_at": "2026-02-04T06:36:54.351Z",
       "doc_updated_by": "ORCHESTRATOR",
       "dirty": false,
       "id_source": "generated"
+    },
+    {
+      "id": "202602040630-S3FVT9",
+      "title": "Document npm audit exception for indexer",
+      "description": "Add formal npm audit exception in CI and document accepted indexer audit warnings.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "DOCS",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "de879ef78698d927473bde77df8af9faba5fdbd1",
+        "message": "🛡️ S3FVT9 add audit exception workflow"
+      },
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: formalize npm audit exception for indexer warnings and document rationale."
+        },
+        {
+          "author": "DOCS",
+          "body": "Verified: make check includes npm audit --audit-level=high and documents indexer exception."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T06:35:21.479Z",
+      "doc_updated_by": "DOCS",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nAdded a formal npm audit check with a documented exception for indexer moderate advisories.\n\n## Scope\n\nAdded scripts/audit.sh, wired audit into Makefile and scripts/check.sh, and documented audit exception in docs/20-engineering-standards.md and docs/13-audit-checklist.md.\n\n## Risks\n\nAudit exceptions may mask emerging issues; must be revisited when Graph CLI or transitive dependencies update.\n\n## Verify Steps\n\nmake check\n\n## Rollback Plan\n\nRevert audit script and documentation updates; restore previous Makefile/scripts/check.sh."
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "e7677469b6075e84d2f6193920a4c6d2443929b4454f76ac21e8b9a08ed40c15"
+    "checksum": "d67460dcc974d6125decf0095b3c760fbd8a7fbe1cdf4d0d4d382a22f8e42446"
   }
 }
