@@ -2487,12 +2487,47 @@
       "dirty": false,
       "id_source": "generated",
       "doc": "## Summary\n\nTrack .agentplane artifacts in git.\n\n## Scope\n\nStage .agentplane/bin, .agentplane/tasks.json, and .agentplane/tasks for version control.\n\n## Risks\n\nTracking agentplane artifacts may include local metadata; review contents before sharing.\n\n## Verify Steps\n\n1) git status --short\\n2) ensure .agentplane files are staged\n\n## Rollback Plan\n\nRemove .agentplane entries from git if tracking should be disabled."
+    },
+    {
+      "id": "202602040503-7T38TX",
+      "title": "Record agentplane task state",
+      "description": "Commit updated agentplane task metadata after tracking artifacts.",
+      "status": "DONE",
+      "priority": "low",
+      "owner": "DOCS",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "git status --short"
+      ],
+      "commit": {
+        "hash": "4e85281526da1c9469ce3f971e3acbd893dc0bfb",
+        "message": "🧾 7T38TX record agentplane metadata"
+      },
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: commit updated agentplane task metadata."
+        },
+        {
+          "author": "DOCS",
+          "body": "Verified: agentplane metadata files are committed and repository is clean."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T05:04:17.457Z",
+      "doc_updated_by": "DOCS",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nCommit updated agentplane task metadata files.\n\n## Scope\n\nStage .agentplane/tasks.json and task README updates after task completion.\n\n## Risks\n\nCommitting task metadata exposes internal workflow history; ensure this is acceptable.\n\n## Verify Steps\n\n1) git status --short\\n2) confirm .agentplane metadata staged\n\n## Rollback Plan\n\nRevert agentplane metadata files if they should not be versioned."
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "fa20a67845bdc030762284ec5fbb59787b8b0793e8de5076e1a8dcd910fd9314"
+    "checksum": "bfac2212e16cc7b167c0248c440d58601223bbc4e69704a8f99ff1702a2cb9d2"
   }
 }
