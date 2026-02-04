@@ -6,18 +6,24 @@ export default [
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
+    ignores: ["generated/**"],
+  },
+  {
     files: ["**/*.ts"],
     languageOptions: {
       parser: tseslint.parser,
       parserOptions: {
-        project: "./tsconfig.json"
+        project: "./tsconfig.json",
       },
       globals: {
-        ...globals.node
-      }
+        ...globals.node,
+      },
     },
     rules: {
-      "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }]
-    }
-  }
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        { argsIgnorePattern: "^_" },
+      ],
+    },
+  },
 ];
