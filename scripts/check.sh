@@ -5,3 +5,4 @@ set -eu
 ./scripts/fmt.sh
 ./scripts/lint.sh
 ./scripts/test.sh
+./scripts/audit.sh

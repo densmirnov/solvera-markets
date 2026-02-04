@@ -29,3 +29,7 @@
 - Reward paid exactly once.
 - Balances correct in all branches.
 - Reputation changes only in `_accept` and `expire`.
+
+## Dependency Audit
+- `npm audit --audit-level=high` must pass for backend, frontend, and indexer.
+- Moderate-only indexer warnings are documented in `docs/20-engineering-standards.md`.
