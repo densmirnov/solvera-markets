@@ -6,6 +6,8 @@
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
+    "lint": "eslint \"**/*.ts\"",
+    "fmt": "eslint \"**/*.ts\" --fix",
     "test": "matchstick-as -f tests/*.test.ts",
     "deploy:local": "graph deploy --node http://localhost:8020 --ipfs http://localhost:5001 intent/marketplace",
     "deploy:base": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ intent/marketplace"
@@ -13,7 +15,12 @@
   "devDependencies": {
     "@graphprotocol/graph-cli": "0.73.0",
     "@graphprotocol/graph-ts": "0.33.0",
+    "@eslint/js": "9.7.0",
+    "@types/node": "20.11.30",
+    "eslint": "9.7.0",
+    "globals": "15.8.0",
     "matchstick-as": "0.5.0",
+    "typescript-eslint": "8.5.0",
     "typescript": "5.4.5"
   }
 }
