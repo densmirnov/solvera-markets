@@ -3648,12 +3648,46 @@
       "doc_updated_by": "DOCS",
       "dirty": false,
       "id_source": "generated"
+    },
+    {
+      "id": "202602041115-C94CTQ",
+      "title": "Add Clawhub README",
+      "description": "Create a concise README.md for Clawhub skill upload with summary, endpoints, and quickstart.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "DOCS",
+      "depends_on": [],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "docker compose up -d --build"
+      ],
+      "commit": {
+        "hash": "10e104896aa1db03d5529a256298475a9d7e7065",
+        "message": "📝 C94CTQ add Clawhub README"
+      },
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: Draft Clawhub README.md for Solvera skill upload."
+        },
+        {
+          "author": "DOCS",
+          "body": "Verified: docker compose up -d --build; README.md added for Clawhub."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T11:16:50.685Z",
+      "doc_updated_by": "DOCS",
+      "dirty": false,
+      "id_source": "generated"
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "b281906eab22f73d864685c6398f080386d3968f1e4323910c31fd6e53f0e164"
+    "checksum": "17e56a75c39daf3f3e508aa3bf65cc15c151ad6361644db0510cda3ad3602f01"
   }
 }
