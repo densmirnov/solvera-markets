@@ -4132,12 +4132,47 @@
       "dirty": false,
       "id_source": "generated",
       "doc": "## Summary\n\nSoftened borders and surfaces with glassy gradients; reduced harsh lines and added modern polish to cards, tables, and header.\n\n## Scope\n\nUpdated index.css for softer borders and new surface styles; applied surface classes to Home, Docs, Marketplace, and adjusted header border.\n\n## Risks\n\nGlassy backgrounds rely on backdrop-filter; ensure acceptable fallback for older browsers.\n\n## Verify Steps\n\n1. npm run build --prefix frontend\n\n## Rollback Plan\n\nRevert index.css and page surface changes via agentplane commit or git revert."
+    },
+    {
+      "id": "202602041556-V5ZFB2",
+      "title": "Boost hero gradient + magnetic hovers",
+      "description": "Strengthen hero gradient, enhance layered surfaces, add subtle magnetic hover on buttons.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "ORCHESTRATOR",
+      "depends_on": [],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "1"
+      ],
+      "commit": {
+        "hash": "4dc1230c00395890ddfb86d9e8e51a97b534aa3a",
+        "message": "✨ V5ZFB2 boost hero gradient + magnetic hover"
+      },
+      "comments": [
+        {
+          "author": "ORCHESTRATOR",
+          "body": "Start: boost hero gradient and add subtle magnetic hover."
+        },
+        {
+          "author": "ORCHESTRATOR",
+          "body": "Verified: npm run build --prefix frontend succeeded; hero gradient and button hover refined."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T15:59:30.188Z",
+      "doc_updated_by": "ORCHESTRATOR",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nEnhanced hero gradients and surface glow; added subtle magnetic hover on buttons for a more premium feel.\n\n## Scope\n\nAdjusted background gradients, button hover treatment, and surface glow in index.css; marked buttons for smoother transform rendering.\n\n## Risks\n\nHeavier gradients and hover effects may increase paint costs on low-end devices; reduced motion users are respected.\n\n## Verify Steps\n\n1. npm run build --prefix frontend\n\n## Rollback Plan\n\nRevert index.css and Button.tsx changes via agentplane commit or git revert."
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "0bcf2d516285227c92cb16ff0bc79a79d3483833c40b700c3e5f455ec6a82b29"
+    "checksum": "b9d672df483de373e4a52a1b1e6cb0bd1351b71834c2b7ccf009f3f3148d0f45"
   }
 }

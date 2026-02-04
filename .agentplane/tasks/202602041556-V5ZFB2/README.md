@@ -1,17 +1,18 @@
 ---
 id: "202602041556-V5ZFB2"
 title: "Boost hero gradient + magnetic hovers"
-status: "DOING"
+status: "DONE"
 priority: "med"
 owner: "ORCHESTRATOR"
 depends_on: []
 tags: ["frontend"]
 verify: ["1"]
-commit: null
+commit: { hash: "4dc1230c00395890ddfb86d9e8e51a97b534aa3a", message: "✨ V5ZFB2 boost hero gradient + magnetic hover" }
 comments:
   - { author: "ORCHESTRATOR", body: "Start: boost hero gradient and add subtle magnetic hover." }
+  - { author: "ORCHESTRATOR", body: "Verified: npm run build --prefix frontend succeeded; hero gradient and button hover refined." }
 doc_version: 2
-doc_updated_at: "2026-02-04T15:58:28.376Z"
+doc_updated_at: "2026-02-04T15:59:30.188Z"
 doc_updated_by: "ORCHESTRATOR"
 description: "Strengthen hero gradient, enhance layered surfaces, add subtle magnetic hover on buttons."
 id_source: "generated"
