@@ -12,7 +12,7 @@ export default function DocsPage() {
   }, []);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-12">
+    <div className="grid grid-cols-1 lg:grid-cols-[220px_1fr] gap-12">
       <aside className="hidden lg:block space-y-6">
         <div className="text-xs uppercase tracking-[0.24em] text-muted-foreground">
           Documentation
@@ -35,7 +35,7 @@ export default function DocsPage() {
           </li>
         </ul>
       </aside>
-      <div className="space-y-14">
+      <div className="section-stack">
         <section id="intro" className="space-y-4">
           <H1 className="hero-title">Documentation</H1>
           <P className="hero-copy text-muted-foreground max-w-3xl">

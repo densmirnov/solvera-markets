@@ -68,8 +68,8 @@ export default function MarketplacePage() {
   }, [load]);
 
   return (
-    <div className="space-y-10 animate-in fade-in duration-500">
-      <div className="flex flex-col gap-3">
+    <div className="section-stack animate-in fade-in duration-500">
+      <div className="section-stack-tight">
         <H1 className="hero-title">Marketplace</H1>
         <P className="hero-copy text-muted-foreground max-w-2xl">
           Discover and bid on active intents.

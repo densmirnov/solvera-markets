@@ -13,9 +13,9 @@ const navLinks = [
 
 export function Layout({ children }: LayoutProps) {
   return (
-    <div className="flex min-h-screen flex-col font-sans bg-background text-foreground antialiased selection:bg-primary/10 selection:text-primary">
+    <div className="bauhaus-shell flex min-h-screen flex-col font-sans bg-background text-foreground antialiased selection:bg-primary/10 selection:text-primary">
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-14 max-w-screen-2xl items-center">
+        <div className="layout-shell-wide flex h-14 items-center">
           <div className="mr-4 hidden md:flex">
             <NavLink to="/" className="mr-6 flex items-center space-x-2">
               <span className="brand-mark hidden font-bold sm:inline-block">
@@ -53,12 +53,12 @@ export function Layout({ children }: LayoutProps) {
         </div>
       </header>
 
-      <main className="flex-1 container max-w-screen-2xl py-6 md:py-10">
-        {children}
+      <main className="flex-1 py-8 md:py-12">
+        <div className="layout-shell-wide">{children}</div>
       </main>
 
-      <footer className="py-6 md:px-8 md:py-0">
-        <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row max-w-screen-2xl">
+      <footer className="py-8 md:py-0">
+        <div className="layout-shell-wide flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
           <p className="text-balance text-center text-sm leading-loose text-muted-foreground md:text-left">
             Built by{" "}
             <a

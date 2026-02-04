@@ -2,6 +2,7 @@
 
 @theme {
   --font-sans: "Manrope", sans-serif;
+  --font-display: "Space Grotesk", "Manrope", sans-serif;
 
   --color-border: var(--border);
   --color-input: var(--input);
@@ -65,6 +66,14 @@
   --ring: 18 94% 58%;
 
   --radius: 0.75rem;
+  --gutter: clamp(1.25rem, 2.6vw, 3rem);
+  --gutter-wide: clamp(1.75rem, 4.2vw, 5rem);
+  --phi: 1.618;
+  --space-1: 0.5rem;
+  --space-2: calc(var(--space-1) * var(--phi));
+  --space-3: calc(var(--space-2) * var(--phi));
+  --space-4: calc(var(--space-3) * var(--phi));
+  --space-5: calc(var(--space-4) * var(--phi));
 }
 
 .dark {
@@ -132,6 +141,46 @@
       );
   }
 
+  .bauhaus-shell {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .bauhaus-shell::before,
+  .bauhaus-shell::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .bauhaus-shell::before {
+    width: 320px;
+    height: 320px;
+    left: calc(-1 * var(--gutter));
+    top: -120px;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle at 30% 30%,
+      hsla(18, 94%, 58%, 0.35),
+      transparent 65%
+    );
+    mix-blend-mode: multiply;
+  }
+
+  .bauhaus-shell::after {
+    width: 420px;
+    height: 220px;
+    right: -140px;
+    bottom: 8%;
+    border-radius: 26% 74% 52% 48% / 40% 42% 58% 60%;
+    background: linear-gradient(
+      120deg,
+      hsla(210, 40%, 80%, 0.5),
+      hsla(36, 24%, 98%, 0)
+    );
+  }
+
   html {
     hanging-punctuation: first last;
     text-wrap: pretty;
@@ -153,6 +202,7 @@
   letter-spacing: -0.035em;
   font-variation-settings: "wght" 760;
   animation: type-breathe 12s ease-in-out infinite;
+  font-family: var(--font-display);
 }
 
 .hero-copy {
@@ -163,6 +213,7 @@
   position: relative;
   font-variation-settings: "wght" 640;
   animation: brand-shift 16s ease-in-out infinite;
+  font-family: var(--font-display);
 }
 
 .brand-mark::after {
@@ -248,6 +299,52 @@
 
 .card-spotlight:hover::before {
   opacity: 1;
+}
+
+.layout-shell {
+  width: min(1200px, 100% - var(--gutter) * 2);
+  margin-inline: auto;
+}
+
+.layout-shell-wide {
+  width: min(1280px, 100% - var(--gutter-wide) * 2);
+  margin-inline: auto;
+}
+
+.section-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.section-stack-tight {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.grid-phi {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.grid-phi > .span-7 {
+  grid-column: span 7;
+}
+
+.grid-phi > .span-5 {
+  grid-column: span 5;
+}
+
+@media (max-width: 1024px) {
+  .grid-phi {
+    grid-template-columns: 1fr;
+  }
+  .grid-phi > .span-7,
+  .grid-phi > .span-5 {
+    grid-column: span 1;
+  }
 }
 
 @keyframes type-breathe {

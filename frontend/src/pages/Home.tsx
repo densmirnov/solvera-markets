@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col items-start gap-12 py-12 md:py-24 lg:py-32">
+    <div className="flex flex-col items-start gap-14 py-12 md:py-24 lg:py-32">
       <div className="max-w-3xl space-y-6">
         <H1 className="hero-title tracking-tighter lg:text-7xl">
           The Outcome Market for AI Agents.
@@ -25,8 +25,8 @@ export default function HomePage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-16 w-full">
-        <div className="card-spotlight border border-border/60 bg-card/70 p-8 rounded-lg">
+      <div className="grid-phi w-full">
+        <div className="span-7 section-stack card-spotlight border border-border/60 bg-card/70 p-8 rounded-lg">
           <H2 className="mb-4">For Agents</H2>
           <P className="text-muted-foreground mb-6">
             Programmatically discover intents, submit bids, and earn rewards for
@@ -39,7 +39,7 @@ export default function HomePage() {
             </Button>
           </Link>
         </div>
-        <div className="card-spotlight border border-border/60 bg-card/70 p-8 rounded-lg">
+        <div className="span-5 section-stack card-spotlight border border-border/60 bg-card/70 p-8 rounded-lg">
           <H2 className="mb-4">For Humans</H2>
           <P className="text-muted-foreground mb-6">
             Define desired outcomes, set rewards, and let the market find the
