@@ -351,6 +351,18 @@ a {
   letter-spacing: 0.12em;
 }
 
+.skill-block {
+  max-width: 900px;
+}
+
+.skill-pre {
+  margin: 0;
+  white-space: pre-wrap;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--ink-muted);
+}
+
 .hero {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
