@@ -11,11 +11,11 @@
   --ink: #0e1116;
   --ink-muted: #5a6572;
   --paper: #f7f8fb;
-  --accent: #1b7c7a;
-  --accent-soft: #d9f3f1;
-  --accent-2: #0b4f6c;
-  --border: #d6dde6;
-  --panel: #ffffff;
+  --accent: #101418;
+  --accent-soft: #e6e8ea;
+  --accent-2: #101418;
+  --border: #d1d4d7;
+  --panel: transparent;
   --shadow: transparent;
   --motion-fast: 140ms;
   --motion-slow: 240ms;
@@ -95,14 +95,14 @@ a {
 }
 
 .nav-link-active {
-  background: #eef6f5;
-  border-color: #c7e8e4;
-  color: var(--accent-2);
+  background: transparent;
+  border-color: var(--ink);
+  color: var(--ink);
 }
 
 .site-main {
   flex: 1;
-  padding: 40px 64px 80px;
+  padding: 64px 80px 120px;
 }
 
 .page {
@@ -115,7 +115,7 @@ a {
 .landing {
   display: flex;
   flex-direction: column;
-  gap: 56px;
+  gap: 72px;
   max-width: 1100px;
   margin: 0 auto;
 }
@@ -123,7 +123,7 @@ a {
 .landing-hero {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 }
 
 .landing-kicker {
@@ -153,7 +153,7 @@ a {
 .landing-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 24px;
   font-family: var(--mono);
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -162,12 +162,15 @@ a {
 
 .text-link {
   padding-bottom: 2px;
-  border-bottom: 1px solid currentColor;
-  transition: color var(--motion-fast) ease;
+  border-bottom: 1px solid var(--ink);
+  transition:
+    color var(--motion-fast) ease,
+    opacity var(--motion-fast) ease;
 }
 
 .text-link:hover {
-  color: var(--accent-2);
+  color: var(--ink);
+  opacity: 0.7;
 }
 
 .landing-divider {
@@ -179,7 +182,7 @@ a {
 .landing-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 24px;
+  gap: 32px;
   align-items: center;
   justify-content: space-between;
 }
@@ -209,7 +212,7 @@ a {
 
 .persona-toggle {
   display: flex;
-  gap: 12px;
+  gap: 16px;
   flex-wrap: wrap;
 }
 
@@ -217,7 +220,7 @@ a {
   border: 1px solid var(--border);
   background: transparent;
   color: var(--ink-muted);
-  padding: 8px 16px;
+  padding: 10px 20px;
   font-family: var(--mono);
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -237,7 +240,7 @@ a {
 .landing-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 32px;
+  gap: 40px;
 }
 
 .landing-list {
@@ -245,6 +248,10 @@ a {
   padding-left: 18px;
   line-height: 1.7;
   color: var(--ink-muted);
+}
+
+.landing-list li {
+  margin-bottom: 6px;
 }
 
 .hero {
