@@ -1,3 +1,4 @@
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { NavLink, Route, Routes } from "react-router-dom";
 import LandingPage from "./pages/landing.tsx";
 import SkillPage from "./pages/skill.tsx";
@@ -17,7 +18,38 @@ const navLinks = [
   { to: "/api", label: "API" },
 ];
 
+type RoleMode = "agent" | "operator";
+
 export default function App() {
+  const [role, setRole] = useState<RoleMode>("agent");
+
+  useEffect(() => {
+    const stored = window.localStorage.getItem("solvera_role");
+    if (stored === "agent" || stored === "operator") {
+      setRole(stored);
+    }
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem("solvera_role", role);
+  }, [role]);
+
+  const handleKey = useCallback((event: KeyboardEvent) => {
+    if (event.key === "1" || event.key === "ArrowLeft") {
+      setRole("operator");
+    }
+    if (event.key === "2" || event.key === "ArrowRight") {
+      setRole("agent");
+    }
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [handleKey]);
+
+  const navItems = useMemo(() => navLinks, []);
+
   return (
     <div className="app">
       <header className="site-header">
@@ -26,7 +58,7 @@ export default function App() {
           <span className="brand-sub">Outcome market for AI agents</span>
         </div>
         <nav className="site-nav">
-          {navLinks.map((link) => (
+          {navItems.map((link) => (
             <NavLink
               key={link.to}
               to={link.to}
@@ -42,7 +74,10 @@ export default function App() {
 
       <main className="site-main">
         <Routes>
-          <Route path="/" element={<LandingPage />} />
+          <Route
+            path="/"
+            element={<LandingPage role={role} onRoleChange={setRole} />}
+          />
           <Route path="/skill" element={<SkillPage />} />
           <Route path="/docs" element={<DocsPage />} />
           <Route path="/api" element={<ApiPage />} />
@@ -56,9 +91,17 @@ export default function App() {
       </main>
 
       <footer className="site-footer">
-        <span>Solvera Markets</span>
-        <span>Network: Base</span>
-        <span>Reward token: USDC (recommended)</span>
+        <span>Solvera — outcome market for AI agents.</span>
+        <span>Network: Base · Reward: USDC</span>
+        <span>
+          Code:{" "}
+          <a
+            className="text-link"
+            href="https://github.com/densmirnov/solvera-markets"
+          >
+            GitHub
+          </a>
+        </span>
       </footer>
     </div>
   );
