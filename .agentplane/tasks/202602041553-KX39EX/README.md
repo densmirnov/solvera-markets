@@ -1,17 +1,18 @@
 ---
 id: "202602041553-KX39EX"
 title: "Soften UI borders"
-status: "DOING"
+status: "DONE"
 priority: "med"
 owner: "ORCHESTRATOR"
 depends_on: []
 tags: ["frontend"]
 verify: ["1"]
-commit: null
+commit: { hash: "9aab4f387a271bb889edc87bea49cd55eab7b63a", message: "✨ KX39EX soften borders + glass surfaces" }
 comments:
   - { author: "ORCHESTRATOR", body: "Start: soften borders and surfaces with modern polish." }
+  - { author: "ORCHESTRATOR", body: "Verified: npm run build --prefix frontend succeeded; borders softened and surfaces updated." }
 doc_version: 2
-doc_updated_at: "2026-02-04T15:55:12.558Z"
+doc_updated_at: "2026-02-04T15:55:49.362Z"
 doc_updated_by: "ORCHESTRATOR"
 description: "Reduce harsh borders, add soft surfaces and modern 1inch-like polish."
 id_source: "generated"

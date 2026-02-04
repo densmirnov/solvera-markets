@@ -4097,12 +4097,47 @@
       "dirty": false,
       "id_source": "generated",
       "doc": "## Summary\n\nEnhanced modular grid on cards/table with subtle rails, added Bauhaus-flavored docs header card and refined table framing.\n\n## Scope\n\nAdded grid rails and table frame styles in index.css; applied card-grid layout on Home; improved Docs header block; refined Marketplace row hover styling.\n\n## Risks\n\nGrid rail overlay may be too visible on very light monitors; adjust opacity if needed.\n\n## Verify Steps\n\n1. npm run build --prefix frontend\n\n## Rollback Plan\n\nRevert styles and layout updates via agentplane commit or git revert."
+    },
+    {
+      "id": "202602041553-KX39EX",
+      "title": "Soften UI borders",
+      "description": "Reduce harsh borders, add soft surfaces and modern 1inch-like polish.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "ORCHESTRATOR",
+      "depends_on": [],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "1"
+      ],
+      "commit": {
+        "hash": "9aab4f387a271bb889edc87bea49cd55eab7b63a",
+        "message": "✨ KX39EX soften borders + glass surfaces"
+      },
+      "comments": [
+        {
+          "author": "ORCHESTRATOR",
+          "body": "Start: soften borders and surfaces with modern polish."
+        },
+        {
+          "author": "ORCHESTRATOR",
+          "body": "Verified: npm run build --prefix frontend succeeded; borders softened and surfaces updated."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T15:55:49.362Z",
+      "doc_updated_by": "ORCHESTRATOR",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nSoftened borders and surfaces with glassy gradients; reduced harsh lines and added modern polish to cards, tables, and header.\n\n## Scope\n\nUpdated index.css for softer borders and new surface styles; applied surface classes to Home, Docs, Marketplace, and adjusted header border.\n\n## Risks\n\nGlassy backgrounds rely on backdrop-filter; ensure acceptable fallback for older browsers.\n\n## Verify Steps\n\n1. npm run build --prefix frontend\n\n## Rollback Plan\n\nRevert index.css and page surface changes via agentplane commit or git revert."
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "4e60e76e5785e4b3f90ef67107e6a9591f2505763b892e1e39fe6fc69ea41879"
+    "checksum": "0bcf2d516285227c92cb16ff0bc79a79d3483833c40b700c3e5f455ec6a82b29"
   }
 }
