@@ -4062,12 +4062,47 @@
       "dirty": false,
       "id_source": "generated",
       "doc": "## Summary\n\nIntroduced golden-ratio spacing scale, layout gutters, and Bauhaus-inspired background accents; updated layout shell and page grids.\n\n## Scope\n\nAdded layout shell utilities and Bauhaus background accents in index.css; introduced Google Fonts import; updated Layout, Home, Docs, and Marketplace grids to use modular spacing.\n\n## Risks\n\nExternal Google Fonts dependency may be blocked in restricted environments; consider self-hosting if needed.\n\n## Verify Steps\n\n1. npm run build --prefix frontend\n\n## Rollback Plan\n\nRevert layout and typography changes via agentplane commit or git revert."
+    },
+    {
+      "id": "202602041548-JW4RCZ",
+      "title": "Enhance card/table grid + docs header",
+      "description": "Refine modular grid on cards/table and sharpen Docs header typography.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "ORCHESTRATOR",
+      "depends_on": [],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "1"
+      ],
+      "commit": {
+        "hash": "fb8433a7f729d04173fcf0f59e07043c47f89430",
+        "message": "✨ JW4RCZ enhance grid rails + docs header"
+      },
+      "comments": [
+        {
+          "author": "ORCHESTRATOR",
+          "body": "Start: refine card/table grid and docs header."
+        },
+        {
+          "author": "ORCHESTRATOR",
+          "body": "Verified: npm run build --prefix frontend succeeded; grid rails and docs header applied."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T15:50:52.123Z",
+      "doc_updated_by": "ORCHESTRATOR",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nEnhanced modular grid on cards/table with subtle rails, added Bauhaus-flavored docs header card and refined table framing.\n\n## Scope\n\nAdded grid rails and table frame styles in index.css; applied card-grid layout on Home; improved Docs header block; refined Marketplace row hover styling.\n\n## Risks\n\nGrid rail overlay may be too visible on very light monitors; adjust opacity if needed.\n\n## Verify Steps\n\n1. npm run build --prefix frontend\n\n## Rollback Plan\n\nRevert styles and layout updates via agentplane commit or git revert."
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "22173ae6850872765128a86970521d8e85c1062bd001601d69cf4aabb71ae8a3"
+    "checksum": "4e60e76e5785e4b3f90ef67107e6a9591f2505763b892e1e39fe6fc69ea41879"
   }
 }

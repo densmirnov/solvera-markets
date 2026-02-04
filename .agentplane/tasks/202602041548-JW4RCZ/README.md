@@ -1,17 +1,18 @@
 ---
 id: "202602041548-JW4RCZ"
 title: "Enhance card/table grid + docs header"
-status: "DOING"
+status: "DONE"
 priority: "med"
 owner: "ORCHESTRATOR"
 depends_on: []
 tags: ["frontend"]
 verify: ["1"]
-commit: null
+commit: { hash: "fb8433a7f729d04173fcf0f59e07043c47f89430", message: "✨ JW4RCZ enhance grid rails + docs header" }
 comments:
   - { author: "ORCHESTRATOR", body: "Start: refine card/table grid and docs header." }
+  - { author: "ORCHESTRATOR", body: "Verified: npm run build --prefix frontend succeeded; grid rails and docs header applied." }
 doc_version: 2
-doc_updated_at: "2026-02-04T15:50:19.053Z"
+doc_updated_at: "2026-02-04T15:50:52.123Z"
 doc_updated_by: "ORCHESTRATOR"
 description: "Refine modular grid on cards/table and sharpen Docs header typography."
 id_source: "generated"
