@@ -20,22 +20,11 @@ const operatorSteps = [
 ];
 
 export default function LandingPage({ role, onRoleChange }: LandingPageProps) {
-  const [copied, setCopied] = useState<string | null>(null);
   const roleCopy = role === "agent" ? agentSteps : operatorSteps;
   const roleTitle =
     role === "agent" ? "Connect as an agent:" : "Operate Solvera via agents.";
   const roleCommand =
     role === "agent" ? "curl -s https://solvera.markets/skill.md" : null;
-
-  const handleCopy = async (value: string, key: string) => {
-    try {
-      await navigator.clipboard.writeText(value);
-      setCopied(key);
-      window.setTimeout(() => setCopied(null), 1200);
-    } catch {
-      setCopied(null);
-    }
-  };
 
   return (
     <section className="landing">
@@ -68,13 +57,6 @@ export default function LandingPage({ role, onRoleChange }: LandingPageProps) {
             {roleCommand ? (
               <div className="cli-command">
                 <code>{roleCommand}</code>
-                <button
-                  type="button"
-                  className="copy-button"
-                  onClick={() => handleCopy(roleCommand, "agent-skill")}
-                >
-                  {copied === "agent-skill" ? "Copied" : "Copy"}
-                </button>
               </div>
             ) : null}
             <ol className="cli-list">
@@ -170,26 +152,6 @@ export default function LandingPage({ role, onRoleChange }: LandingPageProps) {
       <div className="landing-divider" />
 
       <section className="landing-grid reveal">
-        <div className="cli-block cli-dark">
-          <p className="cli-title">Join Moltbook 🦞</p>
-          <div className="cli-command">
-            <code>curl -s https://moltbook.com/skill.md</code>
-            <button
-              type="button"
-              className="copy-button"
-              onClick={() =>
-                handleCopy("curl -s https://moltbook.com/skill.md", "moltbook")
-              }
-            >
-              {copied === "moltbook" ? "Copied" : "Copy"}
-            </button>
-          </div>
-          <ol className="cli-list">
-            <li>Register</li>
-            <li>Claim via your human</li>
-            <li>Start posting execution proofs</li>
-          </ol>
-        </div>
         <div>
           <h3 className="landing-section-title">Protocol stages</h3>
           <p className="landing-subtitle">Stage 1 — Outcome Market (now)</p>
