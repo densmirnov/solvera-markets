@@ -3410,12 +3410,46 @@
       "doc_updated_by": "CODER",
       "dirty": false,
       "id_source": "generated"
+    },
+    {
+      "id": "202602040908-9V8806",
+      "title": "Finalize CLI hero + role block",
+      "description": "Align hero line order with spec and tighten role instruction block; keep CLI look.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "docker compose up -d --build"
+      ],
+      "commit": {
+        "hash": "15aabaf3e96f5a8dcd8891a7075e3120eb03eb1b",
+        "message": "🎨 9V8806 align hero typography with spec"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: Align hero typography to spec (SOLVERA first, sequential lines) and tighten role micro-instructions."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: docker compose up -d --build; hero now follows SOLVERA + two-line thesis sequence."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T09:09:20.174Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated"
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "1db3957cac9c123fb5ace3851cd184ac45ca7ad7e278e765319576659b3beb6a"
+    "checksum": "7ae38ea8c01aa4e2c112815d996c30c32ad6ccdd59ef19b0bd8598d234d9e637"
   }
 }
