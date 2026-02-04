@@ -3614,12 +3614,46 @@
       "doc_updated_by": "CODER",
       "dirty": false,
       "id_source": "generated"
+    },
+    {
+      "id": "202602041111-PBAJJ7",
+      "title": "Expand SKILL.md for Clawhub",
+      "description": "Add executable agent guidance: config bootstrap, request/response schemas, next_steps format, error codes, filtering rules, and on-chain fallback.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "DOCS",
+      "depends_on": [],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "docker compose up -d --build"
+      ],
+      "commit": {
+        "hash": "2eec21fe85880713878939c88c17885fe37d6fd9",
+        "message": "📝 PBAJJ7 expand SKILL.md for agent integration"
+      },
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: Expand SKILL.md into executable agent guide with schemas, next_steps, errors, and fallback."
+        },
+        {
+          "author": "DOCS",
+          "body": "Verified: docker compose up -d --build; SKILL.md expanded with schemas, errors, and fallback."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T11:13:18.590Z",
+      "doc_updated_by": "DOCS",
+      "dirty": false,
+      "id_source": "generated"
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "52e75705511e78a1f4dde23a5d605c54602fb5b5783aefed7a81f9feacbeb6d3"
+    "checksum": "b281906eab22f73d864685c6398f080386d3968f1e4323910c31fd6e53f0e164"
   }
 }
