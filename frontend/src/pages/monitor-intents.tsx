@@ -1,7 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { apiGet } from "../lib/api";
-import { formatAddress, formatAmount } from "../lib/format";
+import {
+  explorerAddressUrl,
+  formatAddress,
+  formatTokenAmount,
+} from "../lib/format";
 
 interface Intent {
   id: string;
@@ -122,9 +126,44 @@ export default function IntentsPage() {
                 </Link>
               </td>
               <td>{intent.state}</td>
-              <td>{formatAmount(intent.rewardAmount)}</td>
-              <td>{formatAmount(intent.minAmountOut)}</td>
-              <td>{formatAddress(intent.initiator)}</td>
+              <td>
+                <div className="amount-primary">
+                  {
+                    formatTokenAmount(intent.rewardAmount, intent.rewardToken)
+                      .primary
+                  }
+                </div>
+                <div className="amount-meta">
+                  {
+                    formatTokenAmount(intent.rewardAmount, intent.rewardToken)
+                      .secondary
+                  }
+                </div>
+              </td>
+              <td>
+                <div className="amount-primary">
+                  {
+                    formatTokenAmount(intent.minAmountOut, intent.tokenOut)
+                      .primary
+                  }
+                </div>
+                <div className="amount-meta">
+                  {
+                    formatTokenAmount(intent.minAmountOut, intent.tokenOut)
+                      .secondary
+                  }
+                </div>
+              </td>
+              <td>
+                <a
+                  className="text-link"
+                  href={explorerAddressUrl(intent.initiator)}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {formatAddress(intent.initiator)}
+                </a>
+              </td>
             </tr>
           ))}
         </tbody>

@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { apiGet } from "../lib/api";
-import { formatAddress, formatAmount } from "../lib/format";
+import {
+  explorerAddressUrl,
+  explorerTxUrl,
+  formatAddress,
+  formatTokenAmount,
+} from "../lib/format";
 
 interface IntentDetail {
   id: string;
@@ -15,6 +20,7 @@ interface IntentDetail {
   verifier: string;
   winner?: string;
   winnerAmountOut?: string;
+  txHash?: string;
 }
 
 interface Offer {
@@ -77,21 +83,123 @@ export default function IntentDetailPage() {
         </div>
         <div className="card">
           <h3>Reward</h3>
-          <p className="section-copy">{formatAmount(intent.rewardAmount)}</p>
+          {(() => {
+            const reward = formatTokenAmount(
+              intent.rewardAmount,
+              intent.rewardToken,
+            );
+            return (
+              <>
+                <p className="section-copy">{reward.primary}</p>
+                {reward.secondary ? (
+                  <p className="section-copy amount-meta">{reward.secondary}</p>
+                ) : null}
+              </>
+            );
+          })()}
         </div>
         <div className="card">
           <h3>Minimum out</h3>
-          <p className="section-copy">{formatAmount(intent.minAmountOut)}</p>
+          {(() => {
+            const minOut = formatTokenAmount(
+              intent.minAmountOut,
+              intent.tokenOut,
+            );
+            return (
+              <>
+                <p className="section-copy">{minOut.primary}</p>
+                {minOut.secondary ? (
+                  <p className="section-copy amount-meta">{minOut.secondary}</p>
+                ) : null}
+              </>
+            );
+          })()}
         </div>
         <div className="card">
           <h3>Verifier</h3>
-          <p className="section-copy">{formatAddress(intent.verifier)}</p>
+          <p className="section-copy">
+            <a
+              className="text-link"
+              href={explorerAddressUrl(intent.verifier)}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {formatAddress(intent.verifier)}
+            </a>
+          </p>
         </div>
         <div className="card">
           <h3>Winner</h3>
-          <p className="section-copy">{formatAddress(intent.winner)}</p>
-          <p className="section-copy">{formatAmount(intent.winnerAmountOut)}</p>
+          <p className="section-copy">
+            {intent.winner ? (
+              <a
+                className="text-link"
+                href={explorerAddressUrl(intent.winner)}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {formatAddress(intent.winner)}
+              </a>
+            ) : (
+              "-"
+            )}
+          </p>
+          {(() => {
+            const winOut = formatTokenAmount(
+              intent.winnerAmountOut,
+              intent.tokenOut,
+            );
+            return (
+              <>
+                <p className="section-copy">{winOut.primary}</p>
+                {winOut.secondary ? (
+                  <p className="section-copy amount-meta">{winOut.secondary}</p>
+                ) : null}
+              </>
+            );
+          })()}
         </div>
+        <div className="card">
+          <h3>Token out</h3>
+          <p className="section-copy">
+            <a
+              className="text-link"
+              href={explorerAddressUrl(intent.tokenOut)}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {formatAddress(intent.tokenOut)}
+            </a>
+          </p>
+        </div>
+        <div className="card">
+          <h3>Reward token</h3>
+          <p className="section-copy">
+            <a
+              className="text-link"
+              href={explorerAddressUrl(intent.rewardToken)}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {formatAddress(intent.rewardToken)}
+            </a>
+          </p>
+        </div>
+        {intent.txHash ? (
+          <div className="card">
+            <h3>Create tx</h3>
+            <p className="section-copy">
+              <a
+                className="text-link"
+                href={explorerTxUrl(intent.txHash)}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {formatAddress(intent.txHash)}
+              </a>
+            </p>
+          </div>
+        ) : null}
       </div>
 
       <h3>Offers</h3>
@@ -106,8 +214,27 @@ export default function IntentDetailPage() {
         <tbody>
           {offers.map((offer) => (
             <tr key={offer.id}>
-              <td>{formatAddress(offer.solver)}</td>
-              <td>{formatAmount(offer.amountOut)}</td>
+              <td>
+                <a
+                  className="text-link"
+                  href={explorerAddressUrl(offer.solver)}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {formatAddress(offer.solver)}
+                </a>
+              </td>
+              <td>
+                <div className="amount-primary">
+                  {formatTokenAmount(offer.amountOut, intent.tokenOut).primary}
+                </div>
+                <div className="amount-meta">
+                  {
+                    formatTokenAmount(offer.amountOut, intent.tokenOut)
+                      .secondary
+                  }
+                </div>
+              </td>
               <td>
                 {new Date(Number(offer.timestamp) * 1000).toLocaleString()}
               </td>

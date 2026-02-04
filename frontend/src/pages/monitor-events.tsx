@@ -1,6 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { apiGet } from "../lib/api";
-import { formatAddress, formatAmount } from "../lib/format";
+import {
+  explorerAddressUrl,
+  explorerTxUrl,
+  formatAddress,
+  formatTokenAmount,
+} from "../lib/format";
 
 interface EventLog {
   id: string;
@@ -91,6 +97,7 @@ export default function EventsPage() {
             <th>Intent</th>
             <th>Solver</th>
             <th>Amount</th>
+            <th>Tx</th>
             <th>Timestamp</th>
           </tr>
         </thead>
@@ -98,9 +105,58 @@ export default function EventsPage() {
           {events.map((event) => (
             <tr key={event.id}>
               <td>{event.eventType}</td>
-              <td>{formatAddress(event.intent?.id)}</td>
-              <td>{formatAddress(event.solver)}</td>
-              <td>{formatAmount(event.amountOut || event.rewardAmount)}</td>
+              <td>
+                {event.intent?.id ? (
+                  <Link to={`/monitor/intents/${event.intent.id}`}>
+                    {formatAddress(event.intent.id)}
+                  </Link>
+                ) : (
+                  "-"
+                )}
+              </td>
+              <td>
+                {event.solver ? (
+                  <a
+                    className="text-link"
+                    href={explorerAddressUrl(event.solver)}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {formatAddress(event.solver)}
+                  </a>
+                ) : (
+                  "-"
+                )}
+              </td>
+              <td>
+                {(() => {
+                  const amount = formatTokenAmount(
+                    event.amountOut || event.rewardAmount,
+                  );
+                  return (
+                    <>
+                      <div className="amount-primary">{amount.primary}</div>
+                      {amount.secondary ? (
+                        <div className="amount-meta">{amount.secondary}</div>
+                      ) : null}
+                    </>
+                  );
+                })()}
+              </td>
+              <td>
+                {event.txHash ? (
+                  <a
+                    className="text-link"
+                    href={explorerTxUrl(event.txHash)}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {formatAddress(event.txHash)}
+                  </a>
+                ) : (
+                  "-"
+                )}
+              </td>
               <td>
                 {event.blockTimestamp
                   ? new Date(

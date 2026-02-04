@@ -514,9 +514,20 @@ a {
 .table th,
 .table td {
   text-align: left;
-  padding: 10px 12px;
+  padding: 16px 16px;
   border-bottom: 1px solid var(--border);
   font-size: 14px;
+  vertical-align: top;
+}
+
+.amount-primary {
+  font-weight: 600;
+}
+
+.amount-meta {
+  font-size: 12px;
+  color: var(--ink-muted);
+  margin-top: 6px;
 }
 
 .table tr:hover td {
