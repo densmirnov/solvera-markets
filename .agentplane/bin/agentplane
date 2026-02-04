@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+# agentplane-hook-shim (do not edit)
+set -e
+if ! command -v agentplane >/dev/null 2>&1; then
+  echo "agentplane shim: agentplane not found in PATH" >&2
+  exit 1
+fi
+exec agentplane "$@"

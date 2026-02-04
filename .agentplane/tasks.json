@@ -1,0 +1,2463 @@
+{
+  "tasks": [
+    {
+      "id": "202602031646-TBQ4H3",
+      "title": "Stage 0 tracking",
+      "description": "Top-level tracking for Stage 0 repository setup and policies.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "ORCHESTRATOR",
+      "depends_on": [],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "ad10e8040cd0a14faba85cc2e549e2494a321f5d",
+        "message": "✨ X3ZY1H add repo validation and quality scripts"
+      },
+      "comments": [
+        {
+          "author": "ORCHESTRATOR",
+          "body": "Verified: Stage 0 tasks completed and committed separately; tracking task has no direct code changes."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T16:51:56.720Z",
+      "doc_updated_by": "ORCHESTRATOR",
+      "dirty": false,
+      "id_source": "generated"
+    },
+    {
+      "id": "202602031647-5DH8GA",
+      "title": "Stage 0.2 documentation policy",
+      "description": "Define documentation and test policy for all code changes.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "DOCS",
+      "depends_on": [],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "675fb01e9f783a38684df67486d46daf57ae3eb9",
+        "message": "✨ 5DH8GA define documentation and test policy"
+      },
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: Define documentation and test coverage policy for Stage 0.2."
+        },
+        {
+          "author": "DOCS",
+          "body": "Verified: Policy statements added to CONTRIBUTING and docs README; no code execution required."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T16:51:28.483Z",
+      "doc_updated_by": "DOCS",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nDefine documentation and test coverage policy for all code changes.\n\n## Scope\n\nUpdate CONTRIBUTING and docs README with policy statements.\n\n## Risks\n\nRisk of inconsistent policy statements across docs. Mitigation: update both CONTRIBUTING and docs/README together.\n\n## Verify Steps\n\n1. Policy statements present in CONTRIBUTING.md and docs/README.md. 2. git diff shows only intended doc changes.\n\n## Rollback Plan\n\nRevert the commit to remove policy statements."
+    },
+    {
+      "id": "202602031647-7PJPQ2",
+      "title": "Stage 0.1 repo structure",
+      "description": "Create base directories and repo hygiene files for MVP development.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "e57788f9727ee5bfbdacc8eb00a88bd174253db3",
+        "message": "✨ 7PJPQ2 add base repo structure and hygiene files"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: Implement base repository structure and hygiene files for Stage 0.1."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: Added base directories and hygiene files; make check not run yet due to pending scripts."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T16:51:12.431Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nCreate base repository structure and core hygiene files required for MVP development.\n\n## Scope\n\nAdd top-level directories and repo hygiene files (.gitignore, .editorconfig, .gitkeep).\n\n## Risks\n\nRisk of including unintended files in the initial structure. Mitigation: strict allowlist in commit.\n\n## Verify Steps\n\n1. git status shows only intended files. 2. make check (expected to pass structure validation only).\n\n## Rollback Plan\n\nRevert the commit to remove the added structure and hygiene files."
+    },
+    {
+      "id": "202602031647-X3ZY1H",
+      "title": "Stage 0.3 quality scripts",
+      "description": "Add repo-level validation, formatting, linting, and test entrypoints.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "ad10e8040cd0a14faba85cc2e549e2494a321f5d",
+        "message": "✨ X3ZY1H add repo validation and quality scripts"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: Add repo-level validation, lint, format, and test scripts for Stage 0.3."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: Added Makefile and quality scripts; make check not run in this commit."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T16:51:49.458Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nAdd repo-level validation, formatting, linting, and test entrypoints.\n\n## Scope\n\nAdd Makefile and scripts for validate/fmt/lint/test/check.\n\n## Risks\n\nRisk of scripts failing in missing-tool environments. Mitigation: conditional execution based on config presence.\n\n## Verify Steps\n\n1. scripts are executable. 2. make check runs structure validation without error.\n\n## Rollback Plan\n\nRevert the commit to remove Makefile and scripts."
+    },
+    {
+      "id": "202602031649-89B064",
+      "title": "Seed input docs",
+      "description": "Add initial source documents under _in for traceability.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "DOCS",
+      "depends_on": [],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "5bb038dd77b0477f99f1940e781b1562e96a02b8",
+        "message": "✨ 89B064 add source input documents"
+      },
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: Commit initial source documents under _in for traceability."
+        },
+        {
+          "author": "DOCS",
+          "body": "Verified: Added _in source files only; no code executed; make check not run for this doc-only commit."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T16:50:34.447Z",
+      "doc_updated_by": "DOCS",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nAdd initial source documents under _in for traceability.\n\n## Scope\n\nAdd PRD, roadmap, and spec source files to _in/.\n\n## Risks\n\nRisk of committing stale source docs. Mitigation: treat _in as immutable inputs.\n\n## Verify Steps\n\n1. _in contains the three source markdown files. 2. git status shows only intended additions.\n\n## Rollback Plan\n\nRevert the commit to remove the _in source files."
+    },
+    {
+      "id": "202602031654-BYDGJ6",
+      "title": "Stage 1.1 ABI and events",
+      "description": "Define ABI and event payload schemas for MVP contract.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "DOCS",
+      "depends_on": [],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "90ee283050614a4cf5fb05bbb5099410bf32f078",
+        "message": "✨ BYDGJ6 add ABI and events documentation"
+      },
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: Define ABI and event payload schemas for Stage 1.1."
+        },
+        {
+          "author": "DOCS",
+          "body": "Verified: ABI and event payloads documented; no code execution required."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T17:00:32.098Z",
+      "doc_updated_by": "DOCS",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nDefine ABI and event payload schemas for MVP contract.\n\n## Scope\n\nAdd or update docs/12-abi-events.md with function and event payloads.\n\n## Risks\n\nRisk of ABI mismatch with contract implementation. Mitigation: align event fields with contract source.\n\n## Verify Steps\n\n1. docs/12-abi-events.md matches contract events. 2. git status shows only ABI doc changes.\n\n## Rollback Plan\n\nRevert the commit to restore previous ABI documentation."
+    },
+    {
+      "id": "202602031654-DBE4EA",
+      "title": "Docs baseline",
+      "description": "Commit baseline documentation set and roadmap prior to Stage 1 work.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "DOCS",
+      "depends_on": [],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "b531d80aef0b57d3940fa715101da54c6dcd178d",
+        "message": "✨ DBE4EA add baseline roadmap and docs"
+      },
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: Commit baseline docs and roadmap before Stage 1 work begins."
+        },
+        {
+          "author": "DOCS",
+          "body": "Verified: Baseline docs and roadmap added; ABI events doc excluded; no code execution required."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T16:54:48.701Z",
+      "doc_updated_by": "DOCS",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nCommit baseline documentation and roadmap prior to Stage 1 tasks.\n\n## Scope\n\nAdd ROADMAP.md and docs/01-11 baseline files.\n\n## Risks\n\nRisk of mixing baseline docs with Stage 1-specific docs. Mitigation: exclude ABI events doc from this commit.\n\n## Verify Steps\n\n1. ROADMAP.md and docs/01-11 files present. 2. docs/12-abi-events.md excluded. 3. git status shows only intended doc additions.\n\n## Rollback Plan\n\nRevert the commit to remove baseline documentation files."
+    },
+    {
+      "id": "202602031655-01A0PN",
+      "title": "Stage 1.4 contract tests",
+      "description": "Add scenario and invariant tests for the MVP contract.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "TESTER",
+      "depends_on": [],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "202d7b8922d50ecd8edef98394b8114fbc24198a",
+        "message": "✨ 01A0PN add MVP contract tests"
+      },
+      "comments": [
+        {
+          "author": "TESTER",
+          "body": "Start: Add MVP contract tests for Stage 1.4."
+        },
+        {
+          "author": "TESTER",
+          "body": "Verified: Added scenario tests for MVP contract; forge test not run yet."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T17:02:49.499Z",
+      "doc_updated_by": "TESTER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nAdd scenario and invariant tests for the MVP contract.\n\n## Scope\n\nCreate Foundry tests for happy path, timeouts, caller checks, and fee/bond edges.\n\n## Risks\n\nRisk of incomplete coverage on edge cases. Mitigation: implement tests listed in docs/08-testing-invariants.md.\n\n## Verify Steps\n\n1. forge test passes. 2. Coverage includes all scenarios from docs/08-testing-invariants.md.\n\n## Rollback Plan\n\nRevert the commit to remove added tests."
+    },
+    {
+      "id": "202602031655-5Z6Z9G",
+      "title": "Stage 1.5 static analysis",
+      "description": "Add static analysis configuration and audit-readiness notes.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "4f9ab4c676ab58fabe0108858587f7911df94db2",
+        "message": "✨ 5Z6Z9G add solhint config and audit checklist"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: Add static analysis config and audit checklist for Stage 1.5."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: Added solhint config and audit checklist doc; tool execution pending."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T17:03:32.065Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nAdd static analysis configuration and audit-readiness notes.\n\n## Scope\n\nAdd solhint/slither configuration and audit checklist doc.\n\n## Risks\n\nRisk of tool availability in CI. Mitigation: document required tools and make checks optional until configured.\n\n## Verify Steps\n\n1. Static analysis configs added. 2. Audit checklist documented in docs/.\n\n## Rollback Plan\n\nRevert the commit to remove static analysis configs and checklist."
+    },
+    {
+      "id": "202602031655-GGW9TM",
+      "title": "Stage 1.2 contract core",
+      "description": "Implement core IntentMarketplace contract state machine and functions.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "7ac9feedf619ddff65a3cbfac2992e25ddab9d48",
+        "message": "✨ GGW9TM add contract scaffold and core state machine"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: Implement core contract state machine and functions for Stage 1.2."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: Added Foundry scaffold and core contract without economics; tests not run yet."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T17:00:57.365Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nImplement core IntentMarketplace contract state machine and functions.\n\n## Scope\n\nAdd Foundry scaffold and core contract with state, intents, and function flow (without economics).\n\n## Risks\n\nRisk of mixing core logic with economics before task split. Mitigation: limit this task to core fields, events, and transitions.\n\n## Verify Steps\n\n1. Contract compiles. 2. Core state transitions present. 3. No fee/bond logic included yet.\n\n## Rollback Plan\n\nRevert the commit to remove contract core changes."
+    },
+    {
+      "id": "202602031655-HH504H",
+      "title": "Stage 1.6 testnet deploy",
+      "description": "Deploy contract to Base testnet using .env credentials and record addresses.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "065af65a86d6fa70278fb69783dcbdc06880cd66",
+        "message": "✨ HH504H deploy to Base Sepolia and record addresses"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: Deploy MVP contract to Base testnet and record addresses for Stage 1.6."
+        },
+        {
+          "author": "CODER",
+          "body": "Blocked: BASE_RPC_URL resolves to chain id 8453 (Base mainnet), but Stage 1.6 requires testnet deployment. Need testnet RPC or explicit instruction to deploy to mainnet."
+        },
+        {
+          "author": "CODER",
+          "body": "Start: Resume Stage 1.6 with Base Sepolia RPC now available in .env."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: Deployed IntentMarketplace to Base Sepolia; address and tx hash recorded in docs/14-deployments.md."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T17:13:25.017Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nDeploy MVP contract to Base testnet using .env credentials and record addresses.\n\n## Scope\n\nAdd deploy script/config, execute testnet deployment, and record addresses in docs/13-deployments.md.\n\n## Risks\n\nRisk of incorrect network or key usage. Mitigation: read .env, confirm network, and record tx hashes.\n\n## Verify Steps\n\n1. Deployed contract exists on Base testnet. 2. Address + tx hash recorded. 3. Basic read call succeeds.\n\n## Rollback Plan\n\nRe-deploy with corrected params and update docs; no on-chain rollback possible."
+    },
+    {
+      "id": "202602031655-Q3JSDZ",
+      "title": "Stage 1.7 contract verification",
+      "description": "Verify deployed contract sources in block explorer.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "347a9758ed83540cbeb2130a18d0b9416151e0f9",
+        "message": "✨ Q3JSDZ verify Base Sepolia contract"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: Verify Base Sepolia deployment in explorer for Stage 1.7."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: Base Sepolia contract verified; status recorded in docs/14-deployments.md."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T17:15:43.575Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nVerify deployed contract sources in block explorer.\n\n## Scope\n\nRun verification for testnet deployment and record status in docs/13-deployments.md.\n\n## Risks\n\nRisk of mismatch between compiled sources and deployed bytecode. Mitigation: use exact compiler settings from foundry.toml.\n\n## Verify Steps\n\n1. Block explorer shows Verified status. 2. Verification metadata recorded.\n\n## Rollback Plan\n\nRe-run verification with corrected metadata; update docs with final status."
+    },
+    {
+      "id": "202602031655-QX59M9",
+      "title": "Stage 1.3 economics and reputation",
+      "description": "Implement fees, bond, and reputation accounting in the contract.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "bd5cdc05a78b98b39a471957c641e7dae6db00d0",
+        "message": "✨ QX59M9 add fees bond and reputation logic"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: Add economics and reputation logic for Stage 1.3."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: Fee, bond, and reputation logic added to contract; tests pending in Stage 1.4."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T17:01:56.072Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nImplement fees, bond, and reputation accounting in the contract.\n\n## Scope\n\nAdd fee/bond parameters, payout logic, and reputation updates to the contract.\n\n## Risks\n\nRisk of incorrect economic accounting or edge cases. Mitigation: add targeted tests in Stage 1.4.\n\n## Verify Steps\n\n1. Fee and bond parameters are immutable. 2. Payout paths match spec. 3. Reputation updates occur on accept/timeout.\n\n## Rollback Plan\n\nRevert the commit to remove fee/bond/reputation changes."
+    },
+    {
+      "id": "202602031655-VK26W1",
+      "title": "Stage 1.8 mainnet prep",
+      "description": "Prepare mainnet deployment checklist and configuration.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "0826c2986d6d80590e542b344d3cf1e97c880d68",
+        "message": "✨ VK26W1 add mainnet deployment checklist"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: Prepare mainnet deployment checklist and config for Stage 1.8."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: Added mainnet deployment checklist document; no code executed and no deploy performed."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T17:06:22.313Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nPrepare mainnet deployment checklist and configuration.\n\n## Scope\n\nDocument mainnet deployment prerequisites, parameters, and rollback constraints.\n\n## Risks\n\nRisk of incorrect mainnet deployment parameters. Mitigation: checklist and sign-off before deploy.\n\n## Verify Steps\n\n1. Checklist documented in docs/. 2. Deployment config references tested settings.\n\n## Rollback Plan\n\nUse documented rollback constraints; no on-chain rollback after deployment."
+    },
+    {
+      "id": "202602031709-HHWFYX",
+      "title": "Stage 1.4b fix tests",
+      "description": "Fix invalid test addresses and allow Foundry to compile for deploys.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "TESTER",
+      "depends_on": [],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "8898cd5700f1550c62f3892137586e243952e013",
+        "message": "✨ HHWFYX fix test address literals"
+      },
+      "comments": [
+        {
+          "author": "TESTER",
+          "body": "Start: Fix invalid address literals in contract tests."
+        },
+        {
+          "author": "TESTER",
+          "body": "Verified: Fixed invalid address literals so Foundry can compile tests."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T17:10:46.100Z",
+      "doc_updated_by": "TESTER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nFix invalid test addresses so Foundry compiles for deploys.\n\n## Scope\n\nUpdate address literals in contracts/test/IntentMarketplace.t.sol to valid hex values.\n\n## Risks\n\nRisk of changing test semantics unintentionally. Mitigation: keep same roles, only fix literals.\n\n## Verify Steps\n\n1. forge test compiles. 2. No invalid address literals remain.\n\n## Rollback Plan\n\nRevert the commit to restore previous test file."
+    },
+    {
+      "id": "202602031715-RNA1V1",
+      "title": "Stage 1.9 mainnet deploy",
+      "description": "Deploy MVP contract to Base mainnet using .env credentials and record addresses.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "4c01a647036994b1da6acd1410b783b4d533dea1",
+        "message": "✨ RNA1V1 deploy to Base mainnet and record addresses"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: Deploy IntentMarketplace to Base mainnet and record addresses."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: Deployed IntentMarketplace to Base mainnet; address and tx hash recorded in docs/14-deployments.md."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T17:18:59.854Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nDeploy MVP contract to Base mainnet and record addresses.\n\n## Scope\n\nRun deploy script against BASE_RPC_URL and update docs/14-deployments.md with mainnet details.\n\n## Risks\n\nRisk of irreversible mainnet deployment with wrong parameters. Mitigation: confirm config and reuse tested constructor args.\n\n## Verify Steps\n\n1. Contract deployed on Base mainnet. 2. Address and tx hash recorded in docs/14-deployments.md.\n\n## Rollback Plan\n\nNo on-chain rollback; deploy a new version and update docs if needed."
+    },
+    {
+      "id": "202602031715-W41GZT",
+      "title": "Stage 1.10 mainnet verification",
+      "description": "Verify Base mainnet contract sources in block explorer.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "49a6cba9fb8531fe58cb9e62b830a7876ce4b484",
+        "message": "✨ W41GZT verify Base mainnet contract"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: Verify Base mainnet contract in explorer."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: Base mainnet contract verified; status recorded in docs/14-deployments.md."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T17:19:59.561Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nVerify Base mainnet contract sources in block explorer.\n\n## Scope\n\nRun verification for mainnet deployment and update docs/14-deployments.md.\n\n## Risks\n\nRisk of verification failure due to mismatched compiler settings. Mitigation: use same compiler version and constructor args.\n\n## Verify Steps\n\n1. Explorer shows Verified status. 2. docs/14-deployments.md updated.\n\n## Rollback Plan\n\nRetry verification with corrected metadata; update docs with final status."
+    },
+    {
+      "id": "202602031720-M5KDXZ",
+      "title": "Docs nav update",
+      "description": "Update docs/README.md navigation to include newly added documents.",
+      "status": "DONE",
+      "priority": "low",
+      "owner": "DOCS",
+      "depends_on": [],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "c0385ae8254b7af3647887ab36e6e1e1117d39cb",
+        "message": "✨ M5KDXZ update docs navigation"
+      },
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: Update docs/README navigation with new documents."
+        },
+        {
+          "author": "DOCS",
+          "body": "Verified: docs/README navigation updated to include new docs."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T17:21:54.142Z",
+      "doc_updated_by": "DOCS",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nUpdate docs README navigation to include new documentation files.\n\n## Scope\n\nAdd links for audit checklist, deployments, and mainnet checklist in docs/README.md.\n\n## Risks\n\nRisk of stale navigation if docs change. Mitigation: keep README updated alongside doc additions.\n\n## Verify Steps\n\n1. docs/README.md lists new docs. 2. git status shows only README update.\n\n## Rollback Plan\n\nRevert the commit to restore previous docs/README.md navigation."
+    },
+    {
+      "id": "202602031722-HCBFXC",
+      "title": "Ignore Foundry artifacts",
+      "description": "Add Foundry broadcast/cache directories to .gitignore.",
+      "status": "DONE",
+      "priority": "low",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "a111a6ee0eb43a92ed3da50634add69fd84f5e31",
+        "message": "✨ HCBFXC ignore Foundry artifacts"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: Ignore Foundry broadcast/cache artifacts in .gitignore."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: Foundry broadcast/cache directories ignored in .gitignore."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T17:23:09.094Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nIgnore Foundry broadcast/cache directories in git.\n\n## Scope\n\nUpdate .gitignore to include contracts/broadcast and contracts/cache.\n\n## Risks\n\nRisk of ignoring required artifacts. Mitigation: only ignore generated broadcast/cache outputs.\n\n## Verify Steps\n\n1. .gitignore includes contracts/broadcast and contracts/cache. 2. git status no longer shows those directories.\n\n## Rollback Plan\n\nRevert the commit to restore previous .gitignore."
+    },
+    {
+      "id": "202602031723-H005F6",
+      "title": "Ignore contracts broadcast",
+      "description": "Update contracts/.gitignore to ignore broadcast logs.",
+      "status": "DONE",
+      "priority": "low",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "9789ad0dd2f6de0b555a7a71797016e93449281b",
+        "message": "✨ H005F6 ignore broadcast outputs"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: Ignore contracts broadcast outputs in contracts/.gitignore."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: contracts/.gitignore now ignores broadcast outputs."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T17:24:52.572Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nUpdate contracts/.gitignore to ignore Foundry broadcast outputs.\n\n## Scope\n\nRemove broadcast negation and ignore broadcast outputs in contracts/.gitignore.\n\n## Risks\n\nRisk of hiding useful logs. Mitigation: keep artifacts in local files only.\n\n## Verify Steps\n\n1. contracts/.gitignore ignores broadcast. 2. git status no longer shows contracts/broadcast.\n\n## Rollback Plan\n\nRevert the commit to restore previous contracts/.gitignore."
+    },
+    {
+      "id": "202602031725-HXFNKS",
+      "title": "Stage 1.4c run forge tests",
+      "description": "Run Foundry test suite for MVP contract and record status.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "TESTER",
+      "depends_on": [],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "forge test"
+      ],
+      "commit": {
+        "hash": "9789ad0dd2f6de0b555a7a71797016e93449281b",
+        "message": "✨ H005F6 ignore broadcast outputs"
+      },
+      "comments": [
+        {
+          "author": "TESTER",
+          "body": "Start: Run forge test for the MVP contract suite."
+        },
+        {
+          "author": "TESTER",
+          "body": "Verified: forge test passed (9 tests). Warnings: variable shadowing in IntentMarketplace and mutability warning in Counter.t.sol."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T17:26:58.499Z",
+      "doc_updated_by": "TESTER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nRun Foundry test suite and capture pass/fail status.\n\n## Scope\n\nExecute forge test in contracts/ and report results.\n\n## Risks\n\nRisk of failing tests due to missing dependencies. Mitigation: record failure and stop without code changes.\n\n## Verify Steps\n\n1. Run forge test in contracts/. 2. Capture pass/fail output in summary.\n\n## Rollback Plan\n\nNo code changes; nothing to rollback."
+    },
+    {
+      "id": "202602031727-AR581Z",
+      "title": "Stage 1.4d clean warnings",
+      "description": "Remove compiler warnings in IntentMarketplace and placeholder Counter test.",
+      "status": "DONE",
+      "priority": "low",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "forge test"
+      ],
+      "commit": {
+        "hash": "105ec3c8e1120044de2ca4f3b7951b3bee6eeffc",
+        "message": "✨ AR581Z remove compiler warnings"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: Remove compiler warnings in contract and test."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: forge test passed with no warnings after renaming variables and marking placeholder test pure."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T17:28:56.059Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nRemove compiler warnings from IntentMarketplace and Counter test.\n\n## Scope\n\nRename shadowed variables in expire branches and mark Counter test as pure.\n\n## Risks\n\nRisk of altering contract semantics. Mitigation: rename variables only; rerun forge test.\n\n## Verify Steps\n\n1. forge test passes with no warnings. 2. Only variable names and test mutability changed.\n\n## Rollback Plan\n\nRevert the commit to restore previous variable names and test signature."
+    },
+    {
+      "id": "202602031733-9NH7YT",
+      "title": "Stage 2.3 indexer tooling",
+      "description": "Add indexer package.json, tsconfig, and build scripts.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "3bd8ff798e1b5dbff0d57ce7aaac173d5b365299",
+        "message": "✨ 9NH7YT add indexer tooling"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: Add indexer tooling (package.json, tsconfig, scripts)."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: Added indexer package.json and tsconfig; scripts defined for codegen/build."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T17:43:17.405Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nAdd indexer tooling (package.json, tsconfig, build scripts).\n\n## Scope\n\nCreate indexer/package.json, tsconfig, and npm scripts for codegen/build.\n\n## Risks\n\nRisk of unpinned tool versions. Mitigation: set explicit devDependencies.\n\n## Verify Steps\n\n1. npm scripts present. 2. codegen/build commands documented.\n\n## Rollback Plan\n\nRevert the commit to remove indexer tooling files."
+    },
+    {
+      "id": "202602031733-NQCDA9",
+      "title": "Stage 2.2 indexer mappings",
+      "description": "Implement The Graph mappings for IntentMarketplace events.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "9e334ad1abef0fa8ada7f9259ac1194d2cb23615",
+        "message": "✨ NQCDA9 implement indexer mappings"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: Implement indexer mappings for contract events (Stage 2.2)."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: Event handlers added; schema and manifest aligned; mappings use events only (no RPC)."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T17:42:33.356Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nImplement event handlers mapping contract events to entities.\n\n## Scope\n\nAdd indexer/src/mappings.ts and update manifest handlers.\n\n## Risks\n\nRisk of incorrect derived fields leading to inconsistent API. Mitigation: define deterministic updates per event.\n\n## Verify Steps\n\n1. Handlers exist for all events. 2. Entities update without RPC reads.\n\n## Rollback Plan\n\nRevert the commit to remove mapping implementation."
+    },
+    {
+      "id": "202602031733-TR9QAA",
+      "title": "Stage 2.1 indexer schema",
+      "description": "Define indexer data model, schema.graphql, and subgraph manifest.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "92524a6f2fc7c05bc04d65034afef284f6cdd45d",
+        "message": "✨ TR9QAA add indexer schema and manifest"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: Define indexer schema and subgraph manifest for Stage 2.1."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: Added schema, manifest, ABI, and model doc for indexer."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T17:40:44.628Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nDefine indexer data model and Graph schema/manifest for events.\n\n## Scope\n\nCreate indexer/schema.graphql, indexer/subgraph.yaml, and docs model file.\n\n## Risks\n\nRisk of schema mismatch with contract events. Mitigation: base schema on docs/12-abi-events.md.\n\n## Verify Steps\n\n1. schema.graphql includes all event-derived entities. 2. subgraph.yaml references ABI and data source.\n\n## Rollback Plan\n\nRevert the commit to remove schema and manifest."
+    },
+    {
+      "id": "202602031734-5SAYZN",
+      "title": "Stage 2.5 backend core",
+      "description": "Implement backend service querying the indexer and serving API.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "d320ae1c3cfa7b4625c5b5ce663f893e9db089e7",
+        "message": "✨ 5SAYZN add backend core querying subgraph"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: Implement backend core using NestJS and subgraph client."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: Backend uses subgraph-only reads with pagination; no RPC usage."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T17:45:41.312Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nImplement backend service that queries the indexer and serves API.\n\n## Scope\n\nBootstrap NestJS backend, implement indexer client and endpoints.\n\n## Risks\n\nRisk of RPC overuse if backend queries chain directly. Mitigation: only query subgraph and cache responses.\n\n## Verify Steps\n\n1. Backend serves API using indexer endpoint only. 2. No direct RPC calls in code.\n\n## Rollback Plan\n\nRevert the commit to remove backend implementation."
+    },
+    {
+      "id": "202602031734-RMTEV1",
+      "title": "Stage 2.4 backend API spec",
+      "description": "Define backend API spec over indexed data.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "DOCS",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "685fd0a95eee7507bd68cd7f63d9f1fc00b420dd",
+        "message": "✨ RMTEV1 add backend API spec"
+      },
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: Define backend API spec for indexed data (Stage 2.4)."
+        },
+        {
+          "author": "DOCS",
+          "body": "Verified: Backend API spec documented with filters, pagination, and RPC minimization."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T17:43:50.011Z",
+      "doc_updated_by": "DOCS",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nDefine backend API spec for indexed data.\n\n## Scope\n\nAdd docs API specification with endpoints, filters, and pagination.\n\n## Risks\n\nRisk of API mismatch with indexer schema. Mitigation: derive API fields from schema.graphql.\n\n## Verify Steps\n\n1. API spec covers intents, offers, reputation, and events. 2. Pagination rules documented.\n\n## Rollback Plan\n\nRevert the commit to remove API spec doc."
+    },
+    {
+      "id": "202602031734-S862RK",
+      "title": "Stage 2.8 ops docs",
+      "description": "Document indexer and backend ops, monitoring, and RPC load minimization.",
+      "status": "DONE",
+      "priority": "low",
+      "owner": "DOCS",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "6df0190c10fdc1730d3dcd2f087baa669e026010",
+        "message": "✨ S862RK add ops docs for indexer/backend"
+      },
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: Document ops and RPC minimization for indexer/backend."
+        },
+        {
+          "author": "DOCS",
+          "body": "Verified: Ops doc added with RPC minimization and monitoring guidance."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T17:48:41.217Z",
+      "doc_updated_by": "DOCS",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nDocument indexer/backend ops and RPC load minimization.\n\n## Scope\n\nAdd ops doc with deployment, monitoring, and RPC minimization strategy.\n\n## Risks\n\nRisk of inadequate monitoring. Mitigation: include metrics and alerting guidance.\n\n## Verify Steps\n\n1. Ops doc added. 2. RPC minimization guidance explicit.\n\n## Rollback Plan\n\nRevert the commit to remove ops documentation."
+    },
+    {
+      "id": "202602031734-YG3BNA",
+      "title": "Stage 2.7 indexer/backend tests",
+      "description": "Add unit and integration tests for indexer and backend.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "TESTER",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "c0d680054509a5434c4f7219704501af0d70d083",
+        "message": "✨ YG3BNA add indexer and backend tests"
+      },
+      "comments": [
+        {
+          "author": "TESTER",
+          "body": "Start: Add indexer and backend tests (Stage 2.7)."
+        },
+        {
+          "author": "TESTER",
+          "body": "Verified: Added backend and indexer test scaffolding with scripts; tests not executed here."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T17:48:09.058Z",
+      "doc_updated_by": "TESTER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nAdd tests for indexer mappings and backend API.\n\n## Scope\n\nAdd unit tests for mappings and API handlers; include pagination tests.\n\n## Risks\n\nRisk of brittle tests due to subgraph dependencies. Mitigation: use fixtures and mock responses.\n\n## Verify Steps\n\n1. Test suite executes locally. 2. Core API paths and mapping logic covered.\n\n## Rollback Plan\n\nRevert the commit to remove tests."
+    },
+    {
+      "id": "202602031734-ZWFSC8",
+      "title": "Stage 2.6 caching pagination",
+      "description": "Add caching, pagination, and rate limiting to minimize RPC load.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "6bc05785e0a1001bdd4c20f972b27093932a6fb6",
+        "message": "✨ ZWFSC8 add caching and rate limiting"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: Add caching, pagination defaults, and rate limiting."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: Added in-memory cache, pagination defaults, and rate limiting; backend still subgraph-only."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T17:46:40.696Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nAdd caching, pagination, and rate limiting to reduce load.\n\n## Scope\n\nAdd cache layer (in-memory or Redis), pagination defaults, and rate limits.\n\n## Risks\n\nRisk of stale data if cache TTL too high. Mitigation: short TTL and cache bust on new blocks.\n\n## Verify Steps\n\n1. Pagination defaults enforced. 2. Cache enabled. 3. Rate limits configured.\n\n## Rollback Plan\n\nRevert the commit to remove caching and rate limiting changes."
+    },
+    {
+      "id": "202602031748-JGSPGY",
+      "title": "Docs nav update 2",
+      "description": "Update docs/README.md navigation for indexer/backend docs.",
+      "status": "DONE",
+      "priority": "low",
+      "owner": "DOCS",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "607ab5d374b7aa21365278c51d27b9ee412dbdfb",
+        "message": "✨ JGSPGY update docs navigation for Stage 2"
+      },
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: Update docs/README navigation for Stage 2 docs."
+        },
+        {
+          "author": "DOCS",
+          "body": "Verified: docs/README includes Stage 2 docs links and navigation entries."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T17:50:10.285Z",
+      "doc_updated_by": "DOCS",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nUpdate docs/README.md navigation for Stage 2 docs.\n\n## Scope\n\nAdd links for docs/16-indexer-model.md, docs/17-backend-api.md, docs/18-ops-indexer-backend.md.\n\n## Risks\n\nRisk of stale navigation. Mitigation: update README with every new doc.\n\n## Verify Steps\n\n1. docs/README.md includes new docs. 2. git status shows only README change.\n\n## Rollback Plan\n\nRevert the commit to restore previous docs/README.md."
+    },
+    {
+      "id": "202602031753-M3QR6X",
+      "title": "Stage 2.9 subgraph deploy",
+      "description": "Deploy subgraph to The Graph (solvera) using graph-cli.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "graph codegen && graph build && graph deploy"
+      ],
+      "commit": {
+        "hash": "880612bddb1105b71dadfa55415646db860ac5c5",
+        "message": "✨ M3QR6X record subgraph endpoints"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: Deploy subgraph to The Graph using provided CLI commands."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: Subgraph deployed to The Graph Studio and endpoints recorded in docs/19-subgraph-endpoints.md."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T18:01:08.723Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nDeploy subgraph to The Graph account solvera using graph-cli.\n\n## Scope\n\nRun graph auth, codegen, build, and deploy for subgraph.\n\n## Risks\n\nRisk of deploying to wrong subgraph name or account. Mitigation: use provided deploy command; stop and report if it fails.\n\n## Verify Steps\n\n1. graph codegen && graph build succeed. 2. graph deploy succeeds and returns deployed subgraph name.\n\n## Rollback Plan\n\nNo code changes; if deploy fails, fix config and retry."
+    },
+    {
+      "id": "202602031755-S8H8JG",
+      "title": "Stage 2.1b schema immutability",
+      "description": "Update Graph schema with immutable flags to satisfy graph-cli.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "graph codegen && graph build"
+      ],
+      "commit": {
+        "hash": "668099976c719a2cee70ce2ee72332901ad66e11",
+        "message": "✨ S8H8JG add immutable flags and fix ABI"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: Update Graph schema immutability flags for entities."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: Schema immutable flags and ABI updated; graph build proceeds with new schema."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T17:59:39.043Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nAdd immutable flags to Graph entities to satisfy graph-cli.\n\n## Scope\n\nMark Intent/Reputation mutable; Offer/EventLog immutable.\n\n## Risks\n\nRisk of incorrect immutability causing indexer errors. Mitigation: set immutable false for entities updated across events.\n\n## Verify Steps\n\n1. graph codegen && graph build succeed. 2. Entities have immutable flags.\n\n## Rollback Plan\n\nRevert the commit to restore previous schema."
+    },
+    {
+      "id": "202602031757-R7P2Q8",
+      "title": "Stage 2.2b fix mapping types",
+      "description": "Fix ttlSubmit/ttlAccept typing in mappings to satisfy graph build.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "graph build"
+      ],
+      "commit": {
+        "hash": "7804be8d1e8798544d34ff582278a390b7a7d1c0",
+        "message": "✨ R7P2Q8 fix ttl mapping types"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: Fix ttl field assignments in indexer mappings."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: graph build now succeeds after ttl mapping fix in indexer mappings."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T18:00:04.238Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nFix mapping type assignments for ttl fields.\n\n## Scope\n\nAssign ttlSubmit/ttlAccept directly from event params (BigInt).\n\n## Risks\n\nRisk of subtle schema mismatch. Mitigation: run graph build after change.\n\n## Verify Steps\n\n1. graph build succeeds. 2. ttl fields stored as BigInt without conversion.\n\n## Rollback Plan\n\nRevert the commit to restore prior mapping assignments."
+    },
+    {
+      "id": "202602031801-2E8YZ4",
+      "title": "Docs nav update 3",
+      "description": "Update docs/README.md with subgraph endpoints doc.",
+      "status": "DONE",
+      "priority": "low",
+      "owner": "DOCS",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "4f4ab6d776329186fe9cf55f818bc377efe990aa",
+        "message": "✨ 2E8YZ4 add subgraph doc to nav"
+      },
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: Update docs README to include subgraph endpoints doc."
+        },
+        {
+          "author": "DOCS",
+          "body": "Verified: docs/README includes subgraph endpoints document in navigation."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T18:02:38.765Z",
+      "doc_updated_by": "DOCS",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nUpdate docs README to include subgraph endpoints doc.\n\n## Scope\n\nAdd docs/19-subgraph-endpoints.md to docs/README.md navigation.\n\n## Risks\n\nRisk of stale docs nav. Mitigation: update README alongside new docs.\n\n## Verify Steps\n\n1. docs/README.md includes the subgraph endpoints doc. 2. git status shows only README update.\n\n## Rollback Plan\n\nRevert the commit to restore previous docs/README.md navigation."
+    },
+    {
+      "id": "202602031802-K4E0WQ",
+      "title": "Stage 2.3b indexer lockfile",
+      "description": "Add indexer package-lock and ignore generated/build outputs.",
+      "status": "DONE",
+      "priority": "low",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "055ee319f528bdd820874a769d584a2d26b86d1c",
+        "message": "✨ K4E0WQ add indexer lockfile and ignore outputs"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: Add indexer lockfile and ignore generated outputs."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: indexer lockfile committed and generated/build outputs ignored."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T18:04:03.072Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nCommit indexer lockfile and ignore generated/build outputs.\n\n## Scope\n\nAdd indexer/package-lock.json and indexer/.gitignore for generated/build outputs.\n\n## Risks\n\nRisk of ignoring required artifacts. Mitigation: ignore only generated/build outputs; keep schema and ABI tracked.\n\n## Verify Steps\n\n1. package-lock.json tracked. 2. indexer/generated and indexer/build ignored.\n\n## Rollback Plan\n\nRevert the commit to remove lockfile and .gitignore changes."
+    },
+    {
+      "id": "202602031805-3R8R9K",
+      "title": "Stage 2.12 containerization",
+      "description": "Add docker compose and Dockerfiles for one-command startup via Dokploy.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "docker compose up"
+      ],
+      "commit": {
+        "hash": "8f327f33085f136469f760222851a2a782923581",
+        "message": "✨ 3R8R9K add docker compose and Dockerfiles"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: Add docker compose and Dockerfiles for Dokploy deployment."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: Added docker compose and Dockerfiles for Dokploy; backend starts via compose."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T18:10:34.890Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nAdd docker compose and Dockerfiles for one-command startup.\n\n## Scope\n\nAdd docker-compose.yml, backend Dockerfile, and dockerignore; ensure docker compose up boots backend.\n\n## Risks\n\nRisk of broken builds in Dokploy. Mitigation: minimal images, explicit env vars, healthcheck.\n\n## Verify Steps\n\n1. docker compose config validates. 2. Backend container builds and starts with SUBGRAPH_URL.\n\n## Rollback Plan\n\nRevert the commit to remove docker compose and Dockerfiles."
+    },
+    {
+      "id": "202602031805-H6A82K",
+      "title": "Stage 2.11 roadmap devops",
+      "description": "Update ROADMAP with Dokploy and docker compose requirements.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "DOCS",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "9d425731218e0a97035b3cd11872a99647f2bec0",
+        "message": "✨ H6A82K update roadmap for Dokploy and docker compose"
+      },
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: Update roadmap with Dokploy and docker compose requirements."
+        },
+        {
+          "author": "DOCS",
+          "body": "Verified: ROADMAP updated with Dokploy and docker compose requirements."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T18:09:11.744Z",
+      "doc_updated_by": "DOCS",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nUpdate ROADMAP with Dokploy-based deployment and docker compose requirements.\n\n## Scope\n\nAdd explicit docker compose and Dokploy steps to release path.\n\n## Risks\n\nRisk of roadmap drift vs implementation. Mitigation: update roadmap immediately with containerization constraints.\n\n## Verify Steps\n\n1. ROADMAP includes Dokploy and docker compose tasks. 2. No unrelated sections modified.\n\n## Rollback Plan\n\nRevert the commit to restore previous roadmap."
+    },
+    {
+      "id": "202602031805-PTPNED",
+      "title": "Stage 2.10 engineering rules",
+      "description": "Update coding principles: linting/formatters required, docs update rules.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "DOCS",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "29cd8b06256095826198f0dd77f34916e648cf82",
+        "message": "✨ PTPNED update engineering rules and standards"
+      },
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: Update engineering rules for linting/formatting and docs updates."
+        },
+        {
+          "author": "DOCS",
+          "body": "Verified: Engineering standards documented; lint/fix requirements added to CONTRIBUTING and docs."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T18:08:21.808Z",
+      "doc_updated_by": "DOCS",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nUpdate engineering rules: linting, formatting, and documentation updates required.\n\n## Scope\n\nUpdate CONTRIBUTING.md and add docs/20-engineering-standards.md; refresh docs/README.md.\n\n## Risks\n\nRisk of inconsistent rules across docs. Mitigation: centralize in engineering standards doc and reference it.\n\n## Verify Steps\n\n1. CONTRIBUTING and engineering standards updated. 2. Docs nav includes standards.\n\n## Rollback Plan\n\nRevert the commit to restore previous rules and docs."
+    },
+    {
+      "id": "202602031812-1VNY83",
+      "title": "Stage 0.4 standards enforcement",
+      "description": "Finalize engineering standards (linters/formatters required) and align Makefile/CONTRIBUTING.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "DOCS",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "021c01c60b6a5bb94211966f1eebc0d721859906",
+        "message": "✨ 1VNY83 enforce lint/formatter standards"
+      },
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: Finalize lint/formatter enforcement standards and rules."
+        },
+        {
+          "author": "DOCS",
+          "body": "Verified: Standards now require linters/formatters; Makefile includes fix target."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T18:15:08.463Z",
+      "doc_updated_by": "DOCS",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nFinalize engineering standards and lint/fix enforcement rules.\n\n## Scope\n\nEnsure CONTRIBUTING and engineering standards enforce linters/formatters; add fix target if needed.\n\n## Risks\n\nRisk of inconsistent enforcement across tools. Mitigation: unify via Makefile targets and docs.\n\n## Verify Steps\n\n1. Standards mention linters and formatters. 2. make check covers lint/fmt.\n\n## Rollback Plan\n\nRevert the commit to restore previous standards and Makefile."
+    },
+    {
+      "id": "202602031812-T15BB0",
+      "title": "Translate repository to English",
+      "description": "Translate all repository documentation and text files to English (excluding agentplane-managed files).",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "DOCS",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "158bc878d8239226a7f2046c9b07c6a74c32e52f",
+        "message": "✨ T15BB0 translate repository docs to English"
+      },
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: Translate repository documentation to English."
+        },
+        {
+          "author": "DOCS",
+          "body": "Verified: All repository docs and roadmap translated to English; agentplane-managed files untouched."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T18:23:47.732Z",
+      "doc_updated_by": "DOCS",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nTranslate repository documentation and text files to English.\n\n## Scope\n\nTranslate docs/, ROADMAP.md, CONTRIBUTING.md, and _in/* to English. Exclude agentplane-managed files.\n\n## Risks\n\nRisk of losing nuances during translation. Mitigation: keep structure and technical terms consistent.\n\n## Verify Steps\n\n1. All docs and roadmap are English. 2. No agentplane-managed files modified.\n\n## Rollback Plan\n\nRevert the commit to restore previous language content."
+    },
+    {
+      "id": "202602031826-291E6D",
+      "title": "Rename repo references",
+      "description": "Update repository name references to solvera-markets and allow .agentplane sync.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "DOCS",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "028b8e5bb8508b60c723ec576358735fb90a2015",
+        "message": "✨ 291E6D rename repo references and track agentplane"
+      },
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: Update repo name references and .gitignore for agentplane sync."
+        },
+        {
+          "author": "DOCS",
+          "body": "Verified: Repo name references updated to solvera-markets and .agentplane is no longer ignored."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T18:29:12.749Z",
+      "doc_updated_by": "DOCS",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nUpdate repo name references to solvera-markets and allow .agentplane sync.\n\n## Scope\n\nUpdate docs and configs with new repo name; remove .agentplane from .gitignore.\n\n## Risks\n\nRisk of missing references. Mitigation: search for old repo name and update all matches.\n\n## Verify Steps\n\n1. No references to old repo name. 2. .gitignore no longer ignores .agentplane.\n\n## Rollback Plan\n\nRevert the commit to restore previous repo name and .gitignore settings."
+    },
+    {
+      "id": "202602031831-C9VDQQ",
+      "title": "Roadmap agent-first updates",
+      "description": "Update ROADMAP with SKILL.md for frontend and agent-first backend API emphasis.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "DOCS",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "cc96d7f616e33a795a797fd9099f0d547b6fb30b",
+        "message": "✨ C9VDQQ update roadmap for agent-first API and SKILL"
+      },
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: Update ROADMAP with SKILL.md and agent-first API requirements."
+        },
+        {
+          "author": "DOCS",
+          "body": "Verified: ROADMAP updated with agent-first API note and SKILL.md task."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T18:34:23.027Z",
+      "doc_updated_by": "DOCS",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nUpdate ROADMAP with SKILL.md for frontend and agent-first backend API requirements.\n\n## Scope\n\nAdd SKILL.md task under frontend and agent-first API note under backend in ROADMAP.\n\n## Risks\n\nRisk of mismatch with implementation. Mitigation: update ROADMAP only with requirements, not details.\n\n## Verify Steps\n\n1. ROADMAP mentions SKILL.md under frontend. 2. Backend section mentions agent-first API endpoints.\n\n## Rollback Plan\n\nRevert the commit to restore previous ROADMAP."
+    },
+    {
+      "id": "202602031831-G5DR2B",
+      "title": "Add component READMEs",
+      "description": "Add README.md for frontend, backend, indexer, and contracts.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "DOCS",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "dd40ccd0df59524afd166fdb2060734fabfd4430",
+        "message": "✨ G5DR2B add component READMEs"
+      },
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: Add component READMEs for frontend, backend, indexer, and contracts."
+        },
+        {
+          "author": "DOCS",
+          "body": "Verified: Added README.md to frontend, backend, indexer, and contracts."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T18:33:40.528Z",
+      "doc_updated_by": "DOCS",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nAdd README.md to frontend/backend/indexer/contracts with structure and usage notes.\n\n## Scope\n\nCreate README.md files describing purpose, structure, and entrypoints for each component.\n\n## Risks\n\nRisk of misleading usage. Mitigation: keep docs aligned with current structure and scripts.\n\n## Verify Steps\n\n1. Each component directory has README.md. 2. Contents are English and accurate.\n\n## Rollback Plan\n\nRevert the commit to remove component READMEs."
+    },
+    {
+      "id": "202602031834-DPM2AC",
+      "title": "Allow agentplane tracking",
+      "description": "Remove .agentplane from .gitignore per request.",
+      "status": "DONE",
+      "priority": "low",
+      "owner": "DOCS",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "make check"
+      ],
+      "commit": {
+        "hash": "c728e6ccfe96599337a1aceec5d2a783889823a8",
+        "message": "🧹 DPM2AC note agentplane tracking in gitignore"
+      },
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: remove .agentplane from gitignore to sync task artifacts reliably."
+        },
+        {
+          "author": "DOCS",
+          "body": "Verified: .gitignore explicitly notes that .agentplane is tracked; status clean except tracked change."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T18:38:21.640Z",
+      "doc_updated_by": "DOCS",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nStop ignoring .agentplane to allow sync.\n\nRemove the .agentplane ignore rule so task artifacts sync with the repository.\n\n## Scope\n\nRemove .agentplane from .gitignore.\n\nUpdate .gitignore to stop ignoring .agentplane so task tracking artifacts are versioned.\n\n## Risks\n\nRisk of committing agentplane state unintentionally. Mitigation: user explicitly requested sync.\n\nIf .agentplane contains environment-specific data, committing it could leak local-only details; review contents after sync.\n\n## Verify Steps\n\n1. .gitignore no longer includes .agentplane. 2. git status clean after commit.\n\n1) git status --short --untracked-files=no\\n2) Confirm .gitignore no longer contains .agentplane\n\n## Rollback Plan\n\nRe-add .agentplane/ to .gitignore and recommit if tracking artifacts should be ignored."
+    },
+    {
+      "id": "202602031839-JSCD1G",
+      "title": "Ignore _in and remove mentions",
+      "description": "Add _in/ to .gitignore and remove references to the _in folder from repo text.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "DOCS",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "rg \"_in\""
+      ],
+      "commit": {
+        "hash": "3208ea3d92f7eda97b8f77cc5d52a938f05d6811",
+        "message": "🧹 JSCD1G ignore _in and remove doc mentions"
+      },
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: add _in to gitignore and purge references to the input folder from docs."
+        },
+        {
+          "author": "DOCS",
+          "body": "Verified: _in is now ignored and removed from docs/README; rg shows no _in references in docs."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T18:41:06.979Z",
+      "doc_updated_by": "DOCS",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nIgnore the _in folder and remove references to it from repository text.\n\n## Scope\n\nUpdate .gitignore to include _in/ and remove textual references to _in from docs or readmes.\n\n## Risks\n\nRemoving references may obscure internal doc inputs if still needed; ensure no workflow depends on _in.\n\n## Verify Steps\n\n1) rg \"_in\"\\n2) git status --short --untracked-files=no\n\n## Rollback Plan\n\nRemove _in/ from .gitignore and restore any required references if needed."
+    },
+    {
+      "id": "202602031839-VQMR29",
+      "title": "Update roadmap with API PRD v0.1",
+      "description": "Align ROADMAP.md with Solvera API PRD v0.1 (agent-friendly API, tx-builder endpoints, next_steps, error model, read-first design, rate limits).",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "DOCS",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "rg \"API\" ROADMAP.md"
+      ],
+      "commit": {
+        "hash": "17ccaa3b428164355ae6708d6afbd063e6674677",
+        "message": "🧭 VQMR29 align roadmap with API PRD v0.1"
+      },
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: align roadmap with Solvera API PRD v0.1 agent-first requirements."
+        },
+        {
+          "author": "DOCS",
+          "body": "Verified: ROADMAP updated with agent-first API, tx-builder endpoints, next_steps, error model, and rate limits per PRD v0.1."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T18:41:40.000Z",
+      "doc_updated_by": "DOCS",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nUpdate ROADMAP.md to reflect Solvera API PRD v0.1 requirements for agent-friendly API behavior.\n\n## Scope\n\nRevise ROADMAP.md to include API read-first principles, tx-builder endpoints, next_steps, error model, config endpoint, and rate limiting.\n\n## Risks\n\nRoadmap edits might duplicate existing items; ensure new tasks are phrased as additions or clarifications without breaking ordering.\n\n## Verify Steps\n\n1) rg \"API\" ROADMAP.md\\n2) git status --short --untracked-files=no\n\n## Rollback Plan\n\nRevert ROADMAP.md to the previous version if API tasks are misaligned."
+    },
+    {
+      "id": "202602031851-0BTF15",
+      "title": "Stage 3.3 API security and limits",
+      "description": "Add rate limits and optional auth for write endpoints with tests and docs.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "rg \"rate limit\" backend"
+      ],
+      "commit": {
+        "hash": "a38eb0a97ce1cbb8f2d5a21f03ebc1d28673912c",
+        "message": "🛡️ 0BTF15 add write auth and rate limiting"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: add write-endpoint auth toggle and rate limiting scoped to write routes."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: write endpoints now require optional API key and are the only routes subject to rate limits."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T18:57:58.914Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nAdd rate limits and optional auth for write endpoints with tests and documentation.\n\n## Scope\n\nImplement rate limiting, auth toggles for tx-builder routes, and update docs/tests to cover access control.\n\n## Risks\n\nOverly strict limits can block legitimate agents; tune defaults and make overrides configurable.\n\n## Verify Steps\n\n1) rg \"rate limit\" backend\\n2) backend tests (if present)\\n3) git status --short --untracked-files=no\n\n## Rollback Plan\n\nDisable rate limits/auth middleware and restore previous routing if issues occur."
+    },
+    {
+      "id": "202602031851-B7PJT2",
+      "title": "Stage 3.4 backend deploy",
+      "description": "Add deployment docs and healthcheck validation for backend service.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "DOCS",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "rg \"healthcheck\" docs"
+      ],
+      "commit": {
+        "hash": "c8270371c3f469d4aac5bc93f676aeb7973e0166",
+        "message": "📝 B7PJT2 document backend healthcheck"
+      },
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: document backend deployment and healthcheck expectations for ops."
+        },
+        {
+          "author": "DOCS",
+          "body": "Verified: ops docs now reference backend healthcheck and endpoint implemented in API."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T18:59:21.354Z",
+      "doc_updated_by": "DOCS",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nDocument backend deployment and healthcheck validation.\n\n## Scope\n\nAdd deployment notes and healthcheck expectations to docs, aligned with docker compose + Dokploy.\n\n## Risks\n\nMissing or incorrect healthchecks can cause failed deployments; ensure endpoints exist before documenting.\n\n## Verify Steps\n\n1) rg \"healthcheck\" docs\\n2) git status --short --untracked-files=no\n\n## Rollback Plan\n\nRevert docs if deployment guidance is incorrect or premature."
+    },
+    {
+      "id": "202602031851-K7QY6Y",
+      "title": "Stage 3.2 backend implementation",
+      "description": "Implement REST API over indexer with tx-builder endpoints, config endpoint, and next_steps in responses.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "rg \"/api/\" backend"
+      ],
+      "commit": {
+        "hash": "528ac0644f46582c28a73ac3b439981c9db49af4",
+        "message": "✨ K7QY6Y implement agent-first backend API"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: implement agent-first backend endpoints with tx-builder responses and next_steps."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: backend now serves /api endpoints with next_steps, tx-builder payloads, config endpoint, and structured errors."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T18:57:11.294Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nImplement REST backend endpoints per PRD v0.1, including tx-builders, config, and next_steps responses.\n\n## Scope\n\nAdd/extend backend routes for intents, offers, tx-builder actions, and config; ensure responses include next_steps and are stateless.\n\n## Risks\n\nMismatch between indexer data and API output could break agent flows; add tests and validations.\n\n## Verify Steps\n\n1) rg \"/api/\" backend\\n2) backend tests (if present)\\n3) git status --short --untracked-files=no\n\n## Rollback Plan\n\nRevert backend route changes and restore previous API behavior if regressions appear."
+    },
+    {
+      "id": "202602031851-Z097CY",
+      "title": "Stage 3.1 API contract",
+      "description": "Define backend API contract per PRD v0.1 with next_steps, tx-builder endpoints, error model, config, and pagination.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "DOCS",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "rg \"next_steps\" docs/17-backend-api.md"
+      ],
+      "commit": {
+        "hash": "6f6434406bc777214bd89eeb17e9957c45d82ea0",
+        "message": "🧭 Z097CY expand backend API contract"
+      },
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: expand backend API documentation per PRD v0.1 with next_steps, tx-builders, and error model."
+        },
+        {
+          "author": "DOCS",
+          "body": "Verified: backend API doc now specifies next_steps, tx-builder endpoints, error model, config endpoint, and pagination filters per PRD v0.1."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-03T18:53:21.259Z",
+      "doc_updated_by": "DOCS",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nDefine the agent-first backend API contract per PRD v0.1 (next_steps, tx-builders, errors, config, pagination).\n\n## Scope\n\nUpdate docs/17-backend-api.md to include endpoint specs, next_steps schema, error model, tx-builder endpoints, config endpoint, and pagination filters.\n\n## Risks\n\nSpec changes may diverge from backend implementation; ensure docs are aligned with server routes.\n\n## Verify Steps\n\n1) rg \"next_steps\" docs/17-backend-api.md\\n2) git status --short --untracked-files=no\n\n## Rollback Plan\n\nRevert docs/17-backend-api.md to previous version if requirements are incorrect."
+    },
+    {
+      "id": "202602040414-3M5N3N",
+      "title": "Stage 4.0 frontend plan alignment",
+      "description": "Update ROADMAP Stage 4 to reflect landing/skill/docs/API pages and operator UI requirements from website sources.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "DOCS",
+      "depends_on": [],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "rg \"Stage 4\" ROADMAP.md"
+      ],
+      "commit": {
+        "hash": "b99ca6da052e4c7f081661aabfcbb72bb80955f9",
+        "message": "🧭 3M5N3N refine Stage 4 frontend scope"
+      },
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: update Stage 4 roadmap with website content and operator UI scope."
+        },
+        {
+          "author": "DOCS",
+          "body": "Verified: Stage 4 roadmap now includes landing/skill/docs/api pages and operator filters without hackathon mentions."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T04:16:59.232Z",
+      "doc_updated_by": "DOCS",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nAlign the Stage 4 roadmap with the website markdown sources and operator UI needs.\n\n## Scope\n\nUpdate ROADMAP.md Stage 4 tasks to include landing/skill/docs/api pages and operator observability screens.\n\n## Risks\n\nRoadmap edits may shift priorities; ensure changes remain consistent with Stage 4 scope.\n\n## Verify Steps\n\n1) rg \"Stage 4\" ROADMAP.md\\n2) git status --short --untracked-files=no\n\n## Rollback Plan\n\nRevert ROADMAP.md to the prior Stage 4 definition if alignment is incorrect."
+    },
+    {
+      "id": "202602040414-B89MK1",
+      "title": "Stage 4.1 frontend scaffold and landing",
+      "description": "Scaffold frontend app with routing, landing/skill/docs/api pages, and base styling.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "rg \"Solvera\" frontend/src || true"
+      ],
+      "commit": {
+        "hash": "03fce0c3b2a99b810d5db78156dabd48f81044eb",
+        "message": "🎨 B89MK1 scaffold frontend pages"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: scaffold frontend app with routing and static pages from site sources."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: frontend scaffold, routing, static pages, styles, and lint/test setup are in place without hackathon mentions."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T04:21:10.462Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nScaffold frontend app with routing and landing/skill/docs/api pages from website sources.\n\n## Scope\n\nCreate frontend build setup, core layout, and static pages reflecting the provided markdown sources.\n\n## Risks\n\nBrand copy must avoid hackathon mentions; verify wording matches constraints.\n\n## Verify Steps\n\n1) rg \"Solvera\" frontend/src\\n2) git status --short --untracked-files=no\n\n## Rollback Plan\n\nRemove frontend scaffold and revert frontend files if setup is incorrect."
+    },
+    {
+      "id": "202602040414-GXENAQ",
+      "title": "Stage 4.2 operator screens",
+      "description": "Implement monitoring UI: intents list, intent detail with offers, events view, and filters.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "rg \"/monitor\" frontend/src || true"
+      ],
+      "commit": {
+        "hash": "6067182b344bbb17d2c6d12958901693bef33bcc",
+        "message": "🔎 GXENAQ expand operator filters and next_steps"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: refine operator monitoring screens with filters and richer state."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: operator screens now expose filters and display next_steps and winner details from the API."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T04:22:10.903Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nImplement operator monitoring screens using backend API.\n\n## Scope\n\nAdd intents list, intent detail (offers), and event log screens with filters and API integration.\n\n## Risks\n\nAPI responses may differ from mock shape; handle empty/error states gracefully.\n\n## Verify Steps\n\n1) rg \"/monitor\" frontend/src\\n2) git status --short --untracked-files=no\n\n## Rollback Plan\n\nRevert operator UI screens and related styles if API integration breaks."
+    },
+    {
+      "id": "202602040414-H225K4",
+      "title": "Stage 4.3 frontend deploy",
+      "description": "Containerize frontend and wire docker-compose service for Dokploy.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "rg \"frontend\" docker-compose.yml"
+      ],
+      "commit": {
+        "hash": "3bbcd67a95893f68a3a73922908d4102e079d8a0",
+        "message": "🐳 H225K4 containerize frontend"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: containerize frontend and wire docker-compose service."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: frontend Dockerfile added and docker-compose includes frontend service with build args."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T04:23:37.750Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nContainerize frontend and add docker-compose service for deployment.\n\n## Scope\n\nAdd frontend Dockerfile, build scripts, and compose service aligned with Dokploy.\n\n## Risks\n\nBuild-time API base URL can be misconfigured; document defaults and overrides.\n\n## Verify Steps\n\n1) rg \"frontend\" docker-compose.yml\\n2) git status --short --untracked-files=no\n\n## Rollback Plan\n\nRevert docker-compose and remove frontend Dockerfile if deployment fails."
+    },
+    {
+      "id": "202602040414-PJFC8C",
+      "title": "Stage 4.2a agent skill guide",
+      "description": "Create frontend/SKILL.md with best practices for agents using Solvera Markets.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "DOCS",
+      "depends_on": [],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "rg \"Solvera Skill\" frontend/SKILL.md"
+      ],
+      "commit": {
+        "hash": "3cd678e1be8a1144304e3a78351c32f5cc9f33eb",
+        "message": "📝 PJFC8C add frontend skill guide"
+      },
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: write frontend SKILL.md with agent integration guidance."
+        },
+        {
+          "author": "DOCS",
+          "body": "Verified: frontend/SKILL.md provides agent integration guidance aligned with API behavior."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T04:22:47.452Z",
+      "doc_updated_by": "DOCS",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nWrite frontend/SKILL.md with agent integration best practices.\n\n## Scope\n\nCreate frontend/SKILL.md describing agent capabilities, endpoints, and safe usage patterns.\n\n## Risks\n\nGuidance might diverge from actual API; keep in sync with docs/17-backend-api.md.\n\n## Verify Steps\n\n1) rg \"Solvera Skill\" frontend/SKILL.md\\n2) git status --short --untracked-files=no\n\n## Rollback Plan\n\nRemove frontend/SKILL.md if guidance is incorrect and needs rewrite."
+    },
+    {
+      "id": "202602040426-KPRC0K",
+      "title": "Add lint/format scripts for backend and indexer",
+      "description": "Add ESLint configs and lint/fmt scripts for backend and indexer so repo lint/format passes.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "rg \"lint\" backend/package.json indexer/package.json"
+      ],
+      "commit": {
+        "hash": "79b63562b103ece22bc04be113ea112d12423153",
+        "message": "🧹 KPRC0K add backend/indexer linting"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: add lint/format scripts and ESLint configs for backend and indexer."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: backend/indexer now have eslint configs and lint/fmt scripts wired for repo tooling."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T04:28:13.028Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nAdd ESLint configs and lint/fmt scripts for backend and indexer packages.\n\n## Scope\n\nAdd eslint configs, update package.json scripts/devDependencies, and ensure make lint/fmt can run for backend and indexer.\n\n## Risks\n\nLinting may require code tweaks; ensure configs align with current code style.\n\n## Verify Steps\n\n1) rg \"lint\" backend/package.json indexer/package.json\\n2) make lint\\n3) git status --short --untracked-files=no\n\n## Rollback Plan\n\nRevert eslint configs and package.json script changes if lint tooling conflicts with build."
+    },
+    {
+      "id": "202602040426-NP70EJ",
+      "title": "Add env.example",
+      "description": "Create env.example with production-style environment variables for contracts/indexer/backend/frontend.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "DOCS",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "rg \"SUBGRAPH_URL\" env.example"
+      ],
+      "commit": {
+        "hash": "926e27b611cbe68e6b9bd43f058b74bdaa5208dc",
+        "message": "🧾 NP70EJ add env.example"
+      },
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: create env.example with production-style placeholders."
+        },
+        {
+          "author": "DOCS",
+          "body": "Verified: env.example added with production-style placeholders and no secrets."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T04:28:47.445Z",
+      "doc_updated_by": "DOCS",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nCreate env.example with production-style environment variables.\n\n## Scope\n\nAdd env.example listing backend/indexer/frontend and contract deployment variables with safe placeholders.\n\n## Risks\n\nEnsure no real secrets are included; use placeholders only.\n\n## Verify Steps\n\n1) test -f env.example\\n2) rg \"SUBGRAPH_URL\" env.example\\n3) git status --short --untracked-files=no\n\n## Rollback Plan\n\nRemove env.example if placeholders are incorrect or misleading."
+    },
+    {
+      "id": "202602040429-D06CGB",
+      "title": "Fix frontend lint dependency",
+      "description": "Resolve eslint peer dependency conflict in frontend by aligning eslint versions.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "rg \"eslint\" frontend/package.json"
+      ],
+      "commit": {
+        "hash": "88c9bf428d305583fd958110939a0dc6a2498153",
+        "message": "🧹 D06CGB align frontend eslint versions"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: align frontend eslint versions to resolve peer dependency error."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: frontend eslint versions aligned for compatible dependency tree."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T04:30:39.533Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nAlign frontend eslint dependencies to resolve peer conflicts.\n\n## Scope\n\nUpdate frontend/package.json eslint and @eslint/js versions to compatible range and reinstall dependencies.\n\n## Risks\n\nVersion mismatch could break lint config; verify lint runs.\n\n## Verify Steps\n\n1) npm --prefix frontend install\\n2) npm --prefix frontend run lint\\n3) git status --short --untracked-files=no\n\n## Rollback Plan\n\nRevert frontend/package.json dependency changes if lint fails."
+    },
+    {
+      "id": "202602040431-2G62AX",
+      "title": "Fix indexer lint ignores",
+      "description": "Exclude generated code from eslint and set module type for indexer.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "rg \"generated\" indexer/eslint.config.js"
+      ],
+      "commit": {
+        "hash": "b9a54498598a4bf0b4eb5725cbd741093b3222ca",
+        "message": "🧹 2G62AX ignore indexer generated lint"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: ignore generated indexer files in lint and set module type."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: indexer lint ignores generated files and package is marked as module."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T04:32:50.176Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nIgnore generated indexer files in lint and mark package as module.\n\n## Scope\n\nUpdate indexer eslint config to ignore generated files and set package.json type to module.\n\n## Risks\n\nIgnoring generated files could hide issues; only exclude generated artifacts.\n\n## Verify Steps\n\n1) make lint\\n2) git status --short --untracked-files=no\n\n## Rollback Plan\n\nRevert lint config changes if generated code must be linted."
+    },
+    {
+      "id": "202602040433-MEMJA8",
+      "title": "Apply formatter outputs",
+      "description": "Commit formatting changes produced by repo fmt scripts.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "git status --short --untracked-files=no"
+      ],
+      "commit": {
+        "hash": "630cb8dcb397dfa60fe6371026f8bd72bfd0a54d",
+        "message": "🧽 MEMJA8 apply formatter outputs"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: commit formatter outputs from make fmt."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: formatter output committed for contracts and indexer mappings."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T04:34:12.307Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nRecord formatter-driven changes from repo scripts.\n\n## Scope\n\nCommit formatted Solidity sources and indexer mapping changes after running fmt.\n\n## Risks\n\nFormatting could change behavior if tooling misconfigured; verify diffs are whitespace-only.\n\n## Verify Steps\n\n1) git diff --stat\\n2) git status --short --untracked-files=no\n\n## Rollback Plan\n\nRevert formatting changes if they introduce noise or unintended diffs."
+    },
+    {
+      "id": "202602040434-759GPN",
+      "title": "Add npm lockfiles",
+      "description": "Add backend/frontend package-lock.json and update indexer package-lock.json after installs.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "ls backend/package-lock.json frontend/package-lock.json indexer/package-lock.json"
+      ],
+      "commit": {
+        "hash": "000cc8cb7a3031a06e0f401443adb1f2b1308665",
+        "message": "📦 759GPN add npm lockfiles"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: add npm lockfiles for backend/frontend/indexer."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: npm lockfiles added for backend, frontend, and indexer."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T04:35:11.973Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nTrack npm lockfiles for backend, frontend, and indexer.\n\n## Scope\n\nAdd backend/package-lock.json and frontend/package-lock.json; update indexer/package-lock.json after dependency installs.\n\n## Risks\n\nLockfile changes may be noisy; ensure they match declared package.json versions.\n\n## Verify Steps\n\n1) ls backend/package-lock.json frontend/package-lock.json indexer/package-lock.json\\n2) git status --short --untracked-files=no\n\n## Rollback Plan\n\nRemove lockfiles if project standard excludes them."
+    },
+    {
+      "id": "202602040435-R5XEDC",
+      "title": "Add frontend fmt script",
+      "description": "Add npm fmt script to frontend package.json to satisfy repo fmt tooling.",
+      "status": "DONE",
+      "priority": "low",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "rg \"fmt\" frontend/package.json"
+      ],
+      "commit": {
+        "hash": "51b62dd8fdcf92db3241f1704b0f7afbb6fdf095",
+        "message": "🧹 R5XEDC add frontend fmt script"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: add frontend fmt script for repo formatter tooling."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: frontend fmt script added for repo formatting workflow."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T04:36:36.880Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nAdd frontend fmt script to align with repo format tooling.\n\n## Scope\n\nAdd npm run fmt in frontend/package.json to run eslint --fix.\n\n## Risks\n\nMisconfigured script could break make fmt; ensure it matches lint fixer.\n\n## Verify Steps\n\n1) npm --prefix frontend run fmt\\n2) git status --short --untracked-files=no\n\n## Rollback Plan\n\nRemove the fmt script if it conflicts with frontend linting."
+    },
+    {
+      "id": "202602040437-24KDFM",
+      "title": "Fix frontend hook lint warnings",
+      "description": "Adjust monitor pages to satisfy react-hooks exhaustive-deps warnings.",
+      "status": "DONE",
+      "priority": "low",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "rg \"useEffect\" frontend/src/pages/monitor-*.tsx"
+      ],
+      "commit": {
+        "hash": "7becc0a03b4080cc26c4eaee816ff846b26bf0be",
+        "message": "🧹 24KDFM fix react-hooks deps"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: fix react-hooks dependency warnings in monitor pages."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: monitor pages use stable callbacks and satisfy react-hooks deps."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T04:39:16.843Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nResolve react-hooks dependency warnings in monitor pages.\n\n## Scope\n\nRefactor monitor pages to use stable callbacks or dependencies in useEffect.\n\n## Risks\n\nIncorrect dependencies could cause extra fetches; ensure behavior stays the same.\n\n## Verify Steps\n\n1) npm --prefix frontend run lint\\n2) git status --short --untracked-files=no\n\n## Rollback Plan\n\nRevert monitor page changes if they introduce regressions."
+    },
+    {
+      "id": "202602040437-57ZEJB",
+      "title": "Add Foundry remappings",
+      "description": "Configure forge-std remappings so forge lint resolves imports.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "rg \"remappings\" contracts/foundry.toml"
+      ],
+      "commit": {
+        "hash": "7a8cc46fc502ccee126b25974be8a22ba9db278e",
+        "message": "🧭 57ZEJB add forge remappings"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: add Foundry remappings for forge-std imports."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: Foundry remappings added so forge-std imports resolve during lint."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T04:39:59.700Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nConfigure Foundry remappings for forge-std imports.\n\n## Scope\n\nAdd remappings to contracts/foundry.toml so forge lint can resolve forge-std.\n\n## Risks\n\nIncorrect remapping could break forge builds; verify lint and tests.\n\n## Verify Steps\n\n1) forge lint\\n2) git status --short --untracked-files=no\n\n## Rollback Plan\n\nRemove remappings if they conflict with Foundry configuration."
+    },
+    {
+      "id": "202602040440-NCP0HB",
+      "title": "Fix Foundry script root",
+      "description": "Run forge fmt/lint with --root contracts so remappings resolve.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "rg \"forge\" scripts/fmt.sh scripts/lint.sh"
+      ],
+      "commit": {
+        "hash": "b9258b78c8fe8bc16a5a5d059066e259a9381763",
+        "message": "🧭 NCP0HB run forge with contracts root"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: update scripts to run forge with contracts root."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: Foundry fmt/lint now run with contracts root for correct remappings."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T04:41:28.158Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nAdjust repo scripts to run Foundry commands with contracts as root.\n\n## Scope\n\nUpdate scripts/fmt.sh and scripts/lint.sh to call forge with --root contracts.\n\n## Risks\n\nChanging root path could affect other Foundry tooling; verify lint/test still run.\n\n## Verify Steps\n\n1) make lint\\n2) git status --short --untracked-files=no\n\n## Rollback Plan\n\nRevert script changes if Foundry commands fail with new root."
+    },
+    {
+      "id": "202602040441-G8RHH6",
+      "title": "Fix Foundry test root",
+      "description": "Run forge test with --root contracts so imports resolve.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "rg \"forge test\" scripts/test.sh"
+      ],
+      "commit": {
+        "hash": "52503be7177654039493c84626aa523abf6ed9fd",
+        "message": "🧪 G8RHH6 run forge tests with contracts root"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: update forge test invocation to use contracts root."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: forge test now runs with contracts root so imports resolve."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T04:43:09.419Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nUpdate test script to run forge with contracts root.\n\n## Scope\n\nModify scripts/test.sh to call forge test --root contracts.\n\n## Risks\n\nIncorrect root could break Foundry tests; verify tests still compile.\n\n## Verify Steps\n\n1) make test\\n2) git status --short --untracked-files=no\n\n## Rollback Plan\n\nRevert scripts/test.sh if Foundry tests fail with the new root."
+    },
+    {
+      "id": "202602040444-M4S9RP",
+      "title": "Fix indexer test script",
+      "description": "Update indexer npm test script to use graph test CLI.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "rg \"test\" indexer/package.json"
+      ],
+      "commit": {
+        "hash": "504f580aa56118b105d75c772f09cd2ec1bb7130",
+        "message": "🧪 M4S9RP use graph test for indexer"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: update indexer test script to graph test CLI."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: indexer test script now uses graph test to run subgraph tests."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T04:45:55.513Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nSwitch indexer tests to graph test CLI.\n\n## Scope\n\nUpdate indexer package.json test script to use graph test so matchstick-as binary is not required.\n\n## Risks\n\nGraph test may download binaries and require network; ensure CI allows it.\n\n## Verify Steps\n\n1) npm --prefix indexer test\\n2) git status --short --untracked-files=no\n\n## Rollback Plan\n\nRestore the previous test script if graph test is unsuitable."
+    },
+    {
+      "id": "202602040446-8NJQ3X",
+      "title": "Run indexer tests via docker",
+      "description": "Update indexer test script to use graph test --docker to avoid platform incompatibility.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "rg \"graph test\" indexer/package.json"
+      ],
+      "commit": {
+        "hash": "e3a87dec724cf9bf8c41c39e6b602a4ea2d344e0",
+        "message": "🧪 8NJQ3X run graph tests in docker"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: switch indexer tests to graph test --docker."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: indexer test script now runs graph test in docker for platform support."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T04:48:12.240Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nSwitch indexer tests to graph test --docker for supported execution.\n\n## Scope\n\nUpdate indexer/package.json test script to use graph test --docker.\n\n## Risks\n\nDocker may be unavailable in some environments; document requirement for tests.\n\n## Verify Steps\n\n1) npm --prefix indexer test\\n2) git status --short --untracked-files=no\n\n## Rollback Plan\n\nRevert to graph test without docker if containerized tests are unsupported."
+    },
+    {
+      "id": "202602040458-MBW332",
+      "title": "Ignore indexer test artifacts",
+      "description": "Add graph test output artifacts to indexer/.gitignore and remove generated files.",
+      "status": "DONE",
+      "priority": "low",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "rg \"tests/.docker\" indexer/.gitignore"
+      ],
+      "commit": {
+        "hash": "80123883eef9df23e82cf208168423ed69c98244",
+        "message": "🧹 MBW332 ignore graph test artifacts"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: ignore graph test artifacts and remove generated files."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: indexer gitignore now excludes graph test artifacts."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T05:00:14.852Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nIgnore graph test artifacts and remove generated files.\n\n## Scope\n\nUpdate indexer/.gitignore for graph test artifacts and delete current test output files.\n\n## Risks\n\nOver-ignoring could hide relevant test assets; only ignore generated artifacts.\n\n## Verify Steps\n\n1) git status --short\\n2) rg \"tests/.docker\" indexer/.gitignore\n\n## Rollback Plan\n\nRemove ignore entries if artifacts should be tracked for debugging."
+    }
+  ],
+  "meta": {
+    "schema_version": 1,
+    "managed_by": "agentplane",
+    "checksum_algo": "sha256",
+    "checksum": "8a2735d6533f9399ea0a9f2861da1ae6a58535eec6545c02f4ac0bad5edd96a5"
+  }
+}
