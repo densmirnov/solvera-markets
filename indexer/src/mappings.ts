@@ -35,8 +35,8 @@ function touchIntent(intent: Intent, timestamp: BigInt, txHash: Bytes): void {
 }
 
 export function handleIntentCreated(event: IntentCreatedEvent): void {
-  let id = event.params.id.toHexString();
-  let intent = new Intent(id);
+  const id = event.params.id.toHexString();
+  const intent = new Intent(id);
 
   intent.tokenOut = event.params.tokenOut;
   intent.minAmountOut = event.params.minAmountOut;
@@ -53,7 +53,7 @@ export function handleIntentCreated(event: IntentCreatedEvent): void {
   intent.txHash = event.transaction.hash;
   intent.save();
 
-  let log = new EventLog(eventId(event.transaction.hash, event.logIndex));
+  const log = new EventLog(eventId(event.transaction.hash, event.logIndex));
   log.intent = id;
   log.eventType = "IntentCreated";
   log.blockNumber = event.block.number;
@@ -63,15 +63,15 @@ export function handleIntentCreated(event: IntentCreatedEvent): void {
 }
 
 export function handleOfferSubmitted(event: OfferSubmittedEvent): void {
-  let intentId = event.params.id.toHexString();
-  let offerId =
+  const intentId = event.params.id.toHexString();
+  const offerId =
     intentId +
     "-" +
     event.transaction.hash.toHexString() +
     "-" +
     event.logIndex.toString();
 
-  let offer = new Offer(offerId);
+  const offer = new Offer(offerId);
   offer.intent = intentId;
   offer.solver = event.params.solver;
   offer.amountOut = event.params.amountOut;
@@ -79,7 +79,7 @@ export function handleOfferSubmitted(event: OfferSubmittedEvent): void {
   offer.txHash = event.transaction.hash;
   offer.save();
 
-  let log = new EventLog(eventId(event.transaction.hash, event.logIndex));
+  const log = new EventLog(eventId(event.transaction.hash, event.logIndex));
   log.intent = intentId;
   log.eventType = "OfferSubmitted";
   log.solver = event.params.solver;
@@ -91,7 +91,7 @@ export function handleOfferSubmitted(event: OfferSubmittedEvent): void {
 }
 
 export function handleWinnerSelected(event: WinnerSelectedEvent): void {
-  let id = event.params.id.toHexString();
+  const id = event.params.id.toHexString();
   let intent = Intent.load(id);
   if (intent == null) {
     intent = new Intent(id);
@@ -106,7 +106,7 @@ export function handleWinnerSelected(event: WinnerSelectedEvent): void {
   touchIntent(intent, event.block.timestamp, event.transaction.hash);
   intent.save();
 
-  let log = new EventLog(eventId(event.transaction.hash, event.logIndex));
+  const log = new EventLog(eventId(event.transaction.hash, event.logIndex));
   log.intent = id;
   log.eventType = "WinnerSelected";
   log.solver = event.params.solver;
@@ -119,7 +119,7 @@ export function handleWinnerSelected(event: WinnerSelectedEvent): void {
 }
 
 export function handleFulfilled(event: FulfilledEvent): void {
-  let id = event.params.id.toHexString();
+  const id = event.params.id.toHexString();
   let intent = Intent.load(id);
   if (intent == null) {
     intent = new Intent(id);
@@ -131,7 +131,7 @@ export function handleFulfilled(event: FulfilledEvent): void {
   touchIntent(intent, event.block.timestamp, event.transaction.hash);
   intent.save();
 
-  let log = new EventLog(eventId(event.transaction.hash, event.logIndex));
+  const log = new EventLog(eventId(event.transaction.hash, event.logIndex));
   log.intent = id;
   log.eventType = "Fulfilled";
   log.solver = event.params.solver;
@@ -143,7 +143,7 @@ export function handleFulfilled(event: FulfilledEvent): void {
 }
 
 export function handleAccepted(event: AcceptedEvent): void {
-  let id = event.params.id.toHexString();
+  const id = event.params.id.toHexString();
   let intent = Intent.load(id);
   if (intent == null) {
     intent = new Intent(id);
@@ -155,7 +155,7 @@ export function handleAccepted(event: AcceptedEvent): void {
   touchIntent(intent, event.block.timestamp, event.transaction.hash);
   intent.save();
 
-  let log = new EventLog(eventId(event.transaction.hash, event.logIndex));
+  const log = new EventLog(eventId(event.transaction.hash, event.logIndex));
   log.intent = id;
   log.eventType = "Accepted";
   log.solver = event.params.solver;
@@ -169,7 +169,7 @@ export function handleAccepted(event: AcceptedEvent): void {
 }
 
 export function handleExpired(event: ExpiredEvent): void {
-  let id = event.params.id.toHexString();
+  const id = event.params.id.toHexString();
   let intent = Intent.load(id);
   if (intent == null) {
     intent = new Intent(id);
@@ -181,7 +181,7 @@ export function handleExpired(event: ExpiredEvent): void {
   touchIntent(intent, event.block.timestamp, event.transaction.hash);
   intent.save();
 
-  let log = new EventLog(eventId(event.transaction.hash, event.logIndex));
+  const log = new EventLog(eventId(event.transaction.hash, event.logIndex));
   log.intent = id;
   log.eventType = "Expired";
   log.reason = stateToString(event.params.fromState);
@@ -194,7 +194,7 @@ export function handleExpired(event: ExpiredEvent): void {
 }
 
 export function handleReputationUpdated(event: ReputationUpdatedEvent): void {
-  let id = event.params.solver.toHexString();
+  const id = event.params.solver.toHexString();
   let rep = Reputation.load(id);
   if (rep == null) {
     rep = new Reputation(id);
@@ -205,7 +205,7 @@ export function handleReputationUpdated(event: ReputationUpdatedEvent): void {
   rep.txHash = event.transaction.hash;
   rep.save();
 
-  let log = new EventLog(eventId(event.transaction.hash, event.logIndex));
+  const log = new EventLog(eventId(event.transaction.hash, event.logIndex));
   log.eventType = "ReputationUpdated";
   log.solver = event.params.solver;
   log.reason = reputationReasonToString(event.params.reason);
