@@ -18,3 +18,9 @@
 - Use minimal base images.
 - Pin dependencies via lockfiles.
 - Avoid external runtime mutations inside containers.
+
+## Dokploy isolation and ports
+- For Dokploy Compose services, prefer `expose` over host `ports` to avoid port binding conflicts.
+- If using Dokploy Domains, set the domain in Dokploy and redeploy for changes to take effect.
+- For manual routing, add services to the `dokploy-network` and configure Traefik labels.
+- Isolated Deployments can be enabled to place each app in its own network and avoid naming conflicts.

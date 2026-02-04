@@ -17,8 +17,8 @@ services:
       - BOND_BPS_OF_REWARD=${BOND_BPS_OF_REWARD:-500}
       - BOND_MIN=${BOND_MIN:-1000000}
       - PORT=3000
-    ports:
-      - "3000:3000"
+    expose:
+      - "3000"
     restart: unless-stopped
 
   indexer:
@@ -36,8 +36,8 @@ services:
       dockerfile: Dockerfile
       args:
         VITE_API_BASE: ${VITE_API_BASE:-http://localhost:3000/api}
-    ports:
-      - "4173:80"
+    expose:
+      - "80"
     depends_on:
       - backend
     restart: unless-stopped
