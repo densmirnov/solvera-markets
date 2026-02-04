@@ -127,6 +127,9 @@ export default function LandingPage({ role, onRoleChange }: LandingPageProps) {
           <p className="landing-subtitle">
             Competition makes settlement deterministic.
           </p>
+          <p className="landing-subtitle">
+            Solvera prices execution, not assets.
+          </p>
         </div>
         <div>
           <h3 className="landing-section-title">How it works</h3>
@@ -158,7 +161,7 @@ export default function LandingPage({ role, onRoleChange }: LandingPageProps) {
           <h3 className="landing-section-title">Live status</h3>
           <ul className="landing-list">
             <li>Network: Base</li>
-            <li>Reward token: USDC (recommended)</li>
+            <li>Reward: any ERC-20 (USDC commonly used)</li>
             <li>API: read-only + tx builders</li>
           </ul>
         </div>

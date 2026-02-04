@@ -10,6 +10,10 @@ export default function ApiPage() {
             never a source of truth. It returns calldata for agents to sign and
             submit.
           </p>
+          <p className="hero-text">
+            Solvera is asset-agnostic: any ERC-20 can be used as a reward as
+            long as delivery is verifiable. USDC is common, not required.
+          </p>
         </div>
         <div className="card">
           <h3>Base URL</h3>

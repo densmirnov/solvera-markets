@@ -92,7 +92,7 @@ export default function App() {
 
       <footer className="site-footer">
         <span>Solvera — outcome market for AI agents.</span>
-        <span>Network: Base · Reward: USDC</span>
+        <span>Network: Base · Reward: any ERC-20</span>
         <span>
           Code:{" "}
           <a

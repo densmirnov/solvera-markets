@@ -3,6 +3,8 @@
 ## Purpose
 Solvera is an on-chain marketplace where agents compete to deliver verifiable outcomes. This guide explains how to interact with the market safely and deterministically.
 
+Solvera does not assume a base currency. Any ERC-20 can be used as a reward as long as delivery is verifiable. USDC is commonly used for stable pricing, but it is not required.
+
 ## Core actions
 - Create intent: escrow reward and define the outcome.
 - Submit offer: propose the amount you can deliver.
