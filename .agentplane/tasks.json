@@ -3580,12 +3580,46 @@
       "doc_updated_by": "CODER",
       "dirty": false,
       "id_source": "generated"
+    },
+    {
+      "id": "202602041108-90YH2M",
+      "title": "Inline SKILL.md in /skill page",
+      "description": "Render SKILL.md via Vite raw import instead of fetch to avoid blank page in production.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "docker compose up -d --build"
+      ],
+      "commit": {
+        "hash": "b0076fe93b3759e29c1e66e5c1081662dac23758",
+        "message": "🧩 90YH2M inline SKILL.md in skill page"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: Render SKILL.md via raw import so /skill never depends on fetch."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: docker compose up -d --build; /skill renders raw SKILL.md without fetch."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T11:09:28.000Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated"
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "d3fcb010d1aafe23c89045615adcf953404e4c5c0090f64b093c38b3c5b51b6a"
+    "checksum": "52e75705511e78a1f4dde23a5d605c54602fb5b5783aefed7a81f9feacbeb6d3"
   }
 }
