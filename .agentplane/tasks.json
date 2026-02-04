@@ -2955,12 +2955,47 @@
       "dirty": false,
       "id_source": "generated",
       "doc": "## Summary\n\nRemoved UI shadows and enabled CORS to fix Monitor API fetch failures.\n\n## Scope\n\nUpdated frontend styles to remove box shadows, enabled CORS in backend, and added CORS_ORIGIN to docker-compose.yml.\n\nUpdated frontend styles to remove box shadows, enabled CORS in backend, and added CORS_ORIGIN to docker-compose.yml.\n\n## Risks\n\nAllowing '*' for CORS may be too permissive for production; set CORS_ORIGIN to the deployed frontend domain in production.\n\n## Verify Steps\n\n1) docker compose up -d --build\\n2) open http://localhost:4173/monitor\\n3) confirm Monitor loads without 'Failed to fetch'\n\n## Rollback Plan\n\nRevert frontend/src/styles.css, backend/src/main.ts, and docker-compose.yml; rebuild containers."
+    },
+    {
+      "id": "202602040713-X6VHSE",
+      "title": "Update env.example and production .env",
+      "description": "Set production CORS_ORIGIN and VITE_API_BASE values for solvera.market and align env.example/.env with production defaults.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "DOCS",
+      "depends_on": [],
+      "tags": [
+        "backend"
+      ],
+      "verify": [
+        "rg -n \"CORS_ORIGIN|VITE_API_BASE|SUBGRAPH_URL\" env.example .env"
+      ],
+      "commit": {
+        "hash": "38fbafb4139d89d2b60774f85afe0a4dff31bb82",
+        "message": "🧾 X6VHSE update production env defaults"
+      },
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: update env.example and .env for solvera.market production settings."
+        },
+        {
+          "author": "DOCS",
+          "body": "Verified: env.example updated for solvera.market and .env contains production CORS/API/subgraph values."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T07:15:33.367Z",
+      "doc_updated_by": "DOCS",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nUpdated env.example and .env with production solvera.market settings for CORS and API base.\n\n## Scope\n\nUpdated env.example and .env with production SUBGRAPH_URL, CORS_ORIGIN, and VITE_API_BASE.\n\n## Risks\n\nEnsure production secrets in .env remain protected; domain changes require updating CORS_ORIGIN and VITE_API_BASE.\n\n## Verify Steps\n\nrg -n \"CORS_ORIGIN|VITE_API_BASE|SUBGRAPH_URL\" env.example .env\n\n## Rollback Plan\n\nRevert env.example and .env to previous values."
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "4e1fdebf2e640798dd02c3ad928bcf2408da95a1fcbb1569ce2602f063092fb0"
+    "checksum": "6540b49ae4262c71affb82d7898649e61c5c0e6e3b490cd512d8c23cd075d067"
   }
 }
