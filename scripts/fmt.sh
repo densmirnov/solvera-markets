@@ -10,7 +10,7 @@ run_if_exists() {
 }
 
 # contracts
-run_if_exists contracts/foundry.toml forge fmt
+run_if_exists contracts/foundry.toml forge fmt --root contracts
 run_if_exists contracts/hardhat.config.js npx hardhat fmt
 run_if_exists contracts/hardhat.config.ts npx hardhat fmt
 

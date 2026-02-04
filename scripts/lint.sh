@@ -10,7 +10,7 @@ run_if_exists() {
 }
 
 # contracts
-run_if_exists contracts/foundry.toml forge lint
+run_if_exists contracts/foundry.toml forge lint --root contracts
 run_if_exists contracts/hardhat.config.js npx hardhat lint
 run_if_exists contracts/hardhat.config.ts npx hardhat lint
 
