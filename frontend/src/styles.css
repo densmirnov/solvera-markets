@@ -1,18 +1,24 @@
-@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap");
 
 :root {
   color-scheme: light;
   font-family: "Space Grotesk", system-ui, sans-serif;
-  background: #f6f4f0;
-  color: #12110f;
-  --ink: #12110f;
-  --ink-muted: #4f4a45;
-  --paper: #f6f4f0;
-  --accent: #1d4ed8;
-  --accent-soft: #dbe6ff;
-  --accent-2: #0f766e;
-  --border: #e2d9cd;
+  background: #f7f8fb;
+  color: #0e1116;
+  --mono:
+    "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  --ink: #0e1116;
+  --ink-muted: #5a6572;
+  --paper: #f7f8fb;
+  --accent: #1b7c7a;
+  --accent-soft: #d9f3f1;
+  --accent-2: #0b4f6c;
+  --border: #d6dde6;
+  --panel: #ffffff;
   --shadow: transparent;
+  --motion-fast: 140ms;
+  --motion-slow: 240ms;
 }
 
 * {
@@ -22,12 +28,14 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background: radial-gradient(
-    circle at top,
-    #ffffff 0%,
-    #f4efe8 45%,
-    #efe8de 100%
-  );
+  background:
+    linear-gradient(180deg, rgba(247, 248, 251, 0.96), rgba(247, 248, 251, 1)),
+    linear-gradient(90deg, rgba(27, 124, 122, 0.06) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(27, 124, 122, 0.06) 1px, transparent 1px);
+  background-size:
+    auto,
+    42px 42px,
+    42px 42px;
 }
 
 a {
@@ -47,8 +55,8 @@ a {
   align-items: center;
   padding: 32px 64px 20px;
   border-bottom: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(6px);
   position: sticky;
   top: 0;
   z-index: 10;
@@ -61,9 +69,10 @@ a {
 }
 
 .brand-mark {
-  font-family: "Instrument Serif", serif;
-  font-size: 28px;
-  letter-spacing: 0.5px;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .brand-sub {
@@ -78,16 +87,25 @@ a {
 
 .nav-link {
   padding: 8px 14px;
-  border-radius: 999px;
+  border-radius: 8px;
   border: 1px solid transparent;
   color: var(--ink-muted);
   font-size: 14px;
+  transition:
+    color var(--motion-fast) ease,
+    border-color var(--motion-fast) ease,
+    background var(--motion-fast) ease;
+}
+
+.nav-link:hover {
+  border-color: var(--border);
+  color: var(--ink);
 }
 
 .nav-link-active {
-  background: var(--accent-soft);
-  border-color: var(--accent);
-  color: var(--accent);
+  background: #eef6f5;
+  border-color: #c7e8e4;
+  color: var(--accent-2);
 }
 
 .site-main {
@@ -99,6 +117,7 @@ a {
   display: flex;
   flex-direction: column;
   gap: 28px;
+  animation: fade-up var(--motion-slow) ease both;
 }
 
 .hero {
@@ -106,16 +125,25 @@ a {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 24px;
   align-items: center;
-  background: #ffffff;
-  padding: 36px;
-  border-radius: 24px;
+  background: var(--panel);
+  padding: 32px;
+  border-radius: 16px;
   border: 1px solid var(--border);
   box-shadow: none;
+  transition:
+    border-color var(--motion-fast) ease,
+    transform var(--motion-fast) ease;
+}
+
+.hero:hover {
+  border-color: #bcdedb;
+  transform: translateY(-2px);
 }
 
 .hero-title {
-  font-family: "Instrument Serif", serif;
-  font-size: 40px;
+  font-size: 34px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   margin: 0 0 12px;
 }
 
@@ -133,16 +161,32 @@ a {
 
 .button {
   padding: 10px 18px;
-  border-radius: 999px;
+  border-radius: 10px;
   border: 1px solid var(--ink);
   background: var(--ink);
   color: #fff;
   font-size: 14px;
+  transition:
+    transform var(--motion-fast) ease,
+    border-color var(--motion-fast) ease,
+    background var(--motion-fast) ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  border-color: var(--accent);
+  background: var(--accent);
 }
 
 .button.secondary {
   background: transparent;
   color: var(--ink);
+  border-color: var(--border);
+}
+
+.button.secondary:hover {
+  border-color: var(--accent-2);
+  color: var(--accent-2);
 }
 
 .card-grid {
@@ -152,11 +196,20 @@ a {
 }
 
 .card {
-  background: #fff;
-  border-radius: 20px;
+  background: var(--panel);
+  border-radius: 14px;
   border: 1px solid var(--border);
   padding: 20px;
   box-shadow: none;
+  transition:
+    border-color var(--motion-fast) ease,
+    transform var(--motion-fast) ease;
+  animation: fade-up var(--motion-slow) ease both;
+}
+
+.card:hover {
+  border-color: #bcdedb;
+  transform: translateY(-2px);
 }
 
 .card h3 {
@@ -185,8 +238,8 @@ a {
   flex-direction: column;
   gap: 12px;
   padding: 16px;
-  background: #fff;
-  border-radius: 16px;
+  background: var(--panel);
+  border-radius: 12px;
   border: 1px solid var(--border);
   height: fit-content;
 }
@@ -194,12 +247,20 @@ a {
 .monitor-link {
   color: var(--ink-muted);
   padding: 8px 12px;
-  border-radius: 10px;
+  border-radius: 8px;
+  transition:
+    color var(--motion-fast) ease,
+    background var(--motion-fast) ease;
+}
+
+.monitor-link:hover {
+  color: var(--ink);
+  background: #f2f6f8;
 }
 
 .monitor-link.active {
   background: var(--accent-soft);
-  color: var(--accent);
+  color: var(--accent-2);
 }
 
 .table {
@@ -215,11 +276,18 @@ a {
   font-size: 14px;
 }
 
+.table tr:hover td {
+  background: #f4f7f9;
+}
+
 .badge {
   padding: 4px 8px;
-  border-radius: 999px;
-  background: #f1ede6;
+  border-radius: 6px;
+  background: #eef3f6;
   font-size: 12px;
+  font-family: var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .filter-row {
@@ -231,17 +299,26 @@ a {
 
 .input {
   padding: 8px 10px;
-  border-radius: 8px;
+  border-radius: 6px;
   border: 1px solid var(--border);
   font-size: 14px;
+  transition:
+    border-color var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(27, 124, 122, 0.12);
 }
 
 .notice {
   padding: 16px;
-  border-radius: 12px;
-  background: #fff8f0;
-  border: 1px solid #f1e0c9;
-  color: #8a5a2b;
+  border-radius: 10px;
+  background: #eef6f5;
+  border: 1px solid #c7e8e4;
+  color: #0b4f6c;
 }
 
 .site-footer {
@@ -252,6 +329,52 @@ a {
   justify-content: space-between;
   font-size: 12px;
   color: var(--ink-muted);
+  font-family: var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.card-grid .card:nth-child(1) {
+  animation-delay: 40ms;
+}
+
+.card-grid .card:nth-child(2) {
+  animation-delay: 80ms;
+}
+
+.card-grid .card:nth-child(3) {
+  animation-delay: 120ms;
+}
+
+.card-grid .card:nth-child(4) {
+  animation-delay: 160ms;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page,
+  .card,
+  .hero {
+    animation: none;
+  }
+
+  .button,
+  .card,
+  .hero,
+  .nav-link,
+  .monitor-link {
+    transition: none;
+  }
 }
 
 @media (max-width: 900px) {
