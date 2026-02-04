@@ -3478,12 +3478,46 @@
       "doc_updated_by": "DOCS",
       "dirty": false,
       "id_source": "generated"
+    },
+    {
+      "id": "202602040914-2V4Z9S",
+      "title": "Remove Moltbook block and fix navbar",
+      "description": "Delete Moltbook section from landing; make navbar solid background; ensure SKILL.md link points to /skill.md.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "docker compose up -d --build"
+      ],
+      "commit": {
+        "hash": "77ff1f285bab0a1464f1d56e7af493a888ae1d34",
+        "message": "🧹 2V4Z9S remove Moltbook and fix navbar"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: Remove Moltbook block and fix navbar background + SKILL.md link."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: docker compose up -d --build; Moltbook block removed and navbar solid background + skill.md link updated."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T09:15:37.631Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated"
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "ce8107cb5569940eec0d547be5c73434d7d51dc723944381e6cfc6e5bbcfdd33"
+    "checksum": "9fae7c88cfaa324dd7d8b0dc865afa4b8449126f588ad8b0681f98070c38098c"
   }
 }
