@@ -3883,12 +3883,47 @@
       "doc_updated_by": "CODER",
       "dirty": false,
       "id_source": "generated"
+    },
+    {
+      "id": "202602041514-DGVWZF",
+      "title": "Fix TS config warnings",
+      "description": "Resolve IDE warnings in backend/frontend tsconfig and docs page casing.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "ORCHESTRATOR",
+      "depends_on": [],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "1"
+      ],
+      "commit": {
+        "hash": "a8b24f1bda9e8542e10ddecd98c5a631b506f8c5",
+        "message": "🐛 DGVWZF fix tsconfig warnings"
+      },
+      "comments": [
+        {
+          "author": "ORCHESTRATOR",
+          "body": "Start: fix tsconfig warnings and docs page casing."
+        },
+        {
+          "author": "ORCHESTRATOR",
+          "body": "Verified: tsconfig warnings addressed; docs page casing normalized."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T15:15:11.983Z",
+      "doc_updated_by": "ORCHESTRATOR",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nFixed backend/frontend tsconfig warnings and normalized docs page casing.\n\n## Scope\n\nUpdated backend/tsconfig.json rootDir, frontend/tsconfig.json noEmit, and ensured frontend/src/pages/docs.tsx casing consistency.\n\n## Risks\n\nChanging tsconfig rootDir to '.' may alter emitted path structure if builds rely on it; noEmit in frontend tsconfig is aligned with Vite but should not affect build output.\n\n## Verify Steps\n\nNot run (tsconfig-only changes).\n\n## Rollback Plan\n\nRevert tsconfig and docs page casing changes via agentplane commit or git revert."
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "da8f2cd0a17f27f94741a8a8ce73cac54abf8fa746077a6d85c4107206cff000"
+    "checksum": "08f1d016bfdecb6f13bdceb4fb5c49831441a353e7c31ee3b4624ab73748d56a"
   }
 }
