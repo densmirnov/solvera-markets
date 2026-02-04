@@ -92,6 +92,9 @@ contract IntentMarketplaceTest is Test {
         uint64 ttlAccept = uint64(block.timestamp + 200);
         bytes32 id = _createIntent(ttlSubmit, ttlAccept);
 
+        vm.prank(solver);
+        market.submitOffer(id, 150e18);
+
         vm.prank(verifier);
         market.selectWinner(id, solver, 150e18);
 
@@ -152,6 +155,37 @@ contract IntentMarketplaceTest is Test {
         market.fulfill(id);
     }
 
+    function test_submitOffer_afterTtlSubmitReverts() public {
+        uint64 ttlSubmit = uint64(block.timestamp + 5);
+        uint64 ttlAccept = uint64(block.timestamp + 10);
+        bytes32 id = _createIntent(ttlSubmit, ttlAccept);
+
+        vm.warp(ttlSubmit + 1);
+        vm.prank(solver);
+        vm.expectRevert(IntentMarketplace.InvalidTime.selector);
+        market.submitOffer(id, 120e18);
+    }
+
+    function test_submitOffer_zeroAmountReverts() public {
+        uint64 ttlSubmit = uint64(block.timestamp + 5);
+        uint64 ttlAccept = uint64(block.timestamp + 10);
+        bytes32 id = _createIntent(ttlSubmit, ttlAccept);
+
+        vm.prank(solver);
+        vm.expectRevert(IntentMarketplace.InvalidAmount.selector);
+        market.submitOffer(id, 0);
+    }
+
+    function test_selectWinner_zeroSolverReverts() public {
+        uint64 ttlSubmit = uint64(block.timestamp + 5);
+        uint64 ttlAccept = uint64(block.timestamp + 10);
+        bytes32 id = _createIntent(ttlSubmit, ttlAccept);
+
+        vm.prank(verifier);
+        vm.expectRevert(IntentMarketplace.InvalidAmount.selector);
+        market.selectWinner(id, address(0), 120e18);
+    }
+
     function test_selectWinner_afterTtlSubmitReverts() public {
         uint64 ttlSubmit = uint64(block.timestamp + 10);
         uint64 ttlAccept = uint64(block.timestamp + 20);
@@ -175,6 +209,86 @@ contract IntentMarketplaceTest is Test {
         vm.prank(solver);
         vm.expectRevert(IntentMarketplace.InvalidTime.selector);
         market.fulfill(id);
+    }
+
+    function test_fulfill_minAmountOutReverts() public {
+        uint64 ttlSubmit = uint64(block.timestamp + 10);
+        uint64 ttlAccept = uint64(block.timestamp + 20);
+        bytes32 id = _createIntent(ttlSubmit, ttlAccept);
+
+        vm.prank(verifier);
+        market.selectWinner(id, solver, 50e18);
+
+        vm.prank(solver);
+        vm.expectRevert(IntentMarketplace.InvalidAmount.selector);
+        market.fulfill(id);
+    }
+
+    function test_accept_updates_balances() public {
+        uint64 ttlSubmit = uint64(block.timestamp + 10);
+        uint64 ttlAccept = uint64(block.timestamp + 20);
+        bytes32 id = _createIntent(ttlSubmit, ttlAccept);
+
+        uint256 feeBefore = reward.balanceOf(feeRecipient);
+
+        vm.prank(verifier);
+        market.selectWinner(id, solver, 150e18);
+
+        uint256 afterSelect = reward.balanceOf(solver);
+
+        vm.prank(solver);
+        market.fulfill(id);
+
+        uint256 rewardAfter = reward.balanceOf(solver);
+        assertTrue(rewardAfter > afterSelect);
+        assertTrue(reward.balanceOf(feeRecipient) > feeBefore);
+    }
+
+    function test_expireSelected_refundsAndSlashesBond() public {
+        uint64 ttlSubmit = uint64(block.timestamp + 10);
+        uint64 ttlAccept = uint64(block.timestamp + 20);
+        bytes32 id = _createIntent(ttlSubmit, ttlAccept);
+
+        uint256 payerBefore = reward.balanceOf(payer);
+        uint256 feeBefore = reward.balanceOf(feeRecipient);
+
+        vm.prank(verifier);
+        market.selectWinner(id, solver, 150e18);
+
+        vm.warp(ttlAccept + 1);
+        market.expire(id);
+
+        uint256 feeAmount = fixedFee;
+        assertEq(reward.balanceOf(feeRecipient), feeBefore + feeAmount + market.getIntent(id).bondAmount);
+        assertEq(reward.balanceOf(payer), payerBefore + (10e18 - feeAmount));
+    }
+
+    function test_createIntent_invalidTimeReverts() public {
+        uint64 ttlSubmit = uint64(block.timestamp);
+        uint64 ttlAccept = uint64(block.timestamp + 10);
+        vm.prank(payer);
+        vm.expectRevert(IntentMarketplace.InvalidTime.selector);
+        market.createIntent(
+            address(tokenOut), 1e18, address(reward), 10e18, payer, initiator, verifier, ttlSubmit, ttlAccept
+        );
+    }
+
+    function test_createIntent_invalidAddressReverts() public {
+        uint64 ttlSubmit = uint64(block.timestamp + 10);
+        uint64 ttlAccept = uint64(block.timestamp + 20);
+        vm.prank(payer);
+        vm.expectRevert(IntentMarketplace.InvalidAddress.selector);
+        market.createIntent(address(0), 1e18, address(reward), 10e18, payer, initiator, verifier, ttlSubmit, ttlAccept);
+    }
+
+    function test_createIntent_invalidAmountReverts() public {
+        uint64 ttlSubmit = uint64(block.timestamp + 10);
+        uint64 ttlAccept = uint64(block.timestamp + 20);
+        vm.prank(payer);
+        vm.expectRevert(IntentMarketplace.InvalidAmount.selector);
+        market.createIntent(
+            address(tokenOut), 0, address(reward), 10e18, payer, initiator, verifier, ttlSubmit, ttlAccept
+        );
     }
 
     function test_feeEdge_rewardLessThanFixedFee() public {

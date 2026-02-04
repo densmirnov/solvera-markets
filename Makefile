@@ -1,6 +1,6 @@
-.PHONY: check fmt lint test validate fix
+.PHONY: check fmt lint test validate fix coverage
 
-check: validate fmt lint test
+check: validate fmt lint test coverage
 
 validate:
 	@./scripts/validate-structure.sh
@@ -13,5 +13,8 @@ lint:
 
 test:
 	@./scripts/test.sh
+
+coverage:
+	@./scripts/coverage.sh
 
 fix: fmt lint
