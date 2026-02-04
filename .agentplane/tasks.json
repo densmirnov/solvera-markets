@@ -2919,12 +2919,48 @@
       "dirty": false,
       "id_source": "generated",
       "doc": "## Summary\n\nSwitched docker-compose to production subgraph endpoint and documented the default URL.\n\n## Scope\n\nUpdated docker-compose.yml to remove mock-subgraph and default SUBGRAPH_URL to the deployed subgraph; updated docs/22-devops-dokploy.md.\n\n## Risks\n\nIf the subgraph endpoint changes or is rate-limited, backend API availability will degrade until SUBGRAPH_URL is updated.\n\n## Verify Steps\n\n1) docker compose up -d --build\\n2) curl -s -o /dev/null -w \"%{http_code}\" http://localhost:4173\\n3) curl -s http://localhost:3000/api/health\n\n## Rollback Plan\n\nRevert docker-compose.yml and docs/22-devops-dokploy.md; re-run docker compose up -d --build."
+    },
+    {
+      "id": "202602040702-JQ56PF",
+      "title": "Fix monitor fetch and remove UI shadows",
+      "description": "Remove drop shadows from frontend UI and fix Monitor API fetch errors.",
+      "status": "DONE",
+      "priority": "high",
+      "owner": "CODER",
+      "depends_on": [],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "docker compose up -d --build",
+        "curl -s -o /dev/null -w \"%{http_code}\" http://localhost:4173"
+      ],
+      "commit": {
+        "hash": "1270ed44daecfc46146127c89ef5c1d8b7b2e99f",
+        "message": "🎨 JQ56PF fix monitor fetch and remove shadows"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: remove frontend shadows and fix Monitor API fetch failures."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: frontend loads without shadows and Monitor API requests succeed with CORS enabled."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-04T07:09:50.524Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nRemoved UI shadows and enabled CORS to fix Monitor API fetch failures.\n\n## Scope\n\nUpdated frontend styles to remove box shadows, enabled CORS in backend, and added CORS_ORIGIN to docker-compose.yml.\n\nUpdated frontend styles to remove box shadows, enabled CORS in backend, and added CORS_ORIGIN to docker-compose.yml.\n\n## Risks\n\nAllowing '*' for CORS may be too permissive for production; set CORS_ORIGIN to the deployed frontend domain in production.\n\n## Verify Steps\n\n1) docker compose up -d --build\\n2) open http://localhost:4173/monitor\\n3) confirm Monitor loads without 'Failed to fetch'\n\n## Rollback Plan\n\nRevert frontend/src/styles.css, backend/src/main.ts, and docker-compose.yml; rebuild containers."
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "f59bd3b1815378917baba11a3b7f46bbd421d859f59feed561c1f94c03d765d3"
+    "checksum": "4e1fdebf2e640798dd02c3ad928bcf2408da95a1fcbb1569ce2602f063092fb0"
   }
 }
