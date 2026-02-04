@@ -4,13 +4,30 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     environment:
-      - SUBGRAPH_URL=${SUBGRAPH_URL}
+      - SUBGRAPH_URL=${SUBGRAPH_URL:-http://mock-subgraph:4000}
       - SUBGRAPH_CACHE_TTL_MS=${SUBGRAPH_CACHE_TTL_MS:-5000}
       - RATE_LIMIT_WINDOW_MS=${RATE_LIMIT_WINDOW_MS:-60000}
       - RATE_LIMIT_MAX=${RATE_LIMIT_MAX:-120}
+      - CONTRACT_ADDRESS=${CONTRACT_ADDRESS:-0x0000000000000000000000000000000000000001}
+      - NETWORK_NAME=${NETWORK_NAME:-base}
+      - CHAIN_ID=${CHAIN_ID:-8453}
+      - FEE_BPS_ON_ACCEPT=${FEE_BPS_ON_ACCEPT:-50}
+      - FIXED_FEE_ON_EXPIRE=${FIXED_FEE_ON_EXPIRE:-1000000}
+      - BOND_BPS_OF_REWARD=${BOND_BPS_OF_REWARD:-500}
+      - BOND_MIN=${BOND_MIN:-1000000}
       - PORT=3000
     ports:
       - "3000:3000"
+    restart: unless-stopped
+    depends_on:
+      - mock-subgraph
+
+  mock-subgraph:
+    build:
+      context: ./mock-subgraph
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
     restart: unless-stopped
 
   indexer:
