@@ -100,7 +100,7 @@ export default function MarketplacePage() {
         </div>
       )}
 
-      <div className="rounded-lg border border-border/60 bg-card/80 overflow-hidden">
+      <div className="table-frame rounded-lg border border-border/60 bg-card/80 overflow-hidden">
         <div className="relative w-full overflow-auto">
           <table className="w-full caption-bottom text-sm">
             <thead className="[&_tr]:border-b">
@@ -157,7 +157,7 @@ export default function MarketplacePage() {
                   return (
                     <tr
                       key={intent.id}
-                      className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted"
+                      className="data-row border-b transition-colors data-[state=selected]:bg-muted"
                     >
                       <td className="p-4 align-middle font-mono">
                         {formatAddress(intent.id)}

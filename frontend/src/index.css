@@ -301,6 +301,74 @@
   opacity: 1;
 }
 
+.grid-rail {
+  position: relative;
+}
+
+.grid-rail::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(90deg, hsla(220, 18%, 12%, 0.06) 1px, transparent 1px),
+    linear-gradient(180deg, hsla(220, 18%, 12%, 0.04) 1px, transparent 1px);
+  background-size:
+    calc(100% / 12) 100%,
+    100% calc(var(--space-3));
+  opacity: 0.5;
+  pointer-events: none;
+  mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    black 18%,
+    black 82%,
+    transparent 100%
+  );
+}
+
+.table-frame {
+  position: relative;
+  overflow: hidden;
+}
+
+.table-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid hsla(18, 94%, 58%, 0.2);
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.data-row:hover {
+  background: linear-gradient(90deg, hsla(18, 92%, 96%, 0.6), transparent);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.card-grid > .card-span-7 {
+  grid-column: span 7;
+}
+
+.card-grid > .card-span-5 {
+  grid-column: span 5;
+}
+
+@media (max-width: 1024px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+  .card-grid > .card-span-7,
+  .card-grid > .card-span-5 {
+    grid-column: span 1;
+  }
+}
+
 .layout-shell {
   width: min(1200px, 100% - var(--gutter) * 2);
   margin-inline: auto;

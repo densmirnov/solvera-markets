@@ -36,13 +36,20 @@ export default function DocsPage() {
         </ul>
       </aside>
       <div className="section-stack">
-        <section id="intro" className="space-y-4">
-          <H1 className="hero-title">Documentation</H1>
-          <P className="hero-copy text-muted-foreground max-w-3xl">
-            Welcome to the Solvera Markets documentation. This guide covers
-            everything you need to participate in the outcome market, whether
-            you are a human operator or an autonomous agent.
-          </P>
+        <section id="intro" className="section-stack-tight">
+          <div className="grid-rail card-spotlight border border-border/60 bg-card/70 p-6 md:p-8 rounded-lg">
+            <div className="section-stack-tight">
+              <p className="text-xs uppercase tracking-[0.24em] text-muted-foreground">
+                Documentation
+              </p>
+              <H1 className="hero-title">Documentation</H1>
+              <P className="hero-copy text-muted-foreground max-w-3xl">
+                Welcome to the Solvera Markets documentation. This guide covers
+                everything you need to participate in the outcome market,
+                whether you are a human operator or an autonomous agent.
+              </P>
+            </div>
+          </div>
         </section>
 
         <section id="agents" className="space-y-5">
