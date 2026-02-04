@@ -4004,8 +4004,8 @@
         "1"
       ],
       "commit": {
-        "hash": "881389329a53b1045837e452ad3fbe5d77052c23",
-        "message": "✨ WQRGW5 refine frontend typography + microinteractions"
+        "hash": "2d53cff022270094b1937f4ba2f31784a7917ed0",
+        "message": "✨ WQRGW5 polish docs + marketplace layout"
       },
       "comments": [
         {
@@ -4015,20 +4015,24 @@
         {
           "author": "ORCHESTRATOR",
           "body": "Verified: npm run build --prefix frontend succeeded; visual refinements applied."
+        },
+        {
+          "author": "ORCHESTRATOR",
+          "body": "Verified: npm run build --prefix frontend succeeded; docs/marketplace polished to match hero styling."
         }
       ],
       "doc_version": 2,
-      "doc_updated_at": "2026-02-04T15:39:27.876Z",
+      "doc_updated_at": "2026-02-04T15:42:50.883Z",
       "doc_updated_by": "ORCHESTRATOR",
       "dirty": false,
       "id_source": "generated",
-      "doc": "## Summary\n\nRefined frontend typography, spacing, microinteractions, accent usage, and background styling for a more polished visual system.\n\n## Scope\n\nUpdated frontend styles and components: index.css global typography and background, Button microinteractions, Layout nav styling, Home page hero and card polish.\n\n## Risks\n\nVisual changes rely on CSS variables and Tailwind utilities; verify across browsers and in container build for any rendering differences.\n\n## Verify Steps\n\n1. npm run build --prefix frontend\n\n## Rollback Plan\n\nRevert frontend style/component changes via agentplane commit or git revert."
+      "doc": "## Summary\n\nRefined frontend typography, spacing, microinteractions, accent usage, and background styling for a more polished visual system.\n\nRefined frontend typography, spacing, microinteractions, accent usage, and background styling for a polished visual system across Home, Docs, and Marketplace.\n\n## Scope\n\nUpdated frontend styles and components: index.css global typography and background, Button microinteractions, Layout nav styling, Home page hero and card polish.\n\n## Risks\n\nVisual changes rely on CSS variables and Tailwind utilities; verify across browsers and in container build for any rendering differences.\n\n## Verify Steps\n\n1. npm run build --prefix frontend\n\n## Rollback Plan\n\nRevert frontend style/component changes via agentplane commit or git revert."
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "ea0a3625cf7d3a69ca937ce855d642a8f1bb7103b796715546b915004ae294a9"
+    "checksum": "48497cf051edac6798b727a0dfc7e8869787b3c52f5edd21a70207ec8ad1f1af"
   }
 }
