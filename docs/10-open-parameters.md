@@ -1,3 +1,8 @@
+---
+title: "Open parameters and config"
+description: "Documentation for Open parameters and config."
+---
+
 # Open parameters and config
 
 ## Parameters

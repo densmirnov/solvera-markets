@@ -1,3 +1,8 @@
+---
+title: "Contract specification (MVP)"
+description: "Requirements:"
+---
+
 # Contract specification (MVP)
 
 ## createIntent(...)

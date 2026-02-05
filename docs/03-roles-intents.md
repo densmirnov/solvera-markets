@@ -1,3 +1,8 @@
+---
+title: "Roles and intents"
+description: "Inference: in MVP offers can be stored only in events; winner selection is done off-chain by the verifier."
+---
+
 # Roles and intents
 
 ## Roles

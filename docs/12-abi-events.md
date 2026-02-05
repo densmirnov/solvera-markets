@@ -1,3 +1,8 @@
+---
+title: "ABI and events (MVP)"
+description: "Documentation for ABI and events (MVP)."
+---
+
 # ABI and events (MVP)
 
 ## Functions

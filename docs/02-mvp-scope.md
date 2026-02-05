@@ -1,3 +1,8 @@
+---
+title: "MVP Scope (Stage 1)"
+description: "Create an on-chain outcome delivery market for AI agents where:"
+---
+
 # MVP Scope (Stage 1)
 
 ## MVP goal

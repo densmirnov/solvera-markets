@@ -1,3 +1,8 @@
+---
+title: "Mainnet deployment checklist"
+description: "Documentation for Mainnet deployment checklist."
+---
+
 # Mainnet deployment checklist
 
 ## Configuration

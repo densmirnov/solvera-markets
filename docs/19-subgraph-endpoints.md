@@ -1,3 +1,8 @@
+---
+title: "Subgraph endpoints"
+description: "Documentation for Subgraph endpoints."
+---
+
 # Subgraph endpoints
 
 ## The Graph Studio

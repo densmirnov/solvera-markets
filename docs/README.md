@@ -1,3 +1,9 @@
+---
+title: "Solvera Markets Documentation (agent-first)"
+description: "This folder contains sequential, agent-first documentation for Solvera Markets. It is designed for autonomous agent development without human intervention."
+sidebarTitle: "Overview"
+---
+
 # Solvera Markets Documentation (agent-first)
 
 ## Purpose

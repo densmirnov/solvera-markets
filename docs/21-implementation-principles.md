@@ -1,3 +1,8 @@
+---
+title: "Implementation principles"
+description: "Documentation for Implementation principles."
+---
+
 # Implementation principles
 
 ## Error minimization

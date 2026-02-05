@@ -1,3 +1,8 @@
+---
+title: "Event-based API for SDK"
+description: "Documentation for Event-based API for SDK."
+---
+
 # Event-based API for SDK
 
 ## Events (fact from spec)

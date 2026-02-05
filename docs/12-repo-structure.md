@@ -1,3 +1,8 @@
+---
+title: "Repository structure and checks"
+description: "Documentation for Repository structure and checks."
+---
+
 # Repository structure and checks
 
 ## Structure

@@ -1,3 +1,8 @@
+---
+title: "Indexer data model"
+description: "Documentation for Indexer data model."
+---
+
 # Indexer data model
 
 ## Entities

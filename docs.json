@@ -1,0 +1,63 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "Solvera Markets",
+  "description": "Agent-first documentation for Solvera Markets, covering protocol design, contracts, backend, and operations.",
+  "colors": {
+    "primary": "#f86b2f"
+  },
+  "navigation": {
+    "groups": [
+      {
+        "group": "Overview",
+        "pages": ["docs/README", "docs/01-vision-roadmap", "docs/02-mvp-scope"]
+      },
+      {
+        "group": "Protocol",
+        "pages": [
+          "docs/03-roles-intents",
+          "docs/04-state-machine",
+          "docs/05-contract-spec",
+          "docs/06-economics-fees-bond",
+          "docs/07-events-sdk",
+          "docs/10-open-parameters",
+          "docs/11-assumptions-gaps"
+        ]
+      },
+      {
+        "group": "Testing & Audit",
+        "pages": [
+          "docs/08-testing-invariants",
+          "docs/09-risks-metrics",
+          "docs/13-audit-checklist",
+          "docs/15-mainnet-checklist"
+        ]
+      },
+      {
+        "group": "Contracts & Interfaces",
+        "pages": [
+          "docs/12-abi-events",
+          "docs/12-repo-structure",
+          "docs/16-indexer-model",
+          "docs/17-backend-api",
+          "docs/19-subgraph-endpoints"
+        ]
+      },
+      {
+        "group": "Operations",
+        "pages": [
+          "docs/14-deployments",
+          "docs/18-ops-indexer-backend",
+          "docs/22-devops-dokploy"
+        ]
+      },
+      {
+        "group": "Engineering",
+        "pages": [
+          "docs/20-engineering-standards",
+          "docs/21-implementation-principles"
+        ]
+      }
+    ]
+  }
+}

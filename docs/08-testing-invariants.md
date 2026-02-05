@@ -1,3 +1,8 @@
+---
+title: "Test plan and invariants"
+description: "4. No `selectWinner/fulfill/expire` calls from final states. 5. `rep` changes only in `_accept` (+1) and `expire` branch B (‑1)."
+---
+
 # Test plan and invariants
 
 ## Scenario tests (minimum)

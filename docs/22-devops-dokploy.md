@@ -1,3 +1,8 @@
+---
+title: "DevOps: Dokploy and Docker Compose"
+description: "Documentation for DevOps: Dokploy and Docker Compose."
+---
+
 # DevOps: Dokploy and Docker Compose
 
 ## Deployment model

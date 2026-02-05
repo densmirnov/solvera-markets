@@ -1,3 +1,8 @@
+---
+title: "State Machine"
+description: "4. `ACCEPTED` — payout completed. 5. `EXPIRED` — terminated by timeout."
+---
+
 # State Machine
 
 ## States
