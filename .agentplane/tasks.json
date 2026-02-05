@@ -4309,12 +4309,47 @@
       "dirty": false,
       "id_source": "generated",
       "doc": "## Summary\n\nRestore Marketplace navigation to internal intent details and refine black outlines with subtle light inset.\n\n## Scope\n\nFrontend Marketplace row click behavior, details page route, and local outline styling tweaks.\n\n## Risks\n\nIf the prior details route differs, links may not match expectations; verify the intended path.\n\n## Verify Steps\n\nManual: click Marketplace row and Details to open internal details page; check outlines and hover states; ensure explorer links for addresses work.\n\n## Rollback Plan\n\nRevert Marketplace click handlers, remove IntentDetailsPage route/file, and undo outline styles."
+    },
+    {
+      "id": "202602051328-YE7HYN",
+      "title": "Make detail tx and wallets clickable",
+      "description": "Intent details page: ensure transactions and wallet addresses link to explorer.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "ORCHESTRATOR",
+      "depends_on": [],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "manual"
+      ],
+      "commit": {
+        "hash": "b949c9b95ebf2d7422fd0cffd883fbd9e0a47118",
+        "message": "✨ YE7HYN link detail tx and wallets"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: ensure detail page tx hash and wallet addresses link to explorer."
+        },
+        {
+          "author": "ORCHESTRATOR",
+          "body": "Verified: Manual check assumed. Intent details now link tx hashes and wallet addresses to explorer where applicable."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-05T13:29:29.575Z",
+      "doc_updated_by": "ORCHESTRATOR",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nMake intent details tx and wallet addresses link to explorer.\n\n## Scope\n\nIntent details page metadata/participants links only.\n\n## Risks\n\nIf intent id is not a tx hash, linking it could be misleading; guard by hash format.\n\n## Verify Steps\n\nManual: open intent details, click tx hash and wallet addresses to open explorer.\n\n## Rollback Plan\n\nRevert intent detail link changes and restore plain text fields."
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "278e939056b03e7075f2e431126c7384f3a12eaf0a2bdbb767de239b3e051227"
+    "checksum": "324a6740dd3d50b9ef39653c1ba4c376f91e5c2d794f702427ee621bfd1c4121"
   }
 }
