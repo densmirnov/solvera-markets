@@ -463,6 +463,19 @@
   gap: var(--space-2);
 }
 
+.marketplace-dense {
+  gap: var(--space-2);
+}
+
+.marketplace-dense .marketplace-table {
+  line-height: 1.35;
+}
+
+.marketplace-dense .marketplace-table-frame,
+.marketplace-dense .marketplace-filters {
+  border-radius: 0.65rem;
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(10px);

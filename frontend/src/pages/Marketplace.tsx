@@ -69,7 +69,7 @@ export default function MarketplacePage() {
   }, [load]);
 
   return (
-    <div className="section-stack animate-in fade-in duration-500">
+    <div className="section-stack animate-in fade-in duration-500 marketplace-dense">
       <div className="section-stack-tight reveal delay-1">
         <H1 className="hero-title hero-glint">Marketplace</H1>
         <P className="hero-copy text-muted-foreground max-w-2xl">
@@ -77,20 +77,20 @@ export default function MarketplacePage() {
         </P>
       </div>
 
-      <div className="card-spotlight surface-soft-muted flex flex-wrap gap-5 items-end p-5 rounded-lg reveal delay-2">
+      <div className="card-spotlight surface-soft-muted flex flex-wrap gap-4 items-end p-4 rounded-lg reveal delay-2 marketplace-filters">
         <div className="grid gap-2">
-          <label className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+          <label className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
             State
           </label>
           <input
-            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-[200px]"
+            className="flex h-9 w-full rounded-md border border-input bg-background px-3 py-2 text-[13px] ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-[190px]"
             placeholder="e.g. OPEN"
             value={filters.state}
             onChange={(e) => setFilters({ ...filters, state: e.target.value })}
           />
         </div>
         {/* More filters can be added here */}
-        <Button onClick={load} variant="secondary">
+        <Button onClick={load} variant="secondary" size="sm">
           Refresh
         </Button>
       </div>
@@ -101,27 +101,27 @@ export default function MarketplacePage() {
         </div>
       )}
 
-      <div className="table-frame surface-soft-muted rounded-lg overflow-hidden reveal delay-3">
+      <div className="table-frame surface-soft-muted rounded-lg overflow-hidden reveal delay-3 marketplace-table-frame">
         <div className="relative w-full overflow-auto">
-          <table className="w-full caption-bottom text-sm">
+          <table className="w-full caption-bottom text-sm marketplace-table">
             <thead className="[&_tr]:border-b">
               <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
-                <th className="h-12 px-4 text-left align-middle text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                <th className="h-10 px-3 text-left align-middle text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
                   ID
                 </th>
-                <th className="h-12 px-4 text-left align-middle text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                <th className="h-10 px-3 text-left align-middle text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
                   State
                 </th>
-                <th className="h-12 px-4 text-left align-middle text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                <th className="h-10 px-3 text-left align-middle text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
                   Reward
                 </th>
-                <th className="h-12 px-4 text-left align-middle text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                <th className="h-10 px-3 text-left align-middle text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
                   Min Output
                 </th>
-                <th className="h-12 px-4 text-left align-middle text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                <th className="h-10 px-3 text-left align-middle text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
                   Initiator
                 </th>
-                <th className="h-12 px-4 text-left align-middle text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                <th className="h-10 px-3 text-left align-middle text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
                   Action
                 </th>
               </tr>
@@ -174,7 +174,7 @@ export default function MarketplacePage() {
                         }
                       }}
                     >
-                      <td className="p-4 align-middle font-mono">
+                      <td className="px-3 py-2 align-middle font-mono text-[13px]">
                         <a
                           href={txUrl}
                           target="_blank"
@@ -185,10 +185,10 @@ export default function MarketplacePage() {
                           {formatAddress(intent.id)}
                         </a>
                       </td>
-                      <td className="p-4 align-middle">
+                      <td className="px-3 py-2 align-middle">
                         <span
                           className={cn(
-                            "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+                            "inline-flex items-center rounded-full border px-2 py-0.5 text-[11px] font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
                             intent.state === "OPEN"
                               ? "border-transparent bg-primary text-primary-foreground"
                               : "text-foreground",
@@ -197,19 +197,23 @@ export default function MarketplacePage() {
                           {intent.state}
                         </span>
                       </td>
-                      <td className="p-4 align-middle">
-                        <div className="font-medium">{reward.primary}</div>
-                        <div className="text-xs text-muted-foreground">
+                      <td className="px-3 py-2 align-middle">
+                        <div className="font-medium text-[13px]">
+                          {reward.primary}
+                        </div>
+                        <div className="text-[11px] text-muted-foreground">
                           {reward.secondary}
                         </div>
                       </td>
-                      <td className="p-4 align-middle">
-                        <div className="font-medium">{minOut.primary}</div>
-                        <div className="text-xs text-muted-foreground">
+                      <td className="px-3 py-2 align-middle">
+                        <div className="font-medium text-[13px]">
+                          {minOut.primary}
+                        </div>
+                        <div className="text-[11px] text-muted-foreground">
                           {minOut.secondary}
                         </div>
                       </td>
-                      <td className="p-4 align-middle font-mono text-xs">
+                      <td className="px-3 py-2 align-middle font-mono text-[11px]">
                         <a
                           href={explorerAddressUrl(intent.initiator)}
                           target="_blank"
@@ -220,7 +224,7 @@ export default function MarketplacePage() {
                           {formatAddress(intent.initiator)}
                         </a>
                       </td>
-                      <td className="p-4 align-middle">
+                      <td className="px-3 py-2 align-middle">
                         <Button
                           variant="ghost"
                           size="sm"
