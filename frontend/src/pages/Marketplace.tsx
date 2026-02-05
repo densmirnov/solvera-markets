@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { apiGet } from "../lib/api";
 import {
   explorerAddressUrl,
-  explorerTxUrl,
   formatAddress,
   formatTokenAmount,
 } from "../lib/format";
@@ -29,6 +28,7 @@ interface IntentResponse {
 }
 
 export default function MarketplacePage() {
+  const navigate = useNavigate();
   const [data, setData] = useState<Intent[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -77,7 +77,7 @@ export default function MarketplacePage() {
         </P>
       </div>
 
-      <div className="card-spotlight surface-soft-muted flex flex-wrap gap-4 items-end p-4 rounded-lg reveal delay-2 marketplace-filters">
+      <div className="card-spotlight surface-soft-muted marketplace-outline flex flex-wrap gap-4 items-end p-4 rounded-lg reveal delay-2 marketplace-filters">
         <div className="grid gap-2">
           <label className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
             State
@@ -101,7 +101,7 @@ export default function MarketplacePage() {
         </div>
       )}
 
-      <div className="table-frame surface-soft-muted rounded-lg overflow-hidden reveal delay-3 marketplace-table-frame">
+      <div className="table-frame surface-soft-muted marketplace-outline rounded-lg overflow-hidden reveal delay-3 marketplace-table-frame">
         <div className="relative w-full overflow-auto">
           <table className="w-full caption-bottom text-sm marketplace-table">
             <thead className="[&_tr]:border-b">
@@ -155,10 +155,9 @@ export default function MarketplacePage() {
                     intent.minAmountOut,
                     intent.tokenOut,
                   );
-                  const txUrl = explorerTxUrl(intent.id);
-                  const openTx = () => {
-                    if (!txUrl) return;
-                    window.open(txUrl, "_blank", "noopener,noreferrer");
+                  const detailsHref = `/marketplace/${intent.id}`;
+                  const openDetails = () => {
+                    navigate(detailsHref);
                   };
                   return (
                     <tr
@@ -166,24 +165,22 @@ export default function MarketplacePage() {
                       className="data-row border-b transition-colors data-[state=selected]:bg-muted hover:bg-muted/40 cursor-pointer"
                       role="link"
                       tabIndex={0}
-                      onClick={openTx}
+                      onClick={openDetails}
                       onKeyDown={(event) => {
                         if (event.key === "Enter" || event.key === " ") {
                           event.preventDefault();
-                          openTx();
+                          openDetails();
                         }
                       }}
                     >
                       <td className="px-3 py-2 align-middle font-mono text-[13px]">
-                        <a
-                          href={txUrl}
-                          target="_blank"
-                          rel="noreferrer"
+                        <Link
+                          to={detailsHref}
                           className="hover:underline"
                           onClick={(event) => event.stopPropagation()}
                         >
                           {formatAddress(intent.id)}
-                        </a>
+                        </Link>
                       </td>
                       <td className="px-3 py-2 align-middle">
                         <span
@@ -230,7 +227,7 @@ export default function MarketplacePage() {
                           size="sm"
                           onClick={(event) => {
                             event.stopPropagation();
-                            openTx();
+                            openDetails();
                           }}
                         >
                           Details
