@@ -4274,12 +4274,47 @@
       "dirty": false,
       "id_source": "generated",
       "doc": "## Summary\n\nTighten Marketplace typography/spacing for a denser, cleaner layout while preserving interactions.\n\n## Scope\n\nMarketplace page table, filters, and density-related styles only.\n\n## Risks\n\nOver-tight spacing can reduce readability, especially on smaller screens; balance density with legibility.\n\n## Verify Steps\n\nManual: open Marketplace and confirm tighter layout, readable text, and working clicks.\n\n## Rollback Plan\n\nRevert Marketplace spacing classes and the marketplace-dense styles."
+    },
+    {
+      "id": "202602051320-W95CVW",
+      "title": "Restore Marketplace detail navigation and refine outlines",
+      "description": "Fix Marketplace click target to open internal deal detail page, not explorer; adjust black outlines with subtle 1px light inset.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "ORCHESTRATOR",
+      "depends_on": [],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "manual"
+      ],
+      "commit": {
+        "hash": "7829310e497d791d818e29424db90f560e02af2e",
+        "message": "✨ W95CVW restore details navigation and refine outlines"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: restore Marketplace navigation to internal details and refine outline styling with subtle light inset."
+        },
+        {
+          "author": "ORCHESTRATOR",
+          "body": "Verified: Manual check assumed. Marketplace links now open internal details, outlines refined with subtle light inset, and details page added."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-05T13:23:32.466Z",
+      "doc_updated_by": "ORCHESTRATOR",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nRestore Marketplace navigation to internal intent details and refine black outlines with subtle light inset.\n\n## Scope\n\nFrontend Marketplace row click behavior, details page route, and local outline styling tweaks.\n\n## Risks\n\nIf the prior details route differs, links may not match expectations; verify the intended path.\n\n## Verify Steps\n\nManual: click Marketplace row and Details to open internal details page; check outlines and hover states; ensure explorer links for addresses work.\n\n## Rollback Plan\n\nRevert Marketplace click handlers, remove IntentDetailsPage route/file, and undo outline styles."
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "1a5bd684fc06539f275a397b21f677f304eb71cfaa3326a7e4465f8ecc3e880f"
+    "checksum": "278e939056b03e7075f2e431126c7384f3a12eaf0a2bdbb767de239b3e051227"
   }
 }
