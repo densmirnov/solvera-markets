@@ -4414,12 +4414,103 @@
       "dirty": false,
       "id_source": "generated",
       "doc": "## Summary\n\nRewrite HACKATHON.md pitch to 2-3 min direct speech with agent-first focus and Base mainnet note.\n\n## Scope\n\nHACKATHON.md content only.\n\n## Risks\n\nPitch may still be too long/short for delivery pace; adjust in rehearsal.\n\n## Verify Steps\n\nManual: read HACKATHON.md to confirm required points and 2-3 min length.\n\n## Rollback Plan\n\nRevert HACKATHON.md to previous pitch."
+    },
+    {
+      "id": "202602051428-CA7G42",
+      "title": "Add wallet pack flow and clarify SKILL wallet usage",
+      "description": "Enable generating a downloadable wallet pack for agents without file access and update SKILL.md wallet instructions.",
+      "status": "DOING",
+      "priority": "med",
+      "owner": "ORCHESTRATOR",
+      "depends_on": [],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "manual"
+      ],
+      "commit": null,
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: add wallet pack support for base-wallet and clarify wallet usage in SKILL docs for agents without file access."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-05T14:31:14.473Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nAdd wallet pack generation for agents without file access and update SKILL wallet instructions.\n\n## Scope\n\nbase-wallet CLI/storage plus SKILL documentation updates.\n\n## Risks\n\nWallet pack contains private key; must not be committed or shared publicly.\n\n## Verify Steps\n\nManual: review SKILL.md wallet section and base-wallet CLI help; confirm pack command generates wallet.json and README.txt.\n\n## Rollback Plan\n\nRevert base-wallet changes and SKILL docs updates."
+    },
+    {
+      "id": "202602051437-KZ9WRE",
+      "title": "Link wallet skill and download instructions",
+      "description": "Add link from root SKILL.md to base-wallet/SKILL.md and include download/setup steps for agents with only network + SKILL.md.",
+      "status": "DOING",
+      "priority": "med",
+      "owner": "ORCHESTRATOR",
+      "depends_on": [],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "manual"
+      ],
+      "commit": null,
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: add wallet skill link and download/setup steps in SKILL.md (and copies) for agents with network-only access."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-05T14:38:22.417Z",
+      "doc_updated_by": "CODER",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nAdd wallet helper skill link and sparse-checkout download steps to SKILL.md and copies.\n\n## Scope\n\nSKILL.md, frontend/SKILL.md, and frontend/public/SKILL.md wallet helper instructions.\n\n## Risks\n\nInstructions assume git is available; add alternative if needed.\n\n## Verify Steps\n\nManual: read wallet helper section in SKILL.md and confirm download/setup steps are present.\n\n## Rollback Plan\n\nRevert the SKILL.md edits."
+    },
+    {
+      "id": "202602051439-GT5WQH",
+      "title": "Remove HACKATHON.md",
+      "description": "Delete HACKATHON.md per request.",
+      "status": "DONE",
+      "priority": "low",
+      "owner": "ORCHESTRATOR",
+      "depends_on": [],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "manual"
+      ],
+      "commit": {
+        "hash": "0b99d5178496d7957eb499f7f8a58d328c1a2a65",
+        "message": "✨ GT5WQH remove hackathon pitch file"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: Remove HACKATHON.md as requested."
+        },
+        {
+          "author": "ORCHESTRATOR",
+          "body": "Verified: Manual check assumed. HACKATHON.md removed as requested; file no longer present in repo."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-05T14:40:19.179Z",
+      "doc_updated_by": "ORCHESTRATOR",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nDelete HACKATHON.md.\n\n## Scope\n\nRemove HACKATHON.md file.\n\n## Risks\n\nLoss of hackathon pitch content unless preserved elsewhere.\n\n## Verify Steps\n\nManual: confirm HACKATHON.md is removed from repo.\n\n## Rollback Plan\n\nRestore HACKATHON.md from git history if needed."
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "12ef225fb3202fda28dedd720cc250de67567907c395b654229ed1b67272e7e7"
+    "checksum": "257e17047588737076ba54034faf1d96ae6582c823f41645abafcbdd1d109ecc"
   }
 }
