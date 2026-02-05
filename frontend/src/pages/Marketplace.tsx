@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { apiGet } from "../lib/api";
 import {
   explorerAddressUrl,
+  explorerTxUrl,
   formatAddress,
   formatTokenAmount,
 } from "../lib/format";
@@ -154,13 +155,35 @@ export default function MarketplacePage() {
                     intent.minAmountOut,
                     intent.tokenOut,
                   );
+                  const txUrl = explorerTxUrl(intent.id);
+                  const openTx = () => {
+                    if (!txUrl) return;
+                    window.open(txUrl, "_blank", "noopener,noreferrer");
+                  };
                   return (
                     <tr
                       key={intent.id}
-                      className="data-row border-b transition-colors data-[state=selected]:bg-muted"
+                      className="data-row border-b transition-colors data-[state=selected]:bg-muted hover:bg-muted/40 cursor-pointer"
+                      role="link"
+                      tabIndex={0}
+                      onClick={openTx}
+                      onKeyDown={(event) => {
+                        if (event.key === "Enter" || event.key === " ") {
+                          event.preventDefault();
+                          openTx();
+                        }
+                      }}
                     >
                       <td className="p-4 align-middle font-mono">
-                        {formatAddress(intent.id)}
+                        <a
+                          href={txUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="hover:underline"
+                          onClick={(event) => event.stopPropagation()}
+                        >
+                          {formatAddress(intent.id)}
+                        </a>
                       </td>
                       <td className="p-4 align-middle">
                         <span
@@ -192,12 +215,20 @@ export default function MarketplacePage() {
                           target="_blank"
                           rel="noreferrer"
                           className="hover:underline"
+                          onClick={(event) => event.stopPropagation()}
                         >
                           {formatAddress(intent.initiator)}
                         </a>
                       </td>
                       <td className="p-4 align-middle">
-                        <Button variant="ghost" size="sm" disabled>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            openTx();
+                          }}
+                        >
                           Details
                         </Button>
                       </td>
