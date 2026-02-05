@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { apiGet } from "../lib/api";
 import {
@@ -6,6 +6,7 @@ import {
   formatAddress,
   formatTokenAmount,
 } from "../lib/format";
+import { useEnsNames } from "../lib/ens";
 import { H1, P } from "../components/ui/Typography";
 import { Button } from "../components/ui/Button";
 import { cn } from "../lib/utils";
@@ -67,6 +68,12 @@ export default function MarketplacePage() {
   useEffect(() => {
     load();
   }, [load]);
+
+  const initiatorAddresses = useMemo(
+    () => data.map((intent) => intent.initiator),
+    [data],
+  );
+  const ensNames = useEnsNames(initiatorAddresses);
 
   return (
     <div className="section-stack animate-in fade-in duration-500 marketplace-dense">
@@ -156,6 +163,8 @@ export default function MarketplacePage() {
                     intent.tokenOut,
                   );
                   const detailsHref = `/marketplace/${intent.id}`;
+                  const initiatorKey = intent.initiator.toLowerCase();
+                  const initiatorEns = ensNames[initiatorKey];
                   const openDetails = () => {
                     navigate(detailsHref);
                   };
@@ -218,7 +227,16 @@ export default function MarketplacePage() {
                           className="hover:underline"
                           onClick={(event) => event.stopPropagation()}
                         >
-                          {formatAddress(intent.initiator)}
+                          {initiatorEns ? (
+                            <span className="flex flex-col">
+                              <span>{initiatorEns}</span>
+                              <span className="text-[10px] text-muted-foreground">
+                                {formatAddress(intent.initiator)}
+                              </span>
+                            </span>
+                          ) : (
+                            formatAddress(intent.initiator)
+                          )}
                         </a>
                       </td>
                       <td className="px-3 py-2 align-middle">

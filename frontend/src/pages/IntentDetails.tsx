@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { apiGet } from "../lib/api";
 import {
@@ -7,6 +7,7 @@ import {
   formatAddress,
   formatTokenAmount,
 } from "../lib/format";
+import { useEnsNames } from "../lib/ens";
 import { H1, P } from "../components/ui/Typography";
 
 interface IntentDetail {
@@ -76,10 +77,29 @@ export default function IntentDetailsPage() {
   const bond = data?.bondAmount
     ? formatTokenAmount(data.bondAmount, data.rewardToken)
     : null;
+  const participantAddresses = useMemo(() => {
+    if (!data) return [];
+    return [data.initiator, data.payer, data.verifier, data.winner].filter(
+      (value): value is string => Boolean(value),
+    );
+  }, [data]);
+  const ensNames = useEnsNames(participantAddresses);
   const isTxHash = (value: string | null | undefined) =>
     Boolean(value && value.startsWith("0x") && value.length === 66);
   const intentTxUrl = isTxHash(data?.id) ? explorerTxUrl(data?.id) : "";
   const txUrl = data?.txHash ? explorerTxUrl(data.txHash) : "";
+  const renderEns = (address: string) => {
+    const ens = ensNames[address.toLowerCase()];
+    if (!ens) return formatAddress(address);
+    return (
+      <span className="inline-flex flex-col">
+        <span>{ens}</span>
+        <span className="text-[10px] text-muted-foreground">
+          {formatAddress(address)}
+        </span>
+      </span>
+    );
+  };
 
   return (
     <div className="section-stack animate-in fade-in duration-500 marketplace-dense">
@@ -181,7 +201,7 @@ export default function IntentDetailsPage() {
                       target="_blank"
                       rel="noreferrer"
                     >
-                      {formatAddress(data.initiator)}
+                      {renderEns(data.initiator)}
                     </a>
                   </div>
                   <div>
@@ -192,7 +212,7 @@ export default function IntentDetailsPage() {
                       target="_blank"
                       rel="noreferrer"
                     >
-                      {formatAddress(data.payer)}
+                      {renderEns(data.payer)}
                     </a>
                   </div>
                   {data.verifier && (
@@ -204,7 +224,7 @@ export default function IntentDetailsPage() {
                         target="_blank"
                         rel="noreferrer"
                       >
-                        {formatAddress(data.verifier)}
+                        {renderEns(data.verifier)}
                       </a>
                     </div>
                   )}
@@ -217,7 +237,7 @@ export default function IntentDetailsPage() {
                         target="_blank"
                         rel="noreferrer"
                       >
-                        {formatAddress(data.winner)}
+                        {renderEns(data.winner)}
                       </a>
                     </div>
                   )}
