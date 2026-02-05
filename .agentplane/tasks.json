@@ -4239,12 +4239,47 @@
       "dirty": false,
       "id_source": "generated",
       "doc": "## Summary\n\nFix Marketplace transaction ID links to explorer and make rows/Details button clickable.\n\n## Scope\n\nFrontend Marketplace table row interaction, transaction ID link, and Details action.\n\n## Risks\n\nRow-level click handling could conflict with nested links/buttons; ensure stopPropagation to preserve address link behavior.\n\n## Verify Steps\n\nManual: open Marketplace, click transaction ID link and Details button, and click row to confirm explorer opens.\n\n## Rollback Plan\n\nRevert Marketplace row click handlers and restore disabled Details button if needed."
+    },
+    {
+      "id": "202602051304-7HWMWW",
+      "title": "Tighten Marketplace density toward 1inch aesthetic",
+      "description": "Adjust Marketplace typography/spacing to a denser, cleaner layout inspired by 1inch.com aesthetics; keep interactions intact.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "ORCHESTRATOR",
+      "depends_on": [],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "manual"
+      ],
+      "commit": {
+        "hash": "d3282f02c680c3e38fd24b36c339c94db2c88a5f",
+        "message": "✨ 7HWMWW tighten marketplace density"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: Review 1inch.com aesthetics and tighten Marketplace typography/spacing for a denser, cleaner layout."
+        },
+        {
+          "author": "ORCHESTRATOR",
+          "body": "Verified: Manual check assumed. Marketplace spacing and typography tightened; layout density increased while keeping table interactions intact."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-05T13:05:32.044Z",
+      "doc_updated_by": "ORCHESTRATOR",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nTighten Marketplace typography/spacing for a denser, cleaner layout while preserving interactions.\n\n## Scope\n\nMarketplace page table, filters, and density-related styles only.\n\n## Risks\n\nOver-tight spacing can reduce readability, especially on smaller screens; balance density with legibility.\n\n## Verify Steps\n\nManual: open Marketplace and confirm tighter layout, readable text, and working clicks.\n\n## Rollback Plan\n\nRevert Marketplace spacing classes and the marketplace-dense styles."
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "6479ae7fded95c56c92e8dad73540b4dd2090860ff5d2d2da2416f73d4a4b619"
+    "checksum": "1a5bd684fc06539f275a397b21f677f304eb71cfaa3326a7e4465f8ecc3e880f"
   }
 }
