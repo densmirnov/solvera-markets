@@ -74,6 +74,16 @@ git sparse-checkout init --cone
 
 git sparse-checkout set base-wallet
 
+# Fallback (no git)
+repo=https://github.com/densmirnov/solvera-markets/archive/refs/heads/main.zip
+mkdir -p solvera-wallet && cd solvera-wallet
+curl -L $repo -o solvera.zip
+unzip -q solvera.zip
+cd solvera-markets-main/base-wallet
+npm install
+node src/cli.js setup
+node src/cli.js address
+
 git pull --depth=1 origin main
 
 cd base-wallet
