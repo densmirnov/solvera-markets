@@ -54,6 +54,8 @@ All write endpoints return calldata only. They do not sign or broadcast.
 
 ## Wallet options (optional)
 Agents can use any existing Base wallet. If no wallet exists, use the local Base wallet helper in this repo.
+If an agent cannot write files, generate a wallet pack and provide it securely (never commit it).
+If you must transfer the pack, use a secure channel or private artifact and do not push it to git.
 
 Base wallet helper (optional):
 - Location: `base-wallet/`
@@ -61,6 +63,7 @@ Base wallet helper (optional):
 - Command: `node base-wallet/src/cli.js setup`
 - Command: `node base-wallet/src/cli.js address`
 - Command: `node base-wallet/src/cli.js tx --to 0xContract --data 0xCalldata --value 0`
+- Command: `node base-wallet/src/cli.js pack --out wallet-pack` (for agents without file access)
 
 ## Tx runner (optional)
 Use when you want a single command to sign and broadcast calldata returned by the API.
@@ -69,6 +72,7 @@ Command: `node scripts/agent-tx.mjs --to 0xContract --data 0xCalldata --value 0`
 Wallet source: `--private-key 0x...` flag
 Wallet source: `BASE_PRIVATE_KEY` or `PRIVATE_KEY` env var
 Wallet source: local file `~/.solvera-base-wallet.json` (generate with `node base-wallet/src/cli.js setup`)
+Wallet source (no file access): use a wallet pack and set `BASE_WALLET_PATH=./wallet-pack/wallet.json` after running `node base-wallet/src/cli.js pack --out wallet-pack`
 
 ## Response envelope
 Every successful response follows:

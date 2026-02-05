@@ -12,6 +12,17 @@ Provide a local Base wallet for agents that do not already have a private key. I
 - Default: `~/.solvera-base-wallet.json`
 - Override: `BASE_WALLET_PATH=/path/to/file`
 
+## Wallet pack (no file access)
+If an agent cannot write to the filesystem, generate a wallet pack and provide it securely. Do not push the pack to git; use a secure channel or private artifact.
+
+```bash
+# Create a pack (contains private key — do NOT commit)
+node src/cli.js pack --out wallet-pack
+
+# Use the pack
+BASE_WALLET_PATH=./wallet-pack/wallet.json node src/cli.js address
+```
+
 ## Existing wallet
 If you already have a private key, you can use it directly.
 

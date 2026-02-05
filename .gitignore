@@ -10,6 +10,7 @@ coverage/
 .env
 .env.*
 *.log
+wallet-pack/
 contracts/.git.bak/
 contracts/lib/forge-std/.git.bak/
 contracts/broadcast/

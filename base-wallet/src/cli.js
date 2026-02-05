@@ -9,7 +9,7 @@ import {
   formatError,
   formatJson,
 } from "./lib/cli.js";
-import { resolveWalletPath } from "./lib/storage.js";
+import { resolveWalletPath, writeWalletPack } from "./lib/storage.js";
 import {
   createWallet,
   getWalletInfo,
@@ -31,6 +31,7 @@ Commands:
   send <to> <amount> [--token <addr>] [--wallet <path>] [--private-key <hex>] [--json] [--rpc <url>]
   tx --to <addr> --data <hex> [--value <eth>] [--value-wei <wei>] [--wallet <path>] [--private-key <hex>] [--json] [--rpc <url>]
   contract <contract> <signature> [args...] [--read] [--value <eth>] [--wallet <path>] [--private-key <hex>] [--json] [--rpc <url>]
+  pack [--out <dir>] [--wallet <path>] [--private-key <hex>] [--json]
 
 Notes:
   - Default chain: Base (chainId ${BASE_CHAIN.id})
@@ -129,6 +130,51 @@ async function main() {
       console.log(`Address: ${wallet.address}`);
       console.log(`Created: ${wallet.createdAt}`);
       console.log(`Path: ${walletPath}`);
+    }
+    return;
+  }
+
+  if (command === "pack") {
+    const outDir = flags.out || "wallet-pack";
+    const privateKey = resolvePrivateKey(flags);
+    let wallet = null;
+    if (privateKey) {
+      const account = privateKeyToAccount(privateKey);
+      wallet = {
+        address: account.address,
+        privateKey,
+        createdAt: new Date().toISOString(),
+      };
+    } else if (hasWallet(walletPath)) {
+      const info = getWalletInfo(walletPath);
+      const account = getAccount(walletPath);
+      wallet = {
+        address: info?.address || account.address,
+        privateKey: account.privateKey,
+        createdAt: info?.createdAt || new Date().toISOString(),
+      };
+    } else {
+      wallet = createWallet();
+    }
+    const savedPath = writeWalletPack(outDir, wallet);
+    const payload = {
+      ok: true,
+      outDir,
+      wallet: {
+        address: wallet.address,
+        createdAt: wallet.createdAt,
+        path: savedPath,
+      },
+      warning: "Do not commit wallet-pack; it contains a private key.",
+    };
+    if (json) {
+      console.log(formatJson(payload));
+    } else {
+      console.log("Wallet pack created.");
+      console.log(`Address: ${wallet.address}`);
+      console.log(`Created: ${wallet.createdAt}`);
+      console.log(`Path: ${savedPath}`);
+      console.log("Warning: Do not commit wallet-pack to git.");
     }
     return;
   }
