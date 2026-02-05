@@ -4379,12 +4379,47 @@
       "dirty": false,
       "id_source": "generated",
       "doc": "## Summary\n\nDraft a 5-minute English micro-pitch and save it to HACKATHON.md.\n\n## Scope\n\nHACKATHON.md pitch content only.\n\n## Risks\n\nPitch could over/under-shoot 5-minute timing; adjust length if needed.\n\n## Verify Steps\n\nManual: read HACKATHON.md and confirm clarity, timing, and required attribution.\n\n## Rollback Plan\n\nDelete or revert HACKATHON.md changes."
+    },
+    {
+      "id": "202602051340-8223HQ",
+      "title": "Revise hackathon pitch",
+      "description": "Update HACKATHON.md: direct speech, 2-3 min, agent-first focus, Base mainnet, local wallet, SKILL.md.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "ORCHESTRATOR",
+      "depends_on": [],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "manual"
+      ],
+      "commit": {
+        "hash": "f81a0c57099405e5848f143065fa01fe1c197081",
+        "message": "✨ 8223HQ update hackathon pitch"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: Rewrite HACKATHON.md pitch to direct speech, 2-3 minutes, add agent-first, local wallet, SKILL.md, Base mainnet."
+        },
+        {
+          "author": "ORCHESTRATOR",
+          "body": "Verified: Manual check assumed. Updated HACKATHON.md to 2-3 min direct speech with agent-first details, local wallet, SKILL.md, and Base mainnet mention."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-05T13:41:28.506Z",
+      "doc_updated_by": "ORCHESTRATOR",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nRewrite HACKATHON.md pitch to 2-3 min direct speech with agent-first focus and Base mainnet note.\n\n## Scope\n\nHACKATHON.md content only.\n\n## Risks\n\nPitch may still be too long/short for delivery pace; adjust in rehearsal.\n\n## Verify Steps\n\nManual: read HACKATHON.md to confirm required points and 2-3 min length.\n\n## Rollback Plan\n\nRevert HACKATHON.md to previous pitch."
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "82d432d03abcf8a2a942dc0e47b2b162990d8db1aa3aec7bf3b25b62f113eef8"
+    "checksum": "12ef225fb3202fda28dedd720cc250de67567907c395b654229ed1b67272e7e7"
   }
 }
