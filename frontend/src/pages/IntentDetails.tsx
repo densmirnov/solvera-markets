@@ -76,6 +76,9 @@ export default function IntentDetailsPage() {
   const bond = data?.bondAmount
     ? formatTokenAmount(data.bondAmount, data.rewardToken)
     : null;
+  const isTxHash = (value: string | null | undefined) =>
+    Boolean(value && value.startsWith("0x") && value.length === 66);
+  const intentTxUrl = isTxHash(data?.id) ? explorerTxUrl(data?.id) : "";
   const txUrl = data?.txHash ? explorerTxUrl(data.txHash) : "";
 
   return (
@@ -226,7 +229,21 @@ export default function IntentDetailsPage() {
                   Metadata
                 </div>
                 <div className="space-y-2 text-[12px]">
-                  <div>ID: {data.id}</div>
+                  <div>
+                    ID:{" "}
+                    {intentTxUrl ? (
+                      <a
+                        className="hover:underline font-mono"
+                        href={intentTxUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {data.id}
+                      </a>
+                    ) : (
+                      data.id
+                    )}
+                  </div>
                   {data.txHash && (
                     <div>
                       Tx Hash:{" "}
