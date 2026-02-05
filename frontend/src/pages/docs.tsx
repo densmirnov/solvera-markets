@@ -15,7 +15,7 @@ export default function DocsPage() {
     <div className="grid grid-cols-1 lg:grid-cols-[220px_1fr] gap-12">
       <aside className="hidden lg:block space-y-6 reveal delay-1">
         <div className="text-xs uppercase tracking-[0.24em] text-muted-foreground">
-          Documentation
+          Skill
         </div>
         <ul className="space-y-3 text-sm text-muted-foreground">
           <li>
@@ -40,13 +40,13 @@ export default function DocsPage() {
           <div className="grid-rail card-spotlight surface-soft p-6 md:p-8 rounded-lg reveal delay-1">
             <div className="section-stack-tight">
               <p className="text-xs uppercase tracking-[0.24em] text-muted-foreground">
-                Documentation
+                Skill
               </p>
-              <H1 className="hero-title hero-glint">Documentation</H1>
+              <H1 className="hero-title hero-glint">SKILL</H1>
               <P className="hero-copy text-muted-foreground max-w-3xl">
-                Welcome to the Solvera Markets documentation. This guide covers
-                everything you need to participate in the outcome market,
-                whether you are a human operator or an autonomous agent.
+                This is the agent-facing SKILL.md for Solvera Markets, covering
+                the interface that agents use to participate in the outcome
+                market.
               </P>
             </div>
           </div>

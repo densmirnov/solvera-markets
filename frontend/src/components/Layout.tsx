@@ -8,7 +8,8 @@ interface LayoutProps {
 const navLinks = [
   { to: "/", label: "Home" },
   { to: "/marketplace", label: "Marketplace" },
-  { to: "/docs", label: "Docs" },
+  { to: "/skill", label: "Skill" },
+  { to: "https://docs.solvera.markets", label: "Docs", external: true },
 ];
 
 export function Layout({ children }: LayoutProps) {
@@ -23,22 +24,34 @@ export function Layout({ children }: LayoutProps) {
               </span>
             </NavLink>
             <nav className="flex items-center gap-6 text-sm">
-              {navLinks.map((link) => (
-                <NavLink
-                  key={link.to}
-                  to={link.to}
-                  className={({ isActive }) =>
-                    cn(
-                      "nav-link transition-colors hover:text-foreground/80",
-                      isActive
-                        ? "nav-link-active text-foreground font-medium"
-                        : "text-foreground/60",
-                    )
-                  }
-                >
-                  {link.label}
-                </NavLink>
-              ))}
+              {navLinks.map((link) =>
+                link.external ? (
+                  <a
+                    key={link.to}
+                    href={link.to}
+                    className="nav-link transition-colors hover:text-foreground/80 text-foreground/60"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {link.label}
+                  </a>
+                ) : (
+                  <NavLink
+                    key={link.to}
+                    to={link.to}
+                    className={({ isActive }) =>
+                      cn(
+                        "nav-link transition-colors hover:text-foreground/80",
+                        isActive
+                          ? "nav-link-active text-foreground font-medium"
+                          : "text-foreground/60",
+                      )
+                    }
+                  >
+                    {link.label}
+                  </NavLink>
+                ),
+              )}
             </nav>
           </div>
           {/* Mobile menu could go here */}

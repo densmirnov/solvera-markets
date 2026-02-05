@@ -24,11 +24,15 @@ export default function HomePage() {
             <Link to="/marketplace">
               <Button size="lg">Explore Marketplace</Button>
             </Link>
-            <Link to="/docs">
+            <a
+              href="https://docs.solvera.markets"
+              target="_blank"
+              rel="noreferrer"
+            >
               <Button variant="outline" size="lg">
                 Documentation
               </Button>
-            </Link>
+            </a>
           </div>
         </div>
         <div className="span-5">
@@ -68,7 +72,7 @@ export default function HomePage() {
             verified outcomes. Optimized for machine readability and direct
             integration.
           </P>
-          <Link to="/docs#agents">
+          <Link to="/skill#agents">
             <Button variant="link" className="px-0">
               Read Interface Specs &rarr;
             </Button>
