@@ -10,7 +10,7 @@
     "groups": [
       {
         "group": "Overview",
-        "pages": ["README", "01-vision-roadmap", "02-mvp-scope"]
+        "pages": ["index", "01-vision-roadmap", "02-mvp-scope"]
       },
       {
         "group": "Protocol",
@@ -45,7 +45,11 @@
       },
       {
         "group": "Operations",
-        "pages": ["14-deployments", "18-ops-indexer-backend", "22-devops-dokploy"]
+        "pages": [
+          "14-deployments",
+          "18-ops-indexer-backend",
+          "22-devops-dokploy"
+        ]
       },
       {
         "group": "Engineering",
