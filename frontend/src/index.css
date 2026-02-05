@@ -218,6 +218,212 @@
   font-size: clamp(1.05rem, 2vw, 1.35rem);
 }
 
+.hero-shell {
+  position: relative;
+  border-radius: clamp(1.1rem, 3vw, 2.4rem);
+  padding: clamp(1.5rem, 3vw, 3rem);
+  border: 1px solid hsla(220, 18%, 80%, 0.45);
+  background:
+    radial-gradient(
+      520px 260px at 8% 8%,
+      hsla(18, 92%, 70%, 0.16),
+      transparent 72%
+    ),
+    radial-gradient(
+      520px 320px at 92% 18%,
+      hsla(210, 40%, 86%, 0.22),
+      transparent 70%
+    ),
+    linear-gradient(135deg, hsla(0, 0%, 100%, 0.92), hsla(36, 24%, 97%, 0.72));
+  box-shadow:
+    0 28px 70px -58px hsla(220, 40%, 20%, 0.4),
+    inset 0 1px 0 hsla(0, 0%, 100%, 0.85);
+  overflow: hidden;
+}
+
+.hero-shell::before,
+.hero-shell::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.hero-shell::before {
+  width: 260px;
+  height: 260px;
+  right: -110px;
+  top: -120px;
+  border-radius: 38% 62% 40% 60% / 45% 45% 55% 55%;
+  background: linear-gradient(
+    140deg,
+    hsla(18, 92%, 62%, 0.18),
+    transparent 68%
+  );
+  filter: blur(0.8px);
+}
+
+.hero-shell::after {
+  inset: auto 16% 10% auto;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 30% 30%,
+    hsla(36, 24%, 94%, 0.7),
+    transparent 72%
+  );
+  opacity: 0.6;
+}
+
+.hero-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: hsla(220, 18%, 24%, 0.75);
+}
+
+.hero-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.hero-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid hsla(220, 18%, 76%, 0.5);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background: hsla(0, 0%, 100%, 0.75);
+  color: hsla(220, 18%, 18%, 0.82);
+  box-shadow: 0 10px 20px -18px hsla(220, 40%, 24%, 0.3);
+}
+
+.hero-chip-primary {
+  border-color: hsla(18, 92%, 55%, 0.5);
+  background: linear-gradient(
+    120deg,
+    hsla(18, 92%, 60%, 0.15),
+    hsla(36, 24%, 97%, 0.86)
+  );
+  color: hsla(18, 70%, 30%, 0.9);
+}
+
+.hero-chip-ghost {
+  background: transparent;
+  border-color: hsla(220, 18%, 70%, 0.4);
+  color: hsla(220, 18%, 35%, 0.7);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-top: 0.25rem;
+}
+
+.hero-panel {
+  position: relative;
+  border-radius: 1.25rem;
+  padding: 1.75rem;
+  border: 1px solid hsla(220, 18%, 82%, 0.45);
+  box-shadow:
+    0 22px 50px -42px hsla(220, 30%, 22%, 0.3),
+    inset 0 1px 0 hsla(0, 0%, 100%, 0.8);
+  overflow: hidden;
+  min-height: 320px;
+}
+
+.hero-panel-glow::before {
+  content: "";
+  position: absolute;
+  inset: -40% -20% auto;
+  height: 140%;
+  background: radial-gradient(
+    circle at top,
+    hsla(18, 92%, 70%, 0.18),
+    transparent 62%
+  );
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+.hero-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.hero-panel-kicker {
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: hsla(220, 18%, 25%, 0.7);
+}
+
+.hero-panel-body {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.hero-panel-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: 0.9rem;
+  background: hsla(0, 0%, 100%, 0.72);
+  border: 1px solid hsla(220, 18%, 86%, 0.45);
+  font-size: 0.9rem;
+}
+
+.hero-panel-label {
+  color: hsla(220, 14%, 40%, 0.85);
+}
+
+.hero-panel-value {
+  font-weight: 600;
+  color: hsla(220, 18%, 18%, 0.9);
+}
+
+.hero-panel-bars {
+  display: grid;
+  gap: 0.6rem;
+  margin-top: 1.35rem;
+}
+
+.hero-panel-bar {
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    hsla(18, 92%, 60%, 0.7),
+    hsla(210, 40%, 65%, 0.35)
+  );
+  box-shadow: 0 10px 18px -16px hsla(18, 92%, 45%, 0.7);
+}
+
+.hero-panel-bar.bar-a {
+  width: 88%;
+}
+
+.hero-panel-bar.bar-b {
+  width: 72%;
+}
+
+.hero-panel-bar.bar-c {
+  width: 58%;
+}
+
 .brand-mark {
   position: relative;
   font-variation-settings: "wght" 640;

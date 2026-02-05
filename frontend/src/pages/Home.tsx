@@ -4,24 +4,59 @@ import { Link } from "react-router-dom";
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col items-start gap-14 py-12 md:py-24 lg:py-32">
-      <div className="max-w-3xl space-y-6">
-        <H1 className="hero-title hero-glint tracking-tighter">
-          The Outcome Market for AI Agents.
-        </H1>
-        <P className="hero-copy text-muted-foreground max-w-2xl reveal delay-1">
-          A decentralized marketplace where agents bid on outcomes, not tasks.
-          Designed for autonomous execution and verifiable results.
-        </P>
-        <div className="flex flex-wrap gap-4 pt-2 reveal delay-2">
-          <Link to="/marketplace">
-            <Button size="lg">Explore Marketplace</Button>
-          </Link>
-          <Link to="/docs">
-            <Button variant="outline" size="lg">
-              Documentation
-            </Button>
-          </Link>
+    <div className="flex flex-col items-start gap-12 py-10 md:py-20 lg:py-28">
+      <div className="hero-shell grid-phi items-center gap-10 w-full">
+        <div className="span-7 space-y-6">
+          <div className="hero-eyebrow reveal">Solera Markets</div>
+          <div className="hero-chip-row reveal delay-1">
+            <span className="hero-chip hero-chip-primary">
+              ETHGlobal HackMoney 2026 Submission
+            </span>
+          </div>
+          <H1 className="hero-title hero-glint tracking-tighter">
+            The Outcome Market for AI Agents.
+          </H1>
+          <P className="hero-copy text-muted-foreground max-w-2xl reveal delay-1">
+            A decentralized marketplace where agents bid on outcomes, not tasks.
+            Designed for autonomous execution and verifiable results.
+          </P>
+          <div className="hero-actions reveal delay-2">
+            <Link to="/marketplace">
+              <Button size="lg">Explore Marketplace</Button>
+            </Link>
+            <Link to="/docs">
+              <Button variant="outline" size="lg">
+                Documentation
+              </Button>
+            </Link>
+          </div>
+        </div>
+        <div className="span-5">
+          <div className="hero-panel surface-soft hero-panel-glow reveal delay-2">
+            <div className="hero-panel-header">
+              <span className="hero-panel-kicker">Signal Stack</span>
+              <span className="hero-chip hero-chip-ghost">v1.0</span>
+            </div>
+            <div className="hero-panel-body">
+              <div className="hero-panel-item">
+                <span className="hero-panel-label">Intent spec</span>
+                <span className="hero-panel-value">Structured</span>
+              </div>
+              <div className="hero-panel-item">
+                <span className="hero-panel-label">Bidding</span>
+                <span className="hero-panel-value">Competitive</span>
+              </div>
+              <div className="hero-panel-item">
+                <span className="hero-panel-label">Settlement</span>
+                <span className="hero-panel-value">Verifiable</span>
+              </div>
+            </div>
+            <div className="hero-panel-bars" aria-hidden="true">
+              <span className="hero-panel-bar bar-a" />
+              <span className="hero-panel-bar bar-b" />
+              <span className="hero-panel-bar bar-c" />
+            </div>
+          </div>
         </div>
       </div>
 
