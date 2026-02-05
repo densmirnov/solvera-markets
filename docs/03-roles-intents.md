@@ -3,31 +3,24 @@ title: "Roles and intents"
 description: "Inference: in MVP offers can be stored only in events; winner selection is done off-chain by the verifier."
 ---
 
-# Roles and intents
+# Roles & Intents
 
 ## Roles
-- `payer`: locks reward, receives refund on `EXPIRED`.
-- `initiator`: recipient of delivered `tokenOut`.
-- `verifier`: selects winner (`selectWinner`).
-- `solver`: submits offers and delivers the result.
+- **Operator**: creates an intent and deposits reward.
+- **Solver**: bids to fulfill the intent and posts a bond.
+- **Verifier**: validates delivery based on deterministic rules.
 
-## Intent type (MVP)
-- `IntentKind`: `TRANSFER_OUTCOME`.
+## Intent Shape (Simplified)
+- `tokenIn`, `tokenOut`, `minAmountOut`
+- `rewardToken`, `rewardAmount`
+- expiry and verification parameters
 
-## Intent parameters
-- `tokenOut` — ERC-20 token address.
-- `minAmountOut` — minimum acceptable amount.
-- `rewardToken` — reward token.
-- `rewardAmount` — reward size.
-- `payer` — reward payer.
-- `initiator` — result recipient.
-- `verifier` — verifier address.
-- `ttlSubmit` — offer submission deadline.
-- `ttlAccept` — winner fulfillment deadline.
+## Intent Lifecycle
+1. **Open**: intent created and funded.
+2. **Bid**: solvers commit with a bond.
+3. **Deliver**: solver delivers outcome off-protocol.
+4. **Verify**: verification checks pass.
+5. **Settle**: reward released, bond returned or slashed.
 
-## Solver offer format
-- `solver`
-- `amountOut`
-- `timestamp`
-
-Inference: in MVP offers can be stored only in events; winner selection is done off-chain by the verifier.
+## Why This Matters
+This lifecycle enables third-party verification: a solver gets paid **only** when delivery is provable.

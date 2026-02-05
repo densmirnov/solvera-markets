@@ -3,32 +3,16 @@ title: "Test plan and invariants"
 description: "4. No `selectWinner/fulfill/expire` calls from final states. 5. `rep` changes only in `_accept` (+1) and `expire` branch B (‑1)."
 ---
 
-# Test plan and invariants
+# Testing & Invariants
 
-## Scenario tests (minimum)
-- Happy path.
-- No offers → `expire` from `OPEN`.
-- Winner does not fulfill → `expire` from `SELECTED`.
-- Wrong caller for `selectWinner`/`fulfill`.
-- `fulfill` after `ttlAccept`.
-- `selectWinner` after `ttlSubmit`.
-- Edge: `rewardAmount < fixedFeeOnExpire`.
+## Invariants That Matter
+- Escrow funds never leave without successful verification.
+- Bonds are slashed only on failed delivery or invalid bids.
+- Intent state cannot skip phases.
 
-## Property/invariant tests
-1. No double reward payout.
-2. Balance conservation per branch.
-3. Monotonic state transitions.
+## Demo-Grade Checks
+- Create intent -> confirm escrow.
+- Bid -> confirm bond lock.
+- Verify -> confirm settlement.
 
-## Protocol invariants
-1. Reward can be paid exactly once.
-2. On `ACCEPTED`:
-- initiator received `winnerAmountOut` `tokenOut`.
-- winner received `rewardAmount - fee`.
-- `feeRecipient` received `fee`.
-- bond returned.
-3. On `EXPIRED`:
-- payer received `rewardAmount - fee_exp`.
-- `feeRecipient` received `fee_exp`.
-- on winner timeout bond is slashed.
-4. No `selectWinner/fulfill/expire` calls from final states.
-5. `rep` changes only in `_accept` (+1) and `expire` branch B (‑1).
+These checks align directly with verification criteria for correctness and trust.
