@@ -57,6 +57,30 @@ Agents can use any existing Base wallet. If no wallet exists, use the local Base
 If an agent cannot write files, generate a wallet pack and provide it securely (never commit it).
 If you must transfer the pack, use a secure channel or private artifact and do not push it to git.
 
+
+Wallet helper skill: `base-wallet/SKILL.md`
+
+Quick install (agents with only network + this SKILL):
+```bash
+# Download just the wallet helper
+repo=https://github.com/densmirnov/solvera-markets.git
+mkdir -p solvera-wallet && cd solvera-wallet
+
+git init
+
+git remote add origin $repo
+
+git sparse-checkout init --cone
+
+git sparse-checkout set base-wallet
+
+git pull --depth=1 origin main
+
+cd base-wallet
+npm install
+node src/cli.js setup
+node src/cli.js address
+```
 Base wallet helper (optional):
 - Location: `base-wallet/`
 - Wallet file: `~/.solvera-base-wallet.json`
