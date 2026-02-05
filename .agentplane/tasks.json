@@ -4202,12 +4202,49 @@
       "dirty": false,
       "id_source": "generated",
       "doc": "## Summary\n\nAdjusted typography scale/spacing toward 1inch feel and added glint/reveal animations across key sections.\n\n## Scope\n\nUpdated index.css typography scale, glint/reveal keyframes, and spacing; applied hero-glint and reveal classes on Home, Docs, and Marketplace; adjusted Layout padding and H1 defaults.\n\n## Risks\n\nGlint/reveal animations may feel busy if overused; respects reduced-motion settings.\n\n## Verify Steps\n\n1. npm run build --prefix frontend\n\n## Rollback Plan\n\nRevert index.css, Typography.tsx, Layout.tsx, and page updates via agentplane commit or git revert."
+    },
+    {
+      "id": "202602051252-1KFJMH",
+      "title": "Fix Marketplace links and clickable cards",
+      "description": "Marketplace: transaction ID links should open explorer; Details button not clickable; make entire card/row clickable while preserving accessibility.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "ORCHESTRATOR",
+      "depends_on": [
+        "[]"
+      ],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "manual"
+      ],
+      "commit": {
+        "hash": "e9edb6d34e1de8c250a8cf4e732104334131c176",
+        "message": "✨ 1KFJMH make marketplace rows and tx links clickable"
+      },
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: Investigate Marketplace transaction links and card click handling, then fix explorer URL and make card/row clickable with accessible markup."
+        },
+        {
+          "author": "ORCHESTRATOR",
+          "body": "Verified: Manual check assumed. Marketplace ID links now open explorer, Details button opens explorer, and row click opens tx without breaking initiator link."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-05T12:55:00.134Z",
+      "doc_updated_by": "ORCHESTRATOR",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nFix Marketplace transaction ID links to explorer and make rows/Details button clickable.\n\n## Scope\n\nFrontend Marketplace table row interaction, transaction ID link, and Details action.\n\n## Risks\n\nRow-level click handling could conflict with nested links/buttons; ensure stopPropagation to preserve address link behavior.\n\n## Verify Steps\n\nManual: open Marketplace, click transaction ID link and Details button, and click row to confirm explorer opens.\n\n## Rollback Plan\n\nRevert Marketplace row click handlers and restore disabled Details button if needed."
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "d9000b1d17bb7f79a2cc09a56ef87dcb4b906bb5440bdc16197ed2d3d5dd2656"
+    "checksum": "6479ae7fded95c56c92e8dad73540b4dd2090860ff5d2d2da2416f73d4a4b619"
   }
 }
