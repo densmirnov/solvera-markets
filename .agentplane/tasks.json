@@ -4210,9 +4210,7 @@
       "status": "DONE",
       "priority": "med",
       "owner": "ORCHESTRATOR",
-      "depends_on": [
-        "[]"
-      ],
+      "depends_on": [],
       "tags": [
         "frontend"
       ],
@@ -4511,6 +4509,6 @@
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "257e17047588737076ba54034faf1d96ae6582c823f41645abafcbdd1d109ecc"
+    "checksum": "4d4c875928db9e9b46f343f544dceda1ff3856d167817679221d4dd7ef190294"
   }
 }
