@@ -1,6 +1,7 @@
 ---
 title: "Mainnet deployment checklist"
-description: "Documentation for Mainnet deployment checklist."
+description: "Preflight checklist for deploying and verifying the MVP contract on Base mainnet."
+sidebarTitle: "Mainnet checklist"
 ---
 
 # Mainnet deployment checklist
@@ -14,7 +15,7 @@ description: "Documentation for Mainnet deployment checklist."
 ## Contract
 - Contract compiles without warnings.
 - Bytecode matches testnet version (if applicable).
-- ABI matches `docs/12-abi-events.md`.
+- ABI matches [ABI and events](/reference/contracts/abi-and-events).
 
 ## Tests and analysis
 - `forge test` successful.
@@ -29,4 +30,4 @@ description: "Documentation for Mainnet deployment checklist."
 ## Publication
 - Deploy via `DeployIntentMarketplace`.
 - Contract verified in explorer.
-- `docs/14-deployments.md` updated.
+- [Deployments and addresses](/operations/deployments-and-addresses) updated.

@@ -1,6 +1,7 @@
 ---
 title: "DevOps: Dokploy and Docker Compose"
-description: "Documentation for DevOps: Dokploy and Docker Compose."
+description: "Deployment conventions for Dokploy and how docker-compose.yml is structured in this repo."
+sidebarTitle: "Dokploy & Compose"
 ---
 
 # DevOps: Dokploy and Docker Compose
@@ -29,3 +30,6 @@ description: "Documentation for DevOps: Dokploy and Docker Compose."
 - If using Dokploy Domains, set the domain in Dokploy and redeploy for changes to take effect.
 - For manual routing, add services to the `dokploy-network` and configure Traefik labels.
 - Isolated Deployments can be enabled to place each app in its own network and avoid naming conflicts.
+
+## Local development
+For local access from your browser, you likely want `ports` mappings for `frontend` and `backend`. See [Getting started](/getting-started).
