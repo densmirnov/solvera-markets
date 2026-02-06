@@ -4587,12 +4587,255 @@
       "dirty": false,
       "id_source": "generated",
       "doc": "## Summary\n\nAdd curl/unzip fallback steps for downloading base-wallet without git.\n\n## Scope\n\nSKILL.md and frontend SKILL copies.\n\n## Risks\n\nAssumes curl and unzip available; otherwise git remains primary path.\n\n## Verify Steps\n\nManual: check SKILL.md includes fallback download steps without git.\n\n## Rollback Plan\n\nRevert SKILL.md edits."
+    },
+    {
+      "id": "202602051458-9BFSE1",
+      "title": "Hero redesign + ETHGlobal chip",
+      "description": "Redesign homepage hero to be more designer/fashionable and add ETHGlobal HackMoney 2026 Submission chip.",
+      "status": "DOING",
+      "priority": "med",
+      "owner": "ORCHESTRATOR",
+      "depends_on": [
+        "[]"
+      ],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "manual:visual-check"
+      ],
+      "commit": null,
+      "comments": [
+        {
+          "author": "ORCHESTRATOR",
+          "body": "Start: Locate homepage hero, redesign layout/visuals, add ETHGlobal HackMoney 2026 Submission chip, keep adaptive layout intact."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-05T15:01:29.360Z",
+      "doc_updated_by": "ORCHESTRATOR",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nRedesigned the homepage hero with layered background styling, a right-side signal panel, and added the ETHGlobal HackMoney 2026 Submission chip.\n\n## Scope\n\nUpdate hero layout and visuals in frontend/src/pages/Home.tsx and add hero-specific styles in frontend/src/index.css.\n\n## Risks\n\nHero visuals are more layered and could feel busy on smaller screens; the new right-side panel is static and could be misread as data if not treated as decorative.\n\n## Verify Steps\n\nmanual: visually inspect homepage hero on desktop and mobile breakpoints.\n\n## Rollback Plan\n\nRevert frontend/src/pages/Home.tsx and frontend/src/index.css to the previous hero markup and styles."
+    },
+    {
+      "id": "202602051518-V2V6NG",
+      "title": "ENS support for addresses",
+      "description": "Add ENS resolution and display for wallet/address inputs to qualify for ENS partner prize.",
+      "status": "DOING",
+      "priority": "med",
+      "owner": "ORCHESTRATOR",
+      "depends_on": [
+        "[]"
+      ],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "manual:ens-resolution"
+      ],
+      "commit": null,
+      "comments": [
+        {
+          "author": "ORCHESTRATOR",
+          "body": "Start: Locate address inputs and displays, add ENS resolution/display via ethers, update UI hints, ensure errors handled."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-05T15:20:29.399Z",
+      "doc_updated_by": "ORCHESTRATOR",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nAdded ENS reverse lookup for participant addresses and display ENS names alongside addresses in marketplace and intent detail views.\n\n## Scope\n\nAdd ENS lookup helper in frontend/src/lib/ens.ts and wire ENS display into frontend/src/pages/Marketplace.tsx and frontend/src/pages/IntentDetails.tsx.\n\n## Risks\n\nENS reverse lookup depends on mainnet RPC availability; if the RPC is rate-limited or blocked, ENS names will not resolve and addresses will display normally.\n\n## Verify Steps\n\nmanual: open marketplace and intent details; confirm ENS names resolve for known ENS addresses and fall back to address when not resolvable.\n\n## Rollback Plan\n\nRevert frontend/src/lib/ens.ts, frontend/src/pages/Marketplace.tsx, and frontend/src/pages/IntentDetails.tsx to remove ENS lookup and display."
+    },
+    {
+      "id": "202602051539-TBV1H6",
+      "title": "Mintlify docs formatting via MCP",
+      "description": "Fetch MCP docs content and format documentation to Mintlify rules for docs.solvera.markets.",
+      "status": "DOING",
+      "priority": "med",
+      "owner": "ORCHESTRATOR",
+      "depends_on": [
+        "[]"
+      ],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "manual:docs-review"
+      ],
+      "commit": null,
+      "comments": [
+        {
+          "author": "ORCHESTRATOR",
+          "body": "Start: Pull docs content via MCP, map to Mintlify structure, update docs files and navigation."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-05T15:44:55.678Z",
+      "doc_updated_by": "ORCHESTRATOR",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nAdded Mintlify frontmatter across docs and created docs.json navigation for Solvera Markets documentation.\n\n## Scope\n\nUpdate docs/*.md with Mintlify frontmatter and add docs.json navigation config at repo root.\n\n## Risks\n\nIf Mintlify expects a different docs root or navigation schema, docs.json may require adjustments; frontmatter descriptions were auto-derived and might need manual tuning.\n\n## Verify Steps\n\nmanual: run Mintlify preview or deploy to confirm navigation and frontmatter render correctly.\n\n## Rollback Plan\n\nRemove docs.json and revert frontmatter additions in docs/*.md."
+    },
+    {
+      "id": "202602051550-TGEWE5",
+      "title": "Update navbar links for Docs/Skill",
+      "description": "Rename Docs nav item to Skill (SKILL.md page) and make Docs link external to docs.solvera.markets.",
+      "status": "DOING",
+      "priority": "med",
+      "owner": "ORCHESTRATOR",
+      "depends_on": [
+        "[]"
+      ],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "manual:nav-check"
+      ],
+      "commit": null,
+      "comments": [
+        {
+          "author": "ORCHESTRATOR",
+          "body": "Start: Update navbar labels/links for Skill vs Docs, adjust CTA and Skill page copy."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-05T15:51:24.543Z",
+      "doc_updated_by": "ORCHESTRATOR",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nSwitched navbar to show Skill (internal) and Docs (external), updated hero CTA and SKILL page copy.\n\n## Scope\n\nUpdate frontend/src/components/Layout.tsx, frontend/src/pages/Home.tsx, and frontend/src/pages/docs.tsx to adjust navigation and copy.\n\n## Risks\n\nExternal docs link opens a new tab and depends on docs.solvera.markets availability; /docs route still exists for legacy access.\n\n## Verify Steps\n\nmanual: confirm navbar shows Skill (internal) and Docs (external) and hero Documentation button opens docs.solvera.markets.\n\n## Rollback Plan\n\nRevert navbar/CTA changes in Layout.tsx, Home.tsx, and docs.tsx to restore previous Docs link behavior."
+    },
+    {
+      "id": "202602051603-JMY9WC",
+      "title": "Fix frontend docker build with ethers",
+      "description": "Add ethers dependency to frontend to fix Docker build failure after ENS integration.",
+      "status": "DOING",
+      "priority": "med",
+      "owner": "ORCHESTRATOR",
+      "depends_on": [
+        "[]"
+      ],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "manual:docker-compose"
+      ],
+      "commit": null,
+      "comments": [
+        {
+          "author": "ORCHESTRATOR",
+          "body": "Start: add ethers to frontend deps to fix Docker build, validate compose up."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-05T16:03:45.091Z",
+      "doc_updated_by": "ORCHESTRATOR",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nAdded ethers to frontend dependencies so Docker builds succeed after ENS integration.\n\n## Scope\n\nUpdate frontend/package.json and frontend/package-lock.json with ethers dependency.\n\n## Risks\n\nMinimal: adds ethers to frontend bundle, increasing JS size slightly.\n\n## Verify Steps\n\nmanual: docker compose up -d --build completes and frontend build succeeds.\n\n## Rollback Plan\n\nRemove ethers from frontend dependencies and revert lockfile, then adjust ENS integration to avoid ethers import."
+    },
+    {
+      "id": "202602051611-3H1VA9",
+      "title": "Adjust hero spacing + Mintlify index",
+      "description": "Reduce top padding before hero and fix Mintlify root route by using index.md instead of README.md.",
+      "status": "DOING",
+      "priority": "med",
+      "owner": "ORCHESTRATOR",
+      "depends_on": [
+        "[]"
+      ],
+      "tags": [
+        "frontend"
+      ],
+      "verify": [
+        "manual:docs-route"
+      ],
+      "commit": null,
+      "comments": [
+        {
+          "author": "ORCHESTRATOR",
+          "body": "Start: tighten layout top padding before hero and switch docs root to index.md for Mintlify routes."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-05T16:12:17.522Z",
+      "doc_updated_by": "ORCHESTRATOR",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nReduced top padding before hero and moved docs root to index.md to fix Mintlify routing.\n\n## Scope\n\nUpdate frontend/src/components/Layout.tsx, move docs/README.md to docs/index.md, and adjust docs/docs.json navigation.\n\n## Risks\n\nExternal links to /README will now 404; ensure any references use / or /index instead.\n\n## Verify Steps\n\nmanual: open site root to confirm hero spacing; open https://docs.solvera.markets/ to confirm index loads without /README 404.\n\n## Rollback Plan\n\nRestore main padding values and rename docs/index.md back to docs/README.md, reverting docs/docs.json navigation."
+    },
+    {
+      "id": "202602051616-7Q8P2M",
+      "title": "Hackathon-focused docs refactor",
+      "description": "Rewrite docs for ETHGlobal judges, new index and key pages focused on demo, differentiation, and verification.",
+      "status": "DOING",
+      "priority": "high",
+      "owner": "ORCHESTRATOR",
+      "depends_on": [
+        "[]"
+      ],
+      "tags": [
+        "code"
+      ],
+      "verify": [
+        "manual:docs-review"
+      ],
+      "commit": null,
+      "comments": [
+        {
+          "author": "ORCHESTRATOR",
+          "body": "Start: Rewrite docs index and key sections for judge-focused narrative, demo flow, and verification."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-05T16:21:35.761Z",
+      "doc_updated_by": "ORCHESTRATOR",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nRewrote docs index and key pages for ETHGlobal judge readability, focusing on demo flow, differentiation, and verification.\n\nRewrote judge-focused docs index and key pages, adding live demo, contract addresses, subgraph, and API links.\n\n## Scope\n\nRewrite docs/index.md and key docs pages (vision, roles, contract spec, testing, indexer, backend API, subgraph endpoints) with judge-focused narrative.\n\n## Risks\n\nRisk of oversimplifying technical detail; some links/endpoints rely on defaults and may need manual updates for your deployment.\n\n## Verify Steps\n\nmanual: review docs index and key pages for clarity, demo flow accuracy, and updated endpoints.\n\n## Rollback Plan\n\nRestore previous versions of the rewritten docs files if the judge-focused rewrite is not desired."
+    },
+    {
+      "id": "202602051718-DP0N2J",
+      "title": "Remove hackathon references in docs",
+      "description": "Remove hackathon/judge-focused wording from documentation as requested.",
+      "status": "DONE",
+      "priority": "med",
+      "owner": "ORCHESTRATOR",
+      "depends_on": [],
+      "tags": [
+        "docs"
+      ],
+      "verify": [],
+      "commit": {
+        "hash": "d9f9339e607eb5a0c24d47aa40bada968943dbdc",
+        "message": "📝 DP0N2J remove hackathon/judge wording in docs"
+      },
+      "comments": [
+        {
+          "author": "ORCHESTRATOR",
+          "body": "Start: Removing hackathon/judge wording from docs per request."
+        },
+        {
+          "author": "ORCHESTRATOR",
+          "body": "Verified: Removed hackathon/judge-focused wording in docs; updated overview, roles, and testing pages. Manual scan confirms no remaining judge/hackathon terms in docs."
+        }
+      ],
+      "doc_version": 2,
+      "doc_updated_at": "2026-02-05T17:22:29.325Z",
+      "doc_updated_by": "ORCHESTRATOR",
+      "dirty": false,
+      "id_source": "generated",
+      "doc": "## Summary\n\nRemove hackathon/judge-focused wording from docs.\n\n## Scope\n\nUpdate docs content to remove hackathon/judge terminology.\n\n## Risks\n\nLow risk: wording-only change; ensure no required terminology removed.\n\n## Verify Steps\n\nManual review of docs for removed hackathon/judge terms.\n\n## Rollback Plan\n\nRevert the edited docs files to the previous wording."
     }
   ],
   "meta": {
     "schema_version": 1,
     "managed_by": "agentplane",
     "checksum_algo": "sha256",
-    "checksum": "4a4f1a7fdb8e6d2a442a552056056cd955afbe853424be8d065fcf87c1e7451f"
+    "checksum": "ae758e068e799a9b93d20b54f2c921bbdde92efc5d019667e187a9a2ff63733a"
   }
 }
