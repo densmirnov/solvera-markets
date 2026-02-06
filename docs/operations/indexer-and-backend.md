@@ -1,6 +1,7 @@
 ---
 title: "Ops: indexer and backend"
-description: "Documentation for Ops: indexer and backend."
+description: "Operational guidance for running and monitoring the subgraph indexer and backend API."
+sidebarTitle: "Indexer & backend"
 ---
 
 # Ops: indexer and backend
@@ -28,3 +29,7 @@ description: "Documentation for Ops: indexer and backend."
   - cache hit ratio
   - rate-limit rejects
 - Alerts on lag and error growth.
+
+## Related
+- [Subgraph endpoints](/reference/indexer/endpoints)
+- [Backend HTTP API](/reference/backend/http-api)

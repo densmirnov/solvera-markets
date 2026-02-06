@@ -1,9 +1,12 @@
 ---
 title: "Deployments and addresses"
-description: "Documentation for Deployments and addresses."
+description: "Deployed IntentMarketplace addresses and constructor parameters by network."
+sidebarTitle: "Deployments"
 ---
 
 # Deployments and addresses
+
+The MVP contract is `IntentMarketplace`. Constructor parameters are immutable after deployment (see [Parameters](/reference/parameters)).
 
 ## Base Sepolia (testnet)
 - RPC env: `BASE_SEPOLIA_RPC_URL`
@@ -32,3 +35,7 @@ description: "Documentation for Deployments and addresses."
   - fixedFeeOnExpire: `1000000`
   - bondBpsOfReward: `200`
   - bondMin: `1000000`
+
+## Backend wiring
+- `CONTRACT_ADDRESS` should match the deployed `IntentMarketplace` on the selected network.
+- The subgraph in `indexer/subgraph.yaml` is currently configured for Base mainnet.
