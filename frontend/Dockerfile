@@ -3,6 +3,7 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 
 COPY package.json package-lock.json* tsconfig.json vite.config.ts eslint.config.js postcss.config.js index.html SKILL.md ./
+COPY public ./public
 COPY src ./src
 
 ARG VITE_API_BASE
