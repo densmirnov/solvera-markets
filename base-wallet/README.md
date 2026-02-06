@@ -19,7 +19,7 @@ npm install
 node src/cli.js setup
 
 # Create a downloadable wallet pack (for agents without file access)
-node src/cli.js pack --out wallet-pack
+node src/cli.js pack
 
 # Show address
 node src/cli.js address
@@ -49,13 +49,13 @@ If the agent cannot write to the filesystem, create a wallet pack and share it s
 
 ```bash
 # Create a pack (contains private key — do NOT commit)
-node src/cli.js pack --out wallet-pack
+node src/cli.js pack
 
 # Use the pack
-BASE_WALLET_PATH=./wallet-pack/wallet.json node src/cli.js address
+BASE_WALLET_PATH=~/.solvera-wallet-pack/wallet.json node src/cli.js address
 ```
 
-The `wallet-pack/` folder is ignored by git, but still treat it as a secret.
+The default pack lives in `~/.solvera-wallet-pack`. Treat it as a secret.
 
 ## Existing wallet
 If you already have a private key, you can use it without generating a new wallet.

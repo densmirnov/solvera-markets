@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Content signals for AI systems
+# search: build a search index and return links/snippets
+# ai-input: use content as input for model responses
+# ai-train: train or fine-tune models
+Content-Signal: search=yes,ai-input=yes,ai-train=no
+
+Sitemap: https://solvera.markets/sitemap.xml

@@ -11,12 +11,20 @@ import { getWalletPathFromEnv } from "./env.js";
 
 const DEFAULT_WALLET_FILENAME = ".solvera-base-wallet.json";
 const DEFAULT_WALLET_PATH = join(homedir(), DEFAULT_WALLET_FILENAME);
+const DEFAULT_WALLET_PACK_DIR = join(homedir(), ".solvera-wallet-pack");
 
 export function resolveWalletPath(overridePath) {
   if (overridePath) {
     return overridePath;
   }
   return getWalletPathFromEnv(DEFAULT_WALLET_PATH);
+}
+
+export function resolveWalletPackDir(overrideDir) {
+  if (overrideDir) {
+    return overrideDir;
+  }
+  return DEFAULT_WALLET_PACK_DIR;
 }
 
 export function walletExists(walletPath) {
@@ -51,23 +59,5 @@ export function writeWalletPack(outDir, wallet) {
   const walletPath = join(outDir, "wallet.json");
   writeFileSync(walletPath, JSON.stringify(wallet, null, 2), "utf8");
   chmodSync(walletPath, 0o600);
-  const readme = [
-    "# Solvera Base Wallet Pack",
-    "",
-    "This folder contains a private key. Treat it as a secret.",
-    "Do NOT commit this folder to git or share it publicly.",
-    "",
-    "Files:",
-    "- wallet.json: { address, privateKey, createdAt }",
-    "",
-    "Usage:",
-    "- Set BASE_WALLET_PATH to this wallet.json",
-    "- Or pass --wallet <path> to base-wallet CLI",
-    "",
-    "Example:",
-    "  BASE_WALLET_PATH=./wallet-pack/wallet.json node base-wallet/src/cli.js address",
-    "",
-  ].join("\n");
-  writeFileSync(join(outDir, "README.txt"), readme, "utf8");
   return walletPath;
 }

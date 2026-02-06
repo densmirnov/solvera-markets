@@ -9,7 +9,11 @@ import {
   formatError,
   formatJson,
 } from "./lib/cli.js";
-import { resolveWalletPath, writeWalletPack } from "./lib/storage.js";
+import {
+  resolveWalletPath,
+  resolveWalletPackDir,
+  writeWalletPack,
+} from "./lib/storage.js";
 import {
   createWallet,
   getWalletInfo,
@@ -36,6 +40,7 @@ Commands:
 Notes:
   - Default chain: Base (chainId ${BASE_CHAIN.id})
   - Wallet file default: ~/.solvera-base-wallet.json (chmod 600)
+  - Wallet pack default: ~/.solvera-wallet-pack
   - Private key overrides: --private-key, BASE_PRIVATE_KEY, PRIVATE_KEY
 `);
 }
@@ -135,7 +140,7 @@ async function main() {
   }
 
   if (command === "pack") {
-    const outDir = flags.out || "wallet-pack";
+    const outDir = resolveWalletPackDir(flags.out);
     const privateKey = resolvePrivateKey(flags);
     let wallet = null;
     if (privateKey) {
@@ -165,7 +170,7 @@ async function main() {
         createdAt: wallet.createdAt,
         path: savedPath,
       },
-      warning: "Do not commit wallet-pack; it contains a private key.",
+      warning: "Do not commit wallet packs; they contain a private key.",
     };
     if (json) {
       console.log(formatJson(payload));
@@ -174,7 +179,7 @@ async function main() {
       console.log(`Address: ${wallet.address}`);
       console.log(`Created: ${wallet.createdAt}`);
       console.log(`Path: ${savedPath}`);
-      console.log("Warning: Do not commit wallet-pack to git.");
+      console.log("Warning: Do not commit wallet packs to git.");
     }
     return;
   }
