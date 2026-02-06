@@ -1,6 +1,7 @@
 ---
 title: "Implementation principles"
-description: "Documentation for Implementation principles."
+description: "Implementation heuristics for determinism, safety, and operational simplicity."
+sidebarTitle: "Principles"
 ---
 
 # Implementation principles

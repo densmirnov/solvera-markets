@@ -1,6 +1,7 @@
 ---
 title: "Engineering Standards"
-description: "Documentation for Engineering Standards."
+description: "Repository-wide quality rules for formatting, linting, tests, and audits."
+sidebarTitle: "Standards"
 ---
 
 # Engineering Standards
