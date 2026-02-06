@@ -1,6 +1,7 @@
 ---
 title: "Audit checklist (MVP)"
-description: "Documentation for Audit checklist (MVP)."
+description: "Checklist for reviewing contract safety, economic correctness, and test coverage."
+sidebarTitle: "Audit checklist"
 ---
 
 # Audit checklist (MVP)
@@ -37,4 +38,4 @@ description: "Documentation for Audit checklist (MVP)."
 
 ## Dependency Audit
 - `npm audit --audit-level=high` must pass for backend, frontend, and indexer.
-- Moderate-only indexer warnings are documented in `docs/20-engineering-standards.md`.
+- Moderate-only indexer warnings are documented in [Engineering standards](/engineering/standards).

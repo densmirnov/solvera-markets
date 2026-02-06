@@ -1,63 +1,70 @@
 ---
 title: "ABI and events (MVP)"
-description: "Documentation for ABI and events (MVP)."
+description: "Public functions and emitted events for the IntentMarketplace contract."
+sidebarTitle: "ABI & events"
 ---
 
 # ABI and events (MVP)
 
 ## Functions
-- `createIntent(tokenOut, minAmountOut, rewardToken, rewardAmount, payer, initiator, verifier, ttlSubmit, ttlAccept) -> id`
-- `submitOffer(id, amountOut)`
-- `selectWinner(id, solver, amountOut)`
-- `fulfill(id)`
-- `expire(id)`
-- `getIntent(id) -> Intent`
+- `createIntent(tokenOut, minAmountOut, rewardToken, rewardAmount, payer, initiator, verifier, ttlSubmit, ttlAccept) -> bytes32 id`
+- `submitOffer(bytes32 id, uint256 amountOut)`
+- `selectWinner(bytes32 id, address solver, uint256 amountOut)`
+- `fulfill(bytes32 id)`
+- `expire(bytes32 id)`
+- `getIntent(bytes32 id) -> Intent`
 
 ## Events and payloads
 
+In the MVP, offers are *not* stored on-chain; the canonical offer history is the `OfferSubmitted` event stream.
+
 ### IntentCreated
-- `id`
-- `payer`
-- `initiator`
-- `verifier`
-- `tokenOut`
-- `minAmountOut`
-- `rewardToken`
-- `rewardAmount`
-- `ttlSubmit`
-- `ttlAccept`
+- `id: bytes32`
+- `payer: address` (indexed)
+- `initiator: address` (indexed)
+- `verifier: address`
+- `tokenOut: address`
+- `minAmountOut: uint256`
+- `rewardToken: address`
+- `rewardAmount: uint256`
+- `ttlSubmit: uint64`
+- `ttlAccept: uint64`
 
 ### OfferSubmitted
-- `id`
-- `solver`
-- `amountOut`
-- `timestamp`
+- `id: bytes32`
+- `solver: address` (indexed)
+- `amountOut: uint256`
+- `timestamp: uint256` (block timestamp)
 
 ### WinnerSelected
-- `id`
-- `solver`
-- `amountOut`
-- `bondAmount`
+- `id: bytes32`
+- `solver: address` (indexed)
+- `amountOut: uint256`
+- `bondAmount: uint256`
 
 ### Fulfilled
-- `id`
-- `solver`
-- `amountOut`
+- `id: bytes32`
+- `solver: address` (indexed)
+- `amountOut: uint256`
 
 ### Accepted
-- `id`
-- `solver`
-- `rewardAmount`
-- `feeAmount`
-- `bondAmount`
+- `id: bytes32`
+- `solver: address` (indexed)
+- `rewardAmount: uint256`
+- `feeAmount: uint256`
+- `bondAmount: uint256`
 
 ### Expired
-- `id`
-- `fromState` (`OPEN` | `SELECTED`)
-- `feeAmount`
-- `refundAmount`
+- `id: bytes32`
+- `fromState: uint8` (`OPEN=0` | `SELECTED=1`)
+- `feeAmount: uint256`
+- `refundAmount: uint256`
 
 ### ReputationUpdated
-- `solver`
-- `newValue`
-- `reason` (`ACCEPTED` | `WINNER_TIMEOUT`)
+- `solver: address` (indexed)
+- `newValue: int256`
+- `reason: uint8` (`ACCEPTED=0` | `WINNER_TIMEOUT=1`)
+
+## Related
+- [Contract spec](/reference/contracts/contract-spec)
+- [Event stream guide](/guides/event-stream)
