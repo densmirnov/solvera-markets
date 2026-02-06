@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { cn } from "../lib/utils";
 
 interface LayoutProps {
@@ -13,6 +13,9 @@ const navLinks = [
 ];
 
 export function Layout({ children }: LayoutProps) {
+  const location = useLocation();
+  const isHome = location.pathname === "/";
+
   return (
     <div className="bauhaus-shell flex min-h-screen flex-col font-sans bg-background text-foreground antialiased selection:bg-primary/10 selection:text-primary">
       <header className="sticky top-0 z-50 w-full border-b border-border/20 bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -66,7 +69,12 @@ export function Layout({ children }: LayoutProps) {
         </div>
       </header>
 
-      <main className="flex-1 py-6 md:py-10">
+      <main
+        className={cn(
+          "flex-1 pb-6 md:pb-10",
+          isHome ? "pt-3 md:pt-5 lg:pt-7" : "pt-6 md:pt-10",
+        )}
+      >
         <div className="layout-shell-wide">{children}</div>
       </main>
 

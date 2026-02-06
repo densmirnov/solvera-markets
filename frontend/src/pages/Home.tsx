@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col items-start gap-12 py-10 md:py-20 lg:py-28">
+    <div className="flex flex-col items-start gap-12 pt-5 pb-10 md:pt-10 md:pb-20 lg:pt-12 lg:pb-28">
       <div className="hero-shell grid-phi items-center gap-10 w-full">
         <div className="span-7 space-y-6">
           <div className="hero-eyebrow reveal">Solera Markets</div>
