@@ -1,17 +1,18 @@
 ---
 id: "202602061434-3JA1QG"
 title: "Mintlify docs refactor"
-status: "DOING"
+status: "DONE"
 priority: "med"
 owner: "ORCHESTRATOR"
 depends_on: []
 tags: ["code"]
 verify: ["make check"]
-commit: null
+commit: { hash: "b5dcc28658348f3f30b6740e8148a634fda33413", message: "📝 3JA1QG docs README + make check fixes" }
 comments:
   - { author: "ORCHESTRATOR", body: "Start: Refactor Mintlify docs structure and formatting with minimal accidental changes." }
+  - { author: "ORCHESTRATOR", body: "Verified: Mintlify docs are reorganized with updated docs/docs.json nav (see commits 4e70ba6..16b5302). Added docs/README plus frontend eslint ignores + format tests to restore make check; agentplane verify passed. Latest commit: b5dcc2865834." }
 doc_version: 2
-doc_updated_at: "2026-02-06T14:36:49.794Z"
+doc_updated_at: "2026-02-06T15:08:06.141Z"
 doc_updated_by: "ORCHESTRATOR"
 description: "Refactor Mintlify documentation: restructure IA/nav, normalize frontmatter and page templates, fix internal links, and reduce duplication. Keep changes deterministic and avoid touching agentplane-managed state unless explicitly required."
 id_source: "generated"
@@ -35,3 +36,15 @@ Refactor Mintlify documentation for Solvera Markets: introduce clearer informati
 ## Rollback Plan
 
 Revert the docs refactor commit(s). If needed, restore previous docs/docs.json and page paths from git history.
+
+## Verification
+
+Status: pass
+Verified at: 2026-02-06T15:07:46.674Z
+Verified sha: b5dcc28658348f3f30b6740e8148a634fda33413
+
+Commands:
+- make check
+
+Manual steps:
+- make check\n2. Spot-check Mintlify navigation: docs/docs.json groups resolve to existing pages.\n3. rg for old slugs/paths to ensure internal links updated.
