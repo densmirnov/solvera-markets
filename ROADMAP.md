@@ -36,7 +36,7 @@
 ### 0.4 Engineering standards
 - Task: enforce mandatory linters and auto-formatters across all code.
 - Dependencies: 0.3.
-- Verify: rules in `CONTRIBUTING.md` and `docs/20-engineering-standards.md`.
+- Verify: rules in `CONTRIBUTING.md` and `docs/engineering/standards.md`.
 
 ---
 
@@ -45,7 +45,7 @@
 ### 1.1 ABI and events
 - Task: define ABI and event payloads.
 - Dependencies: 0.1.
-- Verify: `docs/12-abi-events.md` published.
+- Verify: `docs/reference/contracts/abi-and-events.md` published.
 
 ### 1.2 Contract implementation
 - Task: implement `createIntent`, `submitOffer`, `selectWinner`, `fulfill`, `_accept`, `expire`.
@@ -70,7 +70,7 @@
 ### 1.6 Deploy to testnet
 - Task: deploy contract and record address/chainId.
 - Dependencies: 1.4.
-- Verify: tx visible in explorer; addresses in `docs/14-deployments.md`.
+- Verify: tx visible in explorer; addresses in `docs/operations/deployments-and-addresses.md`.
 
 ### 1.7 Verify contract
 - Task: verify sources in explorer.
@@ -184,7 +184,7 @@
 ### 5.2 Release policy
 - Task: versioning, changelog, tags.
 - Dependencies: 5.1.
-- Verify: process in `docs/16-release-process.md`.
+- Verify: process documented in `CONTRIBUTING.md` and `docs/engineering/standards.md`.
 
 ### 5.3 Pre-release validation
 - Task: repeatable checklist (contract, indexer, backend, frontend).
@@ -198,12 +198,12 @@
 ### 6.1 End-to-end testing
 - Task: integration testing end-to-end.
 - Dependencies: 1.8, 2.3, 3.4, 4.3.
-- Verify: report in `docs/17-e2e-report.md`.
+- Verify: end-to-end test run is repeatable and green in CI and locally.
 
 ### 6.2 Publish MVP
 - Task: announce release, publish contract addresses, API, and links.
 - Dependencies: 6.1.
-- Verify: `docs/14-deployments.md` and `docs/16-release-process.md` updated.
+- Verify: `docs/operations/deployments-and-addresses.md` updated; release notes/policy aligned with `CONTRIBUTING.md`.
 
 ### 6.3 Monitoring and post-release
 - Task: SLA metrics, errors, invariant deviations.
