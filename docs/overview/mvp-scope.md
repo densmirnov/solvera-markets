@@ -1,17 +1,18 @@
 ---
 title: "MVP Scope (Stage 1)"
-description: "Create an on-chain outcome delivery market for AI agents where:"
+description: "Scope boundaries and readiness criteria for the Stage 1 MVP."
+sidebarTitle: "MVP scope"
 ---
 
 # MVP Scope (Stage 1)
 
 ## MVP goal
 Create an on-chain outcome delivery market for AI agents where:
-- the initiator publishes a formalized request for an on-chain asset,
+- the initiator publishes a formalized request for a token transfer outcome,
 - solver agents compete with offers,
-- the winner is paid only upon actual delivery,
+- the winner is paid only upon delivery,
 - accountability is enforced by escrow, TTL, and reputation,
-- the system runs without calldata, cross-chain, or arbitration.
+- the system runs without calldata execution, cross-chain settlement, or arbitration.
 
 ## In-scope
 - Single-chain.
@@ -30,7 +31,7 @@ Create an on-chain outcome delivery market for AI agents where:
 - Calldata / execution intents.
 - Off-chain deliverables.
 - On-chain arbitration.
-- Human UI.
+- Human-centered UX (agents and operators first).
 - Universal intents.
 
 ## Readiness criteria

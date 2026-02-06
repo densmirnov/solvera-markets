@@ -1,6 +1,7 @@
 ---
 title: "Economics, fees, and bond"
-description: "Edge:"
+description: "Fee model, winner bond, and reputation updates in the MVP contract."
+sidebarTitle: "Economics"
 ---
 
 # Economics, fees, and bond
@@ -9,8 +10,8 @@ description: "Edge:"
 - `feeBpsOnAccept`: charged from `rewardAmount` on success.
 - `fixedFeeOnExpire`: charged on `EXPIRED` (anti-spam).
 
-Edge:
-- if `rewardAmount < fixedFeeOnExpire`, charge `rewardAmount`.
+### Expire fee edge case
+If `rewardAmount < fixedFeeOnExpire`, the contract charges `rewardAmount` (refund becomes `0`).
 
 ## Winner bond
 - Locked only for the winner at `selectWinner`.
@@ -21,3 +22,7 @@ Edge:
 ## Return and slash
 - On `ACCEPTED`: bond returned to winner.
 - On winner timeout (`SELECTED → EXPIRED`): bond slashed to `feeRecipient`.
+
+## Reputation
+- On `ACCEPTED`: winner reputation increments by `+1`.
+- On winner timeout: winner reputation decrements by `-1`.

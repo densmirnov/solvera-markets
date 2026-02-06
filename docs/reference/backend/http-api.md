@@ -3,7 +3,7 @@ title: "Backend API (MVP)"
 description: "List of intents."
 ---
 
-# Backend API (Judge Summary)
+# Backend API (Summary)
 
 A thin API over the subgraph for fast, deterministic reads.
 

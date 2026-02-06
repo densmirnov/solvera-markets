@@ -9,51 +9,58 @@
   "navigation": {
     "groups": [
       {
-        "group": "Overview",
-        "pages": ["index", "01-vision-roadmap", "02-mvp-scope"]
-      },
-      {
-        "group": "Protocol",
+        "group": "Getting Started",
         "pages": [
-          "03-roles-intents",
-          "04-state-machine",
-          "05-contract-spec",
-          "06-economics-fees-bond",
-          "07-events-sdk",
-          "10-open-parameters",
-          "11-assumptions-gaps"
+          "index",
+          "getting-started",
+          "overview/vision-roadmap",
+          "overview/mvp-scope",
+          "overview/assumptions-and-gaps"
         ]
       },
       {
-        "group": "Testing & Audit",
+        "group": "Concepts",
+        "pages": ["concepts/roles-and-intents", "concepts/state-machine", "concepts/economics-fees-and-bonds"]
+      },
+      {
+        "group": "Guides",
+        "pages": ["guides/event-stream"]
+      },
+      {
+        "group": "Reference",
         "pages": [
-          "08-testing-invariants",
-          "09-risks-metrics",
-          "13-audit-checklist",
-          "15-mainnet-checklist"
+          "reference/contracts/contract-spec",
+          "reference/contracts/abi-and-events",
+          "reference/parameters",
+          "reference/backend/http-api",
+          "reference/indexer/data-model",
+          "reference/indexer/endpoints"
         ]
       },
       {
-        "group": "Contracts & Interfaces",
+        "group": "Testing & Security",
         "pages": [
-          "12-abi-events",
-          "12-repo-structure",
-          "16-indexer-model",
-          "17-backend-api",
-          "19-subgraph-endpoints"
+          "testing/testing-and-invariants",
+          "testing/risks-and-metrics",
+          "security/audit-checklist"
         ]
       },
       {
         "group": "Operations",
         "pages": [
-          "14-deployments",
-          "18-ops-indexer-backend",
-          "22-devops-dokploy"
+          "operations/deployments-and-addresses",
+          "operations/indexer-and-backend",
+          "operations/dokploy-and-compose",
+          "operations/mainnet-checklist"
         ]
       },
       {
         "group": "Engineering",
-        "pages": ["20-engineering-standards", "21-implementation-principles"]
+        "pages": [
+          "engineering/repo-structure",
+          "engineering/standards",
+          "engineering/implementation-principles"
+        ]
       }
     ]
   }
