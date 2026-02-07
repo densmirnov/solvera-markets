@@ -19,8 +19,8 @@ verification:
   updated_by: "ORCHESTRATOR"
   note: "Verified: git status --short shows only .agentplane/cache untracked; intended files committed."
 commit:
-  hash: "28ed660680e53efe2db7fef08babe89a2bd42a44"
-  message: "🧹 QPK03K chore: commit agentplane tasks and editor settings"
+  hash: "dc0a21e0703b0b32d6038b20ba485a20c200a393"
+  message: "🧹 QPK03K chore: update task records"
 comments:
   -
     author: "ORCHESTRATOR"
@@ -28,6 +28,9 @@ comments:
   -
     author: "ORCHESTRATOR"
     body: "Verified: commit 28ed660680e5 includes agentplane tasks, Zed settings, and frontend/SOLVERA_SKILL; .agentplane/cache excluded."
+  -
+    author: "ORCHESTRATOR"
+    body: "Verified: task records updated in dc0a21e0703b; working tree clean except .agentplane/cache."
 events:
   -
     type: "status"
@@ -49,8 +52,15 @@ events:
     from: "DOING"
     to: "DONE"
     note: "Verified: commit 28ed660680e5 includes agentplane tasks, Zed settings, and frontend/SOLVERA_SKILL; .agentplane/cache excluded."
+  -
+    type: "status"
+    at: "2026-02-07T08:47:36.975Z"
+    author: "ORCHESTRATOR"
+    from: "DONE"
+    to: "DONE"
+    note: "Verified: task records updated in dc0a21e0703b; working tree clean except .agentplane/cache."
 doc_version: 2
-doc_updated_at: "2026-02-07T08:46:50.248Z"
+doc_updated_at: "2026-02-07T08:47:36.975Z"
 doc_updated_by: "ORCHESTRATOR"
 description: "Track and commit untracked files, add recommended Zed settings, exclude .agentplane/cache."
 id_source: "generated"
