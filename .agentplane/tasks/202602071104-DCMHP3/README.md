@@ -1,7 +1,7 @@
 ---
 id: "202602071104-DCMHP3"
 title: "Geist as primary font + pixel HUD statuses"
-status: "DOING"
+status: "DONE"
 priority: "med"
 owner: "ORCHESTRATOR"
 depends_on: []
@@ -15,15 +15,20 @@ plan_approval:
   updated_by: "densmirnov"
   note: "Approved in chat on 2026-02-07: apply Geist fonts + pixel status/HUD everywhere status/health/online appears."
 verification:
-  state: "pending"
-  updated_at: null
-  updated_by: null
-  note: null
-commit: null
+  state: "ok"
+  updated_at: "2026-02-07T11:16:55.222Z"
+  updated_by: "ORCHESTRATOR"
+  note: "Ran make check (fmt/lint/tests/coverage/audit) and frontend build; verified pixel status chips render for intent state and NET/API online HUD appears in header."
+commit:
+  hash: "dce42f7b8ca836671bf65d66fbca5bfdc4b1cfc5"
+  message: "✨ DCMHP3 frontend: switch to Geist + pixel HUD statuses"
 comments:
   -
     author: "ORCHESTRATOR"
     body: "Start: install Geist (sans/mono/pixel), make it default typography, and add pixel status/HUD across all status/health/online surfaces."
+  -
+    author: "ORCHESTRATOR"
+    body: "Verified: Geist is now the default font (sans/mono/pixel). Pixel status chips replace intent state badges and a NET/API HUD strip is shown globally; make check and frontend build/test/lint passed."
 events:
   -
     type: "status"
@@ -32,8 +37,21 @@ events:
     from: "TODO"
     to: "DOING"
     note: "Start: install Geist (sans/mono/pixel), make it default typography, and add pixel status/HUD across all status/health/online surfaces."
+  -
+    type: "verify"
+    at: "2026-02-07T11:16:55.222Z"
+    author: "ORCHESTRATOR"
+    state: "ok"
+    note: "Ran make check (fmt/lint/tests/coverage/audit) and frontend build; verified pixel status chips render for intent state and NET/API online HUD appears in header."
+  -
+    type: "status"
+    at: "2026-02-07T11:17:04.388Z"
+    author: "ORCHESTRATOR"
+    from: "DOING"
+    to: "DONE"
+    note: "Verified: Geist is now the default font (sans/mono/pixel). Pixel status chips replace intent state badges and a NET/API HUD strip is shown globally; make check and frontend build/test/lint passed."
 doc_version: 2
-doc_updated_at: "2026-02-07T11:15:22.413Z"
+doc_updated_at: "2026-02-07T11:17:04.388Z"
 doc_updated_by: "ORCHESTRATOR"
 description: "Install Vercel Geist (sans/mono/pixel) and make it the default site type system. Add pixel-style status/health/online chips and a small Watch Dogs-inspired HUD layer for those indicators (CSS-only, no copied assets). Update all UI surfaces where status/health/online appears."
 id_source: "generated"
@@ -77,3 +95,18 @@ Request: switch the website to Vercel Geist (npm package 'geist') as the default
 4. Replace existing status badges with `PixelStatusChip` and add NET/API online indicators.
 5. Verify build/lint/tests + quick manual smoke test.
 6. Commit with tight allowlist (exclude unrelated files like `PITCH.md`).
+
+## Verification
+
+### Plan
+
+### Results
+
+<!-- BEGIN VERIFICATION RESULTS -->
+#### 2026-02-07T11:16:55.222Z — VERIFY — ok
+
+By: ORCHESTRATOR
+
+Note: Ran make check (fmt/lint/tests/coverage/audit) and frontend build; verified pixel status chips render for intent state and NET/API online HUD appears in header.
+
+<!-- END VERIFICATION RESULTS -->
