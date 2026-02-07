@@ -10,6 +10,7 @@ import { useEnsNames } from "../lib/ens";
 import { H1, P } from "../components/ui/Typography";
 import { Button } from "../components/ui/Button";
 import { cn } from "../lib/utils";
+import { PixelStatusChip, toneForIntentState } from "../components/ui/PixelStatus";
 
 interface Intent {
   id: string;
@@ -192,16 +193,16 @@ export default function MarketplacePage() {
                         </Link>
                       </td>
                       <td className="px-3 py-2 align-middle">
-                        <span
+                        <PixelStatusChip
+                          v={intent.state}
+                          tone={toneForIntentState(intent.state)}
                           className={cn(
-                            "inline-flex items-center rounded-full border px-2 py-0.5 text-[11px] font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+                            "text-[10px]",
                             intent.state === "OPEN"
-                              ? "border-transparent bg-primary text-primary-foreground"
-                              : "text-foreground",
+                              ? "shadow-[0_0_0_1px_hsla(var(--hud-lime),0.12)]"
+                              : null,
                           )}
-                        >
-                          {intent.state}
-                        </span>
+                        />
                       </td>
                       <td className="px-3 py-2 align-middle">
                         <div className="font-medium text-[13px]">

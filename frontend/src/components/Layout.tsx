@@ -1,5 +1,6 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { cn } from "../lib/utils";
+import { HUDStatusBar } from "./ui/HUDStatusBar";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -63,7 +64,9 @@ export function Layout({ children }: LayoutProps) {
               {/* Search or other controls could go here */}
             </div>
             <nav className="flex items-center">
-              {/* Additional nav items like GitHub link or Role toggle */}
+              <div className="hidden sm:flex items-center">
+                <HUDStatusBar />
+              </div>
             </nav>
           </div>
         </div>

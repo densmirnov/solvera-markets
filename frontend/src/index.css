@@ -1,8 +1,26 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Manrope", sans-serif;
-  --font-display: "Space Grotesk", "Manrope", sans-serif;
+  --font-sans:
+    "Geist Sans",
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  --font-display: var(--font-sans);
+  --font-mono:
+    "Geist Mono",
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    "Courier New",
+    monospace;
+  --font-pixel: "Geist Pixel", var(--font-mono);
 
   --color-border: var(--border);
   --color-input: var(--input);
@@ -78,6 +96,13 @@
   --display-line: 1.04;
   --body-size: 1rem;
   --body-line: 1.7;
+
+  /* HUD / pixel accents (Watch Dogs-inspired, CSS-only) */
+  --hud-ink: 220 18% 8%;
+  --hud-cyan: 184 92% 44%;
+  --hud-lime: 145 78% 42%;
+  --hud-amber: 38 92% 56%;
+  --hud-red: 2 86% 56%;
 }
 
 .dark {
@@ -796,4 +821,115 @@
   .card-spotlight {
     transition: none;
   }
+}
+
+/* Pixel / HUD primitives */
+.font-pixel {
+  font-family: var(--font-pixel);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "liga" 0, "calt" 0;
+}
+
+.hud-strip {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hud-chip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 10px;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid hsla(var(--hud-cyan), 0.28);
+  background:
+    linear-gradient(
+      180deg,
+      hsla(var(--hud-ink), 0.88),
+      hsla(var(--hud-ink), 0.68)
+    );
+  box-shadow:
+    0 10px 24px -18px hsla(var(--hud-ink), 0.6),
+    inset 0 1px 0 hsla(0, 0%, 100%, 0.14),
+    0 0 0 1px hsla(var(--hud-cyan), 0.08);
+  color: hsla(var(--hud-cyan), 0.92);
+  overflow: hidden;
+}
+
+.hud-chip::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(
+    180deg,
+    transparent,
+    hsla(0, 0%, 100%, 0.06),
+    transparent
+  );
+  opacity: 0.7;
+  mix-blend-mode: overlay;
+}
+
+.hud-chip::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    180deg,
+    transparent 0px,
+    transparent 2px,
+    hsla(0, 0%, 100%, 0.05) 3px
+  );
+  opacity: 0.18;
+}
+
+.hud-chip[data-tone="ok"] {
+  border-color: hsla(var(--hud-lime), 0.34);
+  color: hsla(var(--hud-lime), 0.96);
+}
+
+.hud-chip[data-tone="warn"] {
+  border-color: hsla(var(--hud-amber), 0.34);
+  color: hsla(var(--hud-amber), 0.96);
+}
+
+.hud-chip[data-tone="err"] {
+  border-color: hsla(var(--hud-red), 0.34);
+  color: hsla(var(--hud-red), 0.96);
+}
+
+.hud-chip[data-tone="idle"] {
+  border-color: hsla(0, 0%, 100%, 0.16);
+  color: hsla(0, 0%, 100%, 0.76);
+}
+
+.hud-chip__key {
+  color: hsla(0, 0%, 100%, 0.65);
+}
+
+@keyframes hud-glitch {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+    filter: none;
+  }
+  40% {
+    transform: translate3d(1px, 0, 0);
+    filter: hue-rotate(6deg) saturate(1.05);
+  }
+  60% {
+    transform: translate3d(-1px, 0, 0);
+    filter: hue-rotate(-6deg) saturate(1.05);
+  }
+}
+
+.hud-chip:hover {
+  animation: hud-glitch 320ms steps(2, end);
 }

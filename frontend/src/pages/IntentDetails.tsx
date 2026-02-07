@@ -9,6 +9,7 @@ import {
 } from "../lib/format";
 import { useEnsNames } from "../lib/ens";
 import { H1, P } from "../components/ui/Typography";
+import { PixelStatusChip, toneForIntentState } from "../components/ui/PixelStatus";
 
 interface IntentDetail {
   id: string;
@@ -140,9 +141,7 @@ export default function IntentDetailsPage() {
               <div className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
                 Status
               </div>
-              <div className="inline-flex items-center rounded-full border px-2 py-0.5 text-[11px] font-semibold">
-                {data.state}
-              </div>
+              <PixelStatusChip v={data.state} tone={toneForIntentState(data.state)} />
               <div>
                 <div className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
                   Reward
