@@ -1,7 +1,7 @@
 ---
 id: "202602071124-71RZYQ"
 title: "Marketplace HUD rail + pixel frames (Watch Dogs style)"
-status: "DOING"
+status: "DONE"
 priority: "med"
 owner: "ORCHESTRATOR"
 depends_on: []
@@ -15,15 +15,20 @@ plan_approval:
   updated_by: "densmirnov"
   note: "Approved in chat on 2026-02-07: extend Watch Dogs HUD (mobile + Marketplace HUD rail + pixel frames)."
 verification:
-  state: "pending"
-  updated_at: null
-  updated_by: null
-  note: null
-commit: null
+  state: "ok"
+  updated_at: "2026-02-07T11:28:38.899Z"
+  updated_by: "ORCHESTRATOR"
+  note: "Ran frontend build/lint/tests and make check. Verified: NET/API HUD renders on mobile + desktop header; Marketplace HUD rail shows state counters + UPDATED + signal meter; pixel frames applied to Marketplace filters/table and IntentDetails panel."
+commit:
+  hash: "29a54ff3afdfebed3b57deec49162c1bfbdbd878"
+  message: "✨ 71RZYQ frontend: Marketplace HUD rail + pixel frames"
 comments:
   -
     author: "ORCHESTRATOR"
     body: "Start: extend HUD layer (mobile NET/API, Marketplace HUD rail with counters/updated-at/signal meter, reusable pixel frames) with minimal visual noise."
+  -
+    author: "ORCHESTRATOR"
+    body: "Verified: HUD now shows on mobile header; Marketplace has a HUD rail (counters + updated-at + signal meter) and pixel-frame primitives are applied to key surfaces. Frontend build/lint/tests and make check passed."
 events:
   -
     type: "status"
@@ -32,8 +37,21 @@ events:
     from: "TODO"
     to: "DOING"
     note: "Start: extend HUD layer (mobile NET/API, Marketplace HUD rail with counters/updated-at/signal meter, reusable pixel frames) with minimal visual noise."
+  -
+    type: "verify"
+    at: "2026-02-07T11:28:38.899Z"
+    author: "ORCHESTRATOR"
+    state: "ok"
+    note: "Ran frontend build/lint/tests and make check. Verified: NET/API HUD renders on mobile + desktop header; Marketplace HUD rail shows state counters + UPDATED + signal meter; pixel frames applied to Marketplace filters/table and IntentDetails panel."
+  -
+    type: "status"
+    at: "2026-02-07T11:28:43.919Z"
+    author: "ORCHESTRATOR"
+    from: "DOING"
+    to: "DONE"
+    note: "Verified: HUD now shows on mobile header; Marketplace has a HUD rail (counters + updated-at + signal meter) and pixel-frame primitives are applied to key surfaces. Frontend build/lint/tests and make check passed."
 doc_version: 2
-doc_updated_at: "2026-02-07T11:25:25.576Z"
+doc_updated_at: "2026-02-07T11:28:43.919Z"
 doc_updated_by: "ORCHESTRATOR"
 description: "Extend Watch Dogs-inspired HUD layer: ensure NET/API HUD is visible on mobile, add Marketplace HUD rail (state counters + updated-at + signal meter), and add reusable pixel-frame primitives applied to key surfaces."
 id_source: "generated"
@@ -70,3 +88,18 @@ Make Watch Dogs-inspired HUD elements more pervasive: show NET/API HUD on mobile
 3. Add pixel-frame CSS primitives and apply them to Marketplace + IntentDetails key containers.
 4. Verify build/lint/tests and run `make check`.
 5. Commit with tight allowlist (exclude unrelated working tree changes).
+
+## Verification
+
+### Plan
+
+### Results
+
+<!-- BEGIN VERIFICATION RESULTS -->
+#### 2026-02-07T11:28:38.899Z — VERIFY — ok
+
+By: ORCHESTRATOR
+
+Note: Ran frontend build/lint/tests and make check. Verified: NET/API HUD renders on mobile + desktop header; Marketplace HUD rail shows state counters + UPDATED + signal meter; pixel frames applied to Marketplace filters/table and IntentDetails panel.
+
+<!-- END VERIFICATION RESULTS -->
