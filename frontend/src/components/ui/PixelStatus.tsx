@@ -28,10 +28,11 @@ export function PixelStatusChip({
   className,
   title,
 }: PixelStatusChipProps) {
+  const dataTone = tone === "info" ? "idle" : tone;
   return (
     <span
       className={cn("hud-chip font-pixel text-[10px]", className)}
-      data-tone={tone}
+      data-tone={dataTone}
       title={title ?? (k ? `${k} ${v}` : v)}
     >
       {k ? <span className="hud-chip__key">{k}</span> : null}
@@ -39,4 +40,3 @@ export function PixelStatusChip({
     </span>
   );
 }
-

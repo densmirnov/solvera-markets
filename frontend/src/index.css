@@ -837,6 +837,8 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .hud-chip {
@@ -932,4 +934,122 @@
 
 .hud-chip:hover {
   animation: hud-glitch 320ms steps(2, end);
+}
+
+.pixel-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.8rem;
+  border: 1px solid hsla(var(--hud-cyan), 0.22);
+  box-shadow:
+    0 16px 34px -30px hsla(var(--hud-ink), 0.55),
+    inset 0 1px 0 hsla(0, 0%, 100%, 0.12);
+}
+
+/* Corner brackets */
+.pixel-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(hsla(var(--hud-cyan), 0.7), hsla(var(--hud-cyan), 0.7)),
+    linear-gradient(hsla(var(--hud-cyan), 0.7), hsla(var(--hud-cyan), 0.7)),
+    linear-gradient(hsla(var(--hud-cyan), 0.7), hsla(var(--hud-cyan), 0.7)),
+    linear-gradient(hsla(var(--hud-cyan), 0.7), hsla(var(--hud-cyan), 0.7)),
+    linear-gradient(hsla(var(--hud-cyan), 0.7), hsla(var(--hud-cyan), 0.7)),
+    linear-gradient(hsla(var(--hud-cyan), 0.7), hsla(var(--hud-cyan), 0.7)),
+    linear-gradient(hsla(var(--hud-cyan), 0.7), hsla(var(--hud-cyan), 0.7)),
+    linear-gradient(hsla(var(--hud-cyan), 0.7), hsla(var(--hud-cyan), 0.7));
+  background-repeat: no-repeat;
+  background-size:
+    14px 2px,
+    2px 14px,
+    14px 2px,
+    2px 14px,
+    14px 2px,
+    2px 14px,
+    14px 2px,
+    2px 14px;
+  background-position:
+    12px 12px,
+    12px 12px,
+    calc(100% - 26px) 12px,
+    calc(100% - 14px) 12px,
+    12px calc(100% - 14px),
+    12px calc(100% - 26px),
+    calc(100% - 26px) calc(100% - 14px),
+    calc(100% - 14px) calc(100% - 26px);
+  opacity: 0.5;
+}
+
+.pixel-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    180deg,
+    transparent 0px,
+    transparent 2px,
+    hsla(0, 0%, 100%, 0.05) 3px
+  );
+  opacity: 0.12;
+  mix-blend-mode: overlay;
+}
+
+.signal-meter {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+}
+
+.signal-meter > span {
+  width: 3px;
+  background: hsla(var(--hud-cyan), 0.55);
+  border-radius: 1px;
+  box-shadow: 0 0 0 1px hsla(var(--hud-cyan), 0.12);
+  transform-origin: bottom;
+  animation: signal-pulse 1200ms steps(8, end) infinite;
+}
+
+.signal-meter > span:nth-child(2) {
+  animation-delay: 120ms;
+}
+.signal-meter > span:nth-child(3) {
+  animation-delay: 240ms;
+}
+.signal-meter > span:nth-child(4) {
+  animation-delay: 360ms;
+}
+.signal-meter > span:nth-child(5) {
+  animation-delay: 480ms;
+}
+.signal-meter > span:nth-child(6) {
+  animation-delay: 600ms;
+}
+.signal-meter > span:nth-child(7) {
+  animation-delay: 720ms;
+}
+
+@keyframes signal-pulse {
+  0%,
+  100% {
+    height: 3px;
+    opacity: 0.35;
+  }
+  50% {
+    height: 14px;
+    opacity: 0.9;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .signal-meter > span {
+    animation: none;
+  }
+  .hud-chip:hover {
+    animation: none;
+  }
 }

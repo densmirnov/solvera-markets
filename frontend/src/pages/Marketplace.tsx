@@ -11,6 +11,7 @@ import { H1, P } from "../components/ui/Typography";
 import { Button } from "../components/ui/Button";
 import { cn } from "../lib/utils";
 import { PixelStatusChip, toneForIntentState } from "../components/ui/PixelStatus";
+import { MarketplaceHudRail } from "../components/marketplace/MarketplaceHudRail";
 
 interface Intent {
   id: string;
@@ -34,6 +35,7 @@ export default function MarketplacePage() {
   const [data, setData] = useState<Intent[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const [updatedAt, setUpdatedAt] = useState<number | null>(null);
   const [filters, setFilters] = useState({
     state: "",
     tokenOut: "",
@@ -51,6 +53,7 @@ export default function MarketplacePage() {
       .then((payload) => {
         if (!active) return;
         setData(payload.data || []);
+        setUpdatedAt(Date.now());
         setError(null);
       })
       .catch((err) => {
@@ -85,7 +88,11 @@ export default function MarketplacePage() {
         </P>
       </div>
 
-      <div className="card-spotlight surface-soft-muted marketplace-outline flex flex-wrap gap-4 items-end p-4 rounded-lg reveal delay-2 marketplace-filters">
+      <div className="reveal delay-2">
+        <MarketplaceHudRail intents={data} updatedAt={updatedAt} />
+      </div>
+
+      <div className="pixel-frame card-spotlight surface-soft-muted marketplace-outline flex flex-wrap gap-4 items-end p-4 reveal delay-2 marketplace-filters">
         <div className="grid gap-2">
           <label className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
             State
@@ -109,7 +116,7 @@ export default function MarketplacePage() {
         </div>
       )}
 
-      <div className="table-frame surface-soft-muted marketplace-outline rounded-lg overflow-hidden reveal delay-3 marketplace-table-frame">
+      <div className="pixel-frame table-frame surface-soft-muted marketplace-outline overflow-hidden reveal delay-3 marketplace-table-frame">
         <div className="relative w-full overflow-auto">
           <table className="w-full caption-bottom text-sm marketplace-table">
             <thead className="[&_tr]:border-b">

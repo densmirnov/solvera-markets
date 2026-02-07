@@ -58,15 +58,15 @@ export function Layout({ children }: LayoutProps) {
               )}
             </nav>
           </div>
-          {/* Mobile menu could go here */}
-          <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
+          <div className="flex flex-1 items-center justify-between gap-3 md:justify-end">
+            <NavLink to="/" className="md:hidden flex items-center">
+              <span className="brand-mark font-bold">Solvera</span>
+            </NavLink>
             <div className="w-full flex-1 md:w-auto md:flex-none">
               {/* Search or other controls could go here */}
             </div>
             <nav className="flex items-center">
-              <div className="hidden sm:flex items-center">
-                <HUDStatusBar />
-              </div>
+              <HUDStatusBar />
             </nav>
           </div>
         </div>

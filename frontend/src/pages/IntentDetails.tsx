@@ -130,7 +130,7 @@ export default function IntentDetailsPage() {
         </div>
       )}
 
-      <div className="card-spotlight surface-soft-muted marketplace-outline rounded-lg p-4 reveal delay-2">
+      <div className="pixel-frame card-spotlight surface-soft-muted marketplace-outline p-4 reveal delay-2">
         {loading ? (
           <div className="text-muted-foreground">Loading...</div>
         ) : !data ? (
