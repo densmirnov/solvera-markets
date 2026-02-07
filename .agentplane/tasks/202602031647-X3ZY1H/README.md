@@ -5,12 +5,31 @@ status: "DONE"
 priority: "med"
 owner: "CODER"
 depends_on: []
-tags: ["code"]
-verify: ["make check"]
-commit: { hash: "ad10e8040cd0a14faba85cc2e549e2494a321f5d", message: "✨ X3ZY1H add repo validation and quality scripts" }
+tags:
+  - "code"
+verify:
+  - "make check"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "ad10e8040cd0a14faba85cc2e549e2494a321f5d"
+  message: "✨ X3ZY1H add repo validation and quality scripts"
 comments:
-  - { author: "CODER", body: "Start: Add repo-level validation, lint, format, and test scripts for Stage 0.3." }
-  - { author: "CODER", body: "Verified: Added Makefile and quality scripts; make check not run in this commit." }
+  -
+    author: "CODER"
+    body: "Start: Add repo-level validation, lint, format, and test scripts for Stage 0.3."
+  -
+    author: "CODER"
+    body: "Verified: Added Makefile and quality scripts; make check not run in this commit."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-03T16:51:49.458Z"
 doc_updated_by: "CODER"

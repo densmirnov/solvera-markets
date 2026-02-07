@@ -5,12 +5,31 @@ status: "DONE"
 priority: "med"
 owner: "DOCS"
 depends_on: []
-tags: ["code"]
-verify: ["make check"]
-commit: { hash: "b531d80aef0b57d3940fa715101da54c6dcd178d", message: "✨ DBE4EA add baseline roadmap and docs" }
+tags:
+  - "code"
+verify:
+  - "make check"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "b531d80aef0b57d3940fa715101da54c6dcd178d"
+  message: "✨ DBE4EA add baseline roadmap and docs"
 comments:
-  - { author: "DOCS", body: "Start: Commit baseline docs and roadmap before Stage 1 work begins." }
-  - { author: "DOCS", body: "Verified: Baseline docs and roadmap added; ABI events doc excluded; no code execution required." }
+  -
+    author: "DOCS"
+    body: "Start: Commit baseline docs and roadmap before Stage 1 work begins."
+  -
+    author: "DOCS"
+    body: "Verified: Baseline docs and roadmap added; ABI events doc excluded; no code execution required."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-03T16:54:48.701Z"
 doc_updated_by: "DOCS"

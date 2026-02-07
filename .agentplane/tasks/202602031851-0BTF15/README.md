@@ -5,12 +5,31 @@ status: "DONE"
 priority: "med"
 owner: "CODER"
 depends_on: []
-tags: ["backend"]
-verify: ["rg \"rate limit\" backend"]
-commit: { hash: "a38eb0a97ce1cbb8f2d5a21f03ebc1d28673912c", message: "🛡️ 0BTF15 add write auth and rate limiting" }
+tags:
+  - "backend"
+verify:
+  - "rg \"rate limit\" backend"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "a38eb0a97ce1cbb8f2d5a21f03ebc1d28673912c"
+  message: "🛡️ 0BTF15 add write auth and rate limiting"
 comments:
-  - { author: "CODER", body: "Start: add write-endpoint auth toggle and rate limiting scoped to write routes." }
-  - { author: "CODER", body: "Verified: write endpoints now require optional API key and are the only routes subject to rate limits." }
+  -
+    author: "CODER"
+    body: "Start: add write-endpoint auth toggle and rate limiting scoped to write routes."
+  -
+    author: "CODER"
+    body: "Verified: write endpoints now require optional API key and are the only routes subject to rate limits."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-03T18:57:58.914Z"
 doc_updated_by: "CODER"

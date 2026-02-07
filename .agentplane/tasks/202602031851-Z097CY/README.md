@@ -5,12 +5,31 @@ status: "DONE"
 priority: "high"
 owner: "DOCS"
 depends_on: []
-tags: ["backend"]
-verify: ["rg \"next_steps\" docs/17-backend-api.md"]
-commit: { hash: "6f6434406bc777214bd89eeb17e9957c45d82ea0", message: "🧭 Z097CY expand backend API contract" }
+tags:
+  - "backend"
+verify:
+  - "rg \"next_steps\" docs/17-backend-api.md"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "6f6434406bc777214bd89eeb17e9957c45d82ea0"
+  message: "🧭 Z097CY expand backend API contract"
 comments:
-  - { author: "DOCS", body: "Start: expand backend API documentation per PRD v0.1 with next_steps, tx-builders, and error model." }
-  - { author: "DOCS", body: "Verified: backend API doc now specifies next_steps, tx-builder endpoints, error model, config endpoint, and pagination filters per PRD v0.1." }
+  -
+    author: "DOCS"
+    body: "Start: expand backend API documentation per PRD v0.1 with next_steps, tx-builders, and error model."
+  -
+    author: "DOCS"
+    body: "Verified: backend API doc now specifies next_steps, tx-builder endpoints, error model, config endpoint, and pagination filters per PRD v0.1."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-03T18:53:21.259Z"
 doc_updated_by: "DOCS"

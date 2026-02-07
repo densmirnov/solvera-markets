@@ -5,12 +5,31 @@ status: "DONE"
 priority: "high"
 owner: "TESTER"
 depends_on: []
-tags: ["backend"]
-verify: ["rg \"c8\" backend/package.json"]
-commit: { hash: "f8e140cd0551759bd646149f84a20f26217724d5", message: "🧪 66KHJ2 add backend tests and coverage" }
+tags:
+  - "backend"
+verify:
+  - "rg \"c8\" backend/package.json"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "f8e140cd0551759bd646149f84a20f26217724d5"
+  message: "🧪 66KHJ2 add backend tests and coverage"
 comments:
-  - { author: "TESTER", body: "Start: add backend API tests and coverage thresholds." }
-  - { author: "TESTER", body: "Verified: backend has API tests and c8 coverage thresholds with updated lockfile." }
+  -
+    author: "TESTER"
+    body: "Start: add backend API tests and coverage thresholds."
+  -
+    author: "TESTER"
+    body: "Verified: backend has API tests and c8 coverage thresholds with updated lockfile."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-04T05:24:00.215Z"
 doc_updated_by: "TESTER"

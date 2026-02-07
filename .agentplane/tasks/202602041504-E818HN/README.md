@@ -5,11 +5,28 @@ status: "DONE"
 priority: "high"
 owner: "CODER"
 depends_on: []
-tags: ["frontend"]
-verify: ["npm run build --prefix frontend"]
-commit: { hash: "60db340df49eb4c29b35655dceafefe8317bc75a", message: "🧾 E818HN track task doc" }
+tags:
+  - "frontend"
+verify:
+  - "npm run build --prefix frontend"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "60db340df49eb4c29b35655dceafefe8317bc75a"
+  message: "🧾 E818HN track task doc"
 comments:
-  - { author: "CODER", body: "Verified: task documentation tracked per request; no implementation changes performed for frontend redesign." }
+  -
+    author: "CODER"
+    body: "Verified: task documentation tracked per request; no implementation changes performed for frontend redesign."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-04T15:11:25.044Z"
 doc_updated_by: "CODER"

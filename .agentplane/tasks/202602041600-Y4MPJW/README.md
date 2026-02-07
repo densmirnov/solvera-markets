@@ -5,12 +5,31 @@ status: "DONE"
 priority: "med"
 owner: "ORCHESTRATOR"
 depends_on: []
-tags: ["frontend"]
-verify: ["1"]
-commit: { hash: "e0ab6248bced2466589c461558045c4b50fac64f", message: "✨ Y4MPJW refine typography + glint reveals" }
+tags:
+  - "frontend"
+verify:
+  - "1"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "e0ab6248bced2466589c461558045c4b50fac64f"
+  message: "✨ Y4MPJW refine typography + glint reveals"
 comments:
-  - { author: "ORCHESTRATOR", body: "Start: refine typography/spacing and add glint/reveal animations." }
-  - { author: "ORCHESTRATOR", body: "Verified: npm run build --prefix frontend succeeded; typography scale and animations updated." }
+  -
+    author: "ORCHESTRATOR"
+    body: "Start: refine typography/spacing and add glint/reveal animations."
+  -
+    author: "ORCHESTRATOR"
+    body: "Verified: npm run build --prefix frontend succeeded; typography scale and animations updated."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-04T16:03:59.308Z"
 doc_updated_by: "ORCHESTRATOR"

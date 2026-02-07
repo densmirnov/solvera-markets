@@ -5,12 +5,31 @@ status: "DONE"
 priority: "med"
 owner: "DOCS"
 depends_on: []
-tags: ["backend"]
-verify: ["rg \"healthcheck\" docs"]
-commit: { hash: "c8270371c3f469d4aac5bc93f676aeb7973e0166", message: "📝 B7PJT2 document backend healthcheck" }
+tags:
+  - "backend"
+verify:
+  - "rg \"healthcheck\" docs"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "c8270371c3f469d4aac5bc93f676aeb7973e0166"
+  message: "📝 B7PJT2 document backend healthcheck"
 comments:
-  - { author: "DOCS", body: "Start: document backend deployment and healthcheck expectations for ops." }
-  - { author: "DOCS", body: "Verified: ops docs now reference backend healthcheck and endpoint implemented in API." }
+  -
+    author: "DOCS"
+    body: "Start: document backend deployment and healthcheck expectations for ops."
+  -
+    author: "DOCS"
+    body: "Verified: ops docs now reference backend healthcheck and endpoint implemented in API."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-03T18:59:21.354Z"
 doc_updated_by: "DOCS"

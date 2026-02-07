@@ -5,13 +5,35 @@ status: "DONE"
 priority: "high"
 owner: "ORCHESTRATOR"
 depends_on: []
-tags: ["code"]
-verify: ["make check", "scripts/e2e.sh"]
-commit: { hash: "24fbbf8eaf23e742023a20239e0108c209df217a", message: "🧭 YWCDG7 record task state" }
+tags:
+  - "code"
+verify:
+  - "make check"
+  - "scripts/e2e.sh"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "24fbbf8eaf23e742023a20239e0108c209df217a"
+  message: "🧭 YWCDG7 record task state"
 comments:
-  - { author: "ORCHESTRATOR", body: "Start: initiating dependency refresh, test stabilization, and local validation workflow." }
-  - { author: "ORCHESTRATOR", body: "Verified: dependency upgrades complete, backend tests stabilized, forge tests restored, and local e2e flow passes." }
-  - { author: "ORCHESTRATOR", body: "Verified: dependency refresh and test stabilization completed; make check and e2e validations are green." }
+  -
+    author: "ORCHESTRATOR"
+    body: "Start: initiating dependency refresh, test stabilization, and local validation workflow."
+  -
+    author: "ORCHESTRATOR"
+    body: "Verified: dependency upgrades complete, backend tests stabilized, forge tests restored, and local e2e flow passes."
+  -
+    author: "ORCHESTRATOR"
+    body: "Verified: dependency refresh and test stabilization completed; make check and e2e validations are green."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-04T06:36:54.351Z"
 doc_updated_by: "ORCHESTRATOR"

@@ -5,12 +5,31 @@ status: "DONE"
 priority: "high"
 owner: "CODER"
 depends_on: []
-tags: ["code"]
-verify: ["make check"]
-commit: { hash: "bd5cdc05a78b98b39a471957c641e7dae6db00d0", message: "✨ QX59M9 add fees bond and reputation logic" }
+tags:
+  - "code"
+verify:
+  - "make check"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "bd5cdc05a78b98b39a471957c641e7dae6db00d0"
+  message: "✨ QX59M9 add fees bond and reputation logic"
 comments:
-  - { author: "CODER", body: "Start: Add economics and reputation logic for Stage 1.3." }
-  - { author: "CODER", body: "Verified: Fee, bond, and reputation logic added to contract; tests pending in Stage 1.4." }
+  -
+    author: "CODER"
+    body: "Start: Add economics and reputation logic for Stage 1.3."
+  -
+    author: "CODER"
+    body: "Verified: Fee, bond, and reputation logic added to contract; tests pending in Stage 1.4."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-03T17:01:56.072Z"
 doc_updated_by: "CODER"

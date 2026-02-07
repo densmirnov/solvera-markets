@@ -5,12 +5,31 @@ status: "DONE"
 priority: "med"
 owner: "DOCS"
 depends_on: []
-tags: ["backend"]
-verify: ["rg \"SUBGRAPH_URL\" env.example"]
-commit: { hash: "926e27b611cbe68e6b9bd43f058b74bdaa5208dc", message: "🧾 NP70EJ add env.example" }
+tags:
+  - "backend"
+verify:
+  - "rg \"SUBGRAPH_URL\" env.example"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "926e27b611cbe68e6b9bd43f058b74bdaa5208dc"
+  message: "🧾 NP70EJ add env.example"
 comments:
-  - { author: "DOCS", body: "Start: create env.example with production-style placeholders." }
-  - { author: "DOCS", body: "Verified: env.example added with production-style placeholders and no secrets." }
+  -
+    author: "DOCS"
+    body: "Start: create env.example with production-style placeholders."
+  -
+    author: "DOCS"
+    body: "Verified: env.example added with production-style placeholders and no secrets."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-04T04:28:47.445Z"
 doc_updated_by: "DOCS"

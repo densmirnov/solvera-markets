@@ -4,13 +4,34 @@ title: "Stabilize backend tests and coverage"
 status: "DONE"
 priority: "high"
 owner: "TESTER"
-depends_on: ["202602040538-YWCDG7", "202602040538-YWCDG7"]
-tags: ["backend"]
-verify: ["npm --prefix backend test"]
-commit: { hash: "d5b7b460028c76da4fbf7f5a59b3090a6d0cbd0b", message: "🧪 KPJ0PR stabilize backend test DI" }
+depends_on:
+  - "202602040538-YWCDG7"
+  - "202602040538-YWCDG7"
+tags:
+  - "backend"
+verify:
+  - "npm --prefix backend test"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "d5b7b460028c76da4fbf7f5a59b3090a6d0cbd0b"
+  message: "🧪 KPJ0PR stabilize backend test DI"
 comments:
-  - { author: "TESTER", body: "Verified: npm --prefix backend test passed; commit d5b7b460028c applied." }
-  - { author: "TESTER", body: "Verified: backend test suite passes with updated DI metadata; coverage and API tests remain green." }
+  -
+    author: "TESTER"
+    body: "Verified: npm --prefix backend test passed; commit d5b7b460028c applied."
+  -
+    author: "TESTER"
+    body: "Verified: backend test suite passes with updated DI metadata; coverage and API tests remain green."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-04T06:35:41.802Z"
 doc_updated_by: "TESTER"

@@ -5,12 +5,31 @@ status: "DONE"
 priority: "high"
 owner: "CODER"
 depends_on: []
-tags: ["frontend"]
-verify: ["docker compose up -d --build"]
-commit: { hash: "3f1df7a6e5b90740fb9e98e59d31761bdf521af1", message: "🔧 KYTC7S fix nginx /api proxy path" }
+tags:
+  - "frontend"
+verify:
+  - "docker compose up -d --build"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "3f1df7a6e5b90740fb9e98e59d31761bdf521af1"
+  message: "🔧 KYTC7S fix nginx /api proxy path"
 comments:
-  - { author: "CODER", body: "Start: Fix nginx proxy_pass to preserve /api prefix so backend routes resolve." }
-  - { author: "CODER", body: "Verified: docker compose up -d --build; /api requests are proxied to backend /api endpoints." }
+  -
+    author: "CODER"
+    body: "Start: Fix nginx proxy_pass to preserve /api prefix so backend routes resolve."
+  -
+    author: "CODER"
+    body: "Verified: docker compose up -d --build; /api requests are proxied to backend /api endpoints."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-04T08:28:21.854Z"
 doc_updated_by: "CODER"

@@ -5,12 +5,31 @@ status: "DONE"
 priority: "low"
 owner: "CODER"
 depends_on: []
-tags: ["frontend"]
-verify: ["rg \"useEffect\" frontend/src/pages/monitor-*.tsx"]
-commit: { hash: "7becc0a03b4080cc26c4eaee816ff846b26bf0be", message: "🧹 24KDFM fix react-hooks deps" }
+tags:
+  - "frontend"
+verify:
+  - "rg \"useEffect\" frontend/src/pages/monitor-*.tsx"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "7becc0a03b4080cc26c4eaee816ff846b26bf0be"
+  message: "🧹 24KDFM fix react-hooks deps"
 comments:
-  - { author: "CODER", body: "Start: fix react-hooks dependency warnings in monitor pages." }
-  - { author: "CODER", body: "Verified: monitor pages use stable callbacks and satisfy react-hooks deps." }
+  -
+    author: "CODER"
+    body: "Start: fix react-hooks dependency warnings in monitor pages."
+  -
+    author: "CODER"
+    body: "Verified: monitor pages use stable callbacks and satisfy react-hooks deps."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-04T04:39:16.843Z"
 doc_updated_by: "CODER"

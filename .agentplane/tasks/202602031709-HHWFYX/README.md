@@ -5,12 +5,31 @@ status: "DONE"
 priority: "high"
 owner: "TESTER"
 depends_on: []
-tags: ["code"]
-verify: ["make check"]
-commit: { hash: "8898cd5700f1550c62f3892137586e243952e013", message: "✨ HHWFYX fix test address literals" }
+tags:
+  - "code"
+verify:
+  - "make check"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "8898cd5700f1550c62f3892137586e243952e013"
+  message: "✨ HHWFYX fix test address literals"
 comments:
-  - { author: "TESTER", body: "Start: Fix invalid address literals in contract tests." }
-  - { author: "TESTER", body: "Verified: Fixed invalid address literals so Foundry can compile tests." }
+  -
+    author: "TESTER"
+    body: "Start: Fix invalid address literals in contract tests."
+  -
+    author: "TESTER"
+    body: "Verified: Fixed invalid address literals so Foundry can compile tests."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-03T17:10:46.100Z"
 doc_updated_by: "TESTER"

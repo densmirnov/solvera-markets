@@ -5,12 +5,31 @@ status: "DONE"
 priority: "low"
 owner: "CODER"
 depends_on: []
-tags: ["code"]
-verify: ["make check"]
-commit: { hash: "a111a6ee0eb43a92ed3da50634add69fd84f5e31", message: "✨ HCBFXC ignore Foundry artifacts" }
+tags:
+  - "code"
+verify:
+  - "make check"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "a111a6ee0eb43a92ed3da50634add69fd84f5e31"
+  message: "✨ HCBFXC ignore Foundry artifacts"
 comments:
-  - { author: "CODER", body: "Start: Ignore Foundry broadcast/cache artifacts in .gitignore." }
-  - { author: "CODER", body: "Verified: Foundry broadcast/cache directories ignored in .gitignore." }
+  -
+    author: "CODER"
+    body: "Start: Ignore Foundry broadcast/cache artifacts in .gitignore."
+  -
+    author: "CODER"
+    body: "Verified: Foundry broadcast/cache directories ignored in .gitignore."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-03T17:23:09.094Z"
 doc_updated_by: "CODER"

@@ -5,12 +5,31 @@ status: "DONE"
 priority: "med"
 owner: "DOCS"
 depends_on: []
-tags: ["frontend"]
-verify: ["rg \"Stage 4\" ROADMAP.md"]
-commit: { hash: "b99ca6da052e4c7f081661aabfcbb72bb80955f9", message: "🧭 3M5N3N refine Stage 4 frontend scope" }
+tags:
+  - "frontend"
+verify:
+  - "rg \"Stage 4\" ROADMAP.md"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "b99ca6da052e4c7f081661aabfcbb72bb80955f9"
+  message: "🧭 3M5N3N refine Stage 4 frontend scope"
 comments:
-  - { author: "DOCS", body: "Start: update Stage 4 roadmap with website content and operator UI scope." }
-  - { author: "DOCS", body: "Verified: Stage 4 roadmap now includes landing/skill/docs/api pages and operator filters without hackathon mentions." }
+  -
+    author: "DOCS"
+    body: "Start: update Stage 4 roadmap with website content and operator UI scope."
+  -
+    author: "DOCS"
+    body: "Verified: Stage 4 roadmap now includes landing/skill/docs/api pages and operator filters without hackathon mentions."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-04T04:16:59.232Z"
 doc_updated_by: "DOCS"

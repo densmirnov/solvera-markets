@@ -5,12 +5,31 @@ status: "DONE"
 priority: "med"
 owner: "CODER"
 depends_on: []
-tags: ["frontend"]
-verify: ["rg \"eslint\" frontend/package.json"]
-commit: { hash: "88c9bf428d305583fd958110939a0dc6a2498153", message: "🧹 D06CGB align frontend eslint versions" }
+tags:
+  - "frontend"
+verify:
+  - "rg \"eslint\" frontend/package.json"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "88c9bf428d305583fd958110939a0dc6a2498153"
+  message: "🧹 D06CGB align frontend eslint versions"
 comments:
-  - { author: "CODER", body: "Start: align frontend eslint versions to resolve peer dependency error." }
-  - { author: "CODER", body: "Verified: frontend eslint versions aligned for compatible dependency tree." }
+  -
+    author: "CODER"
+    body: "Start: align frontend eslint versions to resolve peer dependency error."
+  -
+    author: "CODER"
+    body: "Verified: frontend eslint versions aligned for compatible dependency tree."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-04T04:30:39.533Z"
 doc_updated_by: "CODER"

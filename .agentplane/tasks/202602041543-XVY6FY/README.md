@@ -5,12 +5,31 @@ status: "DONE"
 priority: "med"
 owner: "ORCHESTRATOR"
 depends_on: []
-tags: ["frontend"]
-verify: ["1"]
-commit: { hash: "4b58befbb23bf2527605aa05a89f50b98bc44c27", message: "✨ XVY6FY refine layout grid + bauhaus accents" }
+tags:
+  - "frontend"
+verify:
+  - "1"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "4b58befbb23bf2527605aa05a89f50b98bc44c27"
+  message: "✨ XVY6FY refine layout grid + bauhaus accents"
 comments:
-  - { author: "ORCHESTRATOR", body: "Start: refine layout grid spacing and Bauhaus accents." }
-  - { author: "ORCHESTRATOR", body: "Verified: npm run build --prefix frontend succeeded; layout grid and spacing updated." }
+  -
+    author: "ORCHESTRATOR"
+    body: "Start: refine layout grid spacing and Bauhaus accents."
+  -
+    author: "ORCHESTRATOR"
+    body: "Verified: npm run build --prefix frontend succeeded; layout grid and spacing updated."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-04T15:47:31.076Z"
 doc_updated_by: "ORCHESTRATOR"

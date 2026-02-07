@@ -5,12 +5,31 @@ status: "DONE"
 priority: "med"
 owner: "TESTER"
 depends_on: []
-tags: ["backend"]
-verify: ["make check"]
-commit: { hash: "c0d680054509a5434c4f7219704501af0d70d083", message: "✨ YG3BNA add indexer and backend tests" }
+tags:
+  - "backend"
+verify:
+  - "make check"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "c0d680054509a5434c4f7219704501af0d70d083"
+  message: "✨ YG3BNA add indexer and backend tests"
 comments:
-  - { author: "TESTER", body: "Start: Add indexer and backend tests (Stage 2.7)." }
-  - { author: "TESTER", body: "Verified: Added backend and indexer test scaffolding with scripts; tests not executed here." }
+  -
+    author: "TESTER"
+    body: "Start: Add indexer and backend tests (Stage 2.7)."
+  -
+    author: "TESTER"
+    body: "Verified: Added backend and indexer test scaffolding with scripts; tests not executed here."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-03T17:48:09.058Z"
 doc_updated_by: "TESTER"

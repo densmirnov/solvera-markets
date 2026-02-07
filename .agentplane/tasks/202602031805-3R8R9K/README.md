@@ -5,12 +5,31 @@ status: "DONE"
 priority: "high"
 owner: "CODER"
 depends_on: []
-tags: ["backend"]
-verify: ["docker compose up"]
-commit: { hash: "8f327f33085f136469f760222851a2a782923581", message: "✨ 3R8R9K add docker compose and Dockerfiles" }
+tags:
+  - "backend"
+verify:
+  - "docker compose up"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "8f327f33085f136469f760222851a2a782923581"
+  message: "✨ 3R8R9K add docker compose and Dockerfiles"
 comments:
-  - { author: "CODER", body: "Start: Add docker compose and Dockerfiles for Dokploy deployment." }
-  - { author: "CODER", body: "Verified: Added docker compose and Dockerfiles for Dokploy; backend starts via compose." }
+  -
+    author: "CODER"
+    body: "Start: Add docker compose and Dockerfiles for Dokploy deployment."
+  -
+    author: "CODER"
+    body: "Verified: Added docker compose and Dockerfiles for Dokploy; backend starts via compose."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-03T18:10:34.890Z"
 doc_updated_by: "CODER"

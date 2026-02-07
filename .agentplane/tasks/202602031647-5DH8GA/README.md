@@ -5,12 +5,31 @@ status: "DONE"
 priority: "med"
 owner: "DOCS"
 depends_on: []
-tags: ["code"]
-verify: ["make check"]
-commit: { hash: "675fb01e9f783a38684df67486d46daf57ae3eb9", message: "✨ 5DH8GA define documentation and test policy" }
+tags:
+  - "code"
+verify:
+  - "make check"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "675fb01e9f783a38684df67486d46daf57ae3eb9"
+  message: "✨ 5DH8GA define documentation and test policy"
 comments:
-  - { author: "DOCS", body: "Start: Define documentation and test coverage policy for Stage 0.2." }
-  - { author: "DOCS", body: "Verified: Policy statements added to CONTRIBUTING and docs README; no code execution required." }
+  -
+    author: "DOCS"
+    body: "Start: Define documentation and test coverage policy for Stage 0.2."
+  -
+    author: "DOCS"
+    body: "Verified: Policy statements added to CONTRIBUTING and docs README; no code execution required."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-03T16:51:28.483Z"
 doc_updated_by: "DOCS"

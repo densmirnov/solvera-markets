@@ -5,12 +5,31 @@ status: "DONE"
 priority: "med"
 owner: "ORCHESTRATOR"
 depends_on: []
-tags: ["code"]
-verify: ["1"]
-commit: { hash: "a8b24f1bda9e8542e10ddecd98c5a631b506f8c5", message: "🐛 DGVWZF fix tsconfig warnings" }
+tags:
+  - "code"
+verify:
+  - "1"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "a8b24f1bda9e8542e10ddecd98c5a631b506f8c5"
+  message: "🐛 DGVWZF fix tsconfig warnings"
 comments:
-  - { author: "ORCHESTRATOR", body: "Start: fix tsconfig warnings and docs page casing." }
-  - { author: "ORCHESTRATOR", body: "Verified: tsconfig warnings addressed; docs page casing normalized." }
+  -
+    author: "ORCHESTRATOR"
+    body: "Start: fix tsconfig warnings and docs page casing."
+  -
+    author: "ORCHESTRATOR"
+    body: "Verified: tsconfig warnings addressed; docs page casing normalized."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-04T15:15:11.983Z"
 doc_updated_by: "ORCHESTRATOR"

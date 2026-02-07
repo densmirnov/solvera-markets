@@ -5,12 +5,31 @@ status: "DONE"
 priority: "high"
 owner: "CODER"
 depends_on: []
-tags: ["backend"]
-verify: ["graph codegen && graph build && graph deploy"]
-commit: { hash: "880612bddb1105b71dadfa55415646db860ac5c5", message: "✨ M3QR6X record subgraph endpoints" }
+tags:
+  - "backend"
+verify:
+  - "graph codegen && graph build && graph deploy"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "880612bddb1105b71dadfa55415646db860ac5c5"
+  message: "✨ M3QR6X record subgraph endpoints"
 comments:
-  - { author: "CODER", body: "Start: Deploy subgraph to The Graph using provided CLI commands." }
-  - { author: "CODER", body: "Verified: Subgraph deployed to The Graph Studio and endpoints recorded in docs/19-subgraph-endpoints.md." }
+  -
+    author: "CODER"
+    body: "Start: Deploy subgraph to The Graph using provided CLI commands."
+  -
+    author: "CODER"
+    body: "Verified: Subgraph deployed to The Graph Studio and endpoints recorded in docs/19-subgraph-endpoints.md."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-03T18:01:08.723Z"
 doc_updated_by: "CODER"

@@ -5,12 +5,31 @@ status: "DONE"
 priority: "med"
 owner: "ORCHESTRATOR"
 depends_on: []
-tags: ["code"]
-verify: ["1"]
-commit: { hash: "c7af7358561828c12f84b6ed6165c6310eaf508a", message: "🐛 4JPCAR fix backend build + test tsconfig" }
+tags:
+  - "code"
+verify:
+  - "1"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "c7af7358561828c12f84b6ed6165c6310eaf508a"
+  message: "🐛 4JPCAR fix backend build + test tsconfig"
 comments:
-  - { author: "ORCHESTRATOR", body: "Start: fix backend build output and tsconfig warnings." }
-  - { author: "ORCHESTRATOR", body: "Verified: npm run build --prefix backend succeeded; dist/main.js generated; tsconfig warning addressed via test tsconfig." }
+  -
+    author: "ORCHESTRATOR"
+    body: "Start: fix backend build output and tsconfig warnings."
+  -
+    author: "ORCHESTRATOR"
+    body: "Verified: npm run build --prefix backend succeeded; dist/main.js generated; tsconfig warning addressed via test tsconfig."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-04T15:20:49.255Z"
 doc_updated_by: "ORCHESTRATOR"

@@ -5,12 +5,31 @@ status: "DONE"
 priority: "high"
 owner: "ORCHESTRATOR"
 depends_on: []
-tags: ["code"]
-verify: ["1"]
-commit: { hash: "855d8b8f47a2f141dd86bacc92acfe8880b346bf", message: "🐛 3FW9FA fix frontend docs import + track task doc" }
+tags:
+  - "code"
+verify:
+  - "1"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "855d8b8f47a2f141dd86bacc92acfe8880b346bf"
+  message: "🐛 3FW9FA fix frontend docs import + track task doc"
 comments:
-  - { author: "ORCHESTRATOR", body: "Start: inspect Wallet integration, design Base optional wallet feature, update SKILL, remove Wallet." }
-  - { author: "ORCHESTRATOR", body: "Verified: base wallet + tx runner delivered in prior commit; fixed docs import case; npm run build --prefix frontend succeeded." }
+  -
+    author: "ORCHESTRATOR"
+    body: "Start: inspect Wallet integration, design Base optional wallet feature, update SKILL, remove Wallet."
+  -
+    author: "ORCHESTRATOR"
+    body: "Verified: base wallet + tx runner delivered in prior commit; fixed docs import case; npm run build --prefix frontend succeeded."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-04T15:11:17.370Z"
 doc_updated_by: "ORCHESTRATOR"

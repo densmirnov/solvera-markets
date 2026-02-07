@@ -5,12 +5,31 @@ status: "DONE"
 priority: "high"
 owner: "CODER"
 depends_on: []
-tags: ["frontend"]
-verify: ["npm --prefix frontend run build"]
-commit: { hash: "090f3c0b7a117134ced7011407b78961247be720", message: "🔧 2ARRWK sync SKILL.md on build" }
+tags:
+  - "frontend"
+verify:
+  - "npm --prefix frontend run build"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "090f3c0b7a117134ced7011407b78961247be720"
+  message: "🔧 2ARRWK sync SKILL.md on build"
 comments:
-  - { author: "CODER", body: "Start: ensure SKILL.md syncs into frontend/public during builds." }
-  - { author: "CODER", body: "Verified: prebuild sync copies SKILL.md into public and frontend build succeeds." }
+  -
+    author: "CODER"
+    body: "Start: ensure SKILL.md syncs into frontend/public during builds."
+  -
+    author: "CODER"
+    body: "Verified: prebuild sync copies SKILL.md into public and frontend build succeeds."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-04T07:57:00.454Z"
 doc_updated_by: "CODER"

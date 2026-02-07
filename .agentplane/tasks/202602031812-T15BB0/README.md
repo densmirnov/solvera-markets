@@ -5,12 +5,31 @@ status: "DONE"
 priority: "high"
 owner: "DOCS"
 depends_on: []
-tags: ["backend"]
-verify: ["make check"]
-commit: { hash: "158bc878d8239226a7f2046c9b07c6a74c32e52f", message: "✨ T15BB0 translate repository docs to English" }
+tags:
+  - "backend"
+verify:
+  - "make check"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "158bc878d8239226a7f2046c9b07c6a74c32e52f"
+  message: "✨ T15BB0 translate repository docs to English"
 comments:
-  - { author: "DOCS", body: "Start: Translate repository documentation to English." }
-  - { author: "DOCS", body: "Verified: All repository docs and roadmap translated to English; agentplane-managed files untouched." }
+  -
+    author: "DOCS"
+    body: "Start: Translate repository documentation to English."
+  -
+    author: "DOCS"
+    body: "Verified: All repository docs and roadmap translated to English; agentplane-managed files untouched."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-03T18:23:47.732Z"
 doc_updated_by: "DOCS"

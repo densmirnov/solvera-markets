@@ -5,12 +5,31 @@ status: "DONE"
 priority: "med"
 owner: "CODER"
 depends_on: []
-tags: ["backend"]
-verify: ["graph build"]
-commit: { hash: "7804be8d1e8798544d34ff582278a390b7a7d1c0", message: "✨ R7P2Q8 fix ttl mapping types" }
+tags:
+  - "backend"
+verify:
+  - "graph build"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "7804be8d1e8798544d34ff582278a390b7a7d1c0"
+  message: "✨ R7P2Q8 fix ttl mapping types"
 comments:
-  - { author: "CODER", body: "Start: Fix ttl field assignments in indexer mappings." }
-  - { author: "CODER", body: "Verified: graph build now succeeds after ttl mapping fix in indexer mappings." }
+  -
+    author: "CODER"
+    body: "Start: Fix ttl field assignments in indexer mappings."
+  -
+    author: "CODER"
+    body: "Verified: graph build now succeeds after ttl mapping fix in indexer mappings."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-03T18:00:04.238Z"
 doc_updated_by: "CODER"

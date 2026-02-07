@@ -5,12 +5,31 @@ status: "DONE"
 priority: "low"
 owner: "CODER"
 depends_on: []
-tags: ["backend"]
-verify: ["rg \"tests/.docker\" indexer/.gitignore"]
-commit: { hash: "80123883eef9df23e82cf208168423ed69c98244", message: "🧹 MBW332 ignore graph test artifacts" }
+tags:
+  - "backend"
+verify:
+  - "rg \"tests/.docker\" indexer/.gitignore"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "80123883eef9df23e82cf208168423ed69c98244"
+  message: "🧹 MBW332 ignore graph test artifacts"
 comments:
-  - { author: "CODER", body: "Start: ignore graph test artifacts and remove generated files." }
-  - { author: "CODER", body: "Verified: indexer gitignore now excludes graph test artifacts." }
+  -
+    author: "CODER"
+    body: "Start: ignore graph test artifacts and remove generated files."
+  -
+    author: "CODER"
+    body: "Verified: indexer gitignore now excludes graph test artifacts."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-04T05:00:14.852Z"
 doc_updated_by: "CODER"

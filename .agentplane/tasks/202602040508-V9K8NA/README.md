@@ -5,12 +5,31 @@ status: "DONE"
 priority: "med"
 owner: "TESTER"
 depends_on: []
-tags: ["frontend"]
-verify: ["rg \"coverage\" frontend"]
-commit: { hash: "bc521a0c729655a30dab1b2c9c12d0b54622fbda", message: "🧪 V9K8NA add frontend coverage thresholds" }
+tags:
+  - "frontend"
+verify:
+  - "rg \"coverage\" frontend"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "bc521a0c729655a30dab1b2c9c12d0b54622fbda"
+  message: "🧪 V9K8NA add frontend coverage thresholds"
 comments:
-  - { author: "TESTER", body: "Start: add frontend coverage tooling and thresholds." }
-  - { author: "TESTER", body: "Verified: frontend tests run with coverage and enforce thresholds." }
+  -
+    author: "TESTER"
+    body: "Start: add frontend coverage tooling and thresholds."
+  -
+    author: "TESTER"
+    body: "Verified: frontend tests run with coverage and enforce thresholds."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-04T05:25:01.787Z"
 doc_updated_by: "TESTER"

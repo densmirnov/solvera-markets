@@ -5,12 +5,31 @@ status: "DONE"
 priority: "high"
 owner: "CODER"
 depends_on: []
-tags: ["backend"]
-verify: ["make check"]
-commit: { hash: "9e334ad1abef0fa8ada7f9259ac1194d2cb23615", message: "✨ NQCDA9 implement indexer mappings" }
+tags:
+  - "backend"
+verify:
+  - "make check"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "9e334ad1abef0fa8ada7f9259ac1194d2cb23615"
+  message: "✨ NQCDA9 implement indexer mappings"
 comments:
-  - { author: "CODER", body: "Start: Implement indexer mappings for contract events (Stage 2.2)." }
-  - { author: "CODER", body: "Verified: Event handlers added; schema and manifest aligned; mappings use events only (no RPC)." }
+  -
+    author: "CODER"
+    body: "Start: Implement indexer mappings for contract events (Stage 2.2)."
+  -
+    author: "CODER"
+    body: "Verified: Event handlers added; schema and manifest aligned; mappings use events only (no RPC)."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-03T17:42:33.356Z"
 doc_updated_by: "CODER"

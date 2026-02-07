@@ -29,11 +29,7 @@
   "tasks": {
     "id_suffix_length_default": 6,
     "verify": {
-      "required_tags": [
-        "code",
-        "backend",
-        "frontend"
-      ]
+      "required_tags": ["code", "backend", "frontend"]
     },
     "doc": {
       "sections": [
@@ -43,6 +39,7 @@
         "Risks",
         "Verify Steps",
         "Rollback Plan",
+        "Plan",
         "Notes"
       ],
       "required_sections": [

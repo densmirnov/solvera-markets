@@ -5,12 +5,31 @@ status: "DONE"
 priority: "med"
 owner: "DOCS"
 depends_on: []
-tags: ["backend"]
-verify: ["make check"]
-commit: { hash: "29cd8b06256095826198f0dd77f34916e648cf82", message: "✨ PTPNED update engineering rules and standards" }
+tags:
+  - "backend"
+verify:
+  - "make check"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "29cd8b06256095826198f0dd77f34916e648cf82"
+  message: "✨ PTPNED update engineering rules and standards"
 comments:
-  - { author: "DOCS", body: "Start: Update engineering rules for linting/formatting and docs updates." }
-  - { author: "DOCS", body: "Verified: Engineering standards documented; lint/fix requirements added to CONTRIBUTING and docs." }
+  -
+    author: "DOCS"
+    body: "Start: Update engineering rules for linting/formatting and docs updates."
+  -
+    author: "DOCS"
+    body: "Verified: Engineering standards documented; lint/fix requirements added to CONTRIBUTING and docs."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-03T18:08:21.808Z"
 doc_updated_by: "DOCS"

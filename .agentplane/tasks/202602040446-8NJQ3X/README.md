@@ -5,12 +5,31 @@ status: "DONE"
 priority: "med"
 owner: "CODER"
 depends_on: []
-tags: ["backend"]
-verify: ["rg \"graph test\" indexer/package.json"]
-commit: { hash: "e3a87dec724cf9bf8c41c39e6b602a4ea2d344e0", message: "🧪 8NJQ3X run graph tests in docker" }
+tags:
+  - "backend"
+verify:
+  - "rg \"graph test\" indexer/package.json"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "e3a87dec724cf9bf8c41c39e6b602a4ea2d344e0"
+  message: "🧪 8NJQ3X run graph tests in docker"
 comments:
-  - { author: "CODER", body: "Start: switch indexer tests to graph test --docker." }
-  - { author: "CODER", body: "Verified: indexer test script now runs graph test in docker for platform support." }
+  -
+    author: "CODER"
+    body: "Start: switch indexer tests to graph test --docker."
+  -
+    author: "CODER"
+    body: "Verified: indexer test script now runs graph test in docker for platform support."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-04T04:48:12.240Z"
 doc_updated_by: "CODER"

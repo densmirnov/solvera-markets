@@ -5,12 +5,31 @@ status: "DONE"
 priority: "high"
 owner: "DOCS"
 depends_on: []
-tags: ["backend"]
-verify: ["make check"]
-commit: { hash: "de879ef78698d927473bde77df8af9faba5fdbd1", message: "🛡️ S3FVT9 add audit exception workflow" }
+tags:
+  - "backend"
+verify:
+  - "make check"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "de879ef78698d927473bde77df8af9faba5fdbd1"
+  message: "🛡️ S3FVT9 add audit exception workflow"
 comments:
-  - { author: "DOCS", body: "Start: formalize npm audit exception for indexer warnings and document rationale." }
-  - { author: "DOCS", body: "Verified: make check includes npm audit --audit-level=high and documents indexer exception." }
+  -
+    author: "DOCS"
+    body: "Start: formalize npm audit exception for indexer warnings and document rationale."
+  -
+    author: "DOCS"
+    body: "Verified: make check includes npm audit --audit-level=high and documents indexer exception."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-04T06:35:21.479Z"
 doc_updated_by: "DOCS"

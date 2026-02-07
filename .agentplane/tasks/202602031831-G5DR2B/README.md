@@ -5,12 +5,31 @@ status: "DONE"
 priority: "med"
 owner: "DOCS"
 depends_on: []
-tags: ["backend"]
-verify: ["make check"]
-commit: { hash: "dd40ccd0df59524afd166fdb2060734fabfd4430", message: "✨ G5DR2B add component READMEs" }
+tags:
+  - "backend"
+verify:
+  - "make check"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "dd40ccd0df59524afd166fdb2060734fabfd4430"
+  message: "✨ G5DR2B add component READMEs"
 comments:
-  - { author: "DOCS", body: "Start: Add component READMEs for frontend, backend, indexer, and contracts." }
-  - { author: "DOCS", body: "Verified: Added README.md to frontend, backend, indexer, and contracts." }
+  -
+    author: "DOCS"
+    body: "Start: Add component READMEs for frontend, backend, indexer, and contracts."
+  -
+    author: "DOCS"
+    body: "Verified: Added README.md to frontend, backend, indexer, and contracts."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-03T18:33:40.528Z"
 doc_updated_by: "DOCS"

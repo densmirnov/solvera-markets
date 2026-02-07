@@ -5,12 +5,32 @@ status: "DONE"
 priority: "high"
 owner: "CODER"
 depends_on: []
-tags: ["backend"]
-verify: ["npm --prefix indexer run build", "rg -n \"CONTRACT_ADDRESS\" env.example .env"]
-commit: { hash: "f7f98311d35873d8992335d0139a3948632dfd1f", message: "🛠️ VZVAN9 fix indexer build and contract address" }
+tags:
+  - "backend"
+verify:
+  - "npm --prefix indexer run build"
+  - "rg -n \"CONTRACT_ADDRESS\" env.example .env"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "f7f98311d35873d8992335d0139a3948632dfd1f"
+  message: "🛠️ VZVAN9 fix indexer build and contract address"
 comments:
-  - { author: "CODER", body: "Start: fix indexer build order and update deployed contract address in env files." }
-  - { author: "CODER", body: "Verified: indexer build now runs codegen, and env files reference the deployed Base contract address." }
+  -
+    author: "CODER"
+    body: "Start: fix indexer build order and update deployed contract address in env files."
+  -
+    author: "CODER"
+    body: "Verified: indexer build now runs codegen, and env files reference the deployed Base contract address."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-04T07:35:02.505Z"
 doc_updated_by: "CODER"

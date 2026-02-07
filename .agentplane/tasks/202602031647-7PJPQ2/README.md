@@ -5,12 +5,31 @@ status: "DONE"
 priority: "med"
 owner: "CODER"
 depends_on: []
-tags: ["code"]
-verify: ["make check"]
-commit: { hash: "e57788f9727ee5bfbdacc8eb00a88bd174253db3", message: "✨ 7PJPQ2 add base repo structure and hygiene files" }
+tags:
+  - "code"
+verify:
+  - "make check"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "e57788f9727ee5bfbdacc8eb00a88bd174253db3"
+  message: "✨ 7PJPQ2 add base repo structure and hygiene files"
 comments:
-  - { author: "CODER", body: "Start: Implement base repository structure and hygiene files for Stage 0.1." }
-  - { author: "CODER", body: "Verified: Added base directories and hygiene files; make check not run yet due to pending scripts." }
+  -
+    author: "CODER"
+    body: "Start: Implement base repository structure and hygiene files for Stage 0.1."
+  -
+    author: "CODER"
+    body: "Verified: Added base directories and hygiene files; make check not run yet due to pending scripts."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-03T16:51:12.431Z"
 doc_updated_by: "CODER"

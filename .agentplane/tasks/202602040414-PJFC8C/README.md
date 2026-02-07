@@ -5,12 +5,31 @@ status: "DONE"
 priority: "med"
 owner: "DOCS"
 depends_on: []
-tags: ["frontend"]
-verify: ["rg \"Solvera Skill\" frontend/SKILL.md"]
-commit: { hash: "3cd678e1be8a1144304e3a78351c32f5cc9f33eb", message: "📝 PJFC8C add frontend skill guide" }
+tags:
+  - "frontend"
+verify:
+  - "rg \"Solvera Skill\" frontend/SKILL.md"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "3cd678e1be8a1144304e3a78351c32f5cc9f33eb"
+  message: "📝 PJFC8C add frontend skill guide"
 comments:
-  - { author: "DOCS", body: "Start: write frontend SKILL.md with agent integration guidance." }
-  - { author: "DOCS", body: "Verified: frontend/SKILL.md provides agent integration guidance aligned with API behavior." }
+  -
+    author: "DOCS"
+    body: "Start: write frontend SKILL.md with agent integration guidance."
+  -
+    author: "DOCS"
+    body: "Verified: frontend/SKILL.md provides agent integration guidance aligned with API behavior."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-04T04:22:47.452Z"
 doc_updated_by: "DOCS"

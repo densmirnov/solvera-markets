@@ -5,12 +5,31 @@ status: "DONE"
 priority: "low"
 owner: "CODER"
 depends_on: []
-tags: ["frontend"]
-verify: ["rg \"fmt\" frontend/package.json"]
-commit: { hash: "51b62dd8fdcf92db3241f1704b0f7afbb6fdf095", message: "🧹 R5XEDC add frontend fmt script" }
+tags:
+  - "frontend"
+verify:
+  - "rg \"fmt\" frontend/package.json"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "51b62dd8fdcf92db3241f1704b0f7afbb6fdf095"
+  message: "🧹 R5XEDC add frontend fmt script"
 comments:
-  - { author: "CODER", body: "Start: add frontend fmt script for repo formatter tooling." }
-  - { author: "CODER", body: "Verified: frontend fmt script added for repo formatting workflow." }
+  -
+    author: "CODER"
+    body: "Start: add frontend fmt script for repo formatter tooling."
+  -
+    author: "CODER"
+    body: "Verified: frontend fmt script added for repo formatting workflow."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-04T04:36:36.880Z"
 doc_updated_by: "CODER"

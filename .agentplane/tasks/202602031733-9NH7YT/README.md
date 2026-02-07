@@ -5,12 +5,31 @@ status: "DONE"
 priority: "med"
 owner: "CODER"
 depends_on: []
-tags: ["backend"]
-verify: ["make check"]
-commit: { hash: "3bd8ff798e1b5dbff0d57ce7aaac173d5b365299", message: "✨ 9NH7YT add indexer tooling" }
+tags:
+  - "backend"
+verify:
+  - "make check"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "3bd8ff798e1b5dbff0d57ce7aaac173d5b365299"
+  message: "✨ 9NH7YT add indexer tooling"
 comments:
-  - { author: "CODER", body: "Start: Add indexer tooling (package.json, tsconfig, scripts)." }
-  - { author: "CODER", body: "Verified: Added indexer package.json and tsconfig; scripts defined for codegen/build." }
+  -
+    author: "CODER"
+    body: "Start: Add indexer tooling (package.json, tsconfig, scripts)."
+  -
+    author: "CODER"
+    body: "Verified: Added indexer package.json and tsconfig; scripts defined for codegen/build."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-03T17:43:17.405Z"
 doc_updated_by: "CODER"

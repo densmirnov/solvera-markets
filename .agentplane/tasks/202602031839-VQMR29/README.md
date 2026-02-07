@@ -5,12 +5,31 @@ status: "DONE"
 priority: "med"
 owner: "DOCS"
 depends_on: []
-tags: ["backend"]
-verify: ["rg \"API\" ROADMAP.md"]
-commit: { hash: "17ccaa3b428164355ae6708d6afbd063e6674677", message: "🧭 VQMR29 align roadmap with API PRD v0.1" }
+tags:
+  - "backend"
+verify:
+  - "rg \"API\" ROADMAP.md"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "17ccaa3b428164355ae6708d6afbd063e6674677"
+  message: "🧭 VQMR29 align roadmap with API PRD v0.1"
 comments:
-  - { author: "DOCS", body: "Start: align roadmap with Solvera API PRD v0.1 agent-first requirements." }
-  - { author: "DOCS", body: "Verified: ROADMAP updated with agent-first API, tx-builder endpoints, next_steps, error model, and rate limits per PRD v0.1." }
+  -
+    author: "DOCS"
+    body: "Start: align roadmap with Solvera API PRD v0.1 agent-first requirements."
+  -
+    author: "DOCS"
+    body: "Verified: ROADMAP updated with agent-first API, tx-builder endpoints, next_steps, error model, and rate limits per PRD v0.1."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-03T18:41:40.000Z"
 doc_updated_by: "DOCS"

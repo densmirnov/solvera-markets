@@ -5,12 +5,31 @@ status: "DONE"
 priority: "high"
 owner: "TESTER"
 depends_on: []
-tags: ["code"]
-verify: ["make check"]
-commit: { hash: "202d7b8922d50ecd8edef98394b8114fbc24198a", message: "✨ 01A0PN add MVP contract tests" }
+tags:
+  - "code"
+verify:
+  - "make check"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "202d7b8922d50ecd8edef98394b8114fbc24198a"
+  message: "✨ 01A0PN add MVP contract tests"
 comments:
-  - { author: "TESTER", body: "Start: Add MVP contract tests for Stage 1.4." }
-  - { author: "TESTER", body: "Verified: Added scenario tests for MVP contract; forge test not run yet." }
+  -
+    author: "TESTER"
+    body: "Start: Add MVP contract tests for Stage 1.4."
+  -
+    author: "TESTER"
+    body: "Verified: Added scenario tests for MVP contract; forge test not run yet."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-03T17:02:49.499Z"
 doc_updated_by: "TESTER"

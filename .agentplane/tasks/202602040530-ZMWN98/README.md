@@ -5,12 +5,31 @@ status: "DONE"
 priority: "high"
 owner: "TESTER"
 depends_on: []
-tags: ["backend"]
-verify: ["rg \"platform-express\" backend/package.json"]
-commit: { hash: "921e5e6416f7defb4ba93194956e744e79cf4d5a", message: "🧪 ZMWN98 fix backend tests and deps" }
+tags:
+  - "backend"
+verify:
+  - "rg \"platform-express\" backend/package.json"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "921e5e6416f7defb4ba93194956e744e79cf4d5a"
+  message: "🧪 ZMWN98 fix backend tests and deps"
 comments:
-  - { author: "TESTER", body: "Start: fix backend test runtime and coverage gaps." }
-  - { author: "TESTER", body: "Verified: backend tests expanded and platform-express added for Nest runtime." }
+  -
+    author: "TESTER"
+    body: "Start: fix backend test runtime and coverage gaps."
+  -
+    author: "TESTER"
+    body: "Verified: backend tests expanded and platform-express added for Nest runtime."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-04T05:32:06.431Z"
 doc_updated_by: "TESTER"

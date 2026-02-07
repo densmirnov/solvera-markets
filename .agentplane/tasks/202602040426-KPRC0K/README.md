@@ -5,12 +5,31 @@ status: "DONE"
 priority: "high"
 owner: "CODER"
 depends_on: []
-tags: ["backend"]
-verify: ["rg \"lint\" backend/package.json indexer/package.json"]
-commit: { hash: "79b63562b103ece22bc04be113ea112d12423153", message: "🧹 KPRC0K add backend/indexer linting" }
+tags:
+  - "backend"
+verify:
+  - "rg \"lint\" backend/package.json indexer/package.json"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "79b63562b103ece22bc04be113ea112d12423153"
+  message: "🧹 KPRC0K add backend/indexer linting"
 comments:
-  - { author: "CODER", body: "Start: add lint/format scripts and ESLint configs for backend and indexer." }
-  - { author: "CODER", body: "Verified: backend/indexer now have eslint configs and lint/fmt scripts wired for repo tooling." }
+  -
+    author: "CODER"
+    body: "Start: add lint/format scripts and ESLint configs for backend and indexer."
+  -
+    author: "CODER"
+    body: "Verified: backend/indexer now have eslint configs and lint/fmt scripts wired for repo tooling."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-04T04:28:13.028Z"
 doc_updated_by: "CODER"

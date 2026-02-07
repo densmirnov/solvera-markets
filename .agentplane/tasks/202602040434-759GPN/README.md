@@ -5,12 +5,31 @@ status: "DONE"
 priority: "med"
 owner: "CODER"
 depends_on: []
-tags: ["backend"]
-verify: ["ls backend/package-lock.json frontend/package-lock.json indexer/package-lock.json"]
-commit: { hash: "000cc8cb7a3031a06e0f401443adb1f2b1308665", message: "📦 759GPN add npm lockfiles" }
+tags:
+  - "backend"
+verify:
+  - "ls backend/package-lock.json frontend/package-lock.json indexer/package-lock.json"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "000cc8cb7a3031a06e0f401443adb1f2b1308665"
+  message: "📦 759GPN add npm lockfiles"
 comments:
-  - { author: "CODER", body: "Start: add npm lockfiles for backend/frontend/indexer." }
-  - { author: "CODER", body: "Verified: npm lockfiles added for backend, frontend, and indexer." }
+  -
+    author: "CODER"
+    body: "Start: add npm lockfiles for backend/frontend/indexer."
+  -
+    author: "CODER"
+    body: "Verified: npm lockfiles added for backend, frontend, and indexer."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-04T04:35:11.973Z"
 doc_updated_by: "CODER"

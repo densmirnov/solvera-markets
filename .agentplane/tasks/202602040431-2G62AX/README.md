@@ -5,12 +5,31 @@ status: "DONE"
 priority: "med"
 owner: "CODER"
 depends_on: []
-tags: ["backend"]
-verify: ["rg \"generated\" indexer/eslint.config.js"]
-commit: { hash: "b9a54498598a4bf0b4eb5725cbd741093b3222ca", message: "🧹 2G62AX ignore indexer generated lint" }
+tags:
+  - "backend"
+verify:
+  - "rg \"generated\" indexer/eslint.config.js"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "b9a54498598a4bf0b4eb5725cbd741093b3222ca"
+  message: "🧹 2G62AX ignore indexer generated lint"
 comments:
-  - { author: "CODER", body: "Start: ignore generated indexer files in lint and set module type." }
-  - { author: "CODER", body: "Verified: indexer lint ignores generated files and package is marked as module." }
+  -
+    author: "CODER"
+    body: "Start: ignore generated indexer files in lint and set module type."
+  -
+    author: "CODER"
+    body: "Verified: indexer lint ignores generated files and package is marked as module."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-04T04:32:50.176Z"
 doc_updated_by: "CODER"

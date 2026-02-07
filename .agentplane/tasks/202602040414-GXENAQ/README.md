@@ -5,12 +5,31 @@ status: "DONE"
 priority: "high"
 owner: "CODER"
 depends_on: []
-tags: ["frontend"]
-verify: ["rg \"/monitor\" frontend/src || true"]
-commit: { hash: "6067182b344bbb17d2c6d12958901693bef33bcc", message: "🔎 GXENAQ expand operator filters and next_steps" }
+tags:
+  - "frontend"
+verify:
+  - "rg \"/monitor\" frontend/src || true"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "6067182b344bbb17d2c6d12958901693bef33bcc"
+  message: "🔎 GXENAQ expand operator filters and next_steps"
 comments:
-  - { author: "CODER", body: "Start: refine operator monitoring screens with filters and richer state." }
-  - { author: "CODER", body: "Verified: operator screens now expose filters and display next_steps and winner details from the API." }
+  -
+    author: "CODER"
+    body: "Start: refine operator monitoring screens with filters and richer state."
+  -
+    author: "CODER"
+    body: "Verified: operator screens now expose filters and display next_steps and winner details from the API."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-04T04:22:10.903Z"
 doc_updated_by: "CODER"

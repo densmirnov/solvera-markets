@@ -5,12 +5,31 @@ status: "DONE"
 priority: "med"
 owner: "CODER"
 depends_on: []
-tags: ["code"]
-verify: ["make check"]
-commit: { hash: "4f9ab4c676ab58fabe0108858587f7911df94db2", message: "✨ 5Z6Z9G add solhint config and audit checklist" }
+tags:
+  - "code"
+verify:
+  - "make check"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "4f9ab4c676ab58fabe0108858587f7911df94db2"
+  message: "✨ 5Z6Z9G add solhint config and audit checklist"
 comments:
-  - { author: "CODER", body: "Start: Add static analysis config and audit checklist for Stage 1.5." }
-  - { author: "CODER", body: "Verified: Added solhint config and audit checklist doc; tool execution pending." }
+  -
+    author: "CODER"
+    body: "Start: Add static analysis config and audit checklist for Stage 1.5."
+  -
+    author: "CODER"
+    body: "Verified: Added solhint config and audit checklist doc; tool execution pending."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-03T17:03:32.065Z"
 doc_updated_by: "CODER"

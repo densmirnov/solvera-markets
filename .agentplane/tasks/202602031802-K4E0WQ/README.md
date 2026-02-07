@@ -5,12 +5,31 @@ status: "DONE"
 priority: "low"
 owner: "CODER"
 depends_on: []
-tags: ["backend"]
-verify: ["make check"]
-commit: { hash: "055ee319f528bdd820874a769d584a2d26b86d1c", message: "✨ K4E0WQ add indexer lockfile and ignore outputs" }
+tags:
+  - "backend"
+verify:
+  - "make check"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "055ee319f528bdd820874a769d584a2d26b86d1c"
+  message: "✨ K4E0WQ add indexer lockfile and ignore outputs"
 comments:
-  - { author: "CODER", body: "Start: Add indexer lockfile and ignore generated outputs." }
-  - { author: "CODER", body: "Verified: indexer lockfile committed and generated/build outputs ignored." }
+  -
+    author: "CODER"
+    body: "Start: Add indexer lockfile and ignore generated outputs."
+  -
+    author: "CODER"
+    body: "Verified: indexer lockfile committed and generated/build outputs ignored."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-03T18:04:03.072Z"
 doc_updated_by: "CODER"

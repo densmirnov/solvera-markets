@@ -5,12 +5,31 @@ status: "DONE"
 priority: "high"
 owner: "CODER"
 depends_on: []
-tags: ["frontend"]
-verify: ["docker compose up -d --build"]
-commit: { hash: "502a39caea535597995e00b451c210e89b4c6d0b", message: "🎨 ED0GAP minimalist CLI landing redesign" }
+tags:
+  - "frontend"
+verify:
+  - "docker compose up -d --build"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "502a39caea535597995e00b451c210e89b4c6d0b"
+  message: "🎨 ED0GAP minimalist CLI landing redesign"
 comments:
-  - { author: "CODER", body: "Start: Redesign landing to ultra-minimal CLI aesthetic with large type and whitespace; remove card/block styling." }
-  - { author: "CODER", body: "Verified: docker compose up -d --build; landing now minimal with CLI typography and no card blocks." }
+  -
+    author: "CODER"
+    body: "Start: Redesign landing to ultra-minimal CLI aesthetic with large type and whitespace; remove card/block styling."
+  -
+    author: "CODER"
+    body: "Verified: docker compose up -d --build; landing now minimal with CLI typography and no card blocks."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-04T08:19:34.551Z"
 doc_updated_by: "CODER"

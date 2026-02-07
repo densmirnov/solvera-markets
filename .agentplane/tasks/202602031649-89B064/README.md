@@ -5,12 +5,31 @@ status: "DONE"
 priority: "med"
 owner: "DOCS"
 depends_on: []
-tags: ["code"]
-verify: ["make check"]
-commit: { hash: "5bb038dd77b0477f99f1940e781b1562e96a02b8", message: "✨ 89B064 add source input documents" }
+tags:
+  - "code"
+verify:
+  - "make check"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "5bb038dd77b0477f99f1940e781b1562e96a02b8"
+  message: "✨ 89B064 add source input documents"
 comments:
-  - { author: "DOCS", body: "Start: Commit initial source documents under _in for traceability." }
-  - { author: "DOCS", body: "Verified: Added _in source files only; no code executed; make check not run for this doc-only commit." }
+  -
+    author: "DOCS"
+    body: "Start: Commit initial source documents under _in for traceability."
+  -
+    author: "DOCS"
+    body: "Verified: Added _in source files only; no code executed; make check not run for this doc-only commit."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-03T16:50:34.447Z"
 doc_updated_by: "DOCS"

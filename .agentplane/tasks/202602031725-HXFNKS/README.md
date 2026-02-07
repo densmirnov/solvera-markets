@@ -5,12 +5,31 @@ status: "DONE"
 priority: "med"
 owner: "TESTER"
 depends_on: []
-tags: ["code"]
-verify: ["forge test"]
-commit: { hash: "9789ad0dd2f6de0b555a7a71797016e93449281b", message: "✨ H005F6 ignore broadcast outputs" }
+tags:
+  - "code"
+verify:
+  - "forge test"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "9789ad0dd2f6de0b555a7a71797016e93449281b"
+  message: "✨ H005F6 ignore broadcast outputs"
 comments:
-  - { author: "TESTER", body: "Start: Run forge test for the MVP contract suite." }
-  - { author: "TESTER", body: "Verified: forge test passed (9 tests). Warnings: variable shadowing in IntentMarketplace and mutability warning in Counter.t.sol." }
+  -
+    author: "TESTER"
+    body: "Start: Run forge test for the MVP contract suite."
+  -
+    author: "TESTER"
+    body: "Verified: forge test passed (9 tests). Warnings: variable shadowing in IntentMarketplace and mutability warning in Counter.t.sol."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-03T17:26:58.499Z"
 doc_updated_by: "TESTER"

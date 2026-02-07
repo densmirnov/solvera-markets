@@ -5,12 +5,31 @@ status: "DONE"
 priority: "med"
 owner: "DOCS"
 depends_on: []
-tags: ["backend"]
-verify: ["make check"]
-commit: { hash: "021c01c60b6a5bb94211966f1eebc0d721859906", message: "✨ 1VNY83 enforce lint/formatter standards" }
+tags:
+  - "backend"
+verify:
+  - "make check"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "021c01c60b6a5bb94211966f1eebc0d721859906"
+  message: "✨ 1VNY83 enforce lint/formatter standards"
 comments:
-  - { author: "DOCS", body: "Start: Finalize lint/formatter enforcement standards and rules." }
-  - { author: "DOCS", body: "Verified: Standards now require linters/formatters; Makefile includes fix target." }
+  -
+    author: "DOCS"
+    body: "Start: Finalize lint/formatter enforcement standards and rules."
+  -
+    author: "DOCS"
+    body: "Verified: Standards now require linters/formatters; Makefile includes fix target."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-03T18:15:08.463Z"
 doc_updated_by: "DOCS"

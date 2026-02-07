@@ -5,12 +5,31 @@ status: "DONE"
 priority: "high"
 owner: "CODER"
 depends_on: []
-tags: ["frontend"]
-verify: ["docker compose up -d --build"]
-commit: { hash: "6f5fa02ca795d0e2a95ff2e0b3b66cf5323ba9cb", message: "🧮 DAMTR3 add human amounts and explorer links" }
+tags:
+  - "frontend"
+verify:
+  - "docker compose up -d --build"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "6f5fa02ca795d0e2a95ff2e0b3b66cf5323ba9cb"
+  message: "🧮 DAMTR3 add human amounts and explorer links"
 comments:
-  - { author: "CODER", body: "Start: Add human-readable amounts with explanations, explorer links, and more vertical spacing in tables." }
-  - { author: "CODER", body: "Verified: docker compose up -d --build; amounts formatted with units + raw, explorer links added, tables spaced." }
+  -
+    author: "CODER"
+    body: "Start: Add human-readable amounts with explanations, explorer links, and more vertical spacing in tables."
+  -
+    author: "CODER"
+    body: "Verified: docker compose up -d --build; amounts formatted with units + raw, explorer links added, tables spaced."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-04T11:53:10.944Z"
 doc_updated_by: "CODER"

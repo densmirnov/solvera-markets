@@ -5,12 +5,31 @@ status: "DONE"
 priority: "med"
 owner: "CODER"
 depends_on: []
-tags: ["code"]
-verify: ["make check"]
-commit: { hash: "0826c2986d6d80590e542b344d3cf1e97c880d68", message: "✨ VK26W1 add mainnet deployment checklist" }
+tags:
+  - "code"
+verify:
+  - "make check"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "0826c2986d6d80590e542b344d3cf1e97c880d68"
+  message: "✨ VK26W1 add mainnet deployment checklist"
 comments:
-  - { author: "CODER", body: "Start: Prepare mainnet deployment checklist and config for Stage 1.8." }
-  - { author: "CODER", body: "Verified: Added mainnet deployment checklist document; no code executed and no deploy performed." }
+  -
+    author: "CODER"
+    body: "Start: Prepare mainnet deployment checklist and config for Stage 1.8."
+  -
+    author: "CODER"
+    body: "Verified: Added mainnet deployment checklist document; no code executed and no deploy performed."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-03T17:06:22.313Z"
 doc_updated_by: "CODER"

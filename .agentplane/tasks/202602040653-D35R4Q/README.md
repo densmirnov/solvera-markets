@@ -5,12 +5,33 @@ status: "DONE"
 priority: "high"
 owner: "CODER"
 depends_on: []
-tags: ["backend"]
-verify: ["docker compose up -d --build", "curl -s -o /dev/null -w \"%{http_code}\" http://localhost:4173", "curl -s http://localhost:3000/api/health"]
-commit: { hash: "eafd7b70d0478ae718cb1616fcc7fe684edc31c4", message: "🚀 D35R4Q set prod subgraph in compose" }
+tags:
+  - "backend"
+verify:
+  - "docker compose up -d --build"
+  - "curl -s -o /dev/null -w \"%{http_code}\" http://localhost:4173"
+  - "curl -s http://localhost:3000/api/health"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "eafd7b70d0478ae718cb1616fcc7fe684edc31c4"
+  message: "🚀 D35R4Q set prod subgraph in compose"
 comments:
-  - { author: "CODER", body: "Start: switch docker-compose to production subgraph endpoint and validate frontend/API availability." }
-  - { author: "CODER", body: "Verified: docker compose up uses production subgraph URL; frontend returns 200 and backend health responds." }
+  -
+    author: "CODER"
+    body: "Start: switch docker-compose to production subgraph endpoint and validate frontend/API availability."
+  -
+    author: "CODER"
+    body: "Verified: docker compose up uses production subgraph URL; frontend returns 200 and backend health responds."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-04T06:57:15.048Z"
 doc_updated_by: "CODER"

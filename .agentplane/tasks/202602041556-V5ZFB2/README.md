@@ -5,12 +5,31 @@ status: "DONE"
 priority: "med"
 owner: "ORCHESTRATOR"
 depends_on: []
-tags: ["frontend"]
-verify: ["1"]
-commit: { hash: "4dc1230c00395890ddfb86d9e8e51a97b534aa3a", message: "✨ V5ZFB2 boost hero gradient + magnetic hover" }
+tags:
+  - "frontend"
+verify:
+  - "1"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "4dc1230c00395890ddfb86d9e8e51a97b534aa3a"
+  message: "✨ V5ZFB2 boost hero gradient + magnetic hover"
 comments:
-  - { author: "ORCHESTRATOR", body: "Start: boost hero gradient and add subtle magnetic hover." }
-  - { author: "ORCHESTRATOR", body: "Verified: npm run build --prefix frontend succeeded; hero gradient and button hover refined." }
+  -
+    author: "ORCHESTRATOR"
+    body: "Start: boost hero gradient and add subtle magnetic hover."
+  -
+    author: "ORCHESTRATOR"
+    body: "Verified: npm run build --prefix frontend succeeded; hero gradient and button hover refined."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-04T15:59:30.188Z"
 doc_updated_by: "ORCHESTRATOR"

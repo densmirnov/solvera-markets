@@ -5,12 +5,31 @@ status: "DONE"
 priority: "med"
 owner: "CODER"
 depends_on: []
-tags: ["code"]
-verify: ["make check"]
-commit: { hash: "347a9758ed83540cbeb2130a18d0b9416151e0f9", message: "✨ Q3JSDZ verify Base Sepolia contract" }
+tags:
+  - "code"
+verify:
+  - "make check"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "347a9758ed83540cbeb2130a18d0b9416151e0f9"
+  message: "✨ Q3JSDZ verify Base Sepolia contract"
 comments:
-  - { author: "CODER", body: "Start: Verify Base Sepolia deployment in explorer for Stage 1.7." }
-  - { author: "CODER", body: "Verified: Base Sepolia contract verified; status recorded in docs/14-deployments.md." }
+  -
+    author: "CODER"
+    body: "Start: Verify Base Sepolia deployment in explorer for Stage 1.7."
+  -
+    author: "CODER"
+    body: "Verified: Base Sepolia contract verified; status recorded in docs/14-deployments.md."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-03T17:15:43.575Z"
 doc_updated_by: "CODER"

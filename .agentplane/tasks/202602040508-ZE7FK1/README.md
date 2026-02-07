@@ -5,12 +5,31 @@ status: "DONE"
 priority: "high"
 owner: "TESTER"
 depends_on: []
-tags: ["code"]
-verify: ["rg \"coverage\" scripts"]
-commit: { hash: "c67592b0ff60af73d490ee22afff6949af0d315d", message: "🧪 ZE7FK1 expand contract tests and coverage" }
+tags:
+  - "code"
+verify:
+  - "rg \"coverage\" scripts"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "c67592b0ff60af73d490ee22afff6949af0d315d"
+  message: "🧪 ZE7FK1 expand contract tests and coverage"
 comments:
-  - { author: "TESTER", body: "Start: expand contract tests and add coverage thresholds." }
-  - { author: "TESTER", body: "Verified: contract tests expanded and coverage script/Makefile updated with thresholds." }
+  -
+    author: "TESTER"
+    body: "Start: expand contract tests and add coverage thresholds."
+  -
+    author: "TESTER"
+    body: "Verified: contract tests expanded and coverage script/Makefile updated with thresholds."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-04T05:22:59.724Z"
 doc_updated_by: "TESTER"

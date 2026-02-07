@@ -5,12 +5,31 @@ status: "DONE"
 priority: "high"
 owner: "CODER"
 depends_on: []
-tags: ["code"]
-verify: ["make check"]
-commit: { hash: "4c01a647036994b1da6acd1410b783b4d533dea1", message: "✨ RNA1V1 deploy to Base mainnet and record addresses" }
+tags:
+  - "code"
+verify:
+  - "make check"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "4c01a647036994b1da6acd1410b783b4d533dea1"
+  message: "✨ RNA1V1 deploy to Base mainnet and record addresses"
 comments:
-  - { author: "CODER", body: "Start: Deploy IntentMarketplace to Base mainnet and record addresses." }
-  - { author: "CODER", body: "Verified: Deployed IntentMarketplace to Base mainnet; address and tx hash recorded in docs/14-deployments.md." }
+  -
+    author: "CODER"
+    body: "Start: Deploy IntentMarketplace to Base mainnet and record addresses."
+  -
+    author: "CODER"
+    body: "Verified: Deployed IntentMarketplace to Base mainnet; address and tx hash recorded in docs/14-deployments.md."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-03T17:18:59.854Z"
 doc_updated_by: "CODER"

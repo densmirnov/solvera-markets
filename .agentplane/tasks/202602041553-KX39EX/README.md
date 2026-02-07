@@ -5,12 +5,31 @@ status: "DONE"
 priority: "med"
 owner: "ORCHESTRATOR"
 depends_on: []
-tags: ["frontend"]
-verify: ["1"]
-commit: { hash: "9aab4f387a271bb889edc87bea49cd55eab7b63a", message: "✨ KX39EX soften borders + glass surfaces" }
+tags:
+  - "frontend"
+verify:
+  - "1"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "9aab4f387a271bb889edc87bea49cd55eab7b63a"
+  message: "✨ KX39EX soften borders + glass surfaces"
 comments:
-  - { author: "ORCHESTRATOR", body: "Start: soften borders and surfaces with modern polish." }
-  - { author: "ORCHESTRATOR", body: "Verified: npm run build --prefix frontend succeeded; borders softened and surfaces updated." }
+  -
+    author: "ORCHESTRATOR"
+    body: "Start: soften borders and surfaces with modern polish."
+  -
+    author: "ORCHESTRATOR"
+    body: "Verified: npm run build --prefix frontend succeeded; borders softened and surfaces updated."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-04T15:55:49.362Z"
 doc_updated_by: "ORCHESTRATOR"

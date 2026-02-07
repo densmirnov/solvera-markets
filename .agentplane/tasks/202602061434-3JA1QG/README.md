@@ -5,12 +5,31 @@ status: "DONE"
 priority: "med"
 owner: "ORCHESTRATOR"
 depends_on: []
-tags: ["code"]
-verify: ["make check"]
-commit: { hash: "b5dcc28658348f3f30b6740e8148a634fda33413", message: "📝 3JA1QG docs README + make check fixes" }
+tags:
+  - "code"
+verify:
+  - "make check"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "b5dcc28658348f3f30b6740e8148a634fda33413"
+  message: "📝 3JA1QG docs README + make check fixes"
 comments:
-  - { author: "ORCHESTRATOR", body: "Start: Refactor Mintlify docs structure and formatting with minimal accidental changes." }
-  - { author: "ORCHESTRATOR", body: "Verified: Mintlify docs are reorganized with updated docs/docs.json nav (see commits 4e70ba6..16b5302). Added docs/README plus frontend eslint ignores + format tests to restore make check; agentplane verify passed. Latest commit: b5dcc2865834." }
+  -
+    author: "ORCHESTRATOR"
+    body: "Start: Refactor Mintlify docs structure and formatting with minimal accidental changes."
+  -
+    author: "ORCHESTRATOR"
+    body: "Verified: Mintlify docs are reorganized with updated docs/docs.json nav (see commits 4e70ba6..16b5302). Added docs/README plus frontend eslint ignores + format tests to restore make check; agentplane verify passed. Latest commit: b5dcc2865834."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-06T15:08:06.141Z"
 doc_updated_by: "ORCHESTRATOR"

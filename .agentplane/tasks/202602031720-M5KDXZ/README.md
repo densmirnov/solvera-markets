@@ -5,12 +5,31 @@ status: "DONE"
 priority: "low"
 owner: "DOCS"
 depends_on: []
-tags: ["code"]
-verify: ["make check"]
-commit: { hash: "c0385ae8254b7af3647887ab36e6e1e1117d39cb", message: "✨ M5KDXZ update docs navigation" }
+tags:
+  - "code"
+verify:
+  - "make check"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "c0385ae8254b7af3647887ab36e6e1e1117d39cb"
+  message: "✨ M5KDXZ update docs navigation"
 comments:
-  - { author: "DOCS", body: "Start: Update docs/README navigation with new documents." }
-  - { author: "DOCS", body: "Verified: docs/README navigation updated to include new docs." }
+  -
+    author: "DOCS"
+    body: "Start: Update docs/README navigation with new documents."
+  -
+    author: "DOCS"
+    body: "Verified: docs/README navigation updated to include new docs."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-03T17:21:54.142Z"
 doc_updated_by: "DOCS"

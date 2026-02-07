@@ -5,12 +5,31 @@ status: "DONE"
 priority: "high"
 owner: "CODER"
 depends_on: []
-tags: ["code"]
-verify: ["make check"]
-commit: { hash: "7ac9feedf619ddff65a3cbfac2992e25ddab9d48", message: "✨ GGW9TM add contract scaffold and core state machine" }
+tags:
+  - "code"
+verify:
+  - "make check"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "7ac9feedf619ddff65a3cbfac2992e25ddab9d48"
+  message: "✨ GGW9TM add contract scaffold and core state machine"
 comments:
-  - { author: "CODER", body: "Start: Implement core contract state machine and functions for Stage 1.2." }
-  - { author: "CODER", body: "Verified: Added Foundry scaffold and core contract without economics; tests not run yet." }
+  -
+    author: "CODER"
+    body: "Start: Implement core contract state machine and functions for Stage 1.2."
+  -
+    author: "CODER"
+    body: "Verified: Added Foundry scaffold and core contract without economics; tests not run yet."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-03T17:00:57.365Z"
 doc_updated_by: "CODER"

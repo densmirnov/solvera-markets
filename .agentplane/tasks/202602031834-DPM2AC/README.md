@@ -5,12 +5,31 @@ status: "DONE"
 priority: "low"
 owner: "DOCS"
 depends_on: []
-tags: ["backend"]
-verify: ["make check"]
-commit: { hash: "c728e6ccfe96599337a1aceec5d2a783889823a8", message: "🧹 DPM2AC note agentplane tracking in gitignore" }
+tags:
+  - "backend"
+verify:
+  - "make check"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "c728e6ccfe96599337a1aceec5d2a783889823a8"
+  message: "🧹 DPM2AC note agentplane tracking in gitignore"
 comments:
-  - { author: "DOCS", body: "Start: remove .agentplane from gitignore to sync task artifacts reliably." }
-  - { author: "DOCS", body: "Verified: .gitignore explicitly notes that .agentplane is tracked; status clean except tracked change." }
+  -
+    author: "DOCS"
+    body: "Start: remove .agentplane from gitignore to sync task artifacts reliably."
+  -
+    author: "DOCS"
+    body: "Verified: .gitignore explicitly notes that .agentplane is tracked; status clean except tracked change."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-03T18:38:21.640Z"
 doc_updated_by: "DOCS"

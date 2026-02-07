@@ -5,12 +5,30 @@ status: "DONE"
 priority: "med"
 owner: "ORCHESTRATOR"
 depends_on: []
-tags: ["docs"]
+tags:
+  - "docs"
 verify: []
-commit: { hash: "d9f9339e607eb5a0c24d47aa40bada968943dbdc", message: "📝 DP0N2J remove hackathon/judge wording in docs" }
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "d9f9339e607eb5a0c24d47aa40bada968943dbdc"
+  message: "📝 DP0N2J remove hackathon/judge wording in docs"
 comments:
-  - { author: "ORCHESTRATOR", body: "Start: Removing hackathon/judge wording from docs per request." }
-  - { author: "ORCHESTRATOR", body: "Verified: Removed hackathon/judge-focused wording in docs; updated overview, roles, and testing pages. Manual scan confirms no remaining judge/hackathon terms in docs." }
+  -
+    author: "ORCHESTRATOR"
+    body: "Start: Removing hackathon/judge wording from docs per request."
+  -
+    author: "ORCHESTRATOR"
+    body: "Verified: Removed hackathon/judge-focused wording in docs; updated overview, roles, and testing pages. Manual scan confirms no remaining judge/hackathon terms in docs."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-05T17:22:29.325Z"
 doc_updated_by: "ORCHESTRATOR"

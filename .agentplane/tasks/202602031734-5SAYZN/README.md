@@ -5,12 +5,31 @@ status: "DONE"
 priority: "high"
 owner: "CODER"
 depends_on: []
-tags: ["backend"]
-verify: ["make check"]
-commit: { hash: "d320ae1c3cfa7b4625c5b5ce663f893e9db089e7", message: "✨ 5SAYZN add backend core querying subgraph" }
+tags:
+  - "backend"
+verify:
+  - "make check"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "d320ae1c3cfa7b4625c5b5ce663f893e9db089e7"
+  message: "✨ 5SAYZN add backend core querying subgraph"
 comments:
-  - { author: "CODER", body: "Start: Implement backend core using NestJS and subgraph client." }
-  - { author: "CODER", body: "Verified: Backend uses subgraph-only reads with pagination; no RPC usage." }
+  -
+    author: "CODER"
+    body: "Start: Implement backend core using NestJS and subgraph client."
+  -
+    author: "CODER"
+    body: "Verified: Backend uses subgraph-only reads with pagination; no RPC usage."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-03T17:45:41.312Z"
 doc_updated_by: "CODER"

@@ -5,12 +5,31 @@ status: "DONE"
 priority: "med"
 owner: "DOCS"
 depends_on: []
-tags: ["backend"]
-verify: ["make check"]
-commit: { hash: "9d425731218e0a97035b3cd11872a99647f2bec0", message: "✨ H6A82K update roadmap for Dokploy and docker compose" }
+tags:
+  - "backend"
+verify:
+  - "make check"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "9d425731218e0a97035b3cd11872a99647f2bec0"
+  message: "✨ H6A82K update roadmap for Dokploy and docker compose"
 comments:
-  - { author: "DOCS", body: "Start: Update roadmap with Dokploy and docker compose requirements." }
-  - { author: "DOCS", body: "Verified: ROADMAP updated with Dokploy and docker compose requirements." }
+  -
+    author: "DOCS"
+    body: "Start: Update roadmap with Dokploy and docker compose requirements."
+  -
+    author: "DOCS"
+    body: "Verified: ROADMAP updated with Dokploy and docker compose requirements."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-03T18:09:11.744Z"
 doc_updated_by: "DOCS"

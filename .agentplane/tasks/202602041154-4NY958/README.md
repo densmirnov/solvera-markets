@@ -5,12 +5,31 @@ status: "DONE"
 priority: "med"
 owner: "DOCS"
 depends_on: []
-tags: ["frontend"]
-verify: ["docker compose up -d --build"]
-commit: { hash: "0f33347c43015035081eef78e79f7bbc0967c52b", message: "📝 4NY958 add base URL section to SKILL" }
+tags:
+  - "frontend"
+verify:
+  - "docker compose up -d --build"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "0f33347c43015035081eef78e79f7bbc0967c52b"
+  message: "📝 4NY958 add base URL section to SKILL"
 comments:
-  - { author: "DOCS", body: "Start: Add explicit base URL section to SKILL.md for external agents." }
-  - { author: "DOCS", body: "Verified: docker compose up -d --build; SKILL.md now has explicit base URL section." }
+  -
+    author: "DOCS"
+    body: "Start: Add explicit base URL section to SKILL.md for external agents."
+  -
+    author: "DOCS"
+    body: "Verified: docker compose up -d --build; SKILL.md now has explicit base URL section."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-04T11:55:24.918Z"
 doc_updated_by: "DOCS"

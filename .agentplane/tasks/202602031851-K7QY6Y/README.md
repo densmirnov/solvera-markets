@@ -5,12 +5,31 @@ status: "DONE"
 priority: "high"
 owner: "CODER"
 depends_on: []
-tags: ["backend"]
-verify: ["rg \"/api/\" backend"]
-commit: { hash: "528ac0644f46582c28a73ac3b439981c9db49af4", message: "✨ K7QY6Y implement agent-first backend API" }
+tags:
+  - "backend"
+verify:
+  - "rg \"/api/\" backend"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "528ac0644f46582c28a73ac3b439981c9db49af4"
+  message: "✨ K7QY6Y implement agent-first backend API"
 comments:
-  - { author: "CODER", body: "Start: implement agent-first backend endpoints with tx-builder responses and next_steps." }
-  - { author: "CODER", body: "Verified: backend now serves /api endpoints with next_steps, tx-builder payloads, config endpoint, and structured errors." }
+  -
+    author: "CODER"
+    body: "Start: implement agent-first backend endpoints with tx-builder responses and next_steps."
+  -
+    author: "CODER"
+    body: "Verified: backend now serves /api endpoints with next_steps, tx-builder payloads, config endpoint, and structured errors."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-03T18:57:11.294Z"
 doc_updated_by: "CODER"

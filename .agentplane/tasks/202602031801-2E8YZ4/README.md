@@ -5,12 +5,31 @@ status: "DONE"
 priority: "low"
 owner: "DOCS"
 depends_on: []
-tags: ["backend"]
-verify: ["make check"]
-commit: { hash: "4f4ab6d776329186fe9cf55f818bc377efe990aa", message: "✨ 2E8YZ4 add subgraph doc to nav" }
+tags:
+  - "backend"
+verify:
+  - "make check"
+plan_approval:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+verification:
+  state: "pending"
+  updated_at: null
+  updated_by: null
+  note: null
+commit:
+  hash: "4f4ab6d776329186fe9cf55f818bc377efe990aa"
+  message: "✨ 2E8YZ4 add subgraph doc to nav"
 comments:
-  - { author: "DOCS", body: "Start: Update docs README to include subgraph endpoints doc." }
-  - { author: "DOCS", body: "Verified: docs/README includes subgraph endpoints document in navigation." }
+  -
+    author: "DOCS"
+    body: "Start: Update docs README to include subgraph endpoints doc."
+  -
+    author: "DOCS"
+    body: "Verified: docs/README includes subgraph endpoints document in navigation."
+events: []
 doc_version: 2
 doc_updated_at: "2026-02-03T18:02:38.765Z"
 doc_updated_by: "DOCS"
