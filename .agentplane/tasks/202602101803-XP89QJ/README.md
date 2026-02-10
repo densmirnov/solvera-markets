@@ -1,7 +1,8 @@
 ---
 id: "202602101803-XP89QJ"
 title: "Upgrade agentplane framework bundle"
-status: "DOING"
+result_summary: "Upgraded repo-local agentplane framework bundle"
+status: "DONE"
 priority: "med"
 owner: "ORCHESTRATOR"
 depends_on: []
@@ -14,15 +15,20 @@ plan_approval:
   updated_by: "ORCHESTRATOR"
   note: "OK"
 verification:
-  state: "pending"
-  updated_at: null
-  updated_by: null
-  note: null
-commit: null
+  state: "ok"
+  updated_at: "2026-02-10T18:07:12.106Z"
+  updated_by: "ORCHESTRATOR"
+  note: "Ran agentplane upgrade --auto; agentplane doctor returned OK. Commit fabc3f12e553 contains only upgrade-related AGENTS.md/.agentplane changes."
+commit:
+  hash: "fabc3f12e55350ba829b379ff6f79bc29eba6160"
+  message: "⬆️ XP89QJ agentplane: upgrade framework bundle"
 comments:
   -
     author: "ORCHESTRATOR"
     body: "Start: Running agentplane upgrade to refresh repo-local bundle; will validate with agentplane doctor and commit only .agentplane/ changes (excluding current PITCH.md/README.md edits)."
+  -
+    author: "ORCHESTRATOR"
+    body: "Verified: Ran agentplane upgrade --auto, then agentplane doctor (OK). Committed only AGENTS.md + .agentplane/ upgrade changes; left existing PITCH.md/README.md edits uncommitted."
 events:
   -
     type: "status"
@@ -31,8 +37,21 @@ events:
     from: "TODO"
     to: "DOING"
     note: "Start: Running agentplane upgrade to refresh repo-local bundle; will validate with agentplane doctor and commit only .agentplane/ changes (excluding current PITCH.md/README.md edits)."
+  -
+    type: "verify"
+    at: "2026-02-10T18:07:12.106Z"
+    author: "ORCHESTRATOR"
+    state: "ok"
+    note: "Ran agentplane upgrade --auto; agentplane doctor returned OK. Commit fabc3f12e553 contains only upgrade-related AGENTS.md/.agentplane changes."
+  -
+    type: "status"
+    at: "2026-02-10T18:07:31.928Z"
+    author: "ORCHESTRATOR"
+    from: "DOING"
+    to: "DONE"
+    note: "Verified: Ran agentplane upgrade --auto, then agentplane doctor (OK). Committed only AGENTS.md + .agentplane/ upgrade changes; left existing PITCH.md/README.md edits uncommitted."
 doc_version: 2
-doc_updated_at: "2026-02-10T18:04:25.285Z"
+doc_updated_at: "2026-02-10T18:07:31.928Z"
 doc_updated_by: "ORCHESTRATOR"
 description: "Run agentplane upgrade to refresh the repo-local framework bundle under .agentplane/. Keep unrelated working tree changes (PITCH.md, README.md) untouched and out of the commit."
 id_source: "generated"
@@ -73,3 +92,20 @@ Rollback: revert the upgrade commit if doctor fails or regressions appear.
 
  README.md | 43 +++++++++++++++++++++++++++++++++++++++++++
  2 files changed, 52 insertions(+), 42 deletions(-) and stage only  files related to the upgrade.\n5. Commit via  with tight  allowlist.\n6. Finish task with  referencing the commit hash.\n\n## Risks\n- Upgrade may modify multiple files under ; avoid mixing with unrelated edits in working tree.\n\n## Rollback\n- Revert the upgrade commit (or reset upgraded files to previous revision) if  fails or behavior regresses.
+
+## Verification
+
+### Plan
+
+### Results
+
+<!-- BEGIN VERIFICATION RESULTS -->
+#### 2026-02-10T18:07:12.106Z — VERIFY — ok
+
+By: ORCHESTRATOR
+
+Note: Ran agentplane upgrade --auto; agentplane doctor returned OK. Commit fabc3f12e553 contains only upgrade-related AGENTS.md/.agentplane changes.
+
+VerifyStepsRef: doc_version=2, doc_updated_at=2026-02-10T18:04:25.285Z, excerpt_hash=sha256:7234e8ab4286438ed685ca0c2eefd62ee7ec1e7aabe4eff5ed4ba4b1e700304d
+
+<!-- END VERIFICATION RESULTS -->
