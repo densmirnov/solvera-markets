@@ -3,7 +3,6 @@
   "workflow_mode": "direct",
   "status_commit_policy": "warn",
   "finish_auto_status_commit": true,
-  "base_branch": "main",
   "agents": {
     "approvals": {
       "require_plan": true,
@@ -24,12 +23,16 @@
   },
   "framework": {
     "source": "https://github.com/basilisk-labs/agent-plane",
-    "last_update": null
+    "last_update": "2026-02-10T18:04:41.949Z"
   },
   "tasks": {
     "id_suffix_length_default": 6,
     "verify": {
-      "required_tags": ["code", "backend", "frontend"]
+      "required_tags": [
+        "code",
+        "backend",
+        "frontend"
+      ]
     },
     "doc": {
       "sections": [
