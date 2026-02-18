@@ -248,10 +248,11 @@ body {
 .mode-switch {
   display: flex;
   align-items: flex-end;
+  justify-content: center;
   gap: 0.42rem;
   width: 100%;
   margin: 0 0 -1px;
-  padding-left: 0.68rem;
+  padding-left: 0;
   position: relative;
   z-index: 3;
 }
