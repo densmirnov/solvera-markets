@@ -62,14 +62,30 @@ function buildClawField() {
     const claw = document.createElement("span");
     claw.className = "claw-float";
 
-    const left = Math.random() * 100;
-    const top = Math.random() * 100;
+    const edgeRoll = Math.random();
+    let left;
+    let top;
+
+    if (edgeRoll < 0.34) {
+      left = Math.random() * 100;
+      top = Math.random() * 14;
+    } else if (edgeRoll < 0.68) {
+      left = Math.random() * 100;
+      top = 86 + Math.random() * 14;
+    } else if (edgeRoll < 0.84) {
+      left = Math.random() * 12;
+      top = Math.random() * 100;
+    } else {
+      left = 88 + Math.random() * 12;
+      top = Math.random() * 100;
+    }
+
     const size = 30 + Math.random() * 70;
     const duration = 20 + Math.random() * 24;
     const delay = Math.random() * -20;
-    const drift = (Math.random() * 64 - 32).toFixed(2);
+    const drift = (Math.random() * 36 - 18).toFixed(2);
     const rotate = Math.random() * 60 - 30;
-    const opacity = (0.14 + Math.random() * 0.2).toFixed(2);
+    const opacity = (0.08 + Math.random() * 0.12).toFixed(2);
 
     claw.style.left = `${left.toFixed(2)}%`;
     claw.style.top = `${top.toFixed(2)}%`;
