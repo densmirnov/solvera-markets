@@ -1,5 +1,6 @@
 const STAR_TOTAL = 88;
 const STAR_STATES = ["off", "off", "off", "medium", "high"];
+const CLAW_TOTAL = 15;
 
 function buildStarfield() {
   const host = document.getElementById("edgeStars");
@@ -49,6 +50,41 @@ function buildStarfield() {
       }
     }
   }, 820);
+}
+
+function buildClawField() {
+  const host = document.getElementById("clawField");
+  if (!host) return;
+
+  const fragment = document.createDocumentFragment();
+
+  for (let i = 0; i < CLAW_TOTAL; i += 1) {
+    const claw = document.createElement("span");
+    claw.className = "claw-float";
+
+    const left = Math.random() * 100;
+    const top = Math.random() * 100;
+    const size = 30 + Math.random() * 70;
+    const duration = 20 + Math.random() * 24;
+    const delay = Math.random() * -20;
+    const drift = (Math.random() * 64 - 32).toFixed(2);
+    const rotate = Math.random() * 60 - 30;
+    const opacity = (0.14 + Math.random() * 0.2).toFixed(2);
+
+    claw.style.left = `${left.toFixed(2)}%`;
+    claw.style.top = `${top.toFixed(2)}%`;
+    claw.style.width = `${size.toFixed(0)}px`;
+    claw.style.height = `${Math.max(22, size * 0.58).toFixed(0)}px`;
+    claw.style.animationDuration = `${duration.toFixed(2)}s`;
+    claw.style.animationDelay = `${delay.toFixed(2)}s`;
+    claw.style.setProperty("--claw-drift", `${drift}px`);
+    claw.style.setProperty("--claw-rotate", `${rotate.toFixed(1)}deg`);
+    claw.style.opacity = opacity;
+
+    fragment.appendChild(claw);
+  }
+
+  host.appendChild(fragment);
 }
 
 function setupSelectableCards() {
@@ -122,6 +158,7 @@ function setupRevealOnScroll() {
 }
 
 buildStarfield();
+buildClawField();
 setupSelectableCards();
 setupMarquees();
 setupRevealOnScroll();
