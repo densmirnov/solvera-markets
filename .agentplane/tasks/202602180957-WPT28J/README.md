@@ -15,9 +15,9 @@ plan_approval:
   note: "Revision plan approved."
 verification:
   state: "ok"
-  updated_at: "2026-02-18T10:21:26.021Z"
+  updated_at: "2026-02-18T10:24:35.510Z"
   updated_by: "CODER"
-  note: "Verified: moved Быстрый старт/Войти tabs above the entire form block, removed steps text background card, made steps text accent-only, and kept onboarding/login structure intact; static preview server listens on :4173."
+  note: "Verified: added inline SVG icons for Card and SBP payment pills; layout and interaction preserved; static preview server listens on :4173."
 commit: null
 comments:
   -
@@ -49,8 +49,14 @@ events:
     author: "CODER"
     state: "ok"
     note: "Verified: moved Быстрый старт/Войти tabs above the entire form block, removed steps text background card, made steps text accent-only, and kept onboarding/login structure intact; static preview server listens on :4173."
+  -
+    type: "verify"
+    at: "2026-02-18T10:24:35.510Z"
+    author: "CODER"
+    state: "ok"
+    note: "Verified: added inline SVG icons for Card and SBP payment pills; layout and interaction preserved; static preview server listens on :4173."
 doc_version: 2
-doc_updated_at: "2026-02-18T10:21:26.023Z"
+doc_updated_at: "2026-02-18T10:24:35.512Z"
 doc_updated_by: "CODER"
 description: "Apply domain/contact replacements to simpleclaw.ru and redesign registration form block based on app.simpleclaw.ru in Solvera style, including moving login button to bottom."
 id_source: "generated"
@@ -156,5 +162,13 @@ By: CODER
 Note: Verified: moved Быстрый старт/Войти tabs above the entire form block, removed steps text background card, made steps text accent-only, and kept onboarding/login structure intact; static preview server listens on :4173.
 
 VerifyStepsRef: doc_version=2, doc_updated_at=2026-02-18T10:07:41.041Z, excerpt_hash=sha256:f4afed5b1fe5b87f5962b38679d3f5197d57467579453aa58d6e9640d7f13f8d
+
+#### 2026-02-18T10:24:35.510Z — VERIFY — ok
+
+By: CODER
+
+Note: Verified: added inline SVG icons for Card and SBP payment pills; layout and interaction preserved; static preview server listens on :4173.
+
+VerifyStepsRef: doc_version=2, doc_updated_at=2026-02-18T10:21:26.023Z, excerpt_hash=sha256:f4afed5b1fe5b87f5962b38679d3f5197d57467579453aa58d6e9640d7f13f8d
 
 <!-- END VERIFICATION RESULTS -->
