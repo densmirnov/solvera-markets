@@ -10,7 +10,8 @@ function buildStarfield() {
   for (let i = 0; i < STAR_TOTAL; i += 1) {
     const dot = document.createElement("span");
     dot.className = "star-sparkle";
-    dot.dataset.state = STAR_STATES[Math.floor(Math.random() * STAR_STATES.length)];
+    dot.dataset.state =
+      STAR_STATES[Math.floor(Math.random() * STAR_STATES.length)];
 
     const edgeRoll = Math.random();
     let left;
@@ -43,23 +44,34 @@ function buildStarfield() {
     const stars = host.querySelectorAll(".star-sparkle");
     for (let i = 0; i < stars.length; i += 1) {
       if (Math.random() < 0.22) {
-        stars[i].dataset.state = STAR_STATES[Math.floor(Math.random() * STAR_STATES.length)];
+        stars[i].dataset.state =
+          STAR_STATES[Math.floor(Math.random() * STAR_STATES.length)];
       }
     }
   }, 820);
 }
 
 function setupSelectableCards() {
-  const clickable = document.querySelectorAll(".option-card[data-group]");
+  const clickable = document.querySelectorAll(
+    ".mode-pill[data-group], .pay-pill[data-group]",
+  );
+  const setupCard = document.querySelector(".setup-card[data-mode]");
 
   clickable.forEach((btn) => {
     btn.addEventListener("click", () => {
       const group = btn.getAttribute("data-group");
       if (!group) return;
 
-      const peers = document.querySelectorAll(`.option-card[data-group="${group}"]`);
+      const peers = document.querySelectorAll(`[data-group="${group}"]`);
       peers.forEach((peer) => peer.classList.remove("selected"));
       btn.classList.add("selected");
+
+      if (group === "mode" && setupCard) {
+        const mode = btn.getAttribute("data-mode");
+        if (mode === "login" || mode === "onboarding") {
+          setupCard.setAttribute("data-mode", mode);
+        }
+      }
     });
   });
 }

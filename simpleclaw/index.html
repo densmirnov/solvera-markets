@@ -15,10 +15,10 @@
 
     <main class="page-shell">
       <header class="site-header reveal-up">
-        <div class="brand">SimpleClaw<span>.com</span></div>
+        <div class="brand">SimpleClaw<span>.ru</span></div>
         <a
           class="support-link"
-          href="mailto:support@simpleclaw.com?subject=SimpleClaw%20Support"
+          href="mailto:helpme@simpleclaw.ru?subject=SimpleClaw%20Support"
           >Связаться с поддержкой</a
         >
       </header>
@@ -36,54 +36,75 @@
         <div class="edge-stars" id="edgeStars" aria-hidden="true"></div>
 
         <div class="card-frame">
-          <div class="setup-card">
-            <div class="setup-group">
-              <h2>Какую модель сделать основной?</h2>
-              <div class="option-row">
-                <button class="option-card selected" type="button" data-group="model">
-                  <span class="chip-logo">C</span>
-                  <span>Claude Opus 4.5</span>
-                </button>
-                <button class="option-card" type="button" data-group="model">
-                  <span class="chip-logo">G</span>
-                  <span>GPT-5.2</span>
-                </button>
-                <button class="option-card" type="button" data-group="model">
-                  <span class="chip-logo">Ge</span>
-                  <span>Gemini 3 Flash</span>
-                </button>
+          <div class="setup-card" data-mode="onboarding">
+            <div class="setup-head">
+              <h2>Запуск OpenClaw в simpleclaw.ru</h2>
+              <p>
+                1) Укажите токен Telegram-бота и модель, 2) подтвердите вход через
+                Telegram, 3) переходите к развёртыванию.
+              </p>
+            </div>
+
+            <div class="mode-switch" role="tablist" aria-label="Режим авторизации">
+              <button class="mode-pill selected" type="button" data-group="mode" data-mode="onboarding">
+                Быстрый старт
+              </button>
+              <button class="mode-pill" type="button" data-group="mode" data-mode="login">
+                Войти
+              </button>
+            </div>
+
+            <div class="setup-group onboarding-only">
+              <label for="tg-token">Telegram bot token для деплоя</label>
+              <input id="tg-token" type="password" placeholder="123456789:AA..." value="" />
+              <small>Токен хранится только для инициализации OpenClaw.</small>
+            </div>
+
+            <div class="setup-group onboarding-only">
+              <label for="llm-model">LLM model</label>
+              <select id="llm-model">
+                <option>Claude Opus 4.6</option>
+                <option>ChatGPT 5.2</option>
+                <option>Gemini 3 Flash</option>
+              </select>
+            </div>
+
+            <div class="setup-group onboarding-only">
+              <label>Способ оплаты</label>
+              <div class="option-row pay-row">
+                <button class="pay-pill selected" type="button" data-group="payment">Card</button>
+                <button class="pay-pill" type="button" data-group="payment">СБП (FPS)</button>
               </div>
             </div>
 
-            <div class="setup-group">
-              <h2>Какой канал использовать для сообщений?</h2>
-              <div class="option-row">
-                <button class="option-card selected" type="button" data-group="channel">
-                  <span class="chip-logo">Tg</span>
-                  <span>Telegram</span>
-                </button>
-                <button class="option-card disabled" type="button" disabled>
-                  <span class="chip-logo">Ds</span>
-                  <span>Discord</span>
-                  <small>Скоро</small>
-                </button>
-                <button class="option-card disabled" type="button" disabled>
-                  <span class="chip-logo">Wa</span>
-                  <span>WhatsApp</span>
-                  <small>Скоро</small>
-                </button>
+            <div class="setup-group login-only">
+              <p class="login-note">
+                Режим входа для существующего пользователя. Нажмите кнопку внизу
+                для Telegram Login.
+              </p>
+            </div>
+
+            <div class="tg-wrap">
+              <h3>Вход через Telegram</h3>
+              <p>
+                Используется Telegram Login Widget. После подтверждения вы
+                перейдёте в кабинет simpleclaw.ru.
+              </p>
+              <div class="tg-widget-mock" aria-hidden="true">
+                <span>@simpleclawrubot</span>
+                <span>Telegram Login</span>
               </div>
             </div>
 
             <div class="setup-group auth-group">
-              <button class="google-btn" type="button">
-                <span class="google-dot">G</span>
-                <span>Войти через Google</span>
-              </button>
               <p>
-                Войдите, чтобы развернуть ассистента и подключить каналы.
-                <strong>Ограниченные облачные мощности — осталось 11 мест.</strong>
+                Ограниченные облачные мощности в РФ.
+                <strong>Доступно 11 слотов для быстрой установки.</strong>
               </p>
+              <button class="google-btn bottom-login" type="button">
+                <span class="google-dot">Tg</span>
+                <span>Войти через Telegram</span>
+              </button>
             </div>
           </div>
         </div>
@@ -212,11 +233,8 @@
       </section>
 
       <footer class="site-footer reveal-up">
-        <p>
-          Сделано с ❤️ <a href="http://x.com/saviomartin7" target="_blank" rel="noreferrer">Savio Martin</a>
-        </p>
-        <a href="mailto:support@simpleclaw.com?subject=SimpleClaw%20Support"
-          >Связаться с поддержкой</a
+        <a href="https://t.me/@@openclawru" target="_blank" rel="noreferrer"
+          >t.me/@@openclawru</a
         >
       </footer>
     </main>
