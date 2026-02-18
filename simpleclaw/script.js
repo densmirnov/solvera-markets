@@ -53,7 +53,7 @@ function buildStarfield() {
 
 function setupSelectableCards() {
   const clickable = document.querySelectorAll(
-    ".mode-pill[data-group], .pay-pill[data-group]",
+    ".mode-tab[data-group], .pay-pill[data-group]",
   );
   const setupCard = document.querySelector(".setup-card[data-mode]");
 

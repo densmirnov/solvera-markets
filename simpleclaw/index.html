@@ -35,28 +35,47 @@
         <div class="setup-glow" aria-hidden="true"></div>
         <div class="edge-stars" id="edgeStars" aria-hidden="true"></div>
 
-        <div class="card-frame">
+        <div class="card-frame form-frame">
           <div class="setup-card" data-mode="onboarding">
             <div class="setup-head">
               <h2>Запуск OpenClaw в simpleclaw.ru</h2>
-              <p>
-                1) Укажите токен Telegram-бота и модель, 2) подтвердите вход через
-                Telegram, 3) переходите к развёртыванию.
+              <p class="setup-steps">
+                1) Укажите токен Telegram-бота и модель, 2) подтвердите вход
+                через Telegram, 3) переходите к развёртыванию.
               </p>
             </div>
 
-            <div class="mode-switch" role="tablist" aria-label="Режим авторизации">
-              <button class="mode-pill selected" type="button" data-group="mode" data-mode="onboarding">
+            <div
+              class="mode-switch"
+              role="tablist"
+              aria-label="Режим авторизации"
+            >
+              <button
+                class="mode-tab selected"
+                type="button"
+                data-group="mode"
+                data-mode="onboarding"
+              >
                 Быстрый старт
               </button>
-              <button class="mode-pill" type="button" data-group="mode" data-mode="login">
+              <button
+                class="mode-tab"
+                type="button"
+                data-group="mode"
+                data-mode="login"
+              >
                 Войти
               </button>
             </div>
 
             <div class="setup-group onboarding-only">
               <label for="tg-token">Telegram bot token для деплоя</label>
-              <input id="tg-token" type="password" placeholder="123456789:AA..." value="" />
+              <input
+                id="tg-token"
+                type="password"
+                placeholder="123456789:AA..."
+                value=""
+              />
               <small>Токен хранится только для инициализации OpenClaw.</small>
             </div>
 
@@ -72,8 +91,16 @@
             <div class="setup-group onboarding-only">
               <label>Способ оплаты</label>
               <div class="option-row pay-row">
-                <button class="pay-pill selected" type="button" data-group="payment">Card</button>
-                <button class="pay-pill" type="button" data-group="payment">СБП (FPS)</button>
+                <button
+                  class="pay-pill selected"
+                  type="button"
+                  data-group="payment"
+                >
+                  Card
+                </button>
+                <button class="pay-pill" type="button" data-group="payment">
+                  СБП (FPS)
+                </button>
               </div>
             </div>
 
@@ -233,8 +260,8 @@
       </section>
 
       <footer class="site-footer reveal-up">
-        <a href="https://t.me/@@openclawru" target="_blank" rel="noreferrer"
-          >t.me/@@openclawru</a
+        <a href="https://t.me/@openclawru" target="_blank" rel="noreferrer"
+          >t.me/@openclawru</a
         >
       </footer>
     </main>

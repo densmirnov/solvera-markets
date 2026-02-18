@@ -15,9 +15,9 @@ plan_approval:
   note: "Revision plan approved."
 verification:
   state: "ok"
-  updated_at: "2026-02-18T10:00:46.848Z"
+  updated_at: "2026-02-18T10:07:41.040Z"
   updated_by: "CODER"
-  note: "Verified: replaced domain/email/contact references as requested, redesigned setup form using app.simpleclaw.ru onboarding structure in Solvera style, moved login CTA to bottom, and confirmed static preview server on :4173."
+  note: "Verified: footer link changed to t.me/@openclawru; form restyled in Solvera visual language with highlighted steps block, large top tabs, and bottom login CTA; static preview server confirmed on :4173."
 commit: null
 comments:
   -
@@ -37,8 +37,14 @@ events:
     author: "CODER"
     state: "ok"
     note: "Verified: replaced domain/email/contact references as requested, redesigned setup form using app.simpleclaw.ru onboarding structure in Solvera style, moved login CTA to bottom, and confirmed static preview server on :4173."
+  -
+    type: "verify"
+    at: "2026-02-18T10:07:41.040Z"
+    author: "CODER"
+    state: "ok"
+    note: "Verified: footer link changed to t.me/@openclawru; form restyled in Solvera visual language with highlighted steps block, large top tabs, and bottom login CTA; static preview server confirmed on :4173."
 doc_version: 2
-doc_updated_at: "2026-02-18T10:00:46.850Z"
+doc_updated_at: "2026-02-18T10:07:41.041Z"
 doc_updated_by: "CODER"
 description: "Apply domain/contact replacements to simpleclaw.ru and redesign registration form block based on app.simpleclaw.ru in Solvera style, including moving login button to bottom."
 id_source: "generated"
@@ -96,20 +102,22 @@ Follow-up changes requested by user after rollback of unintended metadata commit
 ## Notes
 
 ### Approvals / Overrides
-- User requested rollback of the unintended auto-generated metadata commit and provided explicit revision requirements.
+- User requested additional visual revision pass: strict Solvera design language for the registration form, highlighted instruction block, and larger tabs above the full form.
 
 ### Decisions
-- Kept static architecture and reproduced onboarding structure from `app.simpleclaw.ru`: mode switch (`Быстрый старт` / `Войти`), token input, model select, payment method, Telegram login block.
-- Placed login CTA at the bottom of the form as requested.
-- Replaced all project domain/email mentions to `simpleclaw.ru` / `helpme@simpleclaw.ru` and replaced footer contacts with `https://t.me/@@openclawru`.
+- Kept static architecture and onboarding logic from `app.simpleclaw.ru`.
+- Converted form container to the same light Solvera visual language as the page (soft gradients, orange/blue accents, glassy borders, subtle depth).
+- Made `Быстрый старт` / `Войти` large full-width tabs above the complete login form.
+- Highlighted the instruction sentence block with accent border and background emphasis.
+- Updated footer contact to `https://t.me/@openclawru`.
 
 ### Implementation Notes
-- Updated `simpleclaw/index.html` structure of setup block and footer.
-- Updated `simpleclaw/styles.css` with form redesign styles in Solvera language.
-- Updated `simpleclaw/script.js` for mode switch + selection behavior.
+- Updated `simpleclaw/index.html` with highlighted steps block, large tab controls, and corrected Telegram footer link.
+- Updated `simpleclaw/styles.css` with Solvera-styled form redesign, large tab styling, and stronger visual hierarchy.
+- Updated `simpleclaw/script.js` to bind interactions to `.mode-tab` controls.
 
 ### Evidence / Links
-- Verified no `simpleclaw.com` or old support email occurrences in `simpleclaw/**`.
+- Verified no stale `@@openclawru` link and no old support domain/email occurrences.
 - Verified local static server starts and listens on `:4173`.
 
 ## Verification
@@ -126,5 +134,13 @@ By: CODER
 Note: Verified: replaced domain/email/contact references as requested, redesigned setup form using app.simpleclaw.ru onboarding structure in Solvera style, moved login CTA to bottom, and confirmed static preview server on :4173.
 
 VerifyStepsRef: doc_version=2, doc_updated_at=2026-02-18T10:00:42.082Z, excerpt_hash=sha256:f4afed5b1fe5b87f5962b38679d3f5197d57467579453aa58d6e9640d7f13f8d
+
+#### 2026-02-18T10:07:41.040Z — VERIFY — ok
+
+By: CODER
+
+Note: Verified: footer link changed to t.me/@openclawru; form restyled in Solvera visual language with highlighted steps block, large top tabs, and bottom login CTA; static preview server confirmed on :4173.
+
+VerifyStepsRef: doc_version=2, doc_updated_at=2026-02-18T10:07:32.621Z, excerpt_hash=sha256:f4afed5b1fe5b87f5962b38679d3f5197d57467579453aa58d6e9640d7f13f8d
 
 <!-- END VERIFICATION RESULTS -->
