@@ -200,15 +200,6 @@ body {
     0 0 0 1px rgba(246, 114, 58, 0.09);
 }
 
-.form-frame::after {
-  content: "";
-  position: absolute;
-  inset: 12px;
-  border-radius: 18px;
-  border: 1px solid rgba(246, 114, 58, 0.12);
-  pointer-events: none;
-}
-
 .setup-card {
   border: 1px solid rgba(27, 33, 45, 0.12);
   border-radius: calc(var(--radius-lg) - 8px);
@@ -249,53 +240,43 @@ body {
   margin: 0.5rem 0 0;
   font-size: 0.94rem;
   line-height: 1.42;
-  color: rgba(27, 33, 45, 0.84);
-  background: linear-gradient(
-    130deg,
-    rgba(246, 114, 58, 0.14),
-    rgba(255, 255, 255, 0.84)
-  );
-  border: 1px solid rgba(246, 114, 58, 0.24);
-  border-left: 4px solid rgba(246, 114, 58, 0.78);
-  border-radius: 12px;
-  padding: 0.74rem 0.86rem;
-  box-shadow: 0 12px 24px -22px rgba(246, 114, 58, 0.52);
+  color: rgba(246, 114, 58, 0.96);
+  font-weight: 600;
+  letter-spacing: 0.01em;
 }
 
 .mode-switch {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.58rem;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.42rem;
   width: 100%;
-  border-radius: 14px;
-  padding: 0.42rem;
-  background: linear-gradient(
-    140deg,
-    rgba(27, 33, 45, 0.06),
-    rgba(27, 33, 45, 0.03)
-  );
-  border: 1px solid rgba(27, 33, 45, 0.1);
+  margin: 0 0 -1px;
+  padding-left: 0.68rem;
+  position: relative;
+  z-index: 3;
 }
 
 .mode-tab {
   border: 1px solid rgba(27, 33, 45, 0.16);
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.78);
+  border-bottom: 0;
+  border-radius: 12px 12px 0 0;
+  background: rgba(246, 243, 238, 0.9);
   color: rgba(27, 33, 45, 0.72);
   font-weight: 640;
-  font-size: 1.03rem;
+  font-size: 1.06rem;
   letter-spacing: -0.01em;
-  padding: 0.84rem 0.88rem;
+  min-width: min(44vw, 230px);
+  text-align: center;
+  padding: 0.95rem 1rem 0.9rem;
   cursor: pointer;
   transition:
     border-color 220ms ease,
     transform 220ms ease,
-    box-shadow 220ms ease,
-    color 220ms ease;
+    box-shadow 220ms ease;
 }
 
 .mode-tab:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 
 .mode-tab.selected {
@@ -303,11 +284,11 @@ body {
   color: #1b212d;
   background: linear-gradient(
     130deg,
-    rgba(246, 114, 58, 0.23),
-    rgba(255, 255, 255, 0.95)
+    rgba(246, 114, 58, 0.18),
+    rgba(255, 255, 255, 0.96)
   );
   box-shadow:
-    0 12px 22px -18px rgba(246, 114, 58, 0.62),
+    0 14px 22px -20px rgba(246, 114, 58, 0.62),
     0 0 0 1px rgba(246, 114, 58, 0.2);
 }
 
@@ -866,6 +847,8 @@ body {
 
   .mode-switch {
     width: 100%;
+    padding-left: 0;
+    gap: 0.35rem;
   }
 
   .mode-tab,

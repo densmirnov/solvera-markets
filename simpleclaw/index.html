@@ -35,7 +35,26 @@
         <div class="setup-glow" aria-hidden="true"></div>
         <div class="edge-stars" id="edgeStars" aria-hidden="true"></div>
 
-        <div class="card-frame form-frame">
+        <div class="mode-switch" role="tablist" aria-label="Режим авторизации">
+          <button
+            class="mode-tab selected"
+            type="button"
+            data-group="mode"
+            data-mode="onboarding"
+          >
+            Быстрый старт
+          </button>
+          <button
+            class="mode-tab"
+            type="button"
+            data-group="mode"
+            data-mode="login"
+          >
+            Войти
+          </button>
+        </div>
+
+        <div class="card-frame">
           <div class="setup-card" data-mode="onboarding">
             <div class="setup-head">
               <h2>Запуск OpenClaw в simpleclaw.ru</h2>
@@ -43,29 +62,6 @@
                 1) Укажите токен Telegram-бота и модель, 2) подтвердите вход
                 через Telegram, 3) переходите к развёртыванию.
               </p>
-            </div>
-
-            <div
-              class="mode-switch"
-              role="tablist"
-              aria-label="Режим авторизации"
-            >
-              <button
-                class="mode-tab selected"
-                type="button"
-                data-group="mode"
-                data-mode="onboarding"
-              >
-                Быстрый старт
-              </button>
-              <button
-                class="mode-tab"
-                type="button"
-                data-group="mode"
-                data-mode="login"
-              >
-                Войти
-              </button>
             </div>
 
             <div class="setup-group onboarding-only">
