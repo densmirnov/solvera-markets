@@ -338,10 +338,6 @@ body {
   display: none;
 }
 
-.setup-card[data-mode="onboarding"] .login-only {
-  display: none;
-}
-
 .option-row {
   display: flex;
   flex-wrap: wrap;
@@ -398,51 +394,6 @@ body {
 
 .pay-row {
   gap: 0.5rem;
-}
-
-.tg-wrap {
-  border-radius: 12px;
-  border: 1px dashed rgba(27, 33, 45, 0.22);
-  background: linear-gradient(
-    140deg,
-    rgba(255, 255, 255, 0.88),
-    rgba(246, 243, 238, 0.8)
-  );
-  padding: 0.78rem 0.9rem;
-}
-
-.tg-wrap h3 {
-  margin: 0;
-  font-size: 0.96rem;
-  font-weight: 620;
-}
-
-.tg-wrap p {
-  margin: 0.28rem 0 0;
-  color: rgba(27, 33, 45, 0.68);
-  font-size: 0.84rem;
-}
-
-.tg-widget-mock {
-  margin-top: 0.6rem;
-  border: 1px solid rgba(27, 33, 45, 0.14);
-  border-radius: 11px;
-  padding: 0.56rem 0.7rem;
-  display: inline-flex;
-  gap: 0.6rem;
-  font-size: 0.82rem;
-  color: rgba(27, 33, 45, 0.74);
-  background: rgba(255, 255, 255, 0.85);
-}
-
-.tg-widget-mock span:first-child {
-  color: #3f79db;
-}
-
-.login-note {
-  margin: 0;
-  color: rgba(27, 33, 45, 0.7);
-  font-size: 0.86rem;
 }
 
 .auth-group p {
