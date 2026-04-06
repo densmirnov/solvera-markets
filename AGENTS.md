@@ -1,776 +1,213 @@
 <!--
-AGENTS_POLICY: prod-v1.1
+AGENTS_POLICY: gateway-v1.1
 repo_namespace: .agentplane
 default_initiator: ORCHESTRATOR
 -->
 
 # PURPOSE
 
-This document defines the **behavioral policy** for Codex-style agents operating in this repository (CLI + VS Code extension).
-Goal: **deterministic execution**, **tight guardrails**, and **minimum accidental changes** by enforcing a strict, inspectable pipeline.
-
-This policy is designed to be the single, authoritative instruction set the agent follows when invoked in a folder containing this file.
-
----
-
-# GLOBAL RULES
-
-## Sources of truth (priority order)
-
-1. `AGENTS.md` (this file)
-2. `agentplane quickstart` / `agentplane role <ROLE>` output
-3. `.agentplane/config.json`
-4. `.agentplane/agents/*.json`
-
-If two sources conflict, prefer the higher-priority source.
-
-## CLI invocation
-
-All commands in this policy are written as `agentplane ...` and MUST use the `agentplane` CLI available on `PATH`.
-
-## Scope boundary
-
-- All operations must remain within the repository unless explicitly approved (see Approval Gates + Overrides).
-- Do not read/write global user files (`~`, `/etc`, keychains, ssh keys, global git config) unless explicitly approved and necessary.
-
-## Agent roles (authority boundaries)
-
-- **ORCHESTRATOR**: the only role allowed to initiate a run; owns user-facing plan + approval gates; may create exactly one top-level tracking task after the user approves the overall plan.
-- **PLANNER**: the sole creator of downstream tasks; may reprioritize tasks; may adjust decomposition (within approved scope).
-- **CREATOR**: creates a new specialized agent definition only when required by the approved plan.
-- **INTEGRATOR**: the only role allowed to integrate/merge into base branch (for `branch_pr`), finish tasks on base, and run exports.
-
-No other role may assume another role’s authority.
-
-## Execution agents (registry)
-
-Execution agents are defined by JSON files under `.agentplane/agents/*.json`. The file basename (without `.json`) is the agent ID (e.g. `CODER`, `TESTER`, `REVIEWER`, `DOCS`).
-
-**Contract (downstream task assignment):**
-
-- Every downstream task created by PLANNER MUST set `owner` to an existing execution agent ID from `.agentplane/agents/*.json`.
-- If no suitable execution agent exists, PLANNER MUST:
-  - create a dedicated CREATOR task to add the missing agent definition, and
-  - make all tasks that require that new agent depend on the CREATOR task via `depends_on: [<creator-task-id>]`.
-
-**Enforcement status:**
-
-- Current: warn-only in CLI (`task new` / `task update`) when `owner` does not exist in `.agentplane/agents`.
-- Planned: upgrade to lint/CI gate once the workflow is stable.
-
-## Definitions (remove ambiguity)
-
-- **Read-only inspection**: commands that may read repo state but must not change tracked files or commit history.
-  Examples: `agentplane config show`, `agentplane task list`, `agentplane task show`, `git status`, `git diff`, `cat`, `grep`.
-- **Mutating action**: anything that can change tracked files, task state, commits, branches, or outside-repo state.
-  Examples: `agentplane task new/update/doc set/plan set/start/finish/verify`, `git commit`, `git checkout`, `bun install`.
-
-If unsure whether an action mutates state, treat it as mutating.
-
-## Truthfulness & safety (hard invariants)
-
-- Never invent facts about repo state. Prefer inspection over guessing.
-- Never modify `.agentplane/tasks.json` manually. It is an **export-only snapshot** generated via `agentplane task export`.
-- Never expose raw internal chain-of-thought. Use structured artifacts instead (see OUTPUT CONTRACTS).
-- Timestamps are recorded in task metadata fields (for example `plan_approval.updated_at` and `verification.updated_at`); do not duplicate timestamps in human notes unless explicitly required.
-
-## Cleanliness & untracked files
-
-- Ignore pre-existing untracked files you did not create.
-- Only stage/commit files intentionally modified for the current task.
-- Any tracked code changes must be recorded in a git commit before finishing the task (do not leave `packages/**` diffs uncommitted).
-- “Clean” means: **no tracked changes** (`git status --short --untracked-files=no` is empty).
-- If untracked files interfere with verify/guardrails or fall inside the task scope paths, surface them as a risk and request approval before acting.
-
-## Approval gates (network vs outside-repo)
-
-### Network
-
-If `.agentplane/config.json` sets `agents.approvals.require_network=true`:
-
-- Network use is prohibited until the user explicitly approves it (per run or per command batch).
-
-Network use includes (non-exhaustive):
-
-- `pip`, `npm`, `bun install`, downloading binaries/models
-- `curl`, `wget`
-- `git fetch`, `git pull`
-- calling external HTTP APIs or remote services
-
-### Outside-repo
-
-Outside-repo reading/writing is **always prohibited** unless the user explicitly approves it (regardless of `require_network`).
-
-Outside-repo includes (non-exhaustive):
-
-- reading/writing outside the repo (`~`, `/etc`, global configs)
-- modifying keychains, ssh keys, credential stores
-- any tool that mutates outside-repo state
-
-## Framework Upgrade / Prompt Merge
-
-`agentplane upgrade` is responsible for mechanical upgrades and safe merges. When an upgrade run indicates a potential semantic conflict (for example, both local and incoming changes exist relative to a baseline, or a baseline is missing but files differ), treat the result as requiring a meaning-level review.
-
-Trigger:
-
-- After running `agentplane upgrade`, check the latest upgrade review report:
-  - Agent mode: `.agentplane/.upgrade/agent/<runId>/review.json`
-  - Auto mode: `.agentplane/.upgrade/last-review.json`
-- If any record has `needsSemanticReview: true`, prompt merge is required.
-
-Protocol:
-
-1. ORCHESTRATOR runs the upgrade (or coordinates whoever runs it) and identifies the upgrade run artifacts directory (for example `.agentplane/.upgrade/agent/<runId>/`).
-2. If the upgrade review report indicates semantic conflicts (`needsSemanticReview: true` for any file), ORCHESTRATOR instructs PLANNER to create a downstream task owned by `UPGRADER`.
-3. UPGRADER performs semantic reconciliation of `AGENTS.md` and `.agentplane/agents/*.json`:
-   - `AGENTS.md` remains the canonical policy source (highest priority).
-   - Preserve local customizations via the Local Overrides block (`<!-- AGENTPLANE:LOCAL-START/END -->`) where feasible.
-   - Minimize unrelated churn in agent JSON profiles; remove contradictions with `AGENTS.md`.
-
-Task creation requirements (PLANNER):
-
-- Owner: `UPGRADER`
-- Description must include:
-  - the upgrade run directory path (for example `.agentplane/.upgrade/agent/<runId>/`)
-  - the list of `relPath` entries with `needsSemanticReview: true` from `review.json`
-
-Done when:
-
-- No contradictions remain between `AGENTS.md` and agent profiles.
-- Local overrides are preserved (or explicitly removed with a documented decision).
-- Relevant lint/tests pass.
+`AGENTS.md` is the policy gateway for agents in this repository.
+It provides strict routing, hard constraints, and command contracts.
+Detailed procedures live in canonical modules from `## CANONICAL DOCS`.
 
 ---
 
-# NON-NEGOTIABLE PIPELINE
+## PROJECT
 
-1. **Preflight** (ORCHESTRATOR, mandatory; read-only)
-2. **Plan + decomposition** (no execution; read-only)
-3. **Explicit user approval** (overall plan + any requested overrides)
-4. **Create tracking task** (one top-level task)
-5. **Create and plan downstream tasks** (PLANNER)
-6. **Execute tasks under mode-specific workflow**
-7. **Verify**
-8. **Finish**
-9. **Export** (if enabled / required)
-
-No step may be skipped unless the user explicitly authorizes skipping it via the Override Protocol.
+- Repository type: user project initialized with `agentplane`.
+- Gateway role: keep this file compact and deterministic; move scenario-specific details to policy modules.
+- CLI rule: use `agentplane` from `PATH`; if unavailable, stop and request installation guidance (do not invent repo-local entrypoints).
+- Startup shortcut: run `## COMMANDS -> Preflight`, then use `agentplane quickstart`; activate `agentplane role ORCHESTRATOR` for planning and `agentplane role <ROLE>` for the active owner before owner-scoped execution; then apply `## LOAD RULES` before any mutation. The guarded route is determined by `workflow_mode` in `.agentplane/config.json`; use `agentplane quickstart` as the canonical summary of the active path before mutating. In `branch_pr`, start from `agentplane work start ... --worktree`; in `direct`, stay in the current checkout and use the task lifecycle route.
 
 ---
 
-# OUTPUT CONTRACTS (REASONING & EXPLAINABILITY)
+## SOURCES OF TRUTH
 
-## Do not expose raw internal chain-of-thought
+Priority order (highest first):
 
-Agents MUST NOT output raw internal chain-of-thought (token-level reasoning, scratchwork, discarded branches).
+1. Enforcement: CI, tests, linters, hooks, CLI validations.
+2. Policy gateway: `AGENTS.md`.
+3. Canonical policy modules from `## CANONICAL DOCS`.
+4. CLI guidance: `agentplane quickstart`, `agentplane role <ROLE>`, `.agentplane/config.json`.
+5. Reference examples from `## REFERENCE EXAMPLES`.
 
-## Use structured, inspectable reasoning artifacts
+Conflict rule:
 
-Agents MUST express reasoning through explicit artifacts, as applicable:
-
-- **Preflight Summary**
-- **Plan**
-- **Assumptions**
-- **Decisions**
-- **Trade-offs**
-- **Verification criteria**
-- **Inference trace** (brief, task-relevant links between inputs -> decisions -> outputs)
-
-This is the required substitute for raw chain-of-thought.
+- If documentation conflicts with enforcement, enforcement wins.
+- If lower-priority text conflicts with higher-priority policy, higher-priority policy wins.
 
 ---
 
-# MANDATORY PREFLIGHT (ORCHESTRATOR)
+## SCOPE BOUNDARY
 
-Preflight is **read-only inspection**. It is allowed before user approval.
-
-Before any planning or execution, ORCHESTRATOR must run:
-
-1. `agentplane config show`
-2. `agentplane quickstart` (CLI instructions)
-3. `agentplane task list`
-4. `git status --short --untracked-files=no`
-5. `git rev-parse --abbrev-ref HEAD`
-
-Then report a **Preflight Summary** (do not dump full config or quickstart text).
-
-## Preflight Summary (required)
-
-You MUST explicitly state:
-
-- Config loaded: yes/no
-- CLI instructions loaded: yes/no
-- Task list loaded: yes/no
-- Working tree clean (tracked-only): yes/no
-- Current git branch: `<name>`
-- `workflow_mode`: `direct` / `branch_pr` / unknown
-- Approval gates (from config):
-  - `require_plan`: true/false/unknown
-  - `require_verify`: true/false/unknown
-  - `require_network`: true/false/unknown
-- Outside-repo: not needed / needed (if needed, requires explicit user approval)
-
-Do not output the full contents of config or quickstart unless the user explicitly asks.
+- MUST keep all actions inside this repository unless the user explicitly approves outside-repo access.
+- MUST NOT read or modify global user files (`~`, `/etc`, keychains, ssh keys, global git config) without explicit user approval.
+- MUST treat network access as approval-gated when `agents.approvals.require_network=true`.
 
 ---
 
-# STARTUP RULE
+## COMMANDS
 
-- Always begin work by engaging ORCHESTRATOR.
-- ORCHESTRATOR starts by producing a top-level plan + task decomposition.
-- **Before explicit user approval, do not perform mutating actions.**
-  - Allowed: read-only inspection (including preflight).
-  - Prohibited: creating/updating tasks, editing files, starting/finishing tasks, commits, branching, verify runs that mutate task state, network use, outside-repo access.
+### Preflight
 
----
+```bash
+agentplane config show
+agentplane quickstart
+agentplane task list
+git status --short --untracked-files=no
+git rev-parse --abbrev-ref HEAD
+```
 
-# ORCHESTRATION FLOW
+### Task lifecycle
 
-## 1) Plan & decomposition (no execution)
+```bash
+agentplane task new --title "..." --description "..." --priority med --owner <ROLE> --tag <tag>
+agentplane task plan set <task-id> --text "..." --updated-by <ROLE>
+agentplane task plan approve <task-id> --by ORCHESTRATOR
+agentplane task start-ready <task-id> --author <ROLE> --body "Start: ..."
+agentplane verify <task-id> --ok|--rework --by <ROLE> --note "..."
+agentplane finish <task-id> --author <ROLE> --body "Verified: ..." --result "..." --commit <git-rev>
+```
 
-ORCHESTRATOR MUST produce:
+### branch_pr lifecycle
 
-- **Scope**
-  - In-scope paths and artifacts
-  - Out-of-scope boundaries
-- **Assumptions**
-  - Only if required; each assumption must be testable/confirmable
-- **Steps**
-  - Ordered, executable steps
-- **Decomposition**
-  - Atomic tasks assignable to existing agents
-- **Approvals**
-  - Whether network and/or outside-repo actions will be needed
-  - Any requested overrides (see Override Protocol)
-- **Verification criteria**
-  - What will be considered "done" + checks to run
-- **Rollback plan**
-  - How to revert safely if verification fails
-- **Drift triggers**
-  - Conditions that require re-approval (see DRIFT POLICY)
+```bash
+agentplane work start <task-id> --agent <ROLE> --slug <slug> --worktree
+agentplane pr open <task-id> --branch task/<task-id>/<slug> --author <ROLE>
+agentplane pr update <task-id>
+agentplane integrate <task-id> --branch task/<task-id>/<slug> --merge-strategy squash --run-verify
+agentplane finish <task-id> --author INTEGRATOR --body "Verified: ..." --result "..." --commit <git-rev> --close-commit
+```
 
-## 2) After user approval (tracking task is mandatory)
+### Verification
 
-- ORCHESTRATOR creates exactly **one** top-level tracking task via agentplane.
-- PLANNER creates any additional tasks from the approved decomposition.
-- Task IDs are referenced in comments/notes for traceability.
-
-**Task tracking is mandatory** for any work that changes repo state. Exceptions require explicit user approval (Override Protocol).
-
----
-
-# OVERRIDE PROTOCOL (USER-APPROVED EXCEPTIONS)
-
-Overrides exist to let the user intentionally relax guardrails **in a controlled, logged way**.
-
-## Hard invariants (cannot be overridden)
-
-- No fabricated repo facts.
-- No raw chain-of-thought.
-- No manual editing of `.agentplane/tasks.json` (exports are generated, not edited).
-
-## What can be overridden (with explicit user approval)
-
-Common overridable guardrails:
-
-- **Network**: allow network access even when `require_network=true`.
-- **Outside-repo**: allow reading/writing outside the repo (scoped).
-- **Pipeline**: skip/relax steps (e.g., skip task tracking for analysis-only; skip exports).
-- **Tooling**: allow direct `git` operations when no agentplane command exists (commit/push).
-- **Force flags**: allow `--force` status transitions / dependency bypass.
-
-## Required format (to remove ambiguity)
-
-When requesting an override, the agent MUST:
-
-1. State the exact override(s) requested (one line per override).
-2. State why it is necessary.
-3. State the exact commands/actions it enables.
-4. State the scope and expiration (this task only / this run only).
-
-The user must respond explicitly approving (or rejecting) the override(s).
-
-## Logging (traceability requirement)
-
-Any approved override MUST be recorded:
-
-- In the top-level tracking task under `## Notes` → `### Approvals / Overrides`.
-- And in the relevant task’s `## Notes` if the override affects execution of that task.
+```bash
+agentplane task verify-show <task-id>
+agentplane verify <task-id> --ok|--rework --by <ROLE> --note "..."
+agentplane incidents advise <task-id>
+agentplane incidents collect <task-id> --check
+agentplane doctor
+node .agentplane/policy/check-routing.mjs
+```
 
 ---
 
-# TASKS & DOCUMENTATION (TRACEABILITY)
+## TOOLING
 
-## Golden rule
-
-If an agent changes repo state, that work must be traceable to a task ID and a filled task README.
-
-## Scaffold is mandatory
-
-Immediately after creating a task, run:
-
-- `agentplane task scaffold <task-id>`
-
-This ensures all standard sections exist and are normalized.
-
-## Who fills the README
-
-- ORCHESTRATOR/PLANNER may create tasks with a minimal description.
-- The **agent that will execute the task** is responsible for filling the task README sections
-  (Plan + Verify Steps + Risks + Rollback + Notes) before starting work.
-
-## Required sections (before finish)
-
-Required sections are config-driven (`.agentplane/config.json` → `tasks.doc.required_sections`).
-At minimum, every task MUST have non-empty content for:
-
-- Summary
-- Scope
-- Plan
-- Risks
-- Verification
-- Rollback Plan
-
-**Policy addition for maximum traceability:**
-
-- `Context` and `Notes` MUST be filled for all non-trivial tasks (anything beyond a typo/doc tweak).
-- `Verify Steps` MUST be filled for tasks that require verify (default tags: `code`, `backend`, `frontend`) and for `spike`.
-
-## Section content contract (practical)
-
-Use `agentplane task doc set` / `agentplane task plan set` (no manual README edits).
-
-### Summary
-
-- What is being changed (one paragraph).
-- What success looks like.
-
-### Context
-
-- Why the change is needed.
-- Constraints, assumptions, related tasks/PRs/issues.
-
-### Scope
-
-- In-scope paths/files/components.
-- Explicit out-of-scope items.
-
-### Plan
-
-- Ordered steps with implementation checkpoints.
-- Any migration steps and rollback checkpoints.
-
-### Risks
-
-- Key risks + mitigations.
-- Any potential breaking changes.
-
-### Verify Steps
-
-- Explicit commands and expected outcomes (pass criteria).
-- Prefer reproducible checks (`bun run test`, `bun run typecheck`, `bun run lint`, `agentplane verify <task-id>`, etc.).
-- If verification is manual, state the manual checklist and acceptance criteria.
-
-### Rollback Plan
-
-- How to revert safely (commands or steps).
-
-### Notes (use structured subheadings)
-
-Use `## Notes` to log:
-
-- `### Approvals / Overrides` (if any)
-- `### Decisions` (trade-offs, why X not Y)
-- `### Implementation Notes` (what changed, file list, key diffs)
-- `### Evidence / Links` (commit hashes, PR links, logs if needed)
-
-## Plan approval per task (when required)
-
-If config sets `agents.approvals.require_plan=true`:
-
-- The implementer fills `## Plan` (use `agentplane task plan set <task-id> ...`) and `## Verify Steps`.
-- ORCHESTRATOR approves with `agentplane task plan approve <task-id> --by ORCHESTRATOR [--note "..."]`.
-- No one may `agentplane start <task-id>` until the plan is approved (unless explicitly overridden by user).
-
-## Two-stage verification (Verify Steps -> Verification)
-
-- `## Verify Steps` is the **ex-ante verification contract**: instructions and pass criteria addressed to the verifier.
-- `## Verification` is the **ex-post verification log**: append-only entries written by `agentplane verify ...`.
-- Do not hand-edit `## Verification` entries. Treat them as audit records.
-- For tasks with verify-required tags (default: `code`, `backend`, `frontend`) and for `spike`, `agentplane task plan approve`
-  will block until `## Verify Steps` is filled (the placeholder `<!-- TODO: FILL VERIFY STEPS -->` is treated as empty).
-- Use `agentplane task verify-show <task-id>` to print the current `## Verify Steps` to stdout.
-
-## Spike -> implementation convention
-
-- A spike task is identified by tag `spike` (schema-free).
-- A spike must define clear exit criteria in `## Verify Steps` and must capture outcomes in `## Notes` (Findings/Decision/Next Steps).
-- `agentplane task derive <spike-id> ...` creates an implementation task that depends on the spike via `depends_on: [<spike-id>]`.
-
-## Updating task docs
-
-- Workflow/task artifacts (task READMEs, PR artifacts, task exports) must be updated via `agentplane` commands, not manual edits.
-- Task README updates must be done via `agentplane task doc set ...` / `agentplane task plan set ...`.
-- Manual edits to `.agentplane/tasks/<task-id>/README.md` are prohibited (unless the user explicitly overrides this, and you still re-normalize via `task doc set`).
+- Use `## COMMANDS` as the canonical command source.
+- Use `agentplane quickstart` as the canonical installed startup path and `agentplane role <ROLE>` to activate the current role before role-scoped planning or execution.
+- For policy changes, routing validation MUST pass via `node .agentplane/policy/check-routing.mjs`.
 
 ---
 
-# COMMIT WORKFLOW
+## LOAD RULES
 
-- Commits and pushes must go through `agentplane` commands (no direct `git commit`/`git push`) unless explicitly overridden.
+Routing is strict. Load only modules that match the current task.
 
-## Commit message semantics (canonical)
+### Always imports for mutating tasks
 
-There are two supported modes:
+Condition: task includes mutation (file edits, task-state changes, commits, merge/integrate, release/publish).
 
-### Mode 1: Explicit commit message (manual message, still policy-governed)
+- `@.agentplane/policy/security.must.md`
+- `@.agentplane/policy/dod.core.md`
 
-Use agentplane commit flows with a message that conforms to the built-in command guide, e.g.:
+### Conditional imports (linear IF -> LOAD contract)
 
-`agentplane guard commit <task-id> -m "✨ <suffix> <scope>: <summary>" ...`
+1. IF `workflow_mode=direct` THEN LOAD `@.agentplane/policy/workflow.direct.md`.
+2. IF `workflow_mode=branch_pr` THEN LOAD `@.agentplane/policy/workflow.branch_pr.md`.
+3. IF task touches release/version/publish THEN LOAD `@.agentplane/policy/workflow.release.md`.
+4. IF task runs `agentplane upgrade` or touches `.agentplane/.upgrade/**` THEN LOAD `@.agentplane/policy/workflow.upgrade.md`.
+5. IF task modifies implementation code paths THEN LOAD `@.agentplane/policy/dod.code.md`.
+6. IF task modifies docs/policy-only paths (`AGENTS.md`, docs, `.agentplane/policy/**`) THEN LOAD `@.agentplane/policy/dod.docs.md`.
+7. IF task modifies policy files (`AGENTS.md` or `.agentplane/policy/**`) THEN LOAD `@.agentplane/policy/governance.md`.
+8. IF task modifies `.agentplane/policy/incidents.md` THEN LOAD `@.agentplane/policy/incidents.md`.
 
-In this mode:
+Routing examples:
 
-- `-m` is the **commit message** (subject/body as supported by agentplane).
-- Do not invent alternative formats.
+- Example (docs-only task): rules `1|6` apply in `direct`; do not load `dod.code.md`.
+- Example (upgrade task): rules `4|7` apply plus workflow mode rule.
 
-### Mode 2: Comment-driven commit (agentplane builds subject)
+Routing constraints:
 
-Use comment-driven flags (where supported by agentplane), e.g.:
-
-- `--commit-from-comment`
-- `--status-commit` (only when explicitly intended)
-
-In this mode:
-
-- agentplane builds the commit subject as `<emoji> <suffix> <scope>: <summary>` from the status/finish body.
-- agentplane adds a short structured commit body (Task/Agent/Status/Comment) automatically for comment-driven commits.
-
-## Commit subject format (enforced)
-
-`<emoji> <suffix> <scope>: <summary>`
-
-`<suffix>` rules:
-
-- Task commits: `<suffix>` must equal the task id suffix (e.g. task `202601010101-ABCDEF` -> `ABCDEF`).
-- Non-task commits: `<suffix>` may be omitted. Preferred: `<emoji> <scope>: <summary>`.
-- Optional explicit non-task suffix: `DEV` is allowed as `<emoji> DEV <scope>: <summary>`.
-
-Recommended action/status emojis:
-
-- `🚧` start / DOING
-- `⛔` blocked / BLOCKED
-- `✅` finish / DONE
-
-Executor agent emoji policy (status/comment-driven commits):
-
-- In `workflow_mode=direct`, status/comment-driven commits prefer the active `work start` lock (`.agentplane/cache/direct-work.json`) when present.
-- The emoji for status/comment-driven commits is derived from the executor agent id (recorded by `agentplane work start ... --agent <ID>`).
-- Users may override the emoji per agent by adding `commit_emoji` to `.agentplane/agents/<ID>.json`.
-- Finish commits MUST use `✅` (enforced by CLI and by the `commit-msg` hook for agentplane-generated commits).
-
-Agents must not reinterpret `-m` as "body-only" or "comment-only". `-m` is a commit message.
-
-## Allowlist staging (guardrails)
-
-- Prefer a tight allowlist for staging/commit (path prefixes).
-- If agentplane provides a suggestion command (e.g., `guard suggest-allow`), use it.
+- MUST NOT load unrelated policy modules.
+- MUST NOT use wildcard policy paths.
+- MUST keep loaded policy set minimal (target: 2-4 files per task).
+- If routing is ambiguous, ask one clarifying question before loading extra modules.
 
 ---
 
-# MODE-DEPENDENT WORKFLOWS
+## MUST / MUST NOT
 
-Always follow `workflow_mode` from `.agentplane/config.json`.
+- MUST start with ORCHESTRATOR preflight and plan summary.
+- MUST NOT perform mutating actions before explicit user approval.
+- MUST create/reuse executable task IDs for any repo-state mutation.
+- MUST use `agentplane` commands for task lifecycle updates; MUST NOT manually edit `.agentplane/tasks.json`.
+- MUST run `agentplane task plan approve ...` and `agentplane task start-ready ...` sequentially (never in parallel).
+- MUST activate `agentplane role ORCHESTRATOR` for planning and `agentplane role <ROLE>` for the active task owner before owner-scoped execution or verification.
+- MUST keep repository artifacts in English by default (unless user explicitly requests another language for a specific artifact).
+- MUST NOT fabricate repository facts.
+- MUST stage/commit only intentional changes for the active task scope.
+- MUST stop and request re-approval when scope, risk, or verification criteria materially drift.
+- MUST NOT let ORCHESTRATOR perform owner-scoped implementation or verification once a task owner is known, unless the approved plan explicitly makes ORCHESTRATOR the owner.
 
-## A) direct mode (single checkout)
+Role boundaries:
 
-Rules:
-
-- Do all work in the current checkout.
-- In `direct` (single working directory), agentplane uses a single-stream workflow in the current checkout. `agentplane work start <task-id> --agent <ROLE> --slug <slug>` records the active task and keeps the current branch (no task branches).
-- Do not use worktrees in `direct`. `agentplane work start ... --worktree` is `branch_pr`-only.
-- If you only need artifacts/docs without switching branches, prefer `agentplane task scaffold <task-id>`.
-
-Recommended cadence:
-
-1. Ensure task plan is approved (if required)
-2. `start` task (status comment; no commit by default)
-3. Implement changes
-4. Run verify commands / `agentplane verify`
-5. Commit via agentplane with tight allowlist
-6. `finish` with `--commit <git-rev>` and a Verified body
-7. `task export` (if required)
-
-## B) branch_pr mode (parallel work)
-
-Rules:
-
-- Planning and closure occur only on the pinned base branch in the root checkout.
-- Implementation occurs only on per-task branch + worktree.
-- **Single-writer rule:** at any time, only one agent may write to a given task worktree; others contribute via `pr note` / review.
-
-Commits:
-
-- WIP commits are allowed in the task branch.
-- The base branch should receive a single squash commit per task (integration owned by INTEGRATOR).
-
-Exports:
-
-- Do not create/commit task exports from task branches.
+- ORCHESTRATOR: preflight + plan + approvals.
+- PLANNER: executable task graph creation/update.
+- INTEGRATOR: base integration/finish in `branch_pr`.
 
 ---
 
-# INTEGRATION & CLOSURE (branch_pr)
+## CORE DOD
 
-- Only INTEGRATOR merges into base and finishes tasks on base.
-- INTEGRATOR runs verify, updates required docs, finishes tasks, and runs exports.
+A task is done only when all are true:
 
----
+1. Approved scope is satisfied; no unresolved drift.
+2. Required checks from loaded policy modules passed.
+3. Security and approval gates were respected.
+4. Traceability exists (task ID + updated task docs).
+5. Verification evidence is recorded.
+6. No unintended tracked changes remain.
 
-# SHARED STATE & EXPORTS
-
-- Task export is a read-only snapshot managed by agentplane.
-- Never edit exported snapshots by hand (checksum will break).
-- Exports must reflect finished tasks and verified state.
-
----
-
-# DRIFT POLICY (WHEN TO RE-APPROVE)
-
-Re-approval is required if any of the following becomes true:
-
-- Scope expands beyond the approved in-scope paths/artifacts.
-- New tasks are needed that were not in the approved decomposition.
-- Any network or outside-repo access becomes necessary (and was not approved).
-- Verification criteria change materially.
-- Plan changes materially for an in-flight task (update plan -> plan approval returns to pending).
-- Guardrails require `--force` to proceed.
-- Verification fails and remediation would change scope or risk profile.
-
-When drift is detected: stop, summarize the drift, propose an updated plan, and ask for explicit approval.
+Detailed DoD rules are in `.agentplane/policy/dod.core.md`, `.agentplane/policy/dod.code.md`, and `.agentplane/policy/dod.docs.md`.
 
 ---
 
-# CONFIG CHANGES
+## SIZE BUDGET
 
-- Do not modify `.agentplane/config.json` unless the user explicitly requests it or the approved plan includes it.
-- Any config changes must be captured in task docs (`## Notes` → `### Decisions` / `### Risks`) and verified.
-
-## Local Overrides (preserved across upgrades)
-
-<!-- AGENTPLANE:LOCAL-START -->
-### Local edits for: Scope boundary
-
-- All operations must remain within the repository unless explicitly approved (see Network & Outside-Repo rules).
-- Do not read/write global user files (`~`, `/etc`, keychains, ssh keys, global git config) unless explicitly approved and necessary.
-
-### Local edits for: Agent roles (authority boundaries)
-
-- **ORCHESTRATOR**: the only role allowed to initiate a run; owns plan + approval gates; may create exactly one top-level tracking task after plan approval.
-- **PLANNER**: the sole creator of downstream tasks; may reprioritize tasks; may adjust decomposition (within approved scope).
-- **CREATOR**: creates a new specialized agent definition only when required by the approved plan.
-- **INTEGRATOR**: the only role allowed to integrate/merge into base branch (for `branch_pr`), finish tasks on base, and run exports.
-
-No other role may assume another role’s authority.
-
-### Added section: Truthfulness & safety
-
-- Never invent facts about repo state. Prefer inspection (`agentplane`, `git status`, `git diff`, `ripgrep`) over guessing.
-- Never modify `.agentplane/tasks.json` manually. It is **agentplane-managed state**.
-- Task status transitions, task docs, and commits must follow **agentplane** flows where available.
-
-### Local edits for: Cleanliness & untracked files
-
-- Ignore pre-existing untracked files you did not create.
-- Only stage/commit files intentionally modified for the current task.
-- “Clean” means: **no tracked changes** (`git status --short --untracked-files=no` is empty).
-- If untracked files interfere with verify/guardrails or fall inside the task scope paths, surface them as a risk and request approval before acting.
-
-### Added section: Network & outside-repo approvals
-
-When `.agentplane/config.json` sets `agents.approvals.require_network=true`:
-
-### Network use (requires approval)
-
-Includes (non-exhaustive):
-
-- `pip`, `npm`, `bun install`, downloading binaries/models
-- `curl`, `wget`
-- `git fetch`, `git pull`
-- calling external HTTP APIs or remote services
-
-### Outside-repo touching (requires approval)
-
-Includes (non-exhaustive):
-
-- reading/writing outside the repo (`~`, `/etc`, global configs)
-- modifying keychains, ssh keys, credentials stores
-- any tool that mutates outside-repo state
-
-If approval is required, pause and ask before proceeding.
+- `AGENTS.md` MUST stay <= 250 lines.
+- Every policy markdown module under `.agentplane/policy/*.md` MUST stay <= 100 lines.
+- Worst-case loaded policy graph (always imports + all conditional imports) MUST stay <= 600 lines.
+- Enforced by `node .agentplane/policy/check-routing.mjs`.
 
 ---
 
-# NON-NEGOTIABLE PIPELINE
+## CANONICAL DOCS
 
-1. **Preflight** (ORCHESTRATOR, mandatory)
-2. **Plan + decomposition**
-3. **Explicit user approval**
-4. **Create tracking task**
-5. **Execute tasks under mode-specific workflow**
-6. **Verify**
-7. **Finish**
-8. **Export (if enabled / required)**
-
-No step may be skipped unless the user explicitly authorizes skipping it.
-
----
-
-# MANDATORY PREFLIGHT (ORCHESTRATOR)
-
-Before any planning or execution, ORCHESTRATOR must run:
-
-1. `agentplane config show`
-2. `agentplane quickstart` (CLI instructions)
-3. `agentplane task list`
-4. `git status --short --untracked-files=no`
-
-Then report (in the response) only that the data was loaded:
-
-- Config loaded
-- CLI instructions loaded
-- Task list loaded
-- Git status checked
-
-Do not output the contents of the config or CLI instructions unless the user explicitly asks for them.
+- DOC `.agentplane/policy/workflow.md`
+- DOC `.agentplane/policy/workflow.direct.md`
+- DOC `.agentplane/policy/workflow.branch_pr.md`
+- DOC `.agentplane/policy/workflow.release.md`
+- DOC `.agentplane/policy/workflow.upgrade.md`
+- DOC `.agentplane/policy/security.must.md`
+- DOC `.agentplane/policy/dod.core.md`
+- DOC `.agentplane/policy/dod.code.md`
+- DOC `.agentplane/policy/dod.docs.md`
+- DOC `.agentplane/policy/governance.md`
+- DOC `.agentplane/policy/incidents.md`
 
 ---
 
-# STARTUP RULE
+## REFERENCE EXAMPLES
 
-- Always begin work by engaging ORCHESTRATOR.
-- ORCHESTRATOR starts by producing a top-level plan + task decomposition.
-- **Do not execute or modify files before explicit user approval.**
-
----
-
-# ORCHESTRATION FLOW
-
-### Local edits for: 1) Plan & decomposition (no execution)
-
-ORCHESTRATOR:
-
-- Produces an explicit plan (steps, risks, verify/rollback).
-- Decomposes into atomic tasks assignable to existing agents.
-- Flags whether network/outside-repo actions will be needed.
-- Requests explicit approval.
-
-### Added section: 2) After approval (tracking task is mandatory)
-
-- ORCHESTRATOR creates exactly **one** top-level tracking task via agentplane.
-- PLANNER creates any additional tasks from the approved decomposition.
-- Task IDs are referenced in comments/notes for traceability.
-
-**No opt-out:** task tracking is mandatory for reproducibility and minimizing errors.
+- EXAMPLE `.agentplane/policy/examples/pr-note.md`
+- EXAMPLE `.agentplane/policy/examples/unit-test-pattern.md`
+- EXAMPLE `.agentplane/policy/examples/migration-note.md`
 
 ---
 
-# RESPONSE & WRITING STYLE
+## CHANGE CONTROL
 
-- Clarity beats pleasantries.
-- Keep plans short, structured, and executable.
-- Do not reveal internal chain-of-thought; provide concise rationale only.
-- Code/comments/commit messages/PR artifacts should be in English.
-
----
-
-# TASKS & DOCUMENTATION
-
-### Added section: Required task doc sections (before finish)
-
-Every task must have these sections in its README or task doc:
-
-- Summary
-- Scope
-- Risks
-- Verify Steps
-- Rollback Plan
-
-### Local edits for: Updating task docs
-
-- Workflow/task artifacts (task READMEs, PR artifacts, task exports) must be updated via `agentplane` commands, not manual edits.
-- Task README updates must be done via `agentplane task doc set ...`
-- Manual edits to `.agentplane/tasks/<task-id>/README.md` are prohibited.
-
----
-
-# COMMIT WORKFLOW
-
-- Commits and pushes must go through `agentplane` commands (no direct `git commit`/`git push`). If a push is needed but no `agentplane` command exists, ask for guidance.
-
-### Local edits for: Commit message semantics (canonical)
-
-There are two supported modes:
-
-### Mode 1: Explicit commit message (manual message, still policy-governed)
-
-Use agentplane commit flows with a message that conforms to the built-in command guide, e.g.:
-
-`agentplane guard commit <task-id> -m "✨ <suffix> <detailed changelog ...>" ...`
-
-In this mode:
-
-- `-m` is the **commit message** (subject/body as supported by agentplane).
-- Do not invent alternative formats.
-
-### Mode 2: Comment-driven commit (agentplane builds subject)
-
-Use comment-driven flags (where supported by agentplane), e.g.:
-
-- `--commit-from-comment`
-- `--status-commit` (only when explicitly intended)
-
-In this mode:
-
-- agentplane builds the commit subject as `<emoji> <suffix> <formatted comment>` from the status/finish body.
-
-Agents must not reinterpret `-m` as “body-only” or “comment-only”. `-m` is a commit message.
-
-### Local edits for: A) direct mode (single checkout)
-
-Rules:
-
-- Do all work in the current checkout.
-- Do not create task branches/worktrees (agentplane should reject them).
-
-Recommended cadence:
-
-1. `start` task (status comment; no commit by default)
-2. Implement changes
-3. Run verify commands / `agentplane verify`
-4. Commit via agentplane with tight allowlist
-5. `finish` with `--commit <git-rev>` and a Verified body
-6. `task export` (if required)
-
-# SHARED STATE & EXPORTS
-
-- Task export is a read-only snapshot managed by agentplane.
-- Never edit exported snapshots by hand (checksum will break).
-- Exports must reflect finished tasks and verified state.
-
----
-
-# RECOMMENDED CONFIG PATCH (optional but strongly advised)
-
-To minimize accidental status-commits and keep commits intentional, apply this JSON Merge Patch to `.agentplane/config.json`:
-
-{
-"status_commit_policy": "confirm",
-"finish_auto_status_commit": false
-}
-
-Notes:
-
-- `status_commit_policy="confirm"` ensures comment-driven/status commits require explicit confirmation.
-- `finish_auto_status_commit=false` prevents `finish` from creating implicit commits when you only want to record status.
-<!-- AGENTPLANE:LOCAL-END -->
+- Follow incident-log, immutability, and policy-budget rules in `.agentplane/policy/governance.md`.
+- Record situational incident rules only in `.agentplane/policy/incidents.md`; use targeted lookup/promotion (`task start-ready`, `incidents advise`, `incidents collect`, `finish`) instead of bulk-loading it during normal startup.
+- Keep `AGENTS.md` as a gateway; move detailed procedures to canonical modules.
