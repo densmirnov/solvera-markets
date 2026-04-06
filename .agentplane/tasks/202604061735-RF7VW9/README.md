@@ -1,10 +1,12 @@
 ---
 id: "202604061735-RF7VW9"
 title: "Prepare real Status indexer manifest"
-status: "DOING"
+result_summary: "Added the canonical Status subgraph manifest for 0xF79367dAB12D8E12146685dA2830f112F02De71a and documented the Status build path."
+risk_level: "low"
+status: "DONE"
 priority: "high"
 owner: "CODER"
-revision: 8
+revision: 9
 origin:
   system: "manual"
 depends_on:
@@ -22,11 +24,16 @@ verification:
   updated_at: "2026-04-06T18:11:13.632Z"
   updated_by: "REVIEWER"
   note: "Verified: the canonical Status manifest points at the live deployment and builds successfully with the repository graph-cli."
-commit: null
+commit:
+  hash: "5a59ed14212d59e4aee12bf719c9f4b43b977ee5"
+  message: "✅ RF7VW9 indexer: add canonical Status manifest"
 comments:
   -
     author: "CODER"
     body: "Start: replace the exploratory Status manifest with the real Status Sepolia manifest tied to the live IntentMarketplace deployment and document the exact indexer entrypoint for downstream tasks."
+  -
+    author: "INTEGRATOR"
+    body: "Verified: the Status indexer now has a canonical manifest for the live deployment, and the local graph-cli can build it reproducibly."
 events:
   -
     type: "status"
@@ -41,9 +48,16 @@ events:
     author: "REVIEWER"
     state: "ok"
     note: "Verified: the canonical Status manifest points at the live deployment and builds successfully with the repository graph-cli."
+  -
+    type: "status"
+    at: "2026-04-06T18:11:32.000Z"
+    author: "INTEGRATOR"
+    from: "DOING"
+    to: "DONE"
+    note: "Verified: the Status indexer now has a canonical manifest for the live deployment, and the local graph-cli can build it reproducibly."
 doc_version: 3
-doc_updated_at: "2026-04-06T18:11:13.639Z"
-doc_updated_by: "CODER"
+doc_updated_at: "2026-04-06T18:11:32.002Z"
+doc_updated_by: "INTEGRATOR"
 description: "Promote the Status Graph spike artifacts into a real Status indexing path with actual contract address/startBlock placeholders and ops guidance. Tracking: 202604061614-XSEJDG."
 sections:
   Summary: |-
