@@ -7,6 +7,7 @@
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph codegen && graph build",
+    "build:status": "graph codegen subgraph.status.yaml && graph build subgraph.status.yaml",
     "lint": "eslint \"**/*.ts\"",
     "fmt": "eslint \"**/*.ts\" --fix",
     "test": "graph test --docker",

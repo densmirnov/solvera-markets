@@ -1,0 +1,40 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+
+dataSources:
+  - kind: ethereum
+    name: IntentMarketplace
+    network: status
+    source:
+      address: "0xF79367dAB12D8E12146685dA2830f112F02De71a"
+      abi: IntentMarketplace
+      startBlock: 18800150
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Intent
+        - Offer
+        - Reputation
+        - EventLog
+      abis:
+        - name: IntentMarketplace
+          file: ./abis/IntentMarketplace.json
+      eventHandlers:
+        - event: IntentCreated(indexed bytes32,indexed address,indexed address,address,address,uint256,address,uint256,uint64,uint64)
+          handler: handleIntentCreated
+        - event: OfferSubmitted(indexed bytes32,indexed address,uint256,uint256)
+          handler: handleOfferSubmitted
+        - event: WinnerSelected(indexed bytes32,indexed address,uint256,uint256)
+          handler: handleWinnerSelected
+        - event: Fulfilled(indexed bytes32,indexed address,uint256)
+          handler: handleFulfilled
+        - event: Accepted(indexed bytes32,indexed address,uint256,uint256,uint256)
+          handler: handleAccepted
+        - event: Expired(indexed bytes32,indexed uint8,uint256,uint256)
+          handler: handleExpired
+        - event: ReputationUpdated(indexed address,int256,uint8)
+          handler: handleReputationUpdated
+      file: ./src/mappings.ts
