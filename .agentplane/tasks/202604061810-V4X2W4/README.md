@@ -1,10 +1,12 @@
 ---
 id: "202604061810-V4X2W4"
 title: "Verify Status Sepolia contracts on StatusScan"
-status: "DOING"
+result_summary: "Verified the live Status deployment on StatusScan and documented the address mismatch for the user-provided explorer page."
+risk_level: "low"
+status: "DONE"
 priority: "high"
 owner: "CODER"
-revision: 8
+revision: 9
 origin:
   system: "manual"
 depends_on:
@@ -22,11 +24,16 @@ verification:
   updated_at: "2026-04-06T18:23:29.760Z"
   updated_by: "REVIEWER"
   note: "StatusScan verification confirmed"
-commit: null
+commit:
+  hash: "44e4fb4d9407ad0843b9ffedd487c25589aaccc0"
+  message: "🚧 V4X2W4 task: record StatusScan verification evidence"
 comments:
   -
     author: "CODER"
     body: "Start: verify the live Status Sepolia deployment on StatusScan/Blockscout with exact compiler settings and constructor args, then inspect the user-specified explorer address as a separate identity."
+  -
+    author: "INTEGRATOR"
+    body: "Verified: StatusScan now publishes the live Solvera IntentMarketplace source, and the user-provided explorer address was confirmed as a separate DemoFaucet contract."
 events:
   -
     type: "status"
@@ -41,9 +48,16 @@ events:
     author: "REVIEWER"
     state: "ok"
     note: "StatusScan verification confirmed"
+  -
+    type: "status"
+    at: "2026-04-06T18:24:39.240Z"
+    author: "INTEGRATOR"
+    from: "DOING"
+    to: "DONE"
+    note: "Verified: StatusScan now publishes the live Solvera IntentMarketplace source, and the user-provided explorer address was confirmed as a separate DemoFaucet contract."
 doc_version: 3
-doc_updated_at: "2026-04-06T18:23:29.775Z"
-doc_updated_by: "CODER"
+doc_updated_at: "2026-04-06T18:24:39.245Z"
+doc_updated_by: "INTEGRATOR"
 description: "Verify deployed Status Sepolia contract sources on Blockscout/StatusScan for the live IntentMarketplace deployment and the user-specified explorer address when contract identity is confirmed. Tracking: 202604061614-XSEJDG."
 sections:
   Summary: |-
