@@ -1,10 +1,12 @@
 ---
 id: "202604061735-3JCAD3"
 title: "Switch backend defaults to Status-ready config"
-status: "DOING"
+result_summary: "Switched backend defaults and tests to Status Sepolia metadata while keeping contract and subgraph endpoints environment-driven."
+risk_level: "low"
+status: "DONE"
 priority: "high"
 owner: "CODER"
-revision: 7
+revision: 8
 origin:
   system: "manual"
 depends_on:
@@ -22,11 +24,16 @@ verification:
   updated_at: "2026-04-06T18:16:25.903Z"
   updated_by: "REVIEWER"
   note: "Verified: backend defaults, tests, and env/docs are Status-ready and no Base fallback remains in API metadata."
-commit: null
+commit:
+  hash: "45e11927e97ec8a57169aa22ac808de1cd9f6e0a"
+  message: "✅ 3JCAD3 backend: switch defaults to Status metadata"
 comments:
   -
     author: "CODER"
     body: "Start: switch backend defaults and tests from Base-biased assumptions to the live Status Sepolia contract, chain metadata, and self-hosted subgraph entrypoint."
+  -
+    author: "INTEGRATOR"
+    body: "Verified: backend API metadata, tests, and operator env/docs now point to Status Sepolia instead of falling back to Base."
 events:
   -
     type: "status"
@@ -41,9 +48,16 @@ events:
     author: "REVIEWER"
     state: "ok"
     note: "Verified: backend defaults, tests, and env/docs are Status-ready and no Base fallback remains in API metadata."
+  -
+    type: "status"
+    at: "2026-04-06T18:16:46.585Z"
+    author: "INTEGRATOR"
+    from: "DOING"
+    to: "DONE"
+    note: "Verified: backend API metadata, tests, and operator env/docs now point to Status Sepolia instead of falling back to Base."
 doc_version: 3
-doc_updated_at: "2026-04-06T18:16:25.914Z"
-doc_updated_by: "CODER"
+doc_updated_at: "2026-04-06T18:16:46.587Z"
+doc_updated_by: "INTEGRATOR"
 description: "Update backend config surfaces and tests so Status chain metadata and contract/indexer endpoints can be used without Base-only assumptions. Tracking: 202604061614-XSEJDG."
 sections:
   Summary: |-
