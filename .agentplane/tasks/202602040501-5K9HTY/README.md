@@ -4,6 +4,7 @@ title: "Track agentplane artifacts"
 status: "DONE"
 priority: "low"
 owner: "DOCS"
+revision: 1
 depends_on: []
 tags:
   - "backend"
@@ -30,10 +31,24 @@ comments:
     author: "DOCS"
     body: "Verified: .agentplane artifacts are staged and committed for tracking."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-04T05:02:54.375Z"
 doc_updated_by: "DOCS"
 description: "Add .agentplane generated artifacts to git as requested."
+sections:
+  Summary: "Track .agentplane artifacts in git."
+  Scope: "Stage .agentplane/bin, .agentplane/tasks.json, and .agentplane/tasks for version control."
+  Plan: |-
+    1. Implement the change for "Track agentplane artifacts".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Tracking agentplane artifacts may include local metadata; review contents before sharing."
+  Verify Steps: "1) git status --short\\n2) ensure .agentplane files are staged"
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Remove .agentplane entries from git if tracking should be disabled."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Track .agentplane artifacts in git.
 
 Stage .agentplane/bin, .agentplane/tasks.json, and .agentplane/tasks for version control.
 
+## Plan
+
+1. Implement the change for "Track agentplane artifacts".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Tracking agentplane artifacts may include local metadata; review contents before sharing.
@@ -52,6 +73,13 @@ Tracking agentplane artifacts may include local metadata; review contents before
 
 1) git status --short\n2) ensure .agentplane files are staged
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Remove .agentplane entries from git if tracking should be disabled.
+
+## Findings

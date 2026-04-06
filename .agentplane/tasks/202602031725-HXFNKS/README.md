@@ -4,6 +4,7 @@ title: "Stage 1.4c run forge tests"
 status: "DONE"
 priority: "med"
 owner: "TESTER"
+revision: 1
 depends_on: []
 tags:
   - "code"
@@ -30,10 +31,24 @@ comments:
     author: "TESTER"
     body: "Verified: forge test passed (9 tests). Warnings: variable shadowing in IntentMarketplace and mutability warning in Counter.t.sol."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-03T17:26:58.499Z"
 doc_updated_by: "TESTER"
 description: "Run Foundry test suite for MVP contract and record status."
+sections:
+  Summary: "Run Foundry test suite and capture pass/fail status."
+  Scope: "Execute forge test in contracts/ and report results."
+  Plan: |-
+    1. Implement the change for "Stage 1.4c run forge tests".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Risk of failing tests due to missing dependencies. Mitigation: record failure and stop without code changes."
+  Verify Steps: "1. Run forge test in contracts/. 2. Capture pass/fail output in summary."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "No code changes; nothing to rollback."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Run Foundry test suite and capture pass/fail status.
 
 Execute forge test in contracts/ and report results.
 
+## Plan
+
+1. Implement the change for "Stage 1.4c run forge tests".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Risk of failing tests due to missing dependencies. Mitigation: record failure and stop without code changes.
@@ -52,6 +73,13 @@ Risk of failing tests due to missing dependencies. Mitigation: record failure an
 
 1. Run forge test in contracts/. 2. Capture pass/fail output in summary.
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 No code changes; nothing to rollback.
+
+## Findings

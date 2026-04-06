@@ -4,6 +4,7 @@ title: "Stage 4.2 operator screens"
 status: "DONE"
 priority: "high"
 owner: "CODER"
+revision: 1
 depends_on: []
 tags:
   - "frontend"
@@ -30,10 +31,24 @@ comments:
     author: "CODER"
     body: "Verified: operator screens now expose filters and display next_steps and winner details from the API."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-04T04:22:10.903Z"
 doc_updated_by: "CODER"
 description: "Implement monitoring UI: intents list, intent detail with offers, events view, and filters."
+sections:
+  Summary: "Implement operator monitoring screens using backend API."
+  Scope: "Add intents list, intent detail (offers), and event log screens with filters and API integration."
+  Plan: |-
+    1. Implement the change for "Stage 4.2 operator screens".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "API responses may differ from mock shape; handle empty/error states gracefully."
+  Verify Steps: "1) rg \"/monitor\" frontend/src\\n2) git status --short --untracked-files=no"
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert operator UI screens and related styles if API integration breaks."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Implement operator monitoring screens using backend API.
 
 Add intents list, intent detail (offers), and event log screens with filters and API integration.
 
+## Plan
+
+1. Implement the change for "Stage 4.2 operator screens".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 API responses may differ from mock shape; handle empty/error states gracefully.
@@ -52,6 +73,13 @@ API responses may differ from mock shape; handle empty/error states gracefully.
 
 1) rg "/monitor" frontend/src\n2) git status --short --untracked-files=no
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert operator UI screens and related styles if API integration breaks.
+
+## Findings

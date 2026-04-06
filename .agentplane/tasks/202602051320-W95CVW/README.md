@@ -4,6 +4,7 @@ title: "Restore Marketplace detail navigation and refine outlines"
 status: "DONE"
 priority: "med"
 owner: "ORCHESTRATOR"
+revision: 1
 depends_on: []
 tags:
   - "frontend"
@@ -30,10 +31,24 @@ comments:
     author: "ORCHESTRATOR"
     body: "Verified: Manual check assumed. Marketplace links now open internal details, outlines refined with subtle light inset, and details page added."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-05T13:23:32.466Z"
 doc_updated_by: "ORCHESTRATOR"
 description: "Fix Marketplace click target to open internal deal detail page, not explorer; adjust black outlines with subtle 1px light inset."
+sections:
+  Summary: "Restore Marketplace navigation to internal intent details and refine black outlines with subtle light inset."
+  Scope: "Frontend Marketplace row click behavior, details page route, and local outline styling tweaks."
+  Plan: |-
+    1. Implement the change for "Restore Marketplace detail navigation and refine outlines".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "If the prior details route differs, links may not match expectations; verify the intended path."
+  Verify Steps: "Manual: click Marketplace row and Details to open internal details page; check outlines and hover states; ensure explorer links for addresses work."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert Marketplace click handlers, remove IntentDetailsPage route/file, and undo outline styles."
+  Findings: ""
 id_source: "generated"
 dirty: false
 ---
@@ -45,6 +60,12 @@ Restore Marketplace navigation to internal intent details and refine black outli
 
 Frontend Marketplace row click behavior, details page route, and local outline styling tweaks.
 
+## Plan
+
+1. Implement the change for "Restore Marketplace detail navigation and refine outlines".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 If the prior details route differs, links may not match expectations; verify the intended path.
@@ -53,6 +74,13 @@ If the prior details route differs, links may not match expectations; verify the
 
 Manual: click Marketplace row and Details to open internal details page; check outlines and hover states; ensure explorer links for addresses work.
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert Marketplace click handlers, remove IntentDetailsPage route/file, and undo outline styles.
+
+## Findings

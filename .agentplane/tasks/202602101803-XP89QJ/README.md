@@ -5,6 +5,7 @@ result_summary: "Upgraded repo-local agentplane framework bundle"
 status: "DONE"
 priority: "med"
 owner: "ORCHESTRATOR"
+revision: 1
 depends_on: []
 tags:
   - "code"
@@ -50,54 +51,66 @@ events:
     from: "DOING"
     to: "DONE"
     note: "Verified: Ran agentplane upgrade --auto, then agentplane doctor (OK). Committed only AGENTS.md + .agentplane/ upgrade changes; left existing PITCH.md/README.md edits uncommitted."
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-10T18:07:31.928Z"
 doc_updated_by: "ORCHESTRATOR"
 description: "Run agentplane upgrade to refresh the repo-local framework bundle under .agentplane/. Keep unrelated working tree changes (PITCH.md, README.md) untouched and out of the commit."
+sections:
+  Summary: "Upgrade the repo-local agentplane framework bundle and confirm the repository doctor check passes after the upgrade."
+  Scope: "Refresh managed agentplane workflow files under `.agentplane/` and keep unrelated working tree edits out of the upgrade commit."
+  Plan: |-
+    1. Ensure no staged files before running the upgrade.
+    2. Run `agentplane upgrade`.
+    3. Run `agentplane doctor`.
+    4. Review the resulting diff and stage only upgrade-related workflow artifacts.
+    5. Commit via agentplane and finish the task with the resulting commit hash.
+  Risks: "Upgrade may touch multiple workflow files; unrelated repository edits must stay out of the commit."
+  Verify Steps: |-
+    1. Run `agentplane upgrade` in the repo root.
+    2. Run `agentplane doctor` and ensure it passes.
+    3. Confirm git status shows only intentional upgrade changes under `.agentplane/` and excludes unrelated `PITCH.md` or `README.md` edits from the commit.
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    #### 2026-02-10T18:07:12.106Z — VERIFY — ok
+
+    By: ORCHESTRATOR
+
+    Note: Ran agentplane upgrade --auto; agentplane doctor returned OK. Commit fabc3f12e553 contains only upgrade-related AGENTS.md/.agentplane changes.
+
+    VerifyStepsRef: doc_version=2, doc_updated_at=2026-02-10T18:04:25.285Z, excerpt_hash=sha256:7234e8ab4286438ed685ca0c2eefd62ee7ec1e7aabe4eff5ed4ba4b1e700304d
+
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert the upgrade commit if `agentplane doctor` fails or the refreshed workflow artifacts regress repository behavior."
+  Findings: "Historical upgrade task; no additional findings beyond the recorded verification result."
 id_source: "generated"
 ---
 ## Summary
 
+Upgrade the repo-local agentplane framework bundle and confirm the repository doctor check passes after the upgrade.
 
 ## Scope
 
-
-## Risks
-
-
-## Verify Steps
-
-1. Run agentplane upgrade in repo root.
-2. Run agentplane doctor and ensure it passes.
-3. Confirm git status shows only intentional changes under .agentplane/ and does not include PITCH.md or README.md in the commit.
-
-## Rollback Plan
-
+Refresh managed agentplane workflow files under `.agentplane/` and keep unrelated working tree edits out of the upgrade commit.
 
 ## Plan
 
-1. Ensure no staged files (agentplane guard clean).
-2. Run agentplane upgrade.
-3. Run agentplane doctor.
-4. Review git diff --stat.
-5. Stage only .agentplane/ changes.
-6. Commit via agentplane commit with --allow .agentplane/.
-7. Finish task with agentplane finish referencing commit hash.
+1. Ensure no staged files before running the upgrade.
+2. Run `agentplane upgrade`.
+3. Run `agentplane doctor`.
+4. Review the resulting diff and stage only upgrade-related workflow artifacts.
+5. Commit via agentplane and finish the task with the resulting commit hash.
 
-Risks: upgrade may touch multiple .agentplane/ files; avoid mixing with unrelated PITCH.md/README.md edits.
+## Risks
 
-Rollback: revert the upgrade commit if doctor fails or regressions appear.
+Upgrade may touch multiple workflow files; unrelated repository edits must stay out of the commit.
 
-## Plan\n\n1. Pre-check: ensure no staged files.\n2. Run  to refresh repo-local agentplane framework bundle.\n3. Run  to validate workspace invariants.\n4. Inspect  PITCH.md  | 51 +++++++++------------------------------------------
+## Verify Steps
 
- README.md | 43 +++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 52 insertions(+), 42 deletions(-) and stage only  files related to the upgrade.\n5. Commit via  with tight  allowlist.\n6. Finish task with  referencing the commit hash.\n\n## Risks\n- Upgrade may modify multiple files under ; avoid mixing with unrelated edits in working tree.\n\n## Rollback\n- Revert the upgrade commit (or reset upgraded files to previous revision) if  fails or behavior regresses.
+1. Run `agentplane upgrade` in the repo root.
+2. Run `agentplane doctor` and ensure it passes.
+3. Confirm git status shows only intentional upgrade changes under `.agentplane/` and excludes unrelated `PITCH.md` or `README.md` edits from the commit.
 
 ## Verification
-
-### Plan
-
-### Results
 
 <!-- BEGIN VERIFICATION RESULTS -->
 #### 2026-02-10T18:07:12.106Z — VERIFY — ok
@@ -109,3 +122,11 @@ Note: Ran agentplane upgrade --auto; agentplane doctor returned OK. Commit fabc3
 VerifyStepsRef: doc_version=2, doc_updated_at=2026-02-10T18:04:25.285Z, excerpt_hash=sha256:7234e8ab4286438ed685ca0c2eefd62ee7ec1e7aabe4eff5ed4ba4b1e700304d
 
 <!-- END VERIFICATION RESULTS -->
+
+## Rollback Plan
+
+Revert the upgrade commit if `agentplane doctor` fails or the refreshed workflow artifacts regress repository behavior.
+
+## Findings
+
+Historical upgrade task; no additional findings beyond the recorded verification result.

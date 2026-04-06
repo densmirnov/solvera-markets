@@ -4,6 +4,7 @@ title: "Revise hackathon pitch"
 status: "DONE"
 priority: "med"
 owner: "ORCHESTRATOR"
+revision: 1
 depends_on: []
 tags:
   - "code"
@@ -30,10 +31,24 @@ comments:
     author: "ORCHESTRATOR"
     body: "Verified: Manual check assumed. Updated HACKATHON.md to 2-3 min direct speech with agent-first details, local wallet, SKILL.md, and Base mainnet mention."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-05T13:41:28.506Z"
 doc_updated_by: "ORCHESTRATOR"
 description: "Update HACKATHON.md: direct speech, 2-3 min, agent-first focus, Base mainnet, local wallet, SKILL.md."
+sections:
+  Summary: "Rewrite HACKATHON.md pitch to 2-3 min direct speech with agent-first focus and Base mainnet note."
+  Scope: "HACKATHON.md content only."
+  Plan: |-
+    1. Implement the change for "Revise hackathon pitch".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Pitch may still be too long/short for delivery pace; adjust in rehearsal."
+  Verify Steps: "Manual: read HACKATHON.md to confirm required points and 2-3 min length."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert HACKATHON.md to previous pitch."
+  Findings: ""
 id_source: "generated"
 dirty: false
 ---
@@ -45,6 +60,12 @@ Rewrite HACKATHON.md pitch to 2-3 min direct speech with agent-first focus and B
 
 HACKATHON.md content only.
 
+## Plan
+
+1. Implement the change for "Revise hackathon pitch".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Pitch may still be too long/short for delivery pace; adjust in rehearsal.
@@ -53,6 +74,13 @@ Pitch may still be too long/short for delivery pace; adjust in rehearsal.
 
 Manual: read HACKATHON.md to confirm required points and 2-3 min length.
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert HACKATHON.md to previous pitch.
+
+## Findings

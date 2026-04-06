@@ -4,6 +4,7 @@ title: "Add env.example"
 status: "DONE"
 priority: "med"
 owner: "DOCS"
+revision: 1
 depends_on: []
 tags:
   - "backend"
@@ -30,10 +31,24 @@ comments:
     author: "DOCS"
     body: "Verified: env.example added with production-style placeholders and no secrets."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-04T04:28:47.445Z"
 doc_updated_by: "DOCS"
 description: "Create env.example with production-style environment variables for contracts/indexer/backend/frontend."
+sections:
+  Summary: "Create env.example with production-style environment variables."
+  Scope: "Add env.example listing backend/indexer/frontend and contract deployment variables with safe placeholders."
+  Plan: |-
+    1. Implement the change for "Add env.example".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Ensure no real secrets are included; use placeholders only."
+  Verify Steps: "1) test -f env.example\\n2) rg \"SUBGRAPH_URL\" env.example\\n3) git status --short --untracked-files=no"
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Remove env.example if placeholders are incorrect or misleading."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Create env.example with production-style environment variables.
 
 Add env.example listing backend/indexer/frontend and contract deployment variables with safe placeholders.
 
+## Plan
+
+1. Implement the change for "Add env.example".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Ensure no real secrets are included; use placeholders only.
@@ -52,6 +73,13 @@ Ensure no real secrets are included; use placeholders only.
 
 1) test -f env.example\n2) rg "SUBGRAPH_URL" env.example\n3) git status --short --untracked-files=no
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Remove env.example if placeholders are incorrect or misleading.
+
+## Findings

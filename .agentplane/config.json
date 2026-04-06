@@ -47,6 +47,7 @@
         "Verification",
         "Rollback Plan",
         "Plan",
+        "Findings",
         "Notes"
       ],
       "required_sections": [
@@ -54,6 +55,7 @@
         "Scope",
         "Risks",
         "Verify Steps",
+        "Verification",
         "Rollback Plan"
       ]
     },

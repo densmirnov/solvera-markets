@@ -4,6 +4,7 @@ title: "Stage 5 stabilization and dependency refresh"
 status: "DONE"
 priority: "high"
 owner: "ORCHESTRATOR"
+revision: 1
 depends_on: []
 tags:
   - "code"
@@ -34,9 +35,50 @@ comments:
     author: "ORCHESTRATOR"
     body: "Verified: dependency refresh and test stabilization completed; make check and e2e validations are green."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-04T06:36:54.351Z"
 doc_updated_by: "ORCHESTRATOR"
 description: "Update dependencies to current versions, fix test stability, ensure coverage, and validate docker compose + agent flow."
+sections:
+  Summary: ""
+  Scope: ""
+  Plan: |-
+    1. Implement the change for "Stage 5 stabilization and dependency refresh".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: ""
+  Verify Steps: ""
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: ""
+  Findings: ""
 id_source: "generated"
 ---
+## Summary
+
+
+## Scope
+
+
+## Plan
+
+1. Implement the change for "Stage 5 stabilization and dependency refresh".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
+## Risks
+
+
+## Verify Steps
+
+
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
+## Rollback Plan
+
+
+## Findings

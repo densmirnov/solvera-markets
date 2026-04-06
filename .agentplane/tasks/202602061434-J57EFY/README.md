@@ -4,6 +4,7 @@ title: "Halve navbar-to-hero spacing on home"
 status: "DONE"
 priority: "low"
 owner: "ORCHESTRATOR"
+revision: 1
 depends_on: []
 tags:
   - "frontend"
@@ -30,10 +31,34 @@ comments:
     author: "ORCHESTRATOR"
     body: "Verified: Ran cd frontend && npm run build; homepage navbar-to-hero gap is ~2x tighter and hero is not overlapped by the sticky header."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-06T14:44:06.573Z"
 doc_updated_by: "ORCHESTRATOR"
 description: "Reduce vertical spacing between the navbar and the hero section on the home page by 2x without causing overlap with sticky/fixed header. Scope: frontend only."
+sections:
+  Summary: "Halved the homepage navbar-to-hero top spacing by reducing top padding on the home route (Layout) and the Home page wrapper."
+  Scope: |-
+    Frontend only:
+    - frontend/src/components/Layout.tsx
+    - frontend/src/pages/Home.tsx
+  Plan: |-
+    1. Implement the change for "Halve navbar-to-hero spacing on home".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "If the header height changes or the router path handling changes (e.g. trailing slashes), the effective gap may drift; homepage padding may need re-tuning to avoid hero feeling cramped."
+  Verify Steps: "- cd frontend && npm run build\\n- Manual: open / and confirm hero is not overlapped by the sticky header and the gap is ~2x smaller than before."
+  Verification: |-
+    Status: pass
+    Verified at: 2026-02-06T14:41:18.741Z
+    Verified sha: 4769d7f8be032f1320d275fd86f9ad3157c066ab
+    
+    Commands:
+    - cd frontend && npm run build
+    
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert commit 2be796f97009 or undo the padding changes in frontend/src/components/Layout.tsx and frontend/src/pages/Home.tsx."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -42,7 +67,15 @@ Halved the homepage navbar-to-hero top spacing by reducing top padding on the ho
 
 ## Scope
 
-Frontend only:\n- frontend/src/components/Layout.tsx\n- frontend/src/pages/Home.tsx
+Frontend only:
+- frontend/src/components/Layout.tsx
+- frontend/src/pages/Home.tsx
+
+## Plan
+
+1. Implement the change for "Halve navbar-to-hero spacing on home".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
 
 ## Risks
 
@@ -52,10 +85,6 @@ If the header height changes or the router path handling changes (e.g. trailing 
 
 - cd frontend && npm run build\n- Manual: open / and confirm hero is not overlapped by the sticky header and the gap is ~2x smaller than before.
 
-## Rollback Plan
-
-Revert commit 2be796f97009 or undo the padding changes in frontend/src/components/Layout.tsx and frontend/src/pages/Home.tsx.
-
 ## Verification
 
 Status: pass
@@ -64,3 +93,12 @@ Verified sha: 4769d7f8be032f1320d275fd86f9ad3157c066ab
 
 Commands:
 - cd frontend && npm run build
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
+## Rollback Plan
+
+Revert commit 2be796f97009 or undo the padding changes in frontend/src/components/Layout.tsx and frontend/src/pages/Home.tsx.
+
+## Findings

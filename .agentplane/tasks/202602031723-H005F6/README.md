@@ -4,6 +4,7 @@ title: "Ignore contracts broadcast"
 status: "DONE"
 priority: "low"
 owner: "CODER"
+revision: 1
 depends_on: []
 tags:
   - "code"
@@ -30,10 +31,24 @@ comments:
     author: "CODER"
     body: "Verified: contracts/.gitignore now ignores broadcast outputs."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-03T17:24:52.572Z"
 doc_updated_by: "CODER"
 description: "Update contracts/.gitignore to ignore broadcast logs."
+sections:
+  Summary: "Update contracts/.gitignore to ignore Foundry broadcast outputs."
+  Scope: "Remove broadcast negation and ignore broadcast outputs in contracts/.gitignore."
+  Plan: |-
+    1. Implement the change for "Ignore contracts broadcast".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Risk of hiding useful logs. Mitigation: keep artifacts in local files only."
+  Verify Steps: "1. contracts/.gitignore ignores broadcast. 2. git status no longer shows contracts/broadcast."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert the commit to restore previous contracts/.gitignore."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Update contracts/.gitignore to ignore Foundry broadcast outputs.
 
 Remove broadcast negation and ignore broadcast outputs in contracts/.gitignore.
 
+## Plan
+
+1. Implement the change for "Ignore contracts broadcast".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Risk of hiding useful logs. Mitigation: keep artifacts in local files only.
@@ -52,6 +73,13 @@ Risk of hiding useful logs. Mitigation: keep artifacts in local files only.
 
 1. contracts/.gitignore ignores broadcast. 2. git status no longer shows contracts/broadcast.
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert the commit to restore previous contracts/.gitignore.
+
+## Findings

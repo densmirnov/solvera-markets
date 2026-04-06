@@ -4,6 +4,7 @@ title: "Update env.example and production .env"
 status: "DONE"
 priority: "high"
 owner: "DOCS"
+revision: 1
 depends_on: []
 tags:
   - "backend"
@@ -30,10 +31,24 @@ comments:
     author: "DOCS"
     body: "Verified: env.example updated for solvera.market and .env contains production CORS/API/subgraph values."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-04T07:15:33.367Z"
 doc_updated_by: "DOCS"
 description: "Set production CORS_ORIGIN and VITE_API_BASE values for solvera.market and align env.example/.env with production defaults."
+sections:
+  Summary: "Updated env.example and .env with production solvera.market settings for CORS and API base."
+  Scope: "Updated env.example and .env with production SUBGRAPH_URL, CORS_ORIGIN, and VITE_API_BASE."
+  Plan: |-
+    1. Implement the change for "Update env.example and production .env".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Ensure production secrets in .env remain protected; domain changes require updating CORS_ORIGIN and VITE_API_BASE."
+  Verify Steps: "rg -n \"CORS_ORIGIN|VITE_API_BASE|SUBGRAPH_URL\" env.example .env"
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert env.example and .env to previous values."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Updated env.example and .env with production solvera.market settings for CORS an
 
 Updated env.example and .env with production SUBGRAPH_URL, CORS_ORIGIN, and VITE_API_BASE.
 
+## Plan
+
+1. Implement the change for "Update env.example and production .env".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Ensure production secrets in .env remain protected; domain changes require updating CORS_ORIGIN and VITE_API_BASE.
@@ -52,6 +73,13 @@ Ensure production secrets in .env remain protected; domain changes require updat
 
 rg -n "CORS_ORIGIN|VITE_API_BASE|SUBGRAPH_URL" env.example .env
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert env.example and .env to previous values.
+
+## Findings

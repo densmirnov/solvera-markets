@@ -4,6 +4,7 @@ title: "Stage 4.1 frontend scaffold and landing"
 status: "DONE"
 priority: "high"
 owner: "CODER"
+revision: 1
 depends_on: []
 tags:
   - "frontend"
@@ -30,10 +31,24 @@ comments:
     author: "CODER"
     body: "Verified: frontend scaffold, routing, static pages, styles, and lint/test setup are in place without hackathon mentions."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-04T04:21:10.462Z"
 doc_updated_by: "CODER"
 description: "Scaffold frontend app with routing, landing/skill/docs/api pages, and base styling."
+sections:
+  Summary: "Scaffold frontend app with routing and landing/skill/docs/api pages from website sources."
+  Scope: "Create frontend build setup, core layout, and static pages reflecting the provided markdown sources."
+  Plan: |-
+    1. Implement the change for "Stage 4.1 frontend scaffold and landing".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Brand copy must avoid hackathon mentions; verify wording matches constraints."
+  Verify Steps: "1) rg \"Solvera\" frontend/src\\n2) git status --short --untracked-files=no"
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Remove frontend scaffold and revert frontend files if setup is incorrect."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Scaffold frontend app with routing and landing/skill/docs/api pages from website
 
 Create frontend build setup, core layout, and static pages reflecting the provided markdown sources.
 
+## Plan
+
+1. Implement the change for "Stage 4.1 frontend scaffold and landing".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Brand copy must avoid hackathon mentions; verify wording matches constraints.
@@ -52,6 +73,13 @@ Brand copy must avoid hackathon mentions; verify wording matches constraints.
 
 1) rg "Solvera" frontend/src\n2) git status --short --untracked-files=no
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Remove frontend scaffold and revert frontend files if setup is incorrect.
+
+## Findings

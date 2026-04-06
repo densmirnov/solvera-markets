@@ -4,6 +4,7 @@ title: "Document npm audit exception for indexer"
 status: "DONE"
 priority: "high"
 owner: "DOCS"
+revision: 1
 depends_on: []
 tags:
   - "backend"
@@ -30,10 +31,24 @@ comments:
     author: "DOCS"
     body: "Verified: make check includes npm audit --audit-level=high and documents indexer exception."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-04T06:35:21.479Z"
 doc_updated_by: "DOCS"
 description: "Add formal npm audit exception in CI and document accepted indexer audit warnings."
+sections:
+  Summary: "Added a formal npm audit check with a documented exception for indexer moderate advisories."
+  Scope: "Added scripts/audit.sh, wired audit into Makefile and scripts/check.sh, and documented audit exception in docs/20-engineering-standards.md and docs/13-audit-checklist.md."
+  Plan: |-
+    1. Implement the change for "Document npm audit exception for indexer".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Audit exceptions may mask emerging issues; must be revisited when Graph CLI or transitive dependencies update."
+  Verify Steps: "make check"
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert audit script and documentation updates; restore previous Makefile/scripts/check.sh."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Added a formal npm audit check with a documented exception for indexer moderate 
 
 Added scripts/audit.sh, wired audit into Makefile and scripts/check.sh, and documented audit exception in docs/20-engineering-standards.md and docs/13-audit-checklist.md.
 
+## Plan
+
+1. Implement the change for "Document npm audit exception for indexer".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Audit exceptions may mask emerging issues; must be revisited when Graph CLI or transitive dependencies update.
@@ -52,6 +73,13 @@ Audit exceptions may mask emerging issues; must be revisited when Graph CLI or t
 
 make check
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert audit script and documentation updates; restore previous Makefile/scripts/check.sh.
+
+## Findings

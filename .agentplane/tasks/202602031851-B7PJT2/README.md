@@ -4,6 +4,7 @@ title: "Stage 3.4 backend deploy"
 status: "DONE"
 priority: "med"
 owner: "DOCS"
+revision: 1
 depends_on: []
 tags:
   - "backend"
@@ -30,10 +31,24 @@ comments:
     author: "DOCS"
     body: "Verified: ops docs now reference backend healthcheck and endpoint implemented in API."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-03T18:59:21.354Z"
 doc_updated_by: "DOCS"
 description: "Add deployment docs and healthcheck validation for backend service."
+sections:
+  Summary: "Document backend deployment and healthcheck validation."
+  Scope: "Add deployment notes and healthcheck expectations to docs, aligned with docker compose + Dokploy."
+  Plan: |-
+    1. Implement the change for "Stage 3.4 backend deploy".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Missing or incorrect healthchecks can cause failed deployments; ensure endpoints exist before documenting."
+  Verify Steps: "1) rg \"healthcheck\" docs\\n2) git status --short --untracked-files=no"
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert docs if deployment guidance is incorrect or premature."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Document backend deployment and healthcheck validation.
 
 Add deployment notes and healthcheck expectations to docs, aligned with docker compose + Dokploy.
 
+## Plan
+
+1. Implement the change for "Stage 3.4 backend deploy".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Missing or incorrect healthchecks can cause failed deployments; ensure endpoints exist before documenting.
@@ -52,6 +73,13 @@ Missing or incorrect healthchecks can cause failed deployments; ensure endpoints
 
 1) rg "healthcheck" docs\n2) git status --short --untracked-files=no
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert docs if deployment guidance is incorrect or premature.
+
+## Findings

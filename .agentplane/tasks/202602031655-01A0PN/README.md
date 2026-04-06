@@ -4,6 +4,7 @@ title: "Stage 1.4 contract tests"
 status: "DONE"
 priority: "high"
 owner: "TESTER"
+revision: 1
 depends_on: []
 tags:
   - "code"
@@ -30,10 +31,24 @@ comments:
     author: "TESTER"
     body: "Verified: Added scenario tests for MVP contract; forge test not run yet."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-03T17:02:49.499Z"
 doc_updated_by: "TESTER"
 description: "Add scenario and invariant tests for the MVP contract."
+sections:
+  Summary: "Add scenario and invariant tests for the MVP contract."
+  Scope: "Create Foundry tests for happy path, timeouts, caller checks, and fee/bond edges."
+  Plan: |-
+    1. Implement the change for "Stage 1.4 contract tests".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Risk of incomplete coverage on edge cases. Mitigation: implement tests listed in docs/08-testing-invariants.md."
+  Verify Steps: "1. forge test passes. 2. Coverage includes all scenarios from docs/08-testing-invariants.md."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert the commit to remove added tests."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Add scenario and invariant tests for the MVP contract.
 
 Create Foundry tests for happy path, timeouts, caller checks, and fee/bond edges.
 
+## Plan
+
+1. Implement the change for "Stage 1.4 contract tests".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Risk of incomplete coverage on edge cases. Mitigation: implement tests listed in docs/08-testing-invariants.md.
@@ -52,6 +73,13 @@ Risk of incomplete coverage on edge cases. Mitigation: implement tests listed in
 
 1. forge test passes. 2. Coverage includes all scenarios from docs/08-testing-invariants.md.
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert the commit to remove added tests.
+
+## Findings

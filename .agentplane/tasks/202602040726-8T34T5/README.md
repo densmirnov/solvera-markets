@@ -4,6 +4,7 @@ title: "Normalize env files for solvera.markets"
 status: "DONE"
 priority: "high"
 owner: "DOCS"
+revision: 1
 depends_on: []
 tags:
   - "backend"
@@ -30,10 +31,24 @@ comments:
     author: "DOCS"
     body: "Verified: env.example updated to solvera.markets and .env contains required production variables."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-04T07:28:43.814Z"
 doc_updated_by: "DOCS"
 description: "Fix production domain to solvera.markets, align env.example, and complete .env with required variables."
+sections:
+  Summary: "Updated env.example/.env to solvera.markets and completed missing production variables."
+  Scope: "Updated env.example domain values and filled .env with required backend/indexer variables."
+  Plan: |-
+    1. Implement the change for "Normalize env files for solvera.markets".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Ensure .env secrets remain protected; production domain changes require updating CORS_ORIGIN and VITE_API_BASE."
+  Verify Steps: "rg -n \"solvera\\.markets|CORS_ORIGIN|VITE_API_BASE|SUBGRAPH_URL\" env.example .env"
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert env.example and .env to previous values."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Updated env.example/.env to solvera.markets and completed missing production var
 
 Updated env.example domain values and filled .env with required backend/indexer variables.
 
+## Plan
+
+1. Implement the change for "Normalize env files for solvera.markets".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Ensure .env secrets remain protected; production domain changes require updating CORS_ORIGIN and VITE_API_BASE.
@@ -52,6 +73,13 @@ Ensure .env secrets remain protected; production domain changes require updating
 
 rg -n "solvera\.markets|CORS_ORIGIN|VITE_API_BASE|SUBGRAPH_URL" env.example .env
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert env.example and .env to previous values.
+
+## Findings

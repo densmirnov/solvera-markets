@@ -4,6 +4,7 @@ title: "Run indexer tests via docker"
 status: "DONE"
 priority: "med"
 owner: "CODER"
+revision: 1
 depends_on: []
 tags:
   - "backend"
@@ -30,10 +31,24 @@ comments:
     author: "CODER"
     body: "Verified: indexer test script now runs graph test in docker for platform support."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-04T04:48:12.240Z"
 doc_updated_by: "CODER"
 description: "Update indexer test script to use graph test --docker to avoid platform incompatibility."
+sections:
+  Summary: "Switch indexer tests to graph test --docker for supported execution."
+  Scope: "Update indexer/package.json test script to use graph test --docker."
+  Plan: |-
+    1. Implement the change for "Run indexer tests via docker".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Docker may be unavailable in some environments; document requirement for tests."
+  Verify Steps: "1) npm --prefix indexer test\\n2) git status --short --untracked-files=no"
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert to graph test without docker if containerized tests are unsupported."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Switch indexer tests to graph test --docker for supported execution.
 
 Update indexer/package.json test script to use graph test --docker.
 
+## Plan
+
+1. Implement the change for "Run indexer tests via docker".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Docker may be unavailable in some environments; document requirement for tests.
@@ -52,6 +73,13 @@ Docker may be unavailable in some environments; document requirement for tests.
 
 1) npm --prefix indexer test\n2) git status --short --untracked-files=no
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert to graph test without docker if containerized tests are unsupported.
+
+## Findings

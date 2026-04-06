@@ -4,6 +4,7 @@ title: "Add component READMEs"
 status: "DONE"
 priority: "med"
 owner: "DOCS"
+revision: 1
 depends_on: []
 tags:
   - "backend"
@@ -30,10 +31,24 @@ comments:
     author: "DOCS"
     body: "Verified: Added README.md to frontend, backend, indexer, and contracts."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-03T18:33:40.528Z"
 doc_updated_by: "DOCS"
 description: "Add README.md for frontend, backend, indexer, and contracts."
+sections:
+  Summary: "Add README.md to frontend/backend/indexer/contracts with structure and usage notes."
+  Scope: "Create README.md files describing purpose, structure, and entrypoints for each component."
+  Plan: |-
+    1. Implement the change for "Add component READMEs".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Risk of misleading usage. Mitigation: keep docs aligned with current structure and scripts."
+  Verify Steps: "1. Each component directory has README.md. 2. Contents are English and accurate."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert the commit to remove component READMEs."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Add README.md to frontend/backend/indexer/contracts with structure and usage not
 
 Create README.md files describing purpose, structure, and entrypoints for each component.
 
+## Plan
+
+1. Implement the change for "Add component READMEs".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Risk of misleading usage. Mitigation: keep docs aligned with current structure and scripts.
@@ -52,6 +73,13 @@ Risk of misleading usage. Mitigation: keep docs aligned with current structure a
 
 1. Each component directory has README.md. 2. Contents are English and accurate.
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert the commit to remove component READMEs.
+
+## Findings

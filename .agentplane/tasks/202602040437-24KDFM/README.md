@@ -4,6 +4,7 @@ title: "Fix frontend hook lint warnings"
 status: "DONE"
 priority: "low"
 owner: "CODER"
+revision: 1
 depends_on: []
 tags:
   - "frontend"
@@ -30,10 +31,24 @@ comments:
     author: "CODER"
     body: "Verified: monitor pages use stable callbacks and satisfy react-hooks deps."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-04T04:39:16.843Z"
 doc_updated_by: "CODER"
 description: "Adjust monitor pages to satisfy react-hooks exhaustive-deps warnings."
+sections:
+  Summary: "Resolve react-hooks dependency warnings in monitor pages."
+  Scope: "Refactor monitor pages to use stable callbacks or dependencies in useEffect."
+  Plan: |-
+    1. Implement the change for "Fix frontend hook lint warnings".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Incorrect dependencies could cause extra fetches; ensure behavior stays the same."
+  Verify Steps: "1) npm --prefix frontend run lint\\n2) git status --short --untracked-files=no"
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert monitor page changes if they introduce regressions."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Resolve react-hooks dependency warnings in monitor pages.
 
 Refactor monitor pages to use stable callbacks or dependencies in useEffect.
 
+## Plan
+
+1. Implement the change for "Fix frontend hook lint warnings".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Incorrect dependencies could cause extra fetches; ensure behavior stays the same.
@@ -52,6 +73,13 @@ Incorrect dependencies could cause extra fetches; ensure behavior stays the same
 
 1) npm --prefix frontend run lint\n2) git status --short --untracked-files=no
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert monitor page changes if they introduce regressions.
+
+## Findings

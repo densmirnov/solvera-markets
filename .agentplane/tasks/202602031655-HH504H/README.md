@@ -4,6 +4,7 @@ title: "Stage 1.6 testnet deploy"
 status: "DONE"
 priority: "med"
 owner: "CODER"
+revision: 1
 depends_on: []
 tags:
   - "code"
@@ -36,10 +37,24 @@ comments:
     author: "CODER"
     body: "Verified: Deployed IntentMarketplace to Base Sepolia; address and tx hash recorded in docs/14-deployments.md."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-03T17:13:25.017Z"
 doc_updated_by: "CODER"
 description: "Deploy contract to Base testnet using .env credentials and record addresses."
+sections:
+  Summary: "Deploy MVP contract to Base testnet using .env credentials and record addresses."
+  Scope: "Add deploy script/config, execute testnet deployment, and record addresses in docs/13-deployments.md."
+  Plan: |-
+    1. Implement the change for "Stage 1.6 testnet deploy".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Risk of incorrect network or key usage. Mitigation: read .env, confirm network, and record tx hashes."
+  Verify Steps: "1. Deployed contract exists on Base testnet. 2. Address + tx hash recorded. 3. Basic read call succeeds."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Re-deploy with corrected params and update docs; no on-chain rollback possible."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -50,6 +65,12 @@ Deploy MVP contract to Base testnet using .env credentials and record addresses.
 
 Add deploy script/config, execute testnet deployment, and record addresses in docs/13-deployments.md.
 
+## Plan
+
+1. Implement the change for "Stage 1.6 testnet deploy".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Risk of incorrect network or key usage. Mitigation: read .env, confirm network, and record tx hashes.
@@ -58,6 +79,13 @@ Risk of incorrect network or key usage. Mitigation: read .env, confirm network, 
 
 1. Deployed contract exists on Base testnet. 2. Address + tx hash recorded. 3. Basic read call succeeds.
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Re-deploy with corrected params and update docs; no on-chain rollback possible.
+
+## Findings

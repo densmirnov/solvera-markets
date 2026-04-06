@@ -4,6 +4,7 @@ title: "Add frontend fmt script"
 status: "DONE"
 priority: "low"
 owner: "CODER"
+revision: 1
 depends_on: []
 tags:
   - "frontend"
@@ -30,10 +31,24 @@ comments:
     author: "CODER"
     body: "Verified: frontend fmt script added for repo formatting workflow."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-04T04:36:36.880Z"
 doc_updated_by: "CODER"
 description: "Add npm fmt script to frontend package.json to satisfy repo fmt tooling."
+sections:
+  Summary: "Add frontend fmt script to align with repo format tooling."
+  Scope: "Add npm run fmt in frontend/package.json to run eslint --fix."
+  Plan: |-
+    1. Implement the change for "Add frontend fmt script".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Misconfigured script could break make fmt; ensure it matches lint fixer."
+  Verify Steps: "1) npm --prefix frontend run fmt\\n2) git status --short --untracked-files=no"
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Remove the fmt script if it conflicts with frontend linting."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Add frontend fmt script to align with repo format tooling.
 
 Add npm run fmt in frontend/package.json to run eslint --fix.
 
+## Plan
+
+1. Implement the change for "Add frontend fmt script".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Misconfigured script could break make fmt; ensure it matches lint fixer.
@@ -52,6 +73,13 @@ Misconfigured script could break make fmt; ensure it matches lint fixer.
 
 1) npm --prefix frontend run fmt\n2) git status --short --untracked-files=no
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Remove the fmt script if it conflicts with frontend linting.
+
+## Findings

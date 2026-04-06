@@ -4,6 +4,7 @@ title: "Update navbar links for Docs/Skill"
 status: "DONE"
 priority: "med"
 owner: "ORCHESTRATOR"
+revision: 1
 depends_on: []
 tags:
   - "frontend"
@@ -43,10 +44,30 @@ events:
     from: "DOING"
     to: "DONE"
     note: "Verified: navbar links updated to Skill internal route and Docs external to docs.solvera.markets."
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-07T08:30:55.757Z"
 doc_updated_by: "ORCHESTRATOR"
 description: "Rename Docs nav item to Skill (SKILL.md page) and make Docs link external to docs.solvera.markets."
+sections:
+  Summary: "Switched navbar to show Skill (internal) and Docs (external), updated hero CTA and SKILL page copy."
+  Scope: "Update frontend/src/components/Layout.tsx, frontend/src/pages/Home.tsx, and frontend/src/pages/docs.tsx to adjust navigation and copy."
+  Plan: |-
+    1. Implement the change for "Update navbar links for Docs/Skill".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "External docs link opens a new tab and depends on docs.solvera.markets availability; /docs route still exists for legacy access."
+  Verify Steps: "manual: confirm navbar shows Skill (internal) and Docs (external) and hero Documentation button opens docs.solvera.markets."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    #### 2026-02-07T08:30:45.419Z — VERIFY — ok
+    
+    By: ORCHESTRATOR
+    
+    Note: Verified: navbar links updated in frontend/src/components/Layout.tsx (Skill internal, Docs external to docs.solvera.markets).
+    
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert navbar/CTA changes in Layout.tsx, Home.tsx, and docs.tsx to restore previous Docs link behavior."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -57,6 +78,12 @@ Switched navbar to show Skill (internal) and Docs (external), updated hero CTA a
 
 Update frontend/src/components/Layout.tsx, frontend/src/pages/Home.tsx, and frontend/src/pages/docs.tsx to adjust navigation and copy.
 
+## Plan
+
+1. Implement the change for "Update navbar links for Docs/Skill".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 External docs link opens a new tab and depends on docs.solvera.markets availability; /docs route still exists for legacy access.
@@ -65,15 +92,7 @@ External docs link opens a new tab and depends on docs.solvera.markets availabil
 
 manual: confirm navbar shows Skill (internal) and Docs (external) and hero Documentation button opens docs.solvera.markets.
 
-## Rollback Plan
-
-Revert navbar/CTA changes in Layout.tsx, Home.tsx, and docs.tsx to restore previous Docs link behavior.
-
 ## Verification
-
-### Plan
-
-### Results
 
 <!-- BEGIN VERIFICATION RESULTS -->
 #### 2026-02-07T08:30:45.419Z — VERIFY — ok
@@ -83,3 +102,9 @@ By: ORCHESTRATOR
 Note: Verified: navbar links updated in frontend/src/components/Layout.tsx (Skill internal, Docs external to docs.solvera.markets).
 
 <!-- END VERIFICATION RESULTS -->
+
+## Rollback Plan
+
+Revert navbar/CTA changes in Layout.tsx, Home.tsx, and docs.tsx to restore previous Docs link behavior.
+
+## Findings

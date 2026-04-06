@@ -4,6 +4,7 @@ title: "Stage 0.1 repo structure"
 status: "DONE"
 priority: "med"
 owner: "CODER"
+revision: 1
 depends_on: []
 tags:
   - "code"
@@ -30,10 +31,24 @@ comments:
     author: "CODER"
     body: "Verified: Added base directories and hygiene files; make check not run yet due to pending scripts."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-03T16:51:12.431Z"
 doc_updated_by: "CODER"
 description: "Create base directories and repo hygiene files for MVP development."
+sections:
+  Summary: "Create base repository structure and core hygiene files required for MVP development."
+  Scope: "Add top-level directories and repo hygiene files (.gitignore, .editorconfig, .gitkeep)."
+  Plan: |-
+    1. Implement the change for "Stage 0.1 repo structure".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Risk of including unintended files in the initial structure. Mitigation: strict allowlist in commit."
+  Verify Steps: "1. git status shows only intended files. 2. make check (expected to pass structure validation only)."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert the commit to remove the added structure and hygiene files."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Create base repository structure and core hygiene files required for MVP develop
 
 Add top-level directories and repo hygiene files (.gitignore, .editorconfig, .gitkeep).
 
+## Plan
+
+1. Implement the change for "Stage 0.1 repo structure".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Risk of including unintended files in the initial structure. Mitigation: strict allowlist in commit.
@@ -52,6 +73,13 @@ Risk of including unintended files in the initial structure. Mitigation: strict 
 
 1. git status shows only intended files. 2. make check (expected to pass structure validation only).
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert the commit to remove the added structure and hygiene files.
+
+## Findings

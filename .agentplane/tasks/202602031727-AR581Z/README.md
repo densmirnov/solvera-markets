@@ -4,6 +4,7 @@ title: "Stage 1.4d clean warnings"
 status: "DONE"
 priority: "low"
 owner: "CODER"
+revision: 1
 depends_on: []
 tags:
   - "code"
@@ -30,10 +31,24 @@ comments:
     author: "CODER"
     body: "Verified: forge test passed with no warnings after renaming variables and marking placeholder test pure."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-03T17:28:56.059Z"
 doc_updated_by: "CODER"
 description: "Remove compiler warnings in IntentMarketplace and placeholder Counter test."
+sections:
+  Summary: "Remove compiler warnings from IntentMarketplace and Counter test."
+  Scope: "Rename shadowed variables in expire branches and mark Counter test as pure."
+  Plan: |-
+    1. Implement the change for "Stage 1.4d clean warnings".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Risk of altering contract semantics. Mitigation: rename variables only; rerun forge test."
+  Verify Steps: "1. forge test passes with no warnings. 2. Only variable names and test mutability changed."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert the commit to restore previous variable names and test signature."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Remove compiler warnings from IntentMarketplace and Counter test.
 
 Rename shadowed variables in expire branches and mark Counter test as pure.
 
+## Plan
+
+1. Implement the change for "Stage 1.4d clean warnings".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Risk of altering contract semantics. Mitigation: rename variables only; rerun forge test.
@@ -52,6 +73,13 @@ Risk of altering contract semantics. Mitigation: rename variables only; rerun fo
 
 1. forge test passes with no warnings. 2. Only variable names and test mutability changed.
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert the commit to restore previous variable names and test signature.
+
+## Findings

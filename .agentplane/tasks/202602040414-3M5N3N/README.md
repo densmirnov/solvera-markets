@@ -4,6 +4,7 @@ title: "Stage 4.0 frontend plan alignment"
 status: "DONE"
 priority: "med"
 owner: "DOCS"
+revision: 1
 depends_on: []
 tags:
   - "frontend"
@@ -30,10 +31,24 @@ comments:
     author: "DOCS"
     body: "Verified: Stage 4 roadmap now includes landing/skill/docs/api pages and operator filters without hackathon mentions."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-04T04:16:59.232Z"
 doc_updated_by: "DOCS"
 description: "Update ROADMAP Stage 4 to reflect landing/skill/docs/API pages and operator UI requirements from website sources."
+sections:
+  Summary: "Align the Stage 4 roadmap with the website markdown sources and operator UI needs."
+  Scope: "Update ROADMAP.md Stage 4 tasks to include landing/skill/docs/api pages and operator observability screens."
+  Plan: |-
+    1. Implement the change for "Stage 4.0 frontend plan alignment".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Roadmap edits may shift priorities; ensure changes remain consistent with Stage 4 scope."
+  Verify Steps: "1) rg \"Stage 4\" ROADMAP.md\\n2) git status --short --untracked-files=no"
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert ROADMAP.md to the prior Stage 4 definition if alignment is incorrect."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Align the Stage 4 roadmap with the website markdown sources and operator UI need
 
 Update ROADMAP.md Stage 4 tasks to include landing/skill/docs/api pages and operator observability screens.
 
+## Plan
+
+1. Implement the change for "Stage 4.0 frontend plan alignment".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Roadmap edits may shift priorities; ensure changes remain consistent with Stage 4 scope.
@@ -52,6 +73,13 @@ Roadmap edits may shift priorities; ensure changes remain consistent with Stage 
 
 1) rg "Stage 4" ROADMAP.md\n2) git status --short --untracked-files=no
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert ROADMAP.md to the prior Stage 4 definition if alignment is incorrect.
+
+## Findings

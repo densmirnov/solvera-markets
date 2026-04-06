@@ -4,6 +4,7 @@ title: "Stage 3.1 API contract"
 status: "DONE"
 priority: "high"
 owner: "DOCS"
+revision: 1
 depends_on: []
 tags:
   - "backend"
@@ -30,10 +31,24 @@ comments:
     author: "DOCS"
     body: "Verified: backend API doc now specifies next_steps, tx-builder endpoints, error model, config endpoint, and pagination filters per PRD v0.1."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-03T18:53:21.259Z"
 doc_updated_by: "DOCS"
 description: "Define backend API contract per PRD v0.1 with next_steps, tx-builder endpoints, error model, config, and pagination."
+sections:
+  Summary: "Define the agent-first backend API contract per PRD v0.1 (next_steps, tx-builders, errors, config, pagination)."
+  Scope: "Update docs/17-backend-api.md to include endpoint specs, next_steps schema, error model, tx-builder endpoints, config endpoint, and pagination filters."
+  Plan: |-
+    1. Implement the change for "Stage 3.1 API contract".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Spec changes may diverge from backend implementation; ensure docs are aligned with server routes."
+  Verify Steps: "1) rg \"next_steps\" docs/17-backend-api.md\\n2) git status --short --untracked-files=no"
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert docs/17-backend-api.md to previous version if requirements are incorrect."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Define the agent-first backend API contract per PRD v0.1 (next_steps, tx-builder
 
 Update docs/17-backend-api.md to include endpoint specs, next_steps schema, error model, tx-builder endpoints, config endpoint, and pagination filters.
 
+## Plan
+
+1. Implement the change for "Stage 3.1 API contract".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Spec changes may diverge from backend implementation; ensure docs are aligned with server routes.
@@ -52,6 +73,13 @@ Spec changes may diverge from backend implementation; ensure docs are aligned wi
 
 1) rg "next_steps" docs/17-backend-api.md\n2) git status --short --untracked-files=no
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert docs/17-backend-api.md to previous version if requirements are incorrect.
+
+## Findings

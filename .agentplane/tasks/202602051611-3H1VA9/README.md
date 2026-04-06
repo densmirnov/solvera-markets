@@ -4,6 +4,7 @@ title: "Adjust hero spacing + Mintlify index"
 status: "DONE"
 priority: "med"
 owner: "ORCHESTRATOR"
+revision: 1
 depends_on: []
 tags:
   - "frontend"
@@ -43,10 +44,30 @@ events:
     from: "DOING"
     to: "DONE"
     note: "Verified: hero spacing adjusted and docs index updated per task scope."
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-07T08:34:14.254Z"
 doc_updated_by: "ORCHESTRATOR"
 description: "Reduce top padding before hero and fix Mintlify root route by using index.md instead of README.md."
+sections:
+  Summary: "Reduced top padding before hero and moved docs root to index.md to fix Mintlify routing."
+  Scope: "Update frontend/src/components/Layout.tsx, move docs/README.md to docs/index.md, and adjust docs/docs.json navigation."
+  Plan: |-
+    1. Implement the change for "Adjust hero spacing + Mintlify index".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "External links to /README will now 404; ensure any references use / or /index instead."
+  Verify Steps: "manual: open site root to confirm hero spacing; open https://docs.solvera.markets/ to confirm index loads without /README 404."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    #### 2026-02-07T08:34:09.360Z — VERIFY — ok
+    
+    By: ORCHESTRATOR
+    
+    Note: Verified: home hero spacing adjusted and docs index updated (commit 3e52538).
+    
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Restore main padding values and rename docs/index.md back to docs/README.md, reverting docs/docs.json navigation."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -57,6 +78,12 @@ Reduced top padding before hero and moved docs root to index.md to fix Mintlify 
 
 Update frontend/src/components/Layout.tsx, move docs/README.md to docs/index.md, and adjust docs/docs.json navigation.
 
+## Plan
+
+1. Implement the change for "Adjust hero spacing + Mintlify index".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 External links to /README will now 404; ensure any references use / or /index instead.
@@ -65,15 +92,7 @@ External links to /README will now 404; ensure any references use / or /index in
 
 manual: open site root to confirm hero spacing; open https://docs.solvera.markets/ to confirm index loads without /README 404.
 
-## Rollback Plan
-
-Restore main padding values and rename docs/index.md back to docs/README.md, reverting docs/docs.json navigation.
-
 ## Verification
-
-### Plan
-
-### Results
 
 <!-- BEGIN VERIFICATION RESULTS -->
 #### 2026-02-07T08:34:09.360Z — VERIFY — ok
@@ -83,3 +102,9 @@ By: ORCHESTRATOR
 Note: Verified: home hero spacing adjusted and docs index updated (commit 3e52538).
 
 <!-- END VERIFICATION RESULTS -->
+
+## Rollback Plan
+
+Restore main padding values and rename docs/index.md back to docs/README.md, reverting docs/docs.json navigation.
+
+## Findings

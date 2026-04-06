@@ -4,6 +4,7 @@ title: "Stage 2.2 indexer mappings"
 status: "DONE"
 priority: "high"
 owner: "CODER"
+revision: 1
 depends_on: []
 tags:
   - "backend"
@@ -30,10 +31,24 @@ comments:
     author: "CODER"
     body: "Verified: Event handlers added; schema and manifest aligned; mappings use events only (no RPC)."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-03T17:42:33.356Z"
 doc_updated_by: "CODER"
 description: "Implement The Graph mappings for IntentMarketplace events."
+sections:
+  Summary: "Implement event handlers mapping contract events to entities."
+  Scope: "Add indexer/src/mappings.ts and update manifest handlers."
+  Plan: |-
+    1. Implement the change for "Stage 2.2 indexer mappings".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Risk of incorrect derived fields leading to inconsistent API. Mitigation: define deterministic updates per event."
+  Verify Steps: "1. Handlers exist for all events. 2. Entities update without RPC reads."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert the commit to remove mapping implementation."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Implement event handlers mapping contract events to entities.
 
 Add indexer/src/mappings.ts and update manifest handlers.
 
+## Plan
+
+1. Implement the change for "Stage 2.2 indexer mappings".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Risk of incorrect derived fields leading to inconsistent API. Mitigation: define deterministic updates per event.
@@ -52,6 +73,13 @@ Risk of incorrect derived fields leading to inconsistent API. Mitigation: define
 
 1. Handlers exist for all events. 2. Entities update without RPC reads.
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert the commit to remove mapping implementation.
+
+## Findings

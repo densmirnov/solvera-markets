@@ -4,6 +4,7 @@ title: "Fix frontend lint dependency"
 status: "DONE"
 priority: "med"
 owner: "CODER"
+revision: 1
 depends_on: []
 tags:
   - "frontend"
@@ -30,10 +31,24 @@ comments:
     author: "CODER"
     body: "Verified: frontend eslint versions aligned for compatible dependency tree."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-04T04:30:39.533Z"
 doc_updated_by: "CODER"
 description: "Resolve eslint peer dependency conflict in frontend by aligning eslint versions."
+sections:
+  Summary: "Align frontend eslint dependencies to resolve peer conflicts."
+  Scope: "Update frontend/package.json eslint and @eslint/js versions to compatible range and reinstall dependencies."
+  Plan: |-
+    1. Implement the change for "Fix frontend lint dependency".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Version mismatch could break lint config; verify lint runs."
+  Verify Steps: "1) npm --prefix frontend install\\n2) npm --prefix frontend run lint\\n3) git status --short --untracked-files=no"
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert frontend/package.json dependency changes if lint fails."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Align frontend eslint dependencies to resolve peer conflicts.
 
 Update frontend/package.json eslint and @eslint/js versions to compatible range and reinstall dependencies.
 
+## Plan
+
+1. Implement the change for "Fix frontend lint dependency".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Version mismatch could break lint config; verify lint runs.
@@ -52,6 +73,13 @@ Version mismatch could break lint config; verify lint runs.
 
 1) npm --prefix frontend install\n2) npm --prefix frontend run lint\n3) git status --short --untracked-files=no
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert frontend/package.json dependency changes if lint fails.
+
+## Findings

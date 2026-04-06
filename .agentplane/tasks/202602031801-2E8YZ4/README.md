@@ -4,6 +4,7 @@ title: "Docs nav update 3"
 status: "DONE"
 priority: "low"
 owner: "DOCS"
+revision: 1
 depends_on: []
 tags:
   - "backend"
@@ -30,10 +31,24 @@ comments:
     author: "DOCS"
     body: "Verified: docs/README includes subgraph endpoints document in navigation."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-03T18:02:38.765Z"
 doc_updated_by: "DOCS"
 description: "Update docs/README.md with subgraph endpoints doc."
+sections:
+  Summary: "Update docs README to include subgraph endpoints doc."
+  Scope: "Add docs/19-subgraph-endpoints.md to docs/README.md navigation."
+  Plan: |-
+    1. Implement the change for "Docs nav update 3".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Risk of stale docs nav. Mitigation: update README alongside new docs."
+  Verify Steps: "1. docs/README.md includes the subgraph endpoints doc. 2. git status shows only README update."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert the commit to restore previous docs/README.md navigation."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Update docs README to include subgraph endpoints doc.
 
 Add docs/19-subgraph-endpoints.md to docs/README.md navigation.
 
+## Plan
+
+1. Implement the change for "Docs nav update 3".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Risk of stale docs nav. Mitigation: update README alongside new docs.
@@ -52,6 +73,13 @@ Risk of stale docs nav. Mitigation: update README alongside new docs.
 
 1. docs/README.md includes the subgraph endpoints doc. 2. git status shows only README update.
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert the commit to restore previous docs/README.md navigation.
+
+## Findings

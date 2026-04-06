@@ -4,6 +4,7 @@ title: "Refresh dependencies to current versions"
 status: "DONE"
 priority: "high"
 owner: "CODER"
+revision: 1
 depends_on:
   - "202602040538-YWCDG7"
   - "202602040538-YWCDG7"
@@ -32,10 +33,24 @@ comments:
     author: "CODER"
     body: "Verified: make check completed after dependency upgrades; backend, frontend, indexer tests and coverage are green."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-04T06:21:05.858Z"
 doc_updated_by: "CODER"
 description: "Audit and update npm/foundry dependencies to current stable versions, align configs, and ensure compatibility."
+sections:
+  Summary: "Upgraded backend/frontend/indexer dependencies to current stable releases, added indexer overrides for transitive vulnerabilities, and added @types/express for backend builds."
+  Scope: "Updated package.json + lockfiles in backend, frontend, and indexer; introduced npm overrides for indexer transitive deps; added @types/express devDependency for backend TS build."
+  Plan: |-
+    1. Implement the change for "Refresh dependencies to current versions".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Major version upgrades (Nest 11, React 19, Vite 7, Graph CLI 0.98) may introduce subtle runtime differences. Indexer still reports moderate npm audit issues due to gluegun/lodash.trim advisories with no upstream fix."
+  Verify Steps: "make check"
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert the dependency update commit and re-run make check to restore the previous toolchain."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -46,6 +61,12 @@ Upgraded backend/frontend/indexer dependencies to current stable releases, added
 
 Updated package.json + lockfiles in backend, frontend, and indexer; introduced npm overrides for indexer transitive deps; added @types/express devDependency for backend TS build.
 
+## Plan
+
+1. Implement the change for "Refresh dependencies to current versions".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Major version upgrades (Nest 11, React 19, Vite 7, Graph CLI 0.98) may introduce subtle runtime differences. Indexer still reports moderate npm audit issues due to gluegun/lodash.trim advisories with no upstream fix.
@@ -54,6 +75,13 @@ Major version upgrades (Nest 11, React 19, Vite 7, Graph CLI 0.98) may introduce
 
 make check
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert the dependency update commit and re-run make check to restore the previous toolchain.
+
+## Findings

@@ -4,6 +4,7 @@ title: "Add wallet pack flow and clarify SKILL wallet usage"
 status: "DONE"
 priority: "med"
 owner: "ORCHESTRATOR"
+revision: 1
 depends_on: []
 tags:
   - "code"
@@ -30,10 +31,24 @@ comments:
     author: "ORCHESTRATOR"
     body: "Verified: Manual check assumed. Wallet pack command added and SKILL wallet guidance updated for agents without file access."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-05T14:44:36.610Z"
 doc_updated_by: "ORCHESTRATOR"
 description: "Enable generating a downloadable wallet pack for agents without file access and update SKILL.md wallet instructions."
+sections:
+  Summary: "Add wallet pack generation for agents without file access and update SKILL wallet instructions."
+  Scope: "base-wallet CLI/storage plus SKILL documentation updates."
+  Plan: |-
+    1. Implement the change for "Add wallet pack flow and clarify SKILL wallet usage".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Wallet pack contains private key; must not be committed or shared publicly."
+  Verify Steps: "Manual: review SKILL.md wallet section and base-wallet CLI help; confirm pack command generates wallet.json and README.txt."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert base-wallet changes and SKILL docs updates."
+  Findings: ""
 id_source: "generated"
 dirty: false
 ---
@@ -45,6 +60,12 @@ Add wallet pack generation for agents without file access and update SKILL walle
 
 base-wallet CLI/storage plus SKILL documentation updates.
 
+## Plan
+
+1. Implement the change for "Add wallet pack flow and clarify SKILL wallet usage".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Wallet pack contains private key; must not be committed or shared publicly.
@@ -53,6 +74,13 @@ Wallet pack contains private key; must not be committed or shared publicly.
 
 Manual: review SKILL.md wallet section and base-wallet CLI help; confirm pack command generates wallet.json and README.txt.
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert base-wallet changes and SKILL docs updates.
+
+## Findings

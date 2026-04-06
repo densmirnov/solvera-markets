@@ -4,6 +4,7 @@ title: "Stage 1.3 economics and reputation"
 status: "DONE"
 priority: "high"
 owner: "CODER"
+revision: 1
 depends_on: []
 tags:
   - "code"
@@ -30,10 +31,24 @@ comments:
     author: "CODER"
     body: "Verified: Fee, bond, and reputation logic added to contract; tests pending in Stage 1.4."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-03T17:01:56.072Z"
 doc_updated_by: "CODER"
 description: "Implement fees, bond, and reputation accounting in the contract."
+sections:
+  Summary: "Implement fees, bond, and reputation accounting in the contract."
+  Scope: "Add fee/bond parameters, payout logic, and reputation updates to the contract."
+  Plan: |-
+    1. Implement the change for "Stage 1.3 economics and reputation".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Risk of incorrect economic accounting or edge cases. Mitigation: add targeted tests in Stage 1.4."
+  Verify Steps: "1. Fee and bond parameters are immutable. 2. Payout paths match spec. 3. Reputation updates occur on accept/timeout."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert the commit to remove fee/bond/reputation changes."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Implement fees, bond, and reputation accounting in the contract.
 
 Add fee/bond parameters, payout logic, and reputation updates to the contract.
 
+## Plan
+
+1. Implement the change for "Stage 1.3 economics and reputation".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Risk of incorrect economic accounting or edge cases. Mitigation: add targeted tests in Stage 1.4.
@@ -52,6 +73,13 @@ Risk of incorrect economic accounting or edge cases. Mitigation: add targeted te
 
 1. Fee and bond parameters are immutable. 2. Payout paths match spec. 3. Reputation updates occur on accept/timeout.
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert the commit to remove fee/bond/reputation changes.
+
+## Findings

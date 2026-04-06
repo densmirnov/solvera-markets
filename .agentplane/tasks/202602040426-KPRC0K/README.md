@@ -4,6 +4,7 @@ title: "Add lint/format scripts for backend and indexer"
 status: "DONE"
 priority: "high"
 owner: "CODER"
+revision: 1
 depends_on: []
 tags:
   - "backend"
@@ -30,10 +31,24 @@ comments:
     author: "CODER"
     body: "Verified: backend/indexer now have eslint configs and lint/fmt scripts wired for repo tooling."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-04T04:28:13.028Z"
 doc_updated_by: "CODER"
 description: "Add ESLint configs and lint/fmt scripts for backend and indexer so repo lint/format passes."
+sections:
+  Summary: "Add ESLint configs and lint/fmt scripts for backend and indexer packages."
+  Scope: "Add eslint configs, update package.json scripts/devDependencies, and ensure make lint/fmt can run for backend and indexer."
+  Plan: |-
+    1. Implement the change for "Add lint/format scripts for backend and indexer".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Linting may require code tweaks; ensure configs align with current code style."
+  Verify Steps: "1) rg \"lint\" backend/package.json indexer/package.json\\n2) make lint\\n3) git status --short --untracked-files=no"
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert eslint configs and package.json script changes if lint tooling conflicts with build."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Add ESLint configs and lint/fmt scripts for backend and indexer packages.
 
 Add eslint configs, update package.json scripts/devDependencies, and ensure make lint/fmt can run for backend and indexer.
 
+## Plan
+
+1. Implement the change for "Add lint/format scripts for backend and indexer".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Linting may require code tweaks; ensure configs align with current code style.
@@ -52,6 +73,13 @@ Linting may require code tweaks; ensure configs align with current code style.
 
 1) rg "lint" backend/package.json indexer/package.json\n2) make lint\n3) git status --short --untracked-files=no
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert eslint configs and package.json script changes if lint tooling conflicts with build.
+
+## Findings

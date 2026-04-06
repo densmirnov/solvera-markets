@@ -4,6 +4,7 @@ title: "Stage 0.2 documentation policy"
 status: "DONE"
 priority: "med"
 owner: "DOCS"
+revision: 1
 depends_on: []
 tags:
   - "code"
@@ -30,10 +31,24 @@ comments:
     author: "DOCS"
     body: "Verified: Policy statements added to CONTRIBUTING and docs README; no code execution required."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-03T16:51:28.483Z"
 doc_updated_by: "DOCS"
 description: "Define documentation and test policy for all code changes."
+sections:
+  Summary: "Define documentation and test coverage policy for all code changes."
+  Scope: "Update CONTRIBUTING and docs README with policy statements."
+  Plan: |-
+    1. Implement the change for "Stage 0.2 documentation policy".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Risk of inconsistent policy statements across docs. Mitigation: update both CONTRIBUTING and docs/README together."
+  Verify Steps: "1. Policy statements present in CONTRIBUTING.md and docs/README.md. 2. git diff shows only intended doc changes."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert the commit to remove policy statements."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Define documentation and test coverage policy for all code changes.
 
 Update CONTRIBUTING and docs README with policy statements.
 
+## Plan
+
+1. Implement the change for "Stage 0.2 documentation policy".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Risk of inconsistent policy statements across docs. Mitigation: update both CONTRIBUTING and docs/README together.
@@ -52,6 +73,13 @@ Risk of inconsistent policy statements across docs. Mitigation: update both CONT
 
 1. Policy statements present in CONTRIBUTING.md and docs/README.md. 2. git diff shows only intended doc changes.
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert the commit to remove policy statements.
+
+## Findings

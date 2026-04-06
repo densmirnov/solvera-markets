@@ -4,6 +4,7 @@ title: "Update ROADMAP doc links"
 status: "DONE"
 priority: "low"
 owner: "ORCHESTRATOR"
+revision: 1
 depends_on: []
 tags:
   - "docs"
@@ -26,9 +27,50 @@ comments:
     author: "ORCHESTRATOR"
     body: "Verified: ROADMAP.md references updated to match new docs paths after Mintlify restructure."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-06T14:57:40.121Z"
 doc_updated_by: "ORCHESTRATOR"
 description: "Align ROADMAP.md doc references with the new Mintlify docs structure (moved files under docs/* subfolders)."
+sections:
+  Summary: ""
+  Scope: ""
+  Plan: |-
+    1. Implement the change for "Update ROADMAP doc links".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: ""
+  Verify Steps: ""
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: ""
+  Findings: ""
 id_source: "generated"
 ---
+## Summary
+
+
+## Scope
+
+
+## Plan
+
+1. Implement the change for "Update ROADMAP doc links".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
+## Risks
+
+
+## Verify Steps
+
+
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
+## Rollback Plan
+
+
+## Findings

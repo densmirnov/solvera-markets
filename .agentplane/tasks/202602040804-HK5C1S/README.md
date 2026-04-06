@@ -4,6 +4,7 @@ title: "Fix frontend Docker build for SKILL.md"
 status: "DONE"
 priority: "high"
 owner: "CODER"
+revision: 1
 depends_on: []
 tags:
   - "frontend"
@@ -33,10 +34,24 @@ comments:
     author: "CODER"
     body: "Verified: docker compose up -d --build passes and frontend build now finds SKILL.md in context."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-04T08:08:13.430Z"
 doc_updated_by: "CODER"
 description: "Ensure frontend Docker build includes SKILL.md so prebuild sync succeeds."
+sections:
+  Summary: "Added SKILL.md to frontend Docker build context to satisfy prebuild sync."
+  Scope: "Updated frontend/Dockerfile to copy SKILL.md during build."
+  Plan: |-
+    1. Implement the change for "Fix frontend Docker build for SKILL.md".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "If SKILL.md is renamed or moved, Docker build will fail unless the copy list is updated."
+  Verify Steps: "docker compose up -d --build"
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert frontend/Dockerfile changes and rebuild containers."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -47,6 +62,12 @@ Added SKILL.md to frontend Docker build context to satisfy prebuild sync.
 
 Updated frontend/Dockerfile to copy SKILL.md during build.
 
+## Plan
+
+1. Implement the change for "Fix frontend Docker build for SKILL.md".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 If SKILL.md is renamed or moved, Docker build will fail unless the copy list is updated.
@@ -55,6 +76,13 @@ If SKILL.md is renamed or moved, Docker build will fail unless the copy list is 
 
 docker compose up -d --build
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert frontend/Dockerfile changes and rebuild containers.
+
+## Findings

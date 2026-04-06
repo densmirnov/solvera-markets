@@ -4,6 +4,7 @@ title: "Fix monitor fetch and remove UI shadows"
 status: "DONE"
 priority: "high"
 owner: "CODER"
+revision: 1
 depends_on: []
 tags:
   - "frontend"
@@ -31,10 +32,27 @@ comments:
     author: "CODER"
     body: "Verified: frontend loads without shadows and Monitor API requests succeed with CORS enabled."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-04T07:09:50.524Z"
 doc_updated_by: "CODER"
 description: "Remove drop shadows from frontend UI and fix Monitor API fetch errors."
+sections:
+  Summary: "Removed UI shadows and enabled CORS to fix Monitor API fetch failures."
+  Scope: |-
+    Updated frontend styles to remove box shadows, enabled CORS in backend, and added CORS_ORIGIN to docker-compose.yml.
+    
+    Updated frontend styles to remove box shadows, enabled CORS in backend, and added CORS_ORIGIN to docker-compose.yml.
+  Plan: |-
+    1. Implement the change for "Fix monitor fetch and remove UI shadows".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Allowing '*' for CORS may be too permissive for production; set CORS_ORIGIN to the deployed frontend domain in production."
+  Verify Steps: "1) docker compose up -d --build\\n2) open http://localhost:4173/monitor\\n3) confirm Monitor loads without 'Failed to fetch'"
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert frontend/src/styles.css, backend/src/main.ts, and docker-compose.yml; rebuild containers."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -47,6 +65,12 @@ Updated frontend styles to remove box shadows, enabled CORS in backend, and adde
 
 Updated frontend styles to remove box shadows, enabled CORS in backend, and added CORS_ORIGIN to docker-compose.yml.
 
+## Plan
+
+1. Implement the change for "Fix monitor fetch and remove UI shadows".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Allowing '*' for CORS may be too permissive for production; set CORS_ORIGIN to the deployed frontend domain in production.
@@ -55,6 +79,13 @@ Allowing '*' for CORS may be too permissive for production; set CORS_ORIGIN to t
 
 1) docker compose up -d --build\n2) open http://localhost:4173/monitor\n3) confirm Monitor loads without 'Failed to fetch'
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert frontend/src/styles.css, backend/src/main.ts, and docker-compose.yml; rebuild containers.
+
+## Findings

@@ -4,6 +4,7 @@ title: "Stage 1.5 static analysis"
 status: "DONE"
 priority: "med"
 owner: "CODER"
+revision: 1
 depends_on: []
 tags:
   - "code"
@@ -30,10 +31,24 @@ comments:
     author: "CODER"
     body: "Verified: Added solhint config and audit checklist doc; tool execution pending."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-03T17:03:32.065Z"
 doc_updated_by: "CODER"
 description: "Add static analysis configuration and audit-readiness notes."
+sections:
+  Summary: "Add static analysis configuration and audit-readiness notes."
+  Scope: "Add solhint/slither configuration and audit checklist doc."
+  Plan: |-
+    1. Implement the change for "Stage 1.5 static analysis".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Risk of tool availability in CI. Mitigation: document required tools and make checks optional until configured."
+  Verify Steps: "1. Static analysis configs added. 2. Audit checklist documented in docs/."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert the commit to remove static analysis configs and checklist."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Add static analysis configuration and audit-readiness notes.
 
 Add solhint/slither configuration and audit checklist doc.
 
+## Plan
+
+1. Implement the change for "Stage 1.5 static analysis".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Risk of tool availability in CI. Mitigation: document required tools and make checks optional until configured.
@@ -52,6 +73,13 @@ Risk of tool availability in CI. Mitigation: document required tools and make ch
 
 1. Static analysis configs added. 2. Audit checklist documented in docs/.
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert the commit to remove static analysis configs and checklist.
+
+## Findings

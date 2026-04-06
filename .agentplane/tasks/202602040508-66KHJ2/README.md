@@ -4,6 +4,7 @@ title: "Backend tests and coverage"
 status: "DONE"
 priority: "high"
 owner: "TESTER"
+revision: 1
 depends_on: []
 tags:
   - "backend"
@@ -30,10 +31,24 @@ comments:
     author: "TESTER"
     body: "Verified: backend has API tests and c8 coverage thresholds with updated lockfile."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-04T05:24:00.215Z"
 doc_updated_by: "TESTER"
 description: "Add backend API tests and enforce coverage thresholds."
+sections:
+  Summary: "Add backend API tests and enforce coverage thresholds."
+  Scope: "Add Nest controller tests, configure c8 coverage, and update backend test scripts."
+  Plan: |-
+    1. Implement the change for "Backend tests and coverage".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Coverage thresholds may require more tests; ensure new tests are deterministic."
+  Verify Steps: "1) npm --prefix backend test\\n2) scripts/coverage.sh\\n3) git status --short --untracked-files=no"
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert backend test changes and coverage settings if they break CI."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Add backend API tests and enforce coverage thresholds.
 
 Add Nest controller tests, configure c8 coverage, and update backend test scripts.
 
+## Plan
+
+1. Implement the change for "Backend tests and coverage".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Coverage thresholds may require more tests; ensure new tests are deterministic.
@@ -52,6 +73,13 @@ Coverage thresholds may require more tests; ensure new tests are deterministic.
 
 1) npm --prefix backend test\n2) scripts/coverage.sh\n3) git status --short --untracked-files=no
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert backend test changes and coverage settings if they break CI.
+
+## Findings

@@ -4,6 +4,7 @@ title: "Remove USDC lock-in messaging"
 status: "DONE"
 priority: "high"
 owner: "DOCS"
+revision: 1
 depends_on: []
 tags:
   - "frontend"
@@ -30,9 +31,50 @@ comments:
     author: "DOCS"
     body: "Verified: docker compose up -d --build; UI and skill/api docs now describe asset-agnostic rewards."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-04T09:12:46.776Z"
 doc_updated_by: "DOCS"
 description: "Replace USDC-only wording with asset-agnostic messaging, add pricing sentence, and update skill/api docs."
+sections:
+  Summary: ""
+  Scope: ""
+  Plan: |-
+    1. Implement the change for "Remove USDC lock-in messaging".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: ""
+  Verify Steps: ""
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: ""
+  Findings: ""
 id_source: "generated"
 ---
+## Summary
+
+
+## Scope
+
+
+## Plan
+
+1. Implement the change for "Remove USDC lock-in messaging".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
+## Risks
+
+
+## Verify Steps
+
+
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
+## Rollback Plan
+
+
+## Findings

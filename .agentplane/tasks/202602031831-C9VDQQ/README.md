@@ -4,6 +4,7 @@ title: "Roadmap agent-first updates"
 status: "DONE"
 priority: "med"
 owner: "DOCS"
+revision: 1
 depends_on: []
 tags:
   - "backend"
@@ -30,10 +31,24 @@ comments:
     author: "DOCS"
     body: "Verified: ROADMAP updated with agent-first API note and SKILL.md task."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-03T18:34:23.027Z"
 doc_updated_by: "DOCS"
 description: "Update ROADMAP with SKILL.md for frontend and agent-first backend API emphasis."
+sections:
+  Summary: "Update ROADMAP with SKILL.md for frontend and agent-first backend API requirements."
+  Scope: "Add SKILL.md task under frontend and agent-first API note under backend in ROADMAP."
+  Plan: |-
+    1. Implement the change for "Roadmap agent-first updates".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Risk of mismatch with implementation. Mitigation: update ROADMAP only with requirements, not details."
+  Verify Steps: "1. ROADMAP mentions SKILL.md under frontend. 2. Backend section mentions agent-first API endpoints."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert the commit to restore previous ROADMAP."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Update ROADMAP with SKILL.md for frontend and agent-first backend API requiremen
 
 Add SKILL.md task under frontend and agent-first API note under backend in ROADMAP.
 
+## Plan
+
+1. Implement the change for "Roadmap agent-first updates".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Risk of mismatch with implementation. Mitigation: update ROADMAP only with requirements, not details.
@@ -52,6 +73,13 @@ Risk of mismatch with implementation. Mitigation: update ROADMAP only with requi
 
 1. ROADMAP mentions SKILL.md under frontend. 2. Backend section mentions agent-first API endpoints.
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert the commit to restore previous ROADMAP.
+
+## Findings

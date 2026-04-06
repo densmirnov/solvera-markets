@@ -4,6 +4,7 @@ title: "Stage 4.2a agent skill guide"
 status: "DONE"
 priority: "med"
 owner: "DOCS"
+revision: 1
 depends_on: []
 tags:
   - "frontend"
@@ -30,10 +31,24 @@ comments:
     author: "DOCS"
     body: "Verified: frontend/SKILL.md provides agent integration guidance aligned with API behavior."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-04T04:22:47.452Z"
 doc_updated_by: "DOCS"
 description: "Create frontend/SKILL.md with best practices for agents using Solvera Markets."
+sections:
+  Summary: "Write frontend/SKILL.md with agent integration best practices."
+  Scope: "Create frontend/SKILL.md describing agent capabilities, endpoints, and safe usage patterns."
+  Plan: |-
+    1. Implement the change for "Stage 4.2a agent skill guide".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Guidance might diverge from actual API; keep in sync with docs/17-backend-api.md."
+  Verify Steps: "1) rg \"Solvera Skill\" frontend/SKILL.md\\n2) git status --short --untracked-files=no"
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Remove frontend/SKILL.md if guidance is incorrect and needs rewrite."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Write frontend/SKILL.md with agent integration best practices.
 
 Create frontend/SKILL.md describing agent capabilities, endpoints, and safe usage patterns.
 
+## Plan
+
+1. Implement the change for "Stage 4.2a agent skill guide".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Guidance might diverge from actual API; keep in sync with docs/17-backend-api.md.
@@ -52,6 +73,13 @@ Guidance might diverge from actual API; keep in sync with docs/17-backend-api.md
 
 1) rg "Solvera Skill" frontend/SKILL.md\n2) git status --short --untracked-files=no
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Remove frontend/SKILL.md if guidance is incorrect and needs rewrite.
+
+## Findings

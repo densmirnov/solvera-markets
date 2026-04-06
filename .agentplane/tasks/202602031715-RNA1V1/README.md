@@ -4,6 +4,7 @@ title: "Stage 1.9 mainnet deploy"
 status: "DONE"
 priority: "high"
 owner: "CODER"
+revision: 1
 depends_on: []
 tags:
   - "code"
@@ -30,10 +31,24 @@ comments:
     author: "CODER"
     body: "Verified: Deployed IntentMarketplace to Base mainnet; address and tx hash recorded in docs/14-deployments.md."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-03T17:18:59.854Z"
 doc_updated_by: "CODER"
 description: "Deploy MVP contract to Base mainnet using .env credentials and record addresses."
+sections:
+  Summary: "Deploy MVP contract to Base mainnet and record addresses."
+  Scope: "Run deploy script against BASE_RPC_URL and update docs/14-deployments.md with mainnet details."
+  Plan: |-
+    1. Implement the change for "Stage 1.9 mainnet deploy".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Risk of irreversible mainnet deployment with wrong parameters. Mitigation: confirm config and reuse tested constructor args."
+  Verify Steps: "1. Contract deployed on Base mainnet. 2. Address and tx hash recorded in docs/14-deployments.md."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "No on-chain rollback; deploy a new version and update docs if needed."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Deploy MVP contract to Base mainnet and record addresses.
 
 Run deploy script against BASE_RPC_URL and update docs/14-deployments.md with mainnet details.
 
+## Plan
+
+1. Implement the change for "Stage 1.9 mainnet deploy".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Risk of irreversible mainnet deployment with wrong parameters. Mitigation: confirm config and reuse tested constructor args.
@@ -52,6 +73,13 @@ Risk of irreversible mainnet deployment with wrong parameters. Mitigation: confi
 
 1. Contract deployed on Base mainnet. 2. Address and tx hash recorded in docs/14-deployments.md.
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 No on-chain rollback; deploy a new version and update docs if needed.
+
+## Findings

@@ -4,6 +4,7 @@ title: "Stage 3.3 API security and limits"
 status: "DONE"
 priority: "med"
 owner: "CODER"
+revision: 1
 depends_on: []
 tags:
   - "backend"
@@ -30,10 +31,24 @@ comments:
     author: "CODER"
     body: "Verified: write endpoints now require optional API key and are the only routes subject to rate limits."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-03T18:57:58.914Z"
 doc_updated_by: "CODER"
 description: "Add rate limits and optional auth for write endpoints with tests and docs."
+sections:
+  Summary: "Add rate limits and optional auth for write endpoints with tests and documentation."
+  Scope: "Implement rate limiting, auth toggles for tx-builder routes, and update docs/tests to cover access control."
+  Plan: |-
+    1. Implement the change for "Stage 3.3 API security and limits".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Overly strict limits can block legitimate agents; tune defaults and make overrides configurable."
+  Verify Steps: "1) rg \"rate limit\" backend\\n2) backend tests (if present)\\n3) git status --short --untracked-files=no"
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Disable rate limits/auth middleware and restore previous routing if issues occur."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Add rate limits and optional auth for write endpoints with tests and documentati
 
 Implement rate limiting, auth toggles for tx-builder routes, and update docs/tests to cover access control.
 
+## Plan
+
+1. Implement the change for "Stage 3.3 API security and limits".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Overly strict limits can block legitimate agents; tune defaults and make overrides configurable.
@@ -52,6 +73,13 @@ Overly strict limits can block legitimate agents; tune defaults and make overrid
 
 1) rg "rate limit" backend\n2) backend tests (if present)\n3) git status --short --untracked-files=no
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Disable rate limits/auth middleware and restore previous routing if issues occur.
+
+## Findings

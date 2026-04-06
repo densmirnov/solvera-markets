@@ -4,6 +4,7 @@ title: "Stage 2.10 engineering rules"
 status: "DONE"
 priority: "med"
 owner: "DOCS"
+revision: 1
 depends_on: []
 tags:
   - "backend"
@@ -30,10 +31,24 @@ comments:
     author: "DOCS"
     body: "Verified: Engineering standards documented; lint/fix requirements added to CONTRIBUTING and docs."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-03T18:08:21.808Z"
 doc_updated_by: "DOCS"
 description: "Update coding principles: linting/formatters required, docs update rules."
+sections:
+  Summary: "Update engineering rules: linting, formatting, and documentation updates required."
+  Scope: "Update CONTRIBUTING.md and add docs/20-engineering-standards.md; refresh docs/README.md."
+  Plan: |-
+    1. Implement the change for "Stage 2.10 engineering rules".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Risk of inconsistent rules across docs. Mitigation: centralize in engineering standards doc and reference it."
+  Verify Steps: "1. CONTRIBUTING and engineering standards updated. 2. Docs nav includes standards."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert the commit to restore previous rules and docs."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Update engineering rules: linting, formatting, and documentation updates require
 
 Update CONTRIBUTING.md and add docs/20-engineering-standards.md; refresh docs/README.md.
 
+## Plan
+
+1. Implement the change for "Stage 2.10 engineering rules".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Risk of inconsistent rules across docs. Mitigation: centralize in engineering standards doc and reference it.
@@ -52,6 +73,13 @@ Risk of inconsistent rules across docs. Mitigation: centralize in engineering st
 
 1. CONTRIBUTING and engineering standards updated. 2. Docs nav includes standards.
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert the commit to restore previous rules and docs.
+
+## Findings

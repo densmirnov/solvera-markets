@@ -4,6 +4,7 @@ title: "Review core code for pitch"
 status: "DONE"
 priority: "med"
 owner: "ORCHESTRATOR"
+revision: 1
 depends_on: []
 tags:
   - "code"
@@ -43,10 +44,30 @@ events:
     from: "DOING"
     to: "DONE"
     note: "Verified: PITCH.md added with English final pitch narrative, demo script, architecture, and live links."
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-07T08:33:07.024Z"
 doc_updated_by: "ORCHESTRATOR"
 description: "Read main code paths to extract product behavior and demo flow for 3-minute ETHGlobal pitch script."
+sections:
+  Summary: ""
+  Scope: ""
+  Plan: |-
+    1. Review existing docs and code notes for pitch-relevant facts (demo flow, architecture, links).
+    2. Draft PITCH.md in English with problem, solution, demo script, architecture, differentiation, and judge links.
+    3. Verify file reads cleanly and matches current live endpoints and contract addresses.
+  Risks: ""
+  Verify Steps: ""
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    #### 2026-02-07T08:32:32.335Z — VERIFY — ok
+    
+    By: ORCHESTRATOR
+    
+    Note: Verified: PITCH.md drafted in English with problem, solution, demo script, architecture, links, and contract addresses.
+    
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert SKILL.md and remove added public files, then redeploy site."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -55,30 +76,19 @@ id_source: "generated"
 ## Scope
 
 
-## Risks
-
-
-## Verify Steps
-
-
-## Rollback Plan
-
-Revert SKILL.md and remove added public files, then redeploy site.
-
-## Notes
-
-
 ## Plan
 
 1. Review existing docs and code notes for pitch-relevant facts (demo flow, architecture, links).
 2. Draft PITCH.md in English with problem, solution, demo script, architecture, differentiation, and judge links.
 3. Verify file reads cleanly and matches current live endpoints and contract addresses.
 
+## Risks
+
+
+## Verify Steps
+
+
 ## Verification
-
-### Plan
-
-### Results
 
 <!-- BEGIN VERIFICATION RESULTS -->
 #### 2026-02-07T08:32:32.335Z — VERIFY — ok
@@ -88,3 +98,9 @@ By: ORCHESTRATOR
 Note: Verified: PITCH.md drafted in English with problem, solution, demo script, architecture, links, and contract addresses.
 
 <!-- END VERIFICATION RESULTS -->
+
+## Rollback Plan
+
+Revert SKILL.md and remove added public files, then redeploy site.
+
+## Findings

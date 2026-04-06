@@ -4,6 +4,7 @@ title: "Sync agentplane task state"
 status: "DONE"
 priority: "med"
 owner: "ORCHESTRATOR"
+revision: 1
 depends_on: []
 tags:
   - "code"
@@ -27,9 +28,50 @@ comments:
     author: "ORCHESTRATOR"
     body: "Verified: agentplane task state and artifacts are committed (tasks.json + task README), reflecting latest docs commits and task statuses."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-06T14:57:31.398Z"
 doc_updated_by: "ORCHESTRATOR"
 description: "Commit agentplane task tracking updates for recent docs work (tasks.json + task README artifacts)."
+sections:
+  Summary: ""
+  Scope: ""
+  Plan: |-
+    1. Implement the change for "Sync agentplane task state".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: ""
+  Verify Steps: ""
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: ""
+  Findings: ""
 id_source: "generated"
 ---
+## Summary
+
+
+## Scope
+
+
+## Plan
+
+1. Implement the change for "Sync agentplane task state".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
+## Risks
+
+
+## Verify Steps
+
+
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
+## Rollback Plan
+
+
+## Findings

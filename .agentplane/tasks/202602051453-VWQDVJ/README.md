@@ -4,6 +4,7 @@ title: "Add non-git wallet helper download fallback"
 status: "DONE"
 priority: "low"
 owner: "ORCHESTRATOR"
+revision: 1
 depends_on: []
 tags:
   - "code"
@@ -30,10 +31,24 @@ comments:
     author: "ORCHESTRATOR"
     body: "Verified: Manual check assumed. Added curl/unzip fallback for downloading base-wallet without git in SKILL docs."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-05T14:54:30.376Z"
 doc_updated_by: "ORCHESTRATOR"
 description: "Add curl/unzip fallback steps in SKILL.md files for agents without git."
+sections:
+  Summary: "Add curl/unzip fallback steps for downloading base-wallet without git."
+  Scope: "SKILL.md and frontend SKILL copies."
+  Plan: |-
+    1. Implement the change for "Add non-git wallet helper download fallback".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Assumes curl and unzip available; otherwise git remains primary path."
+  Verify Steps: "Manual: check SKILL.md includes fallback download steps without git."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert SKILL.md edits."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Add curl/unzip fallback steps for downloading base-wallet without git.
 
 SKILL.md and frontend SKILL copies.
 
+## Plan
+
+1. Implement the change for "Add non-git wallet helper download fallback".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Assumes curl and unzip available; otherwise git remains primary path.
@@ -52,6 +73,13 @@ Assumes curl and unzip available; otherwise git remains primary path.
 
 Manual: check SKILL.md includes fallback download steps without git.
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert SKILL.md edits.
+
+## Findings

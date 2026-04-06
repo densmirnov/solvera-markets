@@ -4,6 +4,7 @@ title: "Expand SKILL.md for Clawhub"
 status: "DONE"
 priority: "high"
 owner: "DOCS"
+revision: 1
 depends_on: []
 tags:
   - "frontend"
@@ -30,9 +31,50 @@ comments:
     author: "DOCS"
     body: "Verified: docker compose up -d --build; SKILL.md expanded with schemas, errors, and fallback."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-04T11:13:18.590Z"
 doc_updated_by: "DOCS"
 description: "Add executable agent guidance: config bootstrap, request/response schemas, next_steps format, error codes, filtering rules, and on-chain fallback."
+sections:
+  Summary: ""
+  Scope: ""
+  Plan: |-
+    1. Implement the change for "Expand SKILL.md for Clawhub".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: ""
+  Verify Steps: ""
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: ""
+  Findings: ""
 id_source: "generated"
 ---
+## Summary
+
+
+## Scope
+
+
+## Plan
+
+1. Implement the change for "Expand SKILL.md for Clawhub".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
+## Risks
+
+
+## Verify Steps
+
+
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
+## Rollback Plan
+
+
+## Findings

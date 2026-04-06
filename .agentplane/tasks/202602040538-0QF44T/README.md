@@ -4,6 +4,7 @@ title: "Fix Foundry test discovery and validate local stack"
 status: "DONE"
 priority: "high"
 owner: "TESTER"
+revision: 1
 depends_on:
   - "202602040538-YWCDG7"
   - "202602040538-YWCDG7"
@@ -33,10 +34,24 @@ comments:
     author: "TESTER"
     body: "Verified: forge test --root contracts and scripts/e2e.sh passed; agent flow now uses valid addresses."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-04T06:36:35.390Z"
 doc_updated_by: "TESTER"
 description: "Ensure forge test discovers all tests and validate docker compose + agent flow."
+sections:
+  Summary: "Updated the agent flow e2e script to use valid addresses for tx-builder calls."
+  Scope: "Adjusted scripts/agent-flow.mjs payload addresses to valid hex values."
+  Plan: |-
+    1. Implement the change for "Fix Foundry test discovery and validate local stack".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Low risk; only affects the local e2e smoke test payload."
+  Verify Steps: "./scripts/e2e.sh"
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert scripts/agent-flow.mjs and re-run ./scripts/e2e.sh."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -47,6 +62,12 @@ Updated the agent flow e2e script to use valid addresses for tx-builder calls.
 
 Adjusted scripts/agent-flow.mjs payload addresses to valid hex values.
 
+## Plan
+
+1. Implement the change for "Fix Foundry test discovery and validate local stack".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Low risk; only affects the local e2e smoke test payload.
@@ -55,6 +76,13 @@ Low risk; only affects the local e2e smoke test payload.
 
 ./scripts/e2e.sh
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert scripts/agent-flow.mjs and re-run ./scripts/e2e.sh.
+
+## Findings

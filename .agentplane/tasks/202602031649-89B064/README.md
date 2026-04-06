@@ -4,6 +4,7 @@ title: "Seed input docs"
 status: "DONE"
 priority: "med"
 owner: "DOCS"
+revision: 1
 depends_on: []
 tags:
   - "code"
@@ -30,10 +31,24 @@ comments:
     author: "DOCS"
     body: "Verified: Added _in source files only; no code executed; make check not run for this doc-only commit."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-03T16:50:34.447Z"
 doc_updated_by: "DOCS"
 description: "Add initial source documents under _in for traceability."
+sections:
+  Summary: "Add initial source documents under _in for traceability."
+  Scope: "Add PRD, roadmap, and spec source files to _in/."
+  Plan: |-
+    1. Implement the change for "Seed input docs".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Risk of committing stale source docs. Mitigation: treat _in as immutable inputs."
+  Verify Steps: "1. _in contains the three source markdown files. 2. git status shows only intended additions."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert the commit to remove the _in source files."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Add initial source documents under _in for traceability.
 
 Add PRD, roadmap, and spec source files to _in/.
 
+## Plan
+
+1. Implement the change for "Seed input docs".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Risk of committing stale source docs. Mitigation: treat _in as immutable inputs.
@@ -52,6 +73,13 @@ Risk of committing stale source docs. Mitigation: treat _in as immutable inputs.
 
 1. _in contains the three source markdown files. 2. git status shows only intended additions.
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert the commit to remove the _in source files.
+
+## Findings

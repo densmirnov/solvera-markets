@@ -4,6 +4,7 @@ title: "Fix frontend docker build with ethers"
 status: "DONE"
 priority: "med"
 owner: "ORCHESTRATOR"
+revision: 1
 depends_on: []
 tags:
   - "frontend"
@@ -43,10 +44,30 @@ events:
     from: "DOING"
     to: "DONE"
     note: "Verified: frontend includes ethers dependency to support ENS and Docker build."
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-07T08:30:55.804Z"
 doc_updated_by: "ORCHESTRATOR"
 description: "Add ethers dependency to frontend to fix Docker build failure after ENS integration."
+sections:
+  Summary: "Added ethers to frontend dependencies so Docker builds succeed after ENS integration."
+  Scope: "Update frontend/package.json and frontend/package-lock.json with ethers dependency."
+  Plan: |-
+    1. Implement the change for "Fix frontend docker build with ethers".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Minimal: adds ethers to frontend bundle, increasing JS size slightly."
+  Verify Steps: "manual: docker compose up -d --build completes and frontend build succeeds."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    #### 2026-02-07T08:30:45.391Z — VERIFY — ok
+    
+    By: ORCHESTRATOR
+    
+    Note: Verified: ethers dependency present in frontend/package.json and ens helper imports ethers.
+    
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Remove ethers from frontend dependencies and revert lockfile, then adjust ENS integration to avoid ethers import."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -57,6 +78,12 @@ Added ethers to frontend dependencies so Docker builds succeed after ENS integra
 
 Update frontend/package.json and frontend/package-lock.json with ethers dependency.
 
+## Plan
+
+1. Implement the change for "Fix frontend docker build with ethers".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Minimal: adds ethers to frontend bundle, increasing JS size slightly.
@@ -65,15 +92,7 @@ Minimal: adds ethers to frontend bundle, increasing JS size slightly.
 
 manual: docker compose up -d --build completes and frontend build succeeds.
 
-## Rollback Plan
-
-Remove ethers from frontend dependencies and revert lockfile, then adjust ENS integration to avoid ethers import.
-
 ## Verification
-
-### Plan
-
-### Results
 
 <!-- BEGIN VERIFICATION RESULTS -->
 #### 2026-02-07T08:30:45.391Z — VERIFY — ok
@@ -83,3 +102,9 @@ By: ORCHESTRATOR
 Note: Verified: ethers dependency present in frontend/package.json and ens helper imports ethers.
 
 <!-- END VERIFICATION RESULTS -->
+
+## Rollback Plan
+
+Remove ethers from frontend dependencies and revert lockfile, then adjust ENS integration to avoid ethers import.
+
+## Findings

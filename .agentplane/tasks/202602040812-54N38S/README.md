@@ -4,6 +4,7 @@ title: "Track pending agentplane task artifacts"
 status: "DONE"
 priority: "med"
 owner: "DOCS"
+revision: 1
 depends_on: []
 tags:
   - "backend"
@@ -30,9 +31,50 @@ comments:
     author: "DOCS"
     body: "Verified: git status -sb shows only _in deletions; agentplane task artifacts are now tracked."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-04T08:12:36.498Z"
 doc_updated_by: "DOCS"
 description: "Add untracked .agentplane/tasks/* directories so task artifacts are committed and working tree is clean."
+sections:
+  Summary: ""
+  Scope: ""
+  Plan: |-
+    1. Implement the change for "Track pending agentplane task artifacts".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: ""
+  Verify Steps: ""
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: ""
+  Findings: ""
 id_source: "generated"
 ---
+## Summary
+
+
+## Scope
+
+
+## Plan
+
+1. Implement the change for "Track pending agentplane task artifacts".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
+## Risks
+
+
+## Verify Steps
+
+
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
+## Rollback Plan
+
+
+## Findings

@@ -4,6 +4,7 @@ title: "Stage 2.1 indexer schema"
 status: "DONE"
 priority: "high"
 owner: "CODER"
+revision: 1
 depends_on: []
 tags:
   - "backend"
@@ -30,10 +31,24 @@ comments:
     author: "CODER"
     body: "Verified: Added schema, manifest, ABI, and model doc for indexer."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-03T17:40:44.628Z"
 doc_updated_by: "CODER"
 description: "Define indexer data model, schema.graphql, and subgraph manifest."
+sections:
+  Summary: "Define indexer data model and Graph schema/manifest for events."
+  Scope: "Create indexer/schema.graphql, indexer/subgraph.yaml, and docs model file."
+  Plan: |-
+    1. Implement the change for "Stage 2.1 indexer schema".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Risk of schema mismatch with contract events. Mitigation: base schema on docs/12-abi-events.md."
+  Verify Steps: "1. schema.graphql includes all event-derived entities. 2. subgraph.yaml references ABI and data source."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert the commit to remove schema and manifest."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Define indexer data model and Graph schema/manifest for events.
 
 Create indexer/schema.graphql, indexer/subgraph.yaml, and docs model file.
 
+## Plan
+
+1. Implement the change for "Stage 2.1 indexer schema".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Risk of schema mismatch with contract events. Mitigation: base schema on docs/12-abi-events.md.
@@ -52,6 +73,13 @@ Risk of schema mismatch with contract events. Mitigation: base schema on docs/12
 
 1. schema.graphql includes all event-derived entities. 2. subgraph.yaml references ABI and data source.
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert the commit to remove schema and manifest.
+
+## Findings

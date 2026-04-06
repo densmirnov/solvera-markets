@@ -4,6 +4,7 @@ title: "Mintlify docs formatting via MCP"
 status: "DONE"
 priority: "med"
 owner: "ORCHESTRATOR"
+revision: 1
 depends_on: []
 tags:
   - "code"
@@ -30,10 +31,24 @@ comments:
     author: "ORCHESTRATOR"
     body: "Verified: Docs reorganized into Mintlify sections, navigation updated, and all judge/judging wording removed; manual spot-check of key pages and links."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-06T14:54:42.905Z"
 doc_updated_by: "ORCHESTRATOR"
 description: "Fetch MCP docs content and format documentation to Mintlify rules for docs.solvera.markets."
+sections:
+  Summary: "Added Mintlify frontmatter across docs and created docs.json navigation for Solvera Markets documentation."
+  Scope: "Update docs/*.md with Mintlify frontmatter and add docs.json navigation config at repo root."
+  Plan: |-
+    1. Implement the change for "Mintlify docs formatting via MCP".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "If Mintlify expects a different docs root or navigation schema, docs.json may require adjustments; frontmatter descriptions were auto-derived and might need manual tuning."
+  Verify Steps: "manual: run Mintlify preview or deploy to confirm navigation and frontmatter render correctly."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Remove docs.json and revert frontmatter additions in docs/*.md."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Added Mintlify frontmatter across docs and created docs.json navigation for Solv
 
 Update docs/*.md with Mintlify frontmatter and add docs.json navigation config at repo root.
 
+## Plan
+
+1. Implement the change for "Mintlify docs formatting via MCP".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 If Mintlify expects a different docs root or navigation schema, docs.json may require adjustments; frontmatter descriptions were auto-derived and might need manual tuning.
@@ -52,6 +73,13 @@ If Mintlify expects a different docs root or navigation schema, docs.json may re
 
 manual: run Mintlify preview or deploy to confirm navigation and frontmatter render correctly.
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Remove docs.json and revert frontmatter additions in docs/*.md.
+
+## Findings

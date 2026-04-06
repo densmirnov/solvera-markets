@@ -4,6 +4,7 @@ title: "Fix indexer lint ignores"
 status: "DONE"
 priority: "med"
 owner: "CODER"
+revision: 1
 depends_on: []
 tags:
   - "backend"
@@ -30,10 +31,24 @@ comments:
     author: "CODER"
     body: "Verified: indexer lint ignores generated files and package is marked as module."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-04T04:32:50.176Z"
 doc_updated_by: "CODER"
 description: "Exclude generated code from eslint and set module type for indexer."
+sections:
+  Summary: "Ignore generated indexer files in lint and mark package as module."
+  Scope: "Update indexer eslint config to ignore generated files and set package.json type to module."
+  Plan: |-
+    1. Implement the change for "Fix indexer lint ignores".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Ignoring generated files could hide issues; only exclude generated artifacts."
+  Verify Steps: "1) make lint\\n2) git status --short --untracked-files=no"
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert lint config changes if generated code must be linted."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Ignore generated indexer files in lint and mark package as module.
 
 Update indexer eslint config to ignore generated files and set package.json type to module.
 
+## Plan
+
+1. Implement the change for "Fix indexer lint ignores".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Ignoring generated files could hide issues; only exclude generated artifacts.
@@ -52,6 +73,13 @@ Ignoring generated files could hide issues; only exclude generated artifacts.
 
 1) make lint\n2) git status --short --untracked-files=no
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert lint config changes if generated code must be linted.
+
+## Findings

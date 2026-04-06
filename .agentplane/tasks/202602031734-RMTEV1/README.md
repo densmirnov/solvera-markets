@@ -4,6 +4,7 @@ title: "Stage 2.4 backend API spec"
 status: "DONE"
 priority: "med"
 owner: "DOCS"
+revision: 1
 depends_on: []
 tags:
   - "backend"
@@ -30,10 +31,24 @@ comments:
     author: "DOCS"
     body: "Verified: Backend API spec documented with filters, pagination, and RPC minimization."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-03T17:43:50.011Z"
 doc_updated_by: "DOCS"
 description: "Define backend API spec over indexed data."
+sections:
+  Summary: "Define backend API spec for indexed data."
+  Scope: "Add docs API specification with endpoints, filters, and pagination."
+  Plan: |-
+    1. Implement the change for "Stage 2.4 backend API spec".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Risk of API mismatch with indexer schema. Mitigation: derive API fields from schema.graphql."
+  Verify Steps: "1. API spec covers intents, offers, reputation, and events. 2. Pagination rules documented."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert the commit to remove API spec doc."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Define backend API spec for indexed data.
 
 Add docs API specification with endpoints, filters, and pagination.
 
+## Plan
+
+1. Implement the change for "Stage 2.4 backend API spec".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Risk of API mismatch with indexer schema. Mitigation: derive API fields from schema.graphql.
@@ -52,6 +73,13 @@ Risk of API mismatch with indexer schema. Mitigation: derive API fields from sch
 
 1. API spec covers intents, offers, reputation, and events. 2. Pagination rules documented.
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert the commit to remove API spec doc.
+
+## Findings

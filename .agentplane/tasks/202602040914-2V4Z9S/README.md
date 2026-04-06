@@ -4,6 +4,7 @@ title: "Remove Moltbook block and fix navbar"
 status: "DONE"
 priority: "high"
 owner: "CODER"
+revision: 1
 depends_on: []
 tags:
   - "frontend"
@@ -30,9 +31,50 @@ comments:
     author: "CODER"
     body: "Verified: docker compose up -d --build; Moltbook block removed and navbar solid background + skill.md link updated."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-04T09:15:37.631Z"
 doc_updated_by: "CODER"
 description: "Delete Moltbook section from landing; make navbar solid background; ensure SKILL.md link points to /skill.md."
+sections:
+  Summary: ""
+  Scope: ""
+  Plan: |-
+    1. Implement the change for "Remove Moltbook block and fix navbar".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: ""
+  Verify Steps: ""
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: ""
+  Findings: ""
 id_source: "generated"
 ---
+## Summary
+
+
+## Scope
+
+
+## Plan
+
+1. Implement the change for "Remove Moltbook block and fix navbar".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
+## Risks
+
+
+## Verify Steps
+
+
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
+## Rollback Plan
+
+
+## Findings

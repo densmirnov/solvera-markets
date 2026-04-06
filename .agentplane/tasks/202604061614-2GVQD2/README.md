@@ -62,7 +62,11 @@ sections:
     1. Run `git status --short`. Expected: no extra untracked noise remains outside `skills/status-network-web3`, and the diff is limited to approved cleanup, task artifacts, and `STATUS_DEPLOY.md`.
     2. Run `test -f STATUS_DEPLOY.md && rg -n "Status Network Testnet|1660990954|public.sepolia.rpc.status.network|faucet|linea_estimateGas|contracts|backend|frontend|indexer|base-wallet" STATUS_DEPLOY.md`. Expected: the document captures the Status constants and every repo subsystem in scope.
     3. Review `sed -n "1,260p" STATUS_DEPLOY.md`. Expected: the roadmap is atomic, ordered, and includes caveats, verification points, and rollback checkpoints.
-  Verification: "- Manual verification note after plumbing fix."
+  Verification: |-
+    - Manual verification note after plumbing fix.
+    
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
   Rollback Plan: |-
     - Revert the task commit(s) that remove `simpleclaw`, untracked noise, or add `STATUS_DEPLOY.md`.
     - If the cleanup scope was too broad, restore the affected files and re-check `git status --short`.
@@ -124,6 +128,9 @@ Analyze contracts, backend, frontend, indexer, base-wallet, and local Status ski
 ## Verification
 
 - Manual verification note after plumbing fix.
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
 
 ## Rollback Plan
 

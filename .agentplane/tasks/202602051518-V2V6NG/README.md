@@ -4,6 +4,7 @@ title: "ENS support for addresses"
 status: "DONE"
 priority: "med"
 owner: "ORCHESTRATOR"
+revision: 1
 depends_on: []
 tags:
   - "frontend"
@@ -43,10 +44,30 @@ events:
     from: "DOING"
     to: "DONE"
     note: "Verified: ENS resolution hook implemented and integrated in Marketplace and Intent Details address rendering."
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-07T08:30:55.806Z"
 doc_updated_by: "ORCHESTRATOR"
 description: "Add ENS resolution and display for wallet/address inputs to qualify for ENS partner prize."
+sections:
+  Summary: "Added ENS reverse lookup for participant addresses and display ENS names alongside addresses in marketplace and intent detail views."
+  Scope: "Add ENS lookup helper in frontend/src/lib/ens.ts and wire ENS display into frontend/src/pages/Marketplace.tsx and frontend/src/pages/IntentDetails.tsx."
+  Plan: |-
+    1. Implement the change for "ENS support for addresses".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "ENS reverse lookup depends on mainnet RPC availability; if the RPC is rate-limited or blocked, ENS names will not resolve and addresses will display normally."
+  Verify Steps: "manual: open marketplace and intent details; confirm ENS names resolve for known ENS addresses and fall back to address when not resolvable."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    #### 2026-02-07T08:30:45.588Z — VERIFY — ok
+    
+    By: ORCHESTRATOR
+    
+    Note: Verified: ENS lookup hook in frontend/src/lib/ens.ts and usage in Marketplace/IntentDetails for address display.
+    
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert frontend/src/lib/ens.ts, frontend/src/pages/Marketplace.tsx, and frontend/src/pages/IntentDetails.tsx to remove ENS lookup and display."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -57,6 +78,12 @@ Added ENS reverse lookup for participant addresses and display ENS names alongsi
 
 Add ENS lookup helper in frontend/src/lib/ens.ts and wire ENS display into frontend/src/pages/Marketplace.tsx and frontend/src/pages/IntentDetails.tsx.
 
+## Plan
+
+1. Implement the change for "ENS support for addresses".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 ENS reverse lookup depends on mainnet RPC availability; if the RPC is rate-limited or blocked, ENS names will not resolve and addresses will display normally.
@@ -65,15 +92,7 @@ ENS reverse lookup depends on mainnet RPC availability; if the RPC is rate-limit
 
 manual: open marketplace and intent details; confirm ENS names resolve for known ENS addresses and fall back to address when not resolvable.
 
-## Rollback Plan
-
-Revert frontend/src/lib/ens.ts, frontend/src/pages/Marketplace.tsx, and frontend/src/pages/IntentDetails.tsx to remove ENS lookup and display.
-
 ## Verification
-
-### Plan
-
-### Results
 
 <!-- BEGIN VERIFICATION RESULTS -->
 #### 2026-02-07T08:30:45.588Z — VERIFY — ok
@@ -83,3 +102,9 @@ By: ORCHESTRATOR
 Note: Verified: ENS lookup hook in frontend/src/lib/ens.ts and usage in Marketplace/IntentDetails for address display.
 
 <!-- END VERIFICATION RESULTS -->
+
+## Rollback Plan
+
+Revert frontend/src/lib/ens.ts, frontend/src/pages/Marketplace.tsx, and frontend/src/pages/IntentDetails.tsx to remove ENS lookup and display.
+
+## Findings

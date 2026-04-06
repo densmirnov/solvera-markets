@@ -61,7 +61,11 @@ sections:
     1. Run `git status --short`. Expected: `simpleclaw/*` is removed by intent, `.agentplane/cache` and backup artifacts are gone, and `skills/status-network-web3` remains present.
     2. Run `test -f STATUS_DEPLOY.md` and `rg -n "Status Network|contracts|backend|frontend|indexer|base-wallet|faucet|deploy" STATUS_DEPLOY.md`. Expected: the roadmap exists and covers all required subsystems and operations.
     3. Review `STATUS_DEPLOY.md`. Expected: it is sequential, repository-specific, and explicitly marks weak links or unverified dependencies.
-  Verification: "- Manual verification note after plumbing fix."
+  Verification: |-
+    - Manual verification note after plumbing fix.
+    
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
   Rollback Plan: |-
     - Revert the task commit(s) that remove repo noise or add `STATUS_DEPLOY.md`.
     - If cleanup removed anything beyond the approved scope, restore those paths before re-running verification.
@@ -121,6 +125,9 @@ Top-level tracking task for repository cleanup, Status Network readiness analysi
 ## Verification
 
 - Manual verification note after plumbing fix.
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
 
 ## Rollback Plan
 

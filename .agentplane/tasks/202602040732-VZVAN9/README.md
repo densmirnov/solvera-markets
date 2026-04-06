@@ -4,6 +4,7 @@ title: "Fix indexer build and update contract address"
 status: "DONE"
 priority: "high"
 owner: "CODER"
+revision: 1
 depends_on: []
 tags:
   - "backend"
@@ -31,10 +32,24 @@ comments:
     author: "CODER"
     body: "Verified: indexer build now runs codegen, and env files reference the deployed Base contract address."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-04T07:35:02.505Z"
 doc_updated_by: "CODER"
 description: "Ensure graph codegen runs before build in indexer container and update env files with deployed contract address."
+sections:
+  Summary: "Updated indexer build to run graph codegen first and set deployed contract address in env files."
+  Scope: "Updated indexer build script to include codegen; set CONTRACT_ADDRESS to the deployed Base mainnet address in env.example and .env."
+  Plan: |-
+    1. Implement the change for "Fix indexer build and update contract address".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Indexer build now runs codegen on each build; keep graph schema and ABI in sync to avoid build failures."
+  Verify Steps: "1) npm --prefix indexer run build\\n2) rg -n \"CONTRACT_ADDRESS\" env.example .env"
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert indexer/package.json and env files to previous values."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -45,6 +60,12 @@ Updated indexer build to run graph codegen first and set deployed contract addre
 
 Updated indexer build script to include codegen; set CONTRACT_ADDRESS to the deployed Base mainnet address in env.example and .env.
 
+## Plan
+
+1. Implement the change for "Fix indexer build and update contract address".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Indexer build now runs codegen on each build; keep graph schema and ABI in sync to avoid build failures.
@@ -53,6 +74,13 @@ Indexer build now runs codegen on each build; keep graph schema and ABI in sync 
 
 1) npm --prefix indexer run build\n2) rg -n "CONTRACT_ADDRESS" env.example .env
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert indexer/package.json and env files to previous values.
+
+## Findings

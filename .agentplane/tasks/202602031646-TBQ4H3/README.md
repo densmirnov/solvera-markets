@@ -4,6 +4,7 @@ title: "Stage 0 tracking"
 status: "DONE"
 priority: "med"
 owner: "ORCHESTRATOR"
+revision: 1
 depends_on: []
 tags:
   - "code"
@@ -27,9 +28,50 @@ comments:
     author: "ORCHESTRATOR"
     body: "Verified: Stage 0 tasks completed and committed separately; tracking task has no direct code changes."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-03T16:51:56.720Z"
 doc_updated_by: "ORCHESTRATOR"
 description: "Top-level tracking for Stage 0 repository setup and policies."
+sections:
+  Summary: ""
+  Scope: ""
+  Plan: |-
+    1. Implement the change for "Stage 0 tracking".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: ""
+  Verify Steps: ""
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: ""
+  Findings: ""
 id_source: "generated"
 ---
+## Summary
+
+
+## Scope
+
+
+## Plan
+
+1. Implement the change for "Stage 0 tracking".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
+## Risks
+
+
+## Verify Steps
+
+
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
+## Rollback Plan
+
+
+## Findings

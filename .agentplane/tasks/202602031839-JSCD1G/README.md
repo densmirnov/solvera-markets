@@ -4,6 +4,7 @@ title: "Ignore _in and remove mentions"
 status: "DONE"
 priority: "med"
 owner: "DOCS"
+revision: 1
 depends_on: []
 tags:
   - "backend"
@@ -30,10 +31,24 @@ comments:
     author: "DOCS"
     body: "Verified: _in is now ignored and removed from docs/README; rg shows no _in references in docs."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-03T18:41:06.979Z"
 doc_updated_by: "DOCS"
 description: "Add _in/ to .gitignore and remove references to the _in folder from repo text."
+sections:
+  Summary: "Ignore the _in folder and remove references to it from repository text."
+  Scope: "Update .gitignore to include _in/ and remove textual references to _in from docs or readmes."
+  Plan: |-
+    1. Implement the change for "Ignore _in and remove mentions".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Removing references may obscure internal doc inputs if still needed; ensure no workflow depends on _in."
+  Verify Steps: "1) rg \"_in\"\\n2) git status --short --untracked-files=no"
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Remove _in/ from .gitignore and restore any required references if needed."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Ignore the _in folder and remove references to it from repository text.
 
 Update .gitignore to include _in/ and remove textual references to _in from docs or readmes.
 
+## Plan
+
+1. Implement the change for "Ignore _in and remove mentions".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Removing references may obscure internal doc inputs if still needed; ensure no workflow depends on _in.
@@ -52,6 +73,13 @@ Removing references may obscure internal doc inputs if still needed; ensure no w
 
 1) rg "_in"\n2) git status --short --untracked-files=no
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Remove _in/ from .gitignore and restore any required references if needed.
+
+## Findings

@@ -4,6 +4,7 @@ title: "Fix backend build + TS config warnings"
 status: "DONE"
 priority: "med"
 owner: "ORCHESTRATOR"
+revision: 1
 depends_on: []
 tags:
   - "code"
@@ -30,10 +31,24 @@ comments:
     author: "ORCHESTRATOR"
     body: "Verified: npm run build --prefix backend succeeded; dist/main.js generated; tsconfig warning addressed via test tsconfig."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-04T15:20:49.255Z"
 doc_updated_by: "ORCHESTRATOR"
 description: "Restore backend build output path, resolve TS rootDir warnings for tests, adjust ESLint project config."
+sections:
+  Summary: "Restored backend build output path to dist/main.js and resolved TS rootDir warnings by separating test tsconfig and ESLint project."
+  Scope: "Updated backend/tsconfig.json to compile src only, added backend/tsconfig.test.json for tests, pointed ESLint to test tsconfig."
+  Plan: |-
+    1. Implement the change for "Fix backend build + TS config warnings".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "ESLint now uses tsconfig.test.json; ensure any tooling that relied on tsconfig.json for tests is updated if needed."
+  Verify Steps: "1. npm run build --prefix backend"
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert backend tsconfig/eslint changes and remove tsconfig.test.json via agentplane commit or git revert."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Restored backend build output path to dist/main.js and resolved TS rootDir warni
 
 Updated backend/tsconfig.json to compile src only, added backend/tsconfig.test.json for tests, pointed ESLint to test tsconfig.
 
+## Plan
+
+1. Implement the change for "Fix backend build + TS config warnings".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 ESLint now uses tsconfig.test.json; ensure any tooling that relied on tsconfig.json for tests is updated if needed.
@@ -52,6 +73,13 @@ ESLint now uses tsconfig.test.json; ensure any tooling that relied on tsconfig.j
 
 1. npm run build --prefix backend
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert backend tsconfig/eslint changes and remove tsconfig.test.json via agentplane commit or git revert.
+
+## Findings

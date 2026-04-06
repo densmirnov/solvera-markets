@@ -4,6 +4,7 @@ title: "Refine typography + reveal glints"
 status: "DONE"
 priority: "med"
 owner: "ORCHESTRATOR"
+revision: 1
 depends_on: []
 tags:
   - "frontend"
@@ -30,10 +31,24 @@ comments:
     author: "ORCHESTRATOR"
     body: "Verified: npm run build --prefix frontend succeeded; typography scale and animations updated."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-04T16:03:59.308Z"
 doc_updated_by: "ORCHESTRATOR"
 description: "Adjust typography/spacing closer to 1inch feel and add subtle glint/reveal animations with reduced-motion support."
+sections:
+  Summary: "Adjusted typography scale/spacing toward 1inch feel and added glint/reveal animations across key sections."
+  Scope: "Updated index.css typography scale, glint/reveal keyframes, and spacing; applied hero-glint and reveal classes on Home, Docs, and Marketplace; adjusted Layout padding and H1 defaults."
+  Plan: |-
+    1. Implement the change for "Refine typography + reveal glints".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Glint/reveal animations may feel busy if overused; respects reduced-motion settings."
+  Verify Steps: "1. npm run build --prefix frontend"
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert index.css, Typography.tsx, Layout.tsx, and page updates via agentplane commit or git revert."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Adjusted typography scale/spacing toward 1inch feel and added glint/reveal anima
 
 Updated index.css typography scale, glint/reveal keyframes, and spacing; applied hero-glint and reveal classes on Home, Docs, and Marketplace; adjusted Layout padding and H1 defaults.
 
+## Plan
+
+1. Implement the change for "Refine typography + reveal glints".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Glint/reveal animations may feel busy if overused; respects reduced-motion settings.
@@ -52,6 +73,13 @@ Glint/reveal animations may feel busy if overused; respects reduced-motion setti
 
 1. npm run build --prefix frontend
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert index.css, Typography.tsx, Layout.tsx, and page updates via agentplane commit or git revert.
+
+## Findings

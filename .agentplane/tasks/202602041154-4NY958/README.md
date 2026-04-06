@@ -4,6 +4,7 @@ title: "Clarify SKILL base URL"
 status: "DONE"
 priority: "med"
 owner: "DOCS"
+revision: 1
 depends_on: []
 tags:
   - "frontend"
@@ -30,9 +31,50 @@ comments:
     author: "DOCS"
     body: "Verified: docker compose up -d --build; SKILL.md now has explicit base URL section."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-04T11:55:24.918Z"
 doc_updated_by: "DOCS"
 description: "Add explicit base URL section near the top of SKILL.md and sync public copy."
+sections:
+  Summary: ""
+  Scope: ""
+  Plan: |-
+    1. Implement the change for "Clarify SKILL base URL".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: ""
+  Verify Steps: ""
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: ""
+  Findings: ""
 id_source: "generated"
 ---
+## Summary
+
+
+## Scope
+
+
+## Plan
+
+1. Implement the change for "Clarify SKILL base URL".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
+## Risks
+
+
+## Verify Steps
+
+
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
+## Rollback Plan
+
+
+## Findings

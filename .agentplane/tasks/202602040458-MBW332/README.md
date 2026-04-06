@@ -4,6 +4,7 @@ title: "Ignore indexer test artifacts"
 status: "DONE"
 priority: "low"
 owner: "CODER"
+revision: 1
 depends_on: []
 tags:
   - "backend"
@@ -30,10 +31,24 @@ comments:
     author: "CODER"
     body: "Verified: indexer gitignore now excludes graph test artifacts."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-04T05:00:14.852Z"
 doc_updated_by: "CODER"
 description: "Add graph test output artifacts to indexer/.gitignore and remove generated files."
+sections:
+  Summary: "Ignore graph test artifacts and remove generated files."
+  Scope: "Update indexer/.gitignore for graph test artifacts and delete current test output files."
+  Plan: |-
+    1. Implement the change for "Ignore indexer test artifacts".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Over-ignoring could hide relevant test assets; only ignore generated artifacts."
+  Verify Steps: "1) git status --short\\n2) rg \"tests/.docker\" indexer/.gitignore"
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Remove ignore entries if artifacts should be tracked for debugging."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Ignore graph test artifacts and remove generated files.
 
 Update indexer/.gitignore for graph test artifacts and delete current test output files.
 
+## Plan
+
+1. Implement the change for "Ignore indexer test artifacts".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Over-ignoring could hide relevant test assets; only ignore generated artifacts.
@@ -52,6 +73,13 @@ Over-ignoring could hide relevant test assets; only ignore generated artifacts.
 
 1) git status --short\n2) rg "tests/.docker" indexer/.gitignore
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Remove ignore entries if artifacts should be tracked for debugging.
+
+## Findings

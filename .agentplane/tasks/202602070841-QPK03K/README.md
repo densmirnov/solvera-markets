@@ -4,6 +4,7 @@ title: "Commit untracked changes and add Zed settings"
 status: "DONE"
 priority: "med"
 owner: "ORCHESTRATOR"
+revision: 1
 depends_on: []
 tags:
   - "docs"
@@ -59,10 +60,32 @@ events:
     from: "DONE"
     to: "DONE"
     note: "Verified: task records updated in dc0a21e0703b; working tree clean except .agentplane/cache."
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-07T08:47:36.975Z"
 doc_updated_by: "ORCHESTRATOR"
 description: "Track and commit untracked files, add recommended Zed settings, exclude .agentplane/cache."
+sections:
+  Summary: "Commit untracked project files, add recommended Zed editor settings, exclude .agentplane/cache."
+  Scope: "Include .agentplane/tasks/*, .zed/settings.json, frontend/SOLVERA_SKILL; exclude .agentplane/cache."
+  Plan: |-
+    1. Inspect untracked files.
+    2. Update .zed/settings.json.
+    3. Commit intended files via agentplane allowlist (exclude .agentplane/cache).
+  Risks: ""
+  Verify Steps: |-
+    1. git status --short
+    2. Review .zed/settings.json
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    #### 2026-02-07T08:46:44.795Z — VERIFY — ok
+    
+    By: ORCHESTRATOR
+    
+    Note: Verified: git status --short shows only .agentplane/cache untracked; intended files committed.
+    
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "git revert <commit> (or reset to previous revision if permitted)."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -73,6 +96,12 @@ Commit untracked project files, add recommended Zed editor settings, exclude .ag
 
 Include .agentplane/tasks/*, .zed/settings.json, frontend/SOLVERA_SKILL; exclude .agentplane/cache.
 
+## Plan
+
+1. Inspect untracked files.
+2. Update .zed/settings.json.
+3. Commit intended files via agentplane allowlist (exclude .agentplane/cache).
+
 ## Risks
 
 
@@ -81,24 +110,7 @@ Include .agentplane/tasks/*, .zed/settings.json, frontend/SOLVERA_SKILL; exclude
 1. git status --short
 2. Review .zed/settings.json
 
-## Rollback Plan
-
-git revert <commit> (or reset to previous revision if permitted).
-
-## Notes
-
-
-## Plan
-
-1. Inspect untracked files.
-2. Update .zed/settings.json.
-3. Commit intended files via agentplane allowlist (exclude .agentplane/cache).
-
 ## Verification
-
-### Plan
-
-### Results
 
 <!-- BEGIN VERIFICATION RESULTS -->
 #### 2026-02-07T08:46:44.795Z — VERIFY — ok
@@ -108,3 +120,9 @@ By: ORCHESTRATOR
 Note: Verified: git status --short shows only .agentplane/cache untracked; intended files committed.
 
 <!-- END VERIFICATION RESULTS -->
+
+## Rollback Plan
+
+git revert <commit> (or reset to previous revision if permitted).
+
+## Findings

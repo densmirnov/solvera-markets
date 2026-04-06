@@ -4,6 +4,7 @@ title: "Stage 2.2b fix mapping types"
 status: "DONE"
 priority: "med"
 owner: "CODER"
+revision: 1
 depends_on: []
 tags:
   - "backend"
@@ -30,10 +31,24 @@ comments:
     author: "CODER"
     body: "Verified: graph build now succeeds after ttl mapping fix in indexer mappings."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-03T18:00:04.238Z"
 doc_updated_by: "CODER"
 description: "Fix ttlSubmit/ttlAccept typing in mappings to satisfy graph build."
+sections:
+  Summary: "Fix mapping type assignments for ttl fields."
+  Scope: "Assign ttlSubmit/ttlAccept directly from event params (BigInt)."
+  Plan: |-
+    1. Implement the change for "Stage 2.2b fix mapping types".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Risk of subtle schema mismatch. Mitigation: run graph build after change."
+  Verify Steps: "1. graph build succeeds. 2. ttl fields stored as BigInt without conversion."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert the commit to restore prior mapping assignments."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Fix mapping type assignments for ttl fields.
 
 Assign ttlSubmit/ttlAccept directly from event params (BigInt).
 
+## Plan
+
+1. Implement the change for "Stage 2.2b fix mapping types".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Risk of subtle schema mismatch. Mitigation: run graph build after change.
@@ -52,6 +73,13 @@ Risk of subtle schema mismatch. Mitigation: run graph build after change.
 
 1. graph build succeeds. 2. ttl fields stored as BigInt without conversion.
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert the commit to restore prior mapping assignments.
+
+## Findings

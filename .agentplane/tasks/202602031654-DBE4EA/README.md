@@ -4,6 +4,7 @@ title: "Docs baseline"
 status: "DONE"
 priority: "med"
 owner: "DOCS"
+revision: 1
 depends_on: []
 tags:
   - "code"
@@ -30,10 +31,24 @@ comments:
     author: "DOCS"
     body: "Verified: Baseline docs and roadmap added; ABI events doc excluded; no code execution required."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-03T16:54:48.701Z"
 doc_updated_by: "DOCS"
 description: "Commit baseline documentation set and roadmap prior to Stage 1 work."
+sections:
+  Summary: "Commit baseline documentation and roadmap prior to Stage 1 tasks."
+  Scope: "Add ROADMAP.md and docs/01-11 baseline files."
+  Plan: |-
+    1. Implement the change for "Docs baseline".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Risk of mixing baseline docs with Stage 1-specific docs. Mitigation: exclude ABI events doc from this commit."
+  Verify Steps: "1. ROADMAP.md and docs/01-11 files present. 2. docs/12-abi-events.md excluded. 3. git status shows only intended doc additions."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert the commit to remove baseline documentation files."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Commit baseline documentation and roadmap prior to Stage 1 tasks.
 
 Add ROADMAP.md and docs/01-11 baseline files.
 
+## Plan
+
+1. Implement the change for "Docs baseline".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Risk of mixing baseline docs with Stage 1-specific docs. Mitigation: exclude ABI events doc from this commit.
@@ -52,6 +73,13 @@ Risk of mixing baseline docs with Stage 1-specific docs. Mitigation: exclude ABI
 
 1. ROADMAP.md and docs/01-11 files present. 2. docs/12-abi-events.md excluded. 3. git status shows only intended doc additions.
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert the commit to remove baseline documentation files.
+
+## Findings

@@ -4,6 +4,7 @@ title: "Fix indexer test script"
 status: "DONE"
 priority: "med"
 owner: "CODER"
+revision: 1
 depends_on: []
 tags:
   - "backend"
@@ -30,10 +31,24 @@ comments:
     author: "CODER"
     body: "Verified: indexer test script now uses graph test to run subgraph tests."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-04T04:45:55.513Z"
 doc_updated_by: "CODER"
 description: "Update indexer npm test script to use graph test CLI."
+sections:
+  Summary: "Switch indexer tests to graph test CLI."
+  Scope: "Update indexer package.json test script to use graph test so matchstick-as binary is not required."
+  Plan: |-
+    1. Implement the change for "Fix indexer test script".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Graph test may download binaries and require network; ensure CI allows it."
+  Verify Steps: "1) npm --prefix indexer test\\n2) git status --short --untracked-files=no"
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Restore the previous test script if graph test is unsuitable."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Switch indexer tests to graph test CLI.
 
 Update indexer package.json test script to use graph test so matchstick-as binary is not required.
 
+## Plan
+
+1. Implement the change for "Fix indexer test script".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Graph test may download binaries and require network; ensure CI allows it.
@@ -52,6 +73,13 @@ Graph test may download binaries and require network; ensure CI allows it.
 
 1) npm --prefix indexer test\n2) git status --short --untracked-files=no
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Restore the previous test script if graph test is unsuitable.
+
+## Findings

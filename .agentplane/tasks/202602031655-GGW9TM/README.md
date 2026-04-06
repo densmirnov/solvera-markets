@@ -4,6 +4,7 @@ title: "Stage 1.2 contract core"
 status: "DONE"
 priority: "high"
 owner: "CODER"
+revision: 1
 depends_on: []
 tags:
   - "code"
@@ -30,10 +31,24 @@ comments:
     author: "CODER"
     body: "Verified: Added Foundry scaffold and core contract without economics; tests not run yet."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-03T17:00:57.365Z"
 doc_updated_by: "CODER"
 description: "Implement core IntentMarketplace contract state machine and functions."
+sections:
+  Summary: "Implement core IntentMarketplace contract state machine and functions."
+  Scope: "Add Foundry scaffold and core contract with state, intents, and function flow (without economics)."
+  Plan: |-
+    1. Implement the change for "Stage 1.2 contract core".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Risk of mixing core logic with economics before task split. Mitigation: limit this task to core fields, events, and transitions."
+  Verify Steps: "1. Contract compiles. 2. Core state transitions present. 3. No fee/bond logic included yet."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert the commit to remove contract core changes."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Implement core IntentMarketplace contract state machine and functions.
 
 Add Foundry scaffold and core contract with state, intents, and function flow (without economics).
 
+## Plan
+
+1. Implement the change for "Stage 1.2 contract core".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Risk of mixing core logic with economics before task split. Mitigation: limit this task to core fields, events, and transitions.
@@ -52,6 +73,13 @@ Risk of mixing core logic with economics before task split. Mitigation: limit th
 
 1. Contract compiles. 2. Core state transitions present. 3. No fee/bond logic included yet.
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert the commit to remove contract core changes.
+
+## Findings

@@ -5,6 +5,7 @@ result_summary: "Tracked placeholders for agentplane doctor"
 status: "DONE"
 priority: "med"
 owner: "ORCHESTRATOR"
+revision: 1
 depends_on:
   - "[\"202602101803-XP89QJ\"]"
 tags:
@@ -51,10 +52,35 @@ events:
     from: "DOING"
     to: "DONE"
     note: "Verified: Added tracked .gitkeep placeholders under packages/agentplane/src/{cli,usecases,ports} so agentplane doctor passes on a fresh clone."
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-10T18:09:56.560Z"
 doc_updated_by: "ORCHESTRATOR"
 description: "After upgrading agentplane framework bundle, agentplane doctor expects packages/agentplane/src/{cli,usecases,ports} to exist. Add minimal tracked placeholders so doctor passes without manual mkdir."
+sections:
+  Summary: ""
+  Scope: ""
+  Plan: |-
+    1. Add .gitkeep placeholders under packages/agentplane/src/cli, packages/agentplane/src/usecases, packages/agentplane/src/ports.
+    2. Run agentplane doctor to validate.
+    3. Commit only packages/ placeholders and the new task README.
+  Risks: ""
+  Verify Steps: |-
+    1. Run agentplane doctor and ensure it returns OK.
+    2. Confirm packages/agentplane/src/{cli,usecases,ports} are tracked (git status shows them staged when added).
+    3. Confirm no unrelated files (PITCH.md/README.md) are included in the commit.
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    #### 2026-02-10T18:09:45.091Z — VERIFY — ok
+    
+    By: ORCHESTRATOR
+    
+    Note: Added tracked placeholders under packages/agentplane/src/{cli,usecases,ports}; agentplane doctor returns OK.
+    
+    VerifyStepsRef: doc_version=2, doc_updated_at=2026-02-10T18:09:28.936Z, excerpt_hash=sha256:725ff850e4caf965019f986135b1cec222777d626d7cc842b8a9387a9af040dd
+    
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: ""
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -62,6 +88,12 @@ id_source: "generated"
 
 ## Scope
 
+
+## Plan
+
+1. Add .gitkeep placeholders under packages/agentplane/src/cli, packages/agentplane/src/usecases, packages/agentplane/src/ports.
+2. Run agentplane doctor to validate.
+3. Commit only packages/ placeholders and the new task README.
 
 ## Risks
 
@@ -72,20 +104,7 @@ id_source: "generated"
 2. Confirm packages/agentplane/src/{cli,usecases,ports} are tracked (git status shows them staged when added).
 3. Confirm no unrelated files (PITCH.md/README.md) are included in the commit.
 
-## Rollback Plan
-
-
-## Plan
-
-1. Add .gitkeep placeholders under packages/agentplane/src/cli, packages/agentplane/src/usecases, packages/agentplane/src/ports.
-2. Run agentplane doctor to validate.
-3. Commit only packages/ placeholders and the new task README.
-
 ## Verification
-
-### Plan
-
-### Results
 
 <!-- BEGIN VERIFICATION RESULTS -->
 #### 2026-02-10T18:09:45.091Z — VERIFY — ok
@@ -97,3 +116,8 @@ Note: Added tracked placeholders under packages/agentplane/src/{cli,usecases,por
 VerifyStepsRef: doc_version=2, doc_updated_at=2026-02-10T18:09:28.936Z, excerpt_hash=sha256:725ff850e4caf965019f986135b1cec222777d626d7cc842b8a9387a9af040dd
 
 <!-- END VERIFICATION RESULTS -->
+
+## Rollback Plan
+
+
+## Findings

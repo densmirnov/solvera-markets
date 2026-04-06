@@ -4,6 +4,7 @@ title: "Fix Foundry script root"
 status: "DONE"
 priority: "med"
 owner: "CODER"
+revision: 1
 depends_on: []
 tags:
   - "code"
@@ -30,10 +31,24 @@ comments:
     author: "CODER"
     body: "Verified: Foundry fmt/lint now run with contracts root for correct remappings."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-04T04:41:28.158Z"
 doc_updated_by: "CODER"
 description: "Run forge fmt/lint with --root contracts so remappings resolve."
+sections:
+  Summary: "Adjust repo scripts to run Foundry commands with contracts as root."
+  Scope: "Update scripts/fmt.sh and scripts/lint.sh to call forge with --root contracts."
+  Plan: |-
+    1. Implement the change for "Fix Foundry script root".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Changing root path could affect other Foundry tooling; verify lint/test still run."
+  Verify Steps: "1) make lint\\n2) git status --short --untracked-files=no"
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert script changes if Foundry commands fail with new root."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Adjust repo scripts to run Foundry commands with contracts as root.
 
 Update scripts/fmt.sh and scripts/lint.sh to call forge with --root contracts.
 
+## Plan
+
+1. Implement the change for "Fix Foundry script root".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Changing root path could affect other Foundry tooling; verify lint/test still run.
@@ -52,6 +73,13 @@ Changing root path could affect other Foundry tooling; verify lint/test still ru
 
 1) make lint\n2) git status --short --untracked-files=no
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert script changes if Foundry commands fail with new root.
+
+## Findings

@@ -4,6 +4,7 @@ title: "Stage 2.8 ops docs"
 status: "DONE"
 priority: "low"
 owner: "DOCS"
+revision: 1
 depends_on: []
 tags:
   - "backend"
@@ -30,10 +31,24 @@ comments:
     author: "DOCS"
     body: "Verified: Ops doc added with RPC minimization and monitoring guidance."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-03T17:48:41.217Z"
 doc_updated_by: "DOCS"
 description: "Document indexer and backend ops, monitoring, and RPC load minimization."
+sections:
+  Summary: "Document indexer/backend ops and RPC load minimization."
+  Scope: "Add ops doc with deployment, monitoring, and RPC minimization strategy."
+  Plan: |-
+    1. Implement the change for "Stage 2.8 ops docs".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Risk of inadequate monitoring. Mitigation: include metrics and alerting guidance."
+  Verify Steps: "1. Ops doc added. 2. RPC minimization guidance explicit."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert the commit to remove ops documentation."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Document indexer/backend ops and RPC load minimization.
 
 Add ops doc with deployment, monitoring, and RPC minimization strategy.
 
+## Plan
+
+1. Implement the change for "Stage 2.8 ops docs".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Risk of inadequate monitoring. Mitigation: include metrics and alerting guidance.
@@ -52,6 +73,13 @@ Risk of inadequate monitoring. Mitigation: include metrics and alerting guidance
 
 1. Ops doc added. 2. RPC minimization guidance explicit.
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert the commit to remove ops documentation.
+
+## Findings

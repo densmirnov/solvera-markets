@@ -4,6 +4,7 @@ title: "Docs nav update"
 status: "DONE"
 priority: "low"
 owner: "DOCS"
+revision: 1
 depends_on: []
 tags:
   - "code"
@@ -30,10 +31,24 @@ comments:
     author: "DOCS"
     body: "Verified: docs/README navigation updated to include new docs."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-03T17:21:54.142Z"
 doc_updated_by: "DOCS"
 description: "Update docs/README.md navigation to include newly added documents."
+sections:
+  Summary: "Update docs README navigation to include new documentation files."
+  Scope: "Add links for audit checklist, deployments, and mainnet checklist in docs/README.md."
+  Plan: |-
+    1. Implement the change for "Docs nav update".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Risk of stale navigation if docs change. Mitigation: keep README updated alongside doc additions."
+  Verify Steps: "1. docs/README.md lists new docs. 2. git status shows only README update."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert the commit to restore previous docs/README.md navigation."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Update docs README navigation to include new documentation files.
 
 Add links for audit checklist, deployments, and mainnet checklist in docs/README.md.
 
+## Plan
+
+1. Implement the change for "Docs nav update".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Risk of stale navigation if docs change. Mitigation: keep README updated alongside doc additions.
@@ -52,6 +73,13 @@ Risk of stale navigation if docs change. Mitigation: keep README updated alongsi
 
 1. docs/README.md lists new docs. 2. git status shows only README update.
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert the commit to restore previous docs/README.md navigation.
+
+## Findings

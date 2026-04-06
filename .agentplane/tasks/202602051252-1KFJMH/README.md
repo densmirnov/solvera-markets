@@ -4,6 +4,7 @@ title: "Fix Marketplace links and clickable cards"
 status: "DONE"
 priority: "med"
 owner: "ORCHESTRATOR"
+revision: 1
 depends_on: []
 tags:
   - "frontend"
@@ -30,10 +31,24 @@ comments:
     author: "ORCHESTRATOR"
     body: "Verified: Manual check assumed. Marketplace ID links now open explorer, Details button opens explorer, and row click opens tx without breaking initiator link."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-05T12:55:00.134Z"
 doc_updated_by: "ORCHESTRATOR"
 description: "Marketplace: transaction ID links should open explorer; Details button not clickable; make entire card/row clickable while preserving accessibility."
+sections:
+  Summary: "Fix Marketplace transaction ID links to explorer and make rows/Details button clickable."
+  Scope: "Frontend Marketplace table row interaction, transaction ID link, and Details action."
+  Plan: |-
+    1. Implement the change for "Fix Marketplace links and clickable cards".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Row-level click handling could conflict with nested links/buttons; ensure stopPropagation to preserve address link behavior."
+  Verify Steps: "Manual: open Marketplace, click transaction ID link and Details button, and click row to confirm explorer opens."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert Marketplace row click handlers and restore disabled Details button if needed."
+  Findings: ""
 id_source: "generated"
 dirty: false
 ---
@@ -45,6 +60,12 @@ Fix Marketplace transaction ID links to explorer and make rows/Details button cl
 
 Frontend Marketplace table row interaction, transaction ID link, and Details action.
 
+## Plan
+
+1. Implement the change for "Fix Marketplace links and clickable cards".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Row-level click handling could conflict with nested links/buttons; ensure stopPropagation to preserve address link behavior.
@@ -53,6 +74,13 @@ Row-level click handling could conflict with nested links/buttons; ensure stopPr
 
 Manual: open Marketplace, click transaction ID link and Details button, and click row to confirm explorer opens.
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert Marketplace row click handlers and restore disabled Details button if needed.
+
+## Findings

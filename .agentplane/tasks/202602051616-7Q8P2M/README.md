@@ -4,6 +4,7 @@ title: "Hackathon-focused docs refactor"
 status: "DONE"
 priority: "high"
 owner: "ORCHESTRATOR"
+revision: 1
 depends_on: []
 tags:
   - "code"
@@ -43,10 +44,33 @@ events:
     from: "DOING"
     to: "DONE"
     note: "Verified: docs index updated for judge-focused flow with start-here links and narrative."
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-07T08:30:55.752Z"
 doc_updated_by: "ORCHESTRATOR"
 description: "Rewrite docs for ETHGlobal judges, new index and key pages focused on demo, differentiation, and verification."
+sections:
+  Summary: |-
+    Rewrote docs index and key pages for ETHGlobal judge readability, focusing on demo flow, differentiation, and verification.
+    
+    Rewrote judge-focused docs index and key pages, adding live demo, contract addresses, subgraph, and API links.
+  Scope: "Rewrite docs/index.md and key docs pages (vision, roles, contract spec, testing, indexer, backend API, subgraph endpoints) with judge-focused narrative."
+  Plan: |-
+    1. Implement the change for "Hackathon-focused docs refactor".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Risk of oversimplifying technical detail; some links/endpoints rely on defaults and may need manual updates for your deployment."
+  Verify Steps: "manual: review docs index and key pages for clarity, demo flow accuracy, and updated endpoints."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    #### 2026-02-07T08:30:45.458Z — VERIFY — ok
+    
+    By: ORCHESTRATOR
+    
+    Note: Verified: docs index updated for judge-focused narrative in docs/index.md (start-here links and differentiation).
+    
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Restore previous versions of the rewritten docs files if the judge-focused rewrite is not desired."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -59,6 +83,12 @@ Rewrote judge-focused docs index and key pages, adding live demo, contract addre
 
 Rewrite docs/index.md and key docs pages (vision, roles, contract spec, testing, indexer, backend API, subgraph endpoints) with judge-focused narrative.
 
+## Plan
+
+1. Implement the change for "Hackathon-focused docs refactor".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Risk of oversimplifying technical detail; some links/endpoints rely on defaults and may need manual updates for your deployment.
@@ -67,15 +97,7 @@ Risk of oversimplifying technical detail; some links/endpoints rely on defaults 
 
 manual: review docs index and key pages for clarity, demo flow accuracy, and updated endpoints.
 
-## Rollback Plan
-
-Restore previous versions of the rewritten docs files if the judge-focused rewrite is not desired.
-
 ## Verification
-
-### Plan
-
-### Results
 
 <!-- BEGIN VERIFICATION RESULTS -->
 #### 2026-02-07T08:30:45.458Z — VERIFY — ok
@@ -85,3 +107,9 @@ By: ORCHESTRATOR
 Note: Verified: docs index updated for judge-focused narrative in docs/index.md (start-here links and differentiation).
 
 <!-- END VERIFICATION RESULTS -->
+
+## Rollback Plan
+
+Restore previous versions of the rewritten docs files if the judge-focused rewrite is not desired.
+
+## Findings

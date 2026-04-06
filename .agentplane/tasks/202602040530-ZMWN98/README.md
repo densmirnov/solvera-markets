@@ -4,6 +4,7 @@ title: "Fix backend test runtime"
 status: "DONE"
 priority: "high"
 owner: "TESTER"
+revision: 1
 depends_on: []
 tags:
   - "backend"
@@ -30,10 +31,24 @@ comments:
     author: "TESTER"
     body: "Verified: backend tests expanded and platform-express added for Nest runtime."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-04T05:32:06.431Z"
 doc_updated_by: "TESTER"
 description: "Install platform-express and expand backend tests to meet coverage."
+sections:
+  Summary: "Fix backend test runtime and improve coverage by expanding API tests."
+  Scope: "Add @nestjs/platform-express, adjust coverage thresholds, and expand backend API tests."
+  Plan: |-
+    1. Implement the change for "Fix backend test runtime".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Coverage still may fall short; adjust tests to cover controller branches."
+  Verify Steps: "1) npm --prefix backend test\\n2) git status --short --untracked-files=no"
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert backend dependency and test changes if coverage is unstable."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Fix backend test runtime and improve coverage by expanding API tests.
 
 Add @nestjs/platform-express, adjust coverage thresholds, and expand backend API tests.
 
+## Plan
+
+1. Implement the change for "Fix backend test runtime".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Coverage still may fall short; adjust tests to cover controller branches.
@@ -52,6 +73,13 @@ Coverage still may fall short; adjust tests to cover controller branches.
 
 1) npm --prefix backend test\n2) git status --short --untracked-files=no
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert backend dependency and test changes if coverage is unstable.
+
+## Findings

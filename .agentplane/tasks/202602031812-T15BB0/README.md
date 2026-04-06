@@ -4,6 +4,7 @@ title: "Translate repository to English"
 status: "DONE"
 priority: "high"
 owner: "DOCS"
+revision: 1
 depends_on: []
 tags:
   - "backend"
@@ -30,10 +31,24 @@ comments:
     author: "DOCS"
     body: "Verified: All repository docs and roadmap translated to English; agentplane-managed files untouched."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-03T18:23:47.732Z"
 doc_updated_by: "DOCS"
 description: "Translate all repository documentation and text files to English (excluding agentplane-managed files)."
+sections:
+  Summary: "Translate repository documentation and text files to English."
+  Scope: "Translate docs/, ROADMAP.md, CONTRIBUTING.md, and _in/* to English. Exclude agentplane-managed files."
+  Plan: |-
+    1. Implement the change for "Translate repository to English".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Risk of losing nuances during translation. Mitigation: keep structure and technical terms consistent."
+  Verify Steps: "1. All docs and roadmap are English. 2. No agentplane-managed files modified."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert the commit to restore previous language content."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Translate repository documentation and text files to English.
 
 Translate docs/, ROADMAP.md, CONTRIBUTING.md, and _in/* to English. Exclude agentplane-managed files.
 
+## Plan
+
+1. Implement the change for "Translate repository to English".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Risk of losing nuances during translation. Mitigation: keep structure and technical terms consistent.
@@ -52,6 +73,13 @@ Risk of losing nuances during translation. Mitigation: keep structure and techni
 
 1. All docs and roadmap are English. 2. No agentplane-managed files modified.
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert the commit to restore previous language content.
+
+## Findings

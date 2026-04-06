@@ -4,6 +4,7 @@ title: "Hero redesign + ETHGlobal chip"
 status: "DONE"
 priority: "med"
 owner: "ORCHESTRATOR"
+revision: 1
 depends_on: []
 tags:
   - "frontend"
@@ -43,10 +44,30 @@ events:
     from: "DOING"
     to: "DONE"
     note: "Verified: hero redesign and ETHGlobal HackMoney 2026 Submission chip present in home hero; layout updated."
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-07T08:30:55.790Z"
 doc_updated_by: "ORCHESTRATOR"
 description: "Redesign homepage hero to be more designer/fashionable and add ETHGlobal HackMoney 2026 Submission chip."
+sections:
+  Summary: "Redesigned the homepage hero with layered background styling, a right-side signal panel, and added the ETHGlobal HackMoney 2026 Submission chip."
+  Scope: "Update hero layout and visuals in frontend/src/pages/Home.tsx and add hero-specific styles in frontend/src/index.css."
+  Plan: |-
+    1. Implement the change for "Hero redesign + ETHGlobal chip".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Hero visuals are more layered and could feel busy on smaller screens; the new right-side panel is static and could be misread as data if not treated as decorative."
+  Verify Steps: "manual: visually inspect homepage hero on desktop and mobile breakpoints."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    #### 2026-02-07T08:30:45.457Z — VERIFY — ok
+    
+    By: ORCHESTRATOR
+    
+    Note: Verified: hero chip and redesign present in frontend/src/pages/Home.tsx with ETHGlobal HackMoney 2026 Submission chip and updated layout.
+    
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert frontend/src/pages/Home.tsx and frontend/src/index.css to the previous hero markup and styles."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -57,6 +78,12 @@ Redesigned the homepage hero with layered background styling, a right-side signa
 
 Update hero layout and visuals in frontend/src/pages/Home.tsx and add hero-specific styles in frontend/src/index.css.
 
+## Plan
+
+1. Implement the change for "Hero redesign + ETHGlobal chip".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Hero visuals are more layered and could feel busy on smaller screens; the new right-side panel is static and could be misread as data if not treated as decorative.
@@ -65,15 +92,7 @@ Hero visuals are more layered and could feel busy on smaller screens; the new ri
 
 manual: visually inspect homepage hero on desktop and mobile breakpoints.
 
-## Rollback Plan
-
-Revert frontend/src/pages/Home.tsx and frontend/src/index.css to the previous hero markup and styles.
-
 ## Verification
-
-### Plan
-
-### Results
 
 <!-- BEGIN VERIFICATION RESULTS -->
 #### 2026-02-07T08:30:45.457Z — VERIFY — ok
@@ -83,3 +102,9 @@ By: ORCHESTRATOR
 Note: Verified: hero chip and redesign present in frontend/src/pages/Home.tsx with ETHGlobal HackMoney 2026 Submission chip and updated layout.
 
 <!-- END VERIFICATION RESULTS -->
+
+## Rollback Plan
+
+Revert frontend/src/pages/Home.tsx and frontend/src/index.css to the previous hero markup and styles.
+
+## Findings

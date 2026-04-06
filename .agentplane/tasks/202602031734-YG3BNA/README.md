@@ -4,6 +4,7 @@ title: "Stage 2.7 indexer/backend tests"
 status: "DONE"
 priority: "med"
 owner: "TESTER"
+revision: 1
 depends_on: []
 tags:
   - "backend"
@@ -30,10 +31,24 @@ comments:
     author: "TESTER"
     body: "Verified: Added backend and indexer test scaffolding with scripts; tests not executed here."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-03T17:48:09.058Z"
 doc_updated_by: "TESTER"
 description: "Add unit and integration tests for indexer and backend."
+sections:
+  Summary: "Add tests for indexer mappings and backend API."
+  Scope: "Add unit tests for mappings and API handlers; include pagination tests."
+  Plan: |-
+    1. Implement the change for "Stage 2.7 indexer/backend tests".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: "Risk of brittle tests due to subgraph dependencies. Mitigation: use fixtures and mock responses."
+  Verify Steps: "1. Test suite executes locally. 2. Core API paths and mapping logic covered."
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: "Revert the commit to remove tests."
+  Findings: ""
 id_source: "generated"
 ---
 ## Summary
@@ -44,6 +59,12 @@ Add tests for indexer mappings and backend API.
 
 Add unit tests for mappings and API handlers; include pagination tests.
 
+## Plan
+
+1. Implement the change for "Stage 2.7 indexer/backend tests".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
 ## Risks
 
 Risk of brittle tests due to subgraph dependencies. Mitigation: use fixtures and mock responses.
@@ -52,6 +73,13 @@ Risk of brittle tests due to subgraph dependencies. Mitigation: use fixtures and
 
 1. Test suite executes locally. 2. Core API paths and mapping logic covered.
 
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
 ## Rollback Plan
 
 Revert the commit to remove tests.
+
+## Findings

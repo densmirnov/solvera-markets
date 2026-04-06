@@ -4,6 +4,7 @@ title: "Minimalist CLI landing refresh"
 status: "DONE"
 priority: "high"
 owner: "CODER"
+revision: 1
 depends_on: []
 tags:
   - "frontend"
@@ -30,9 +31,50 @@ comments:
     author: "CODER"
     body: "Verified: docker compose up -d --build; landing now minimal with CLI typography and no card blocks."
 events: []
-doc_version: 2
+doc_version: 3
 doc_updated_at: "2026-02-04T08:19:34.551Z"
 doc_updated_by: "CODER"
 description: "Make landing page ultra-minimal: CLI vibe, large typography, lots of whitespace, no cards, shadows, or rounded blocks."
+sections:
+  Summary: ""
+  Scope: ""
+  Plan: |-
+    1. Implement the change for "Minimalist CLI landing refresh".
+    2. Run required checks and capture verification evidence.
+    3. Finalize task findings and finish with traceable commit metadata.
+  Risks: ""
+  Verify Steps: ""
+  Verification: |-
+    <!-- BEGIN VERIFICATION RESULTS -->
+    <!-- END VERIFICATION RESULTS -->
+  Rollback Plan: ""
+  Findings: ""
 id_source: "generated"
 ---
+## Summary
+
+
+## Scope
+
+
+## Plan
+
+1. Implement the change for "Minimalist CLI landing refresh".
+2. Run required checks and capture verification evidence.
+3. Finalize task findings and finish with traceable commit metadata.
+
+## Risks
+
+
+## Verify Steps
+
+
+## Verification
+
+<!-- BEGIN VERIFICATION RESULTS -->
+<!-- END VERIFICATION RESULTS -->
+
+## Rollback Plan
+
+
+## Findings
