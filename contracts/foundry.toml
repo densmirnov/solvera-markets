@@ -4,4 +4,9 @@ out = "out"
 libs = ["lib"]
 remappings = ["forge-std/=lib/forge-std/src/"]
 
+[rpc_endpoints]
+base = "${BASE_RPC_URL}"
+base_sepolia = "${BASE_SEPOLIA_RPC_URL}"
+status_sepolia = "${STATUS_SEPOLIA_RPC_URL}"
+
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options

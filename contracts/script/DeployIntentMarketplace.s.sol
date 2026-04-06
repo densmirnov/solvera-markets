@@ -6,7 +6,13 @@ import "../src/IntentMarketplace.sol";
 
 contract DeployIntentMarketplace is Script {
     function run() external returns (IntentMarketplace market) {
-        string memory keyStr = vm.envString("BASE_DEPLOYER_PRIVATE_KEY");
+        string memory keyStr = vm.envOr("DEPLOYER_PRIVATE_KEY", string(""));
+        if (bytes(keyStr).length == 0) {
+            keyStr = vm.envOr("STATUS_DEPLOYER_PRIVATE_KEY", string(""));
+        }
+        if (bytes(keyStr).length == 0) {
+            keyStr = vm.envString("BASE_DEPLOYER_PRIVATE_KEY");
+        }
         if (bytes(keyStr).length == 64) {
             keyStr = string(abi.encodePacked("0x", keyStr));
         }

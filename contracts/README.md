@@ -15,4 +15,5 @@ This folder contains the Solidity implementation of the Solvera Markets protocol
 
 ## Entry points
 - Build/test: `forge test`
-- Deploy: `forge script script/DeployIntentMarketplace.s.sol --rpc-url <RPC> --broadcast`
+- Deploy to Status Sepolia: `forge script script/DeployIntentMarketplace.s.sol:DeployIntentMarketplace --rpc-url status_sepolia --broadcast`
+- Deployer key resolution order: `DEPLOYER_PRIVATE_KEY` -> `STATUS_DEPLOYER_PRIVATE_KEY` -> `BASE_DEPLOYER_PRIVATE_KEY`
