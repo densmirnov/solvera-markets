@@ -12,7 +12,8 @@ import { Button } from "../components/ui/Button";
 import { cn } from "../lib/utils";
 import { PixelStatusChip, toneForIntentState } from "../components/ui/PixelStatus";
 import { MarketplaceHudRail } from "../components/marketplace/MarketplaceHudRail";
-import { formatNetworkLabel, useRuntimeConfig } from "../lib/config";
+import { formatNetworkLabel } from "../lib/config";
+import { useNetworkSelection } from "../lib/network-context";
 
 interface Intent {
   id: string;
@@ -33,7 +34,7 @@ interface IntentResponse {
 
 export default function MarketplacePage() {
   const navigate = useNavigate();
-  const runtimeConfig = useRuntimeConfig();
+  const { runtimeConfig } = useNetworkSelection();
   const [data, setData] = useState<Intent[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -51,7 +52,9 @@ export default function MarketplacePage() {
     if (filters.state) params.set("state", filters.state);
     if (filters.tokenOut) params.set("tokenOut", filters.tokenOut);
     if (filters.rewardToken) params.set("rewardToken", filters.rewardToken);
-    apiGet<IntentResponse>(`/intents?${params.toString()}`)
+    apiGet<IntentResponse>(`/intents?${params.toString()}`, {
+      baseUrl: runtimeConfig.apiBase,
+    })
       .then((payload) => {
         if (!active) return;
         setData(payload.data || []);
@@ -69,7 +72,12 @@ export default function MarketplacePage() {
     return () => {
       active = false;
     };
-  }, [filters.rewardToken, filters.state, filters.tokenOut]);
+  }, [
+    filters.rewardToken,
+    filters.state,
+    filters.tokenOut,
+    runtimeConfig.apiBase,
+  ]);
 
   useEffect(() => {
     load();

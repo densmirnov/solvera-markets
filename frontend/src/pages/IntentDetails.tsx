@@ -10,7 +10,8 @@ import {
 import { useEnsNames } from "../lib/ens";
 import { H1, P } from "../components/ui/Typography";
 import { PixelStatusChip, toneForIntentState } from "../components/ui/PixelStatus";
-import { formatNetworkLabel, useRuntimeConfig } from "../lib/config";
+import { formatNetworkLabel } from "../lib/config";
+import { useNetworkSelection } from "../lib/network-context";
 
 interface IntentDetail {
   id: string;
@@ -36,7 +37,7 @@ interface IntentDetailResponse {
 
 export default function IntentDetailsPage() {
   const { id } = useParams();
-  const runtimeConfig = useRuntimeConfig();
+  const { runtimeConfig } = useNetworkSelection();
   const [data, setData] = useState<IntentDetail | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -49,7 +50,9 @@ export default function IntentDetailsPage() {
     }
     let active = true;
     setLoading(true);
-    apiGet<IntentDetailResponse>(`/intents/${id}`)
+    apiGet<IntentDetailResponse>(`/intents/${id}`, {
+      baseUrl: runtimeConfig.apiBase,
+    })
       .then((payload) => {
         if (!active) return;
         setData(payload.data ?? null);
@@ -66,7 +69,7 @@ export default function IntentDetailsPage() {
     return () => {
       active = false;
     };
-  }, [id]);
+  }, [id, runtimeConfig.apiBase]);
 
   const reward = data
     ? formatTokenAmount(data.rewardAmount, data.rewardToken)

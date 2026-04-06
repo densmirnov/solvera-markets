@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./app.tsx";
 import "./index.css";
 import "./styles/fonts.css";
+import { NetworkProvider } from "./lib/network-context";
 
 const container = document.getElementById("root");
 if (!container) {
@@ -13,7 +14,9 @@ if (!container) {
 createRoot(container).render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <NetworkProvider>
+        <App />
+      </NetworkProvider>
     </BrowserRouter>
   </React.StrictMode>,
 );

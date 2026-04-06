@@ -1,5 +1,13 @@
 import { useEffect, useState } from "react";
 import { apiGet } from "./api";
+import {
+  DEFAULT_NETWORK_KEY,
+  getNetworkDefinition,
+  networkFromChainId,
+  networkFromName,
+  type NetworkDefinition,
+  type SupportedNetwork,
+} from "./networks";
 
 interface ApiConfigData {
   contractAddress?: string | null;
@@ -13,17 +21,25 @@ interface ApiConfigResponse {
 
 export interface RuntimeConfig {
   contractAddress: string | null;
-  network: string;
+  network: SupportedNetwork;
   chainId: number;
   explorerBaseUrl: string;
+  apiBase: string;
 }
 
-export const STATUS_SEPOLIA_DEFAULTS: RuntimeConfig = {
-  contractAddress: "0xF79367dAB12D8E12146685dA2830f112F02De71a",
-  network: "status-sepolia",
-  chainId: 1660990954,
-  explorerBaseUrl: "https://sepoliascan.status.network",
-};
+function runtimeFromDefinition(definition: NetworkDefinition): RuntimeConfig {
+  return {
+    contractAddress: definition.contractAddress,
+    network: definition.key,
+    chainId: definition.chainId,
+    explorerBaseUrl: definition.explorerBaseUrl,
+    apiBase: definition.apiBase,
+  };
+}
+
+export const STATUS_SEPOLIA_DEFAULTS = runtimeFromDefinition(
+  getNetworkDefinition("status-sepolia"),
+);
 
 const EXPLORER_BY_CHAIN_ID: Record<number, string> = {
   8453: "https://basescan.org",
@@ -58,19 +74,30 @@ export function explorerBaseUrlForNetwork(
 
 export function normalizeRuntimeConfig(
   payload?: ApiConfigResponse | null,
+  selectedNetwork: SupportedNetwork = DEFAULT_NETWORK_KEY,
 ): RuntimeConfig {
+  const fallback = runtimeFromDefinition(getNetworkDefinition(selectedNetwork));
   const data = payload?.data ?? {};
   const chainId = Number(data.chainId);
-  const normalizedChainId = Number.isFinite(chainId)
-    ? chainId
-    : STATUS_SEPOLIA_DEFAULTS.chainId;
-  const network = data.network?.trim() || STATUS_SEPOLIA_DEFAULTS.network;
+  const inferredNetwork = networkFromChainId(chainId);
+  const namedNetwork = networkFromName(data.network);
+  const payloadNetwork = inferredNetwork || namedNetwork;
+  const normalizedChainId =
+    payloadNetwork === selectedNetwork && Number.isFinite(chainId)
+      ? chainId
+      : fallback.chainId;
+  const network = selectedNetwork;
+  const contractAddress =
+    payloadNetwork === selectedNetwork
+      ? data.contractAddress || fallback.contractAddress
+      : fallback.contractAddress;
 
   return {
-    contractAddress: data.contractAddress || STATUS_SEPOLIA_DEFAULTS.contractAddress,
+    contractAddress,
     network,
     chainId: normalizedChainId,
     explorerBaseUrl: explorerBaseUrlForNetwork(network, normalizedChainId),
+    apiBase: fallback.apiBase,
   };
 }
 
@@ -91,26 +118,33 @@ export function formatNetworkChip(network: string): string {
   return network.toUpperCase().slice(0, 10);
 }
 
-export function useRuntimeConfig(): RuntimeConfig {
-  const [config, setConfig] = useState<RuntimeConfig>(STATUS_SEPOLIA_DEFAULTS);
+export function useRuntimeConfig(
+  selectedNetwork: SupportedNetwork = DEFAULT_NETWORK_KEY,
+): RuntimeConfig {
+  const [config, setConfig] = useState<RuntimeConfig>(() =>
+    normalizeRuntimeConfig(undefined, selectedNetwork),
+  );
 
   useEffect(() => {
     let active = true;
+    const fallback = normalizeRuntimeConfig(undefined, selectedNetwork);
 
-    apiGet<ApiConfigResponse>("/config")
+    setConfig(fallback);
+
+    apiGet<ApiConfigResponse>("/config", { baseUrl: fallback.apiBase })
       .then((payload) => {
         if (!active) return;
-        setConfig(normalizeRuntimeConfig(payload));
+        setConfig(normalizeRuntimeConfig(payload, selectedNetwork));
       })
       .catch(() => {
         if (!active) return;
-        setConfig(STATUS_SEPOLIA_DEFAULTS);
+        setConfig(fallback);
       });
 
     return () => {
       active = false;
     };
-  }, []);
+  }, [selectedNetwork]);
 
   return config;
 }

@@ -1,6 +1,7 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { cn } from "../lib/utils";
 import { HUDStatusBar } from "./ui/HUDStatusBar";
+import { NetworkSwitcher } from "./ui/NetworkSwitcher";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -65,7 +66,8 @@ export function Layout({ children }: LayoutProps) {
             <div className="w-full flex-1 md:w-auto md:flex-none">
               {/* Search or other controls could go here */}
             </div>
-            <nav className="flex items-center">
+            <nav className="flex items-center gap-2">
+              <NetworkSwitcher />
               <HUDStatusBar />
             </nav>
           </div>

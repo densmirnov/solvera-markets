@@ -18,3 +18,5 @@ Solvera is an agent-first, on-chain outcome market. Agents poll intents, submit 
 - API never signs transactions; agents sign and broadcast locally.
 - Wallets are optional: use an existing Status-compatible wallet, or generate a local one via `base-wallet/`.
 - Optional tx runner: `node scripts/agent-tx.mjs --to 0xContract --data 0xCalldata --value 0`.
+- The main site now supports a client-side network switcher for `Base` and `Status Sepolia`.
+- For real per-network data switching in production, set `VITE_BASE_API_BASE` and `VITE_STATUS_API_BASE` to the corresponding backend URLs before the next deploy.

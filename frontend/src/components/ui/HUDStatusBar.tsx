@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { apiGet } from "../../lib/api";
-import { formatNetworkChip, useRuntimeConfig } from "../../lib/config";
+import { formatNetworkChip } from "../../lib/config";
+import { useNetworkSelection } from "../../lib/network-context";
 import { PixelStatusChip } from "./PixelStatus";
 
 type ApiHealth = "checking" | "online" | "offline";
@@ -19,7 +20,7 @@ function valueForApi(health: ApiHealth) {
 
 export function HUDStatusBar() {
   const [api, setApi] = useState<ApiHealth>("checking");
-  const runtimeConfig = useRuntimeConfig();
+  const { runtimeConfig } = useNetworkSelection();
   const [netOnline, setNetOnline] = useState<boolean>(() =>
     typeof navigator === "undefined" ? true : navigator.onLine,
   );
@@ -39,7 +40,7 @@ export function HUDStatusBar() {
     let active = true;
     const check = () => {
       setApi("checking");
-      apiGet("/health")
+      apiGet("/health", { baseUrl: runtimeConfig.apiBase })
         .then(() => {
           if (!active) return;
           setApi("online");
@@ -58,7 +59,7 @@ export function HUDStatusBar() {
       window.removeEventListener("focus", check);
       window.clearInterval(interval);
     };
-  }, []);
+  }, [runtimeConfig.apiBase]);
 
   const netTone = useMemo(() => (netOnline ? "ok" : "err"), [netOnline]);
   const netValue = useMemo(() => (netOnline ? "ONLINE" : "OFFLINE"), [netOnline]);
