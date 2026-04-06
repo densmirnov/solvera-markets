@@ -17,6 +17,13 @@ Adapt Solvera Markets from its current Base-oriented setup to a Status Network t
 - Status transaction-fee UX must use `linea_estimateGas` with `from`; standard `eth_*` fee methods are not the correct user-facing source.
 - Status docs are internally inconsistent about whether testnet ETH is optional. The safer deployment assumption is: keep a funded deployer wallet.
 - The Graph supported-networks page lists Base and many other chains, but not Status Network. The same page explicitly says unsupported chains require running your own Graph Node for EVM indexing.
+- This repository has now verified a self-hosted Graph Node spike against Status Sepolia:
+  - local Graph Node accepted `network: status`,
+  - the Solvera subgraph built successfully from a Status-specific manifest,
+  - the deployment reached `health=healthy` and `synced=true` against `https://public.sepolia.rpc.status.network`.
+- The same spike exposed two operational caveats that are now facts for this repo:
+  - Graph Node requires Postgres initialized with locale `C`,
+  - the public Status RPC does not implement `eth_getBlockReceipts`, so Graph Node falls back to slower block/log indexing behavior.
 
 ## Inferences
 
@@ -26,9 +33,9 @@ Adapt Solvera Markets from its current Base-oriented setup to a Status Network t
 
 ## Hypotheses that must remain explicit
 
-- Status Network may be indexable through self-hosted Graph Node without major subgraph schema changes. This is plausible, not yet proven in this repo.
 - Gasless support may reduce runtime costs for user actions, but should not be treated as a deploy-time guarantee for contract broadcast and verification flows.
 - The current frontend can run on Status without wallet-layer rewrite if it remains read-first and delegates signing to external wallets or local tooling.
+- The current schema and mappings should work on Status once the real Solvera contract address and `startBlock` are inserted. This is likely, but still unproven end to end because the spike used a temporary address rather than a live Status deployment of `IntentMarketplace`.
 
 ## Repository impact map
 
@@ -50,6 +57,84 @@ Adapt Solvera Markets from its current Base-oriented setup to a Status Network t
 5. Rewire backend and frontend to new chain constants.
 6. Rework wallet tooling and any fee-estimation UX for Status rules.
 7. Run end-to-end validation on Status testnet.
+
+## What "full Solvera on Status Sepolia" actually means
+
+Status presence is not just "contract deployed". A full Status Sepolia version exists only when all layers below are live at the same time.
+
+### A. Onchain layer is real
+
+Required:
+- a funded dedicated Status deployer wallet,
+- a deployed `IntentMarketplace`,
+- explorer-visible deployment metadata,
+- successful contract verification on `https://sepoliascan.status.network`,
+- at least one successful write transaction after deploy, not just constructor broadcast.
+
+Not enough:
+- a contract address without source verification,
+- a one-off deploy tx with no post-deploy interaction evidence.
+
+### B. Indexing layer is live
+
+Required:
+- a self-hosted Graph Node stack or equivalent production-ready indexer,
+- `subgraph.status-spike.yaml` converted from spike artifact into a real Status manifest with the actual contract address and exact `startBlock`,
+- sync to head on Status Sepolia,
+- queryable entities for real Solvera events: `Intent`, `Offer`, `Reputation`, `EventLog`.
+
+Not enough:
+- a subgraph that compiles but points to a dummy address,
+- Graph health without real Solvera entity creation.
+
+### C. Backend layer is switched to Status
+
+Required:
+- `GET /api/config` returns Status values,
+- backend points to the real Status contract and the real Status indexer endpoint,
+- backend tests stop asserting Base-specific chain metadata,
+- pagination and data fetches still work under the chosen Status indexing architecture.
+
+Not enough:
+- changing env vars locally without updating fixtures and operator docs.
+
+### D. Frontend layer is visibly Status-native
+
+Required:
+- Status explorer links everywhere they matter,
+- no Base-only chain copy in UI or public skills,
+- no silent Base USDC assumptions in token formatting,
+- live read flow against the Status backend/indexer,
+- at least one operator flow that can open a real Status intent and inspect it end to end.
+
+Not enough:
+- swapping only the explorer hostname,
+- leaving wallet and token semantics implicitly Base-shaped.
+
+### E. Wallet and operator tooling work on Status
+
+Required:
+- current `base-wallet` internals become chain-aware enough to sign and broadcast on Status,
+- generic env variables replace Base-only operator assumptions,
+- operator runbooks document wallet creation, funding, deploy, verify, smoke tx, and recovery.
+
+Not enough:
+- a working contract deploy path that still leaves agents/operators on Base-only wallet tooling.
+
+### F. Demonstration criteria are satisfied
+
+The minimum proof that a full Status Sepolia version exists is this sequence:
+1. Fund a fresh Status deployer wallet.
+2. Deploy and verify `IntentMarketplace`.
+3. Repoint the indexer to the real Status deployment and sync it.
+4. Repoint backend config to Status.
+5. Repoint frontend explorer/config/token handling to Status.
+6. Create at least one real Solvera lifecycle on Status:
+   deployer or operator opens an intent,
+   another actor submits an offer,
+   resulting state becomes visible through indexer, backend, and frontend.
+
+If any one of these six steps is missing, the result is a partial migration, not a full Status Sepolia Solvera.
 
 ## Atomic roadmap
 
@@ -212,23 +297,23 @@ Files:
 - `docs/operations/indexer-and-backend.md`
 
 Action:
-- Treat The Graph support as the highest-risk dependency.
-- Because Status does not appear on the official supported-networks list, choose one of these paths explicitly:
-  - Path A: confirm supported Studio deployment exists for Status now.
-  - Path B: run your own Graph Node against Status RPC.
-  - Path C: replace the subgraph with a repo-native event indexer.
+- Treat Studio-hosted The Graph support as unavailable unless newly proven otherwise.
+- The repo-level spike already narrowed the decision:
+  - preferred path now is Path B: run your own Graph Node against Status RPC,
+  - fallback path remains Path C: replace the subgraph with a repo-native event indexer only if real-event indexing proves unstable.
 - Do not assume the current `deploy:base` script can be repointed trivially.
-- If using Graph Node:
-  - determine the correct network identifier,
-  - verify Graph Node version support for Status / EVM chain config,
-  - provision RPC and IPFS endpoints,
-  - update `subgraph.yaml` network/address/startBlock.
+- Required next actions for the chosen Graph Node path:
+  - promote `indexer/docker-compose.graph-node.yml` from spike artifact to maintained ops asset,
+  - replace the temporary manifest values in `subgraph.status-spike.yaml` with the real Status contract address and precise `startBlock`,
+  - decide whether `subgraph.yaml` becomes chain-neutral, dual-manifest, or Status-primary,
+  - document the Postgres locale requirement and the `eth_getBlockReceipts` fallback behavior,
+  - measure whether sync and query performance remain acceptable under Status RPC limits.
 
 Output:
 - One explicit indexing architecture decision for Status.
 
 Exit criteria:
-- There is a credible path to query `Intent`, `Offer`, `Reputation`, and `EventLog` on Status without unsupported-network ambiguity.
+- There is a working path to query `Intent`, `Offer`, `Reputation`, and `EventLog` on Status from the real Solvera deployment, not just from a healthy empty subgraph.
 
 ### 8. Rewire backend configuration and tests
 
@@ -403,7 +488,7 @@ Exit criteria:
 ## Highest-risk gaps
 
 1. **Indexer support**
-   The current repo assumes The Graph on a supported chain. Status support is not established from the official supported-networks page. This is the primary blocker.
+   Chain support is no longer the blocker: self-hosted Graph Node already works against Status Sepolia in this repo. The remaining blocker is operational completeness: real contract address, exact `startBlock`, sustained sync quality, and acceptable performance under public RPC limits.
 
 2. **Wallet tooling**
    `base-wallet` hardcodes Base RPCs, explorer URLs, env var names, and file names. This is the densest migration surface.
