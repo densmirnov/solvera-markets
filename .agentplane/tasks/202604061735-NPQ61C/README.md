@@ -1,10 +1,12 @@
 ---
 id: "202604061735-NPQ61C"
 title: "Deploy IntentMarketplace to Status Sepolia"
-status: "DOING"
+result_summary: "Deployed IntentMarketplace to Status Sepolia at 0xF79367dAB12D8E12146685dA2830f112F02De71a and pinned the Foundry deploy target to paris."
+risk_level: "low"
+status: "DONE"
 priority: "high"
 owner: "CODER"
-revision: 11
+revision: 12
 origin:
   system: "manual"
 depends_on:
@@ -22,11 +24,16 @@ verification:
   updated_at: "2026-04-06T18:02:14.865Z"
   updated_by: "REVIEWER"
   note: "Verified: IntentMarketplace is deployed on Status Sepolia and the canonical broadcast artifact records the live address and receipt."
-commit: null
+commit:
+  hash: "9f0992359f3a79d79d43510807bbeff1686e86d9"
+  message: "✅ NPQ61C contracts: pin Status deploy target to paris"
 comments:
   -
     author: "CODER"
     body: "Start: deploy IntentMarketplace to Status Sepolia with the funded deployer, then record the canonical address, tx hash, block, and broadcast artifact for downstream Status tasks."
+  -
+    author: "INTEGRATOR"
+    body: "Verified: IntentMarketplace is deployed on Status Sepolia, and the repository default deploy path now targets an EVM version that the network accepts."
 events:
   -
     type: "status"
@@ -41,9 +48,16 @@ events:
     author: "REVIEWER"
     state: "ok"
     note: "Verified: IntentMarketplace is deployed on Status Sepolia and the canonical broadcast artifact records the live address and receipt."
+  -
+    type: "status"
+    at: "2026-04-06T18:02:50.002Z"
+    author: "INTEGRATOR"
+    from: "DOING"
+    to: "DONE"
+    note: "Verified: IntentMarketplace is deployed on Status Sepolia, and the repository default deploy path now targets an EVM version that the network accepts."
 doc_version: 3
-doc_updated_at: "2026-04-06T18:02:14.884Z"
-doc_updated_by: "CODER"
+doc_updated_at: "2026-04-06T18:02:50.003Z"
+doc_updated_by: "INTEGRATOR"
 description: "Broadcast IntentMarketplace to Status Sepolia using the funded deployer and record canonical deployment artifacts. Tracking: 202604061614-XSEJDG."
 sections:
   Summary: |-
