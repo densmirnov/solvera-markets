@@ -1,6 +1,6 @@
 {
   "meta": {
-    "checksum": "59fd728611c9538919685cfba802ece45f0b801299dec8b1f790199d7d9f48ba",
+    "checksum": "ee24f07cc78d4158ecf7a3d1ad6ca55dcd3c64eff4175e87fdef749676e6e1aa",
     "checksum_algo": "sha256",
     "managed_by": "agentplane",
     "schema_version": 1
@@ -9898,14 +9898,21 @@
         {
           "author": "CODER",
           "body": "Start: create local multi-network env profiles, keep the existing deployer key as the primary Status deployer without secret duplication, and validate that the funded Status address is derivable and reachable over Status RPC."
+        },
+        {
+          "author": "CODER",
+          "body": "Verified: created local multi-network env overlays for Base mainnet, Base Sepolia, and Status Sepolia; updated env.example to document the overlay model; kept the existing private key as the single secret source instead of duplicating it; and confirmed that the key derives to the funded Status deployer address `0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d` with live Status RPC access."
         }
       ],
-      "commit": null,
+      "commit": {
+        "hash": "cacddb33b9195bc3a7a49b03105a97f9b9d694c6",
+        "message": "✅ 3R3K82 env: add network profiles and validate Status deployer"
+      },
       "depends_on": [],
       "description": "Create network-specific env files for Base/Base Sepolia/Status Sepolia, preserve current Base deployer key as the primary Status deployer, and validate that the private key from the current .env derives to 0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d with usable Status RPC access. Tracking: 202604061614-XSEJDG.",
       "dirty": false,
       "doc": "## Summary\n\nCreate local multi-network env profiles for Base mainnet, Base Sepolia, and Status Sepolia without duplicating secrets in tracked files. Validate that the existing private key from the current `.env` derives to the funded Status deployer address `0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d` and can be used against Status RPC.\n\n## Scope\n\n- In scope: local `.env.base`, `.env.base-sepolia`, and `.env.status-sepolia` profiles; `env.example` updates for the new profile model; validation of the deployer key/address relationship and Status RPC reachability.\n- Out of scope: live contract deployment, key rotation, or broad code refactors beyond the env surface required for this operator workflow.\n\n## Plan\n\n1. Inspect current env usage and preserve compatibility with the existing Base-oriented variables.\n2. Create ignored local env profile files for Base mainnet, Base Sepolia, and Status Sepolia so operators can switch networks without editing one monolithic `.env`.\n3. Update `env.example` to document the profile pattern and the Status constants.\n4. Validate that the private key from the current `.env` derives to `0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d` and confirm Status RPC visibility for that address without exposing the secret.\n5. Run targeted verification, record findings, and leave tracked changes limited to documentation/example updates only.\n\n## Risks\n\n- Copying the private key into multiple env files would increase secret sprawl. Mitigation: keep the secret in the existing `.env` only and create network overlays without duplicating it.\n- Current code still reads Base-specific variable names in several places. Mitigation: keep compatibility variables in the profile files instead of trying a broad config refactor in this step.\n- A derived address match alone does not prove deployment readiness if the wallet is unfunded or RPC is broken. Mitigation: verify both derivation and live balance/chain access on Status RPC.\n\n## Verify Steps\n\n1. Run `test -f .env.base && test -f .env.base-sepolia && test -f .env.status-sepolia`. Expected: all three local network profiles exist.\n2. Run `rg -n \"STATUS_SEPOLIA_RPC_URL|STATUS_DEPLOYER_ADDRESS|BASE_RPC_URL|BASE_SEPOLIA_RPC_URL\" env.example .env.base .env.base-sepolia .env.status-sepolia`. Expected: profile files and example docs expose the intended network-specific variables.\n3. Run address derivation from the current `.env` private key without printing the key. Expected: the derived address equals `0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d`.\n4. Query Status RPC for chain id and address balance. Expected: chain id `1660990954` and a nonzero or at least queryable balance for the deployer address.\n\n## Verification\n\n<!-- BEGIN VERIFICATION RESULTS -->\n### 2026-04-06T17:32:59.611Z — VERIFY — ok\n\nBy: REVIEWER\n\nNote: Created local multi-network env overlays for Base mainnet, Base Sepolia, and Status Sepolia; updated env.example to document the overlay model; confirmed that the private key from the current .env derives to 0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d; and confirmed live Status RPC visibility with chain id 1660990954 and balance 0.01 ETH.\n\nVerifyStepsRef: doc_version=3, doc_updated_at=2026-04-06T17:32:53.723Z, excerpt_hash=sha256:6540a8dd2e410c064266e4f4e7f132143c4cc84ca211042b781d363fbb4480b4\n\n<!-- END VERIFICATION RESULTS -->\n\n## Rollback Plan\n\n1. Delete the local `.env.base`, `.env.base-sepolia`, and `.env.status-sepolia` files if the profile model proves confusing or unsafe.\n2. Revert `env.example` to the previous single-env layout if the new guidance is misleading.\n3. Re-run the derivation and RPC checks before any later deploy step if the deployer secret changes.\n\n## Findings\n\nDecision: use the existing deployer key as the primary Status deployer, but do not duplicate the private key across multiple network profiles.\nKey findings: local overlays `.env.base`, `.env.base-sepolia`, and `.env.status-sepolia` now exist and switch non-secret network settings cleanly on top of the existing `.env`; `env.example` documents the profile workflow and Status constants; the private key from the current `.env` derives exactly to `0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d`; Status public RPC returns chain id `1660990954` and balance `0.01 ETH` for that address.\nOperational implication: the address is funded and reachable, so it is suitable as the primary Status deployer for the next deployment step. The remaining missing piece is only the actual contract broadcast/verification, which was intentionally not executed in this task.",
-      "doc_updated_at": "2026-04-06T17:32:59.616Z",
+      "doc_updated_at": "2026-04-06T17:33:27.859Z",
       "doc_updated_by": "CODER",
       "doc_version": 3,
       "events": [
@@ -9923,6 +9930,14 @@
           "note": "Created local multi-network env overlays for Base mainnet, Base Sepolia, and Status Sepolia; updated env.example to document the overlay model; confirmed that the private key from the current .env derives to 0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d; and confirmed live Status RPC visibility with chain id 1660990954 and balance 0.01 ETH.",
           "state": "ok",
           "type": "verify"
+        },
+        {
+          "at": "2026-04-06T17:33:27.858Z",
+          "author": "CODER",
+          "from": "DOING",
+          "note": "Verified: created local multi-network env overlays for Base mainnet, Base Sepolia, and Status Sepolia; updated env.example to document the overlay model; kept the existing private key as the single secret source instead of duplicating it; and confirmed that the key derives to the funded Status deployer address `0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d` with live Status RPC access.",
+          "to": "DONE",
+          "type": "status"
         }
       ],
       "id": "202604061729-3R3K82",
@@ -9938,7 +9953,9 @@
         "updated_by": "ORCHESTRATOR"
       },
       "priority": "high",
-      "revision": 11,
+      "result_summary": "Added local network env profiles and validated the funded Status deployer address.",
+      "revision": 12,
+      "risk_level": "low",
       "sections": {
         "Findings": "Decision: use the existing deployer key as the primary Status deployer, but do not duplicate the private key across multiple network profiles.\nKey findings: local overlays `.env.base`, `.env.base-sepolia`, and `.env.status-sepolia` now exist and switch non-secret network settings cleanly on top of the existing `.env`; `env.example` documents the profile workflow and Status constants; the private key from the current `.env` derives exactly to `0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d`; Status public RPC returns chain id `1660990954` and balance `0.01 ETH` for that address.\nOperational implication: the address is funded and reachable, so it is suitable as the primary Status deployer for the next deployment step. The remaining missing piece is only the actual contract broadcast/verification, which was intentionally not executed in this task.",
         "Plan": "1. Inspect current env usage and preserve compatibility with the existing Base-oriented variables.\n2. Create ignored local env profile files for Base mainnet, Base Sepolia, and Status Sepolia so operators can switch networks without editing one monolithic `.env`.\n3. Update `env.example` to document the profile pattern and the Status constants.\n4. Validate that the private key from the current `.env` derives to `0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d` and confirm Status RPC visibility for that address without exposing the secret.\n5. Run targeted verification, record findings, and leave tracked changes limited to documentation/example updates only.",
@@ -9949,7 +9966,7 @@
         "Verification": "<!-- BEGIN VERIFICATION RESULTS -->\n### 2026-04-06T17:32:59.611Z — VERIFY — ok\n\nBy: REVIEWER\n\nNote: Created local multi-network env overlays for Base mainnet, Base Sepolia, and Status Sepolia; updated env.example to document the overlay model; confirmed that the private key from the current .env derives to 0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d; and confirmed live Status RPC visibility with chain id 1660990954 and balance 0.01 ETH.\n\nVerifyStepsRef: doc_version=3, doc_updated_at=2026-04-06T17:32:53.723Z, excerpt_hash=sha256:6540a8dd2e410c064266e4f4e7f132143c4cc84ca211042b781d363fbb4480b4\n\n<!-- END VERIFICATION RESULTS -->",
         "Verify Steps": "1. Run `test -f .env.base && test -f .env.base-sepolia && test -f .env.status-sepolia`. Expected: all three local network profiles exist.\n2. Run `rg -n \"STATUS_SEPOLIA_RPC_URL|STATUS_DEPLOYER_ADDRESS|BASE_RPC_URL|BASE_SEPOLIA_RPC_URL\" env.example .env.base .env.base-sepolia .env.status-sepolia`. Expected: profile files and example docs expose the intended network-specific variables.\n3. Run address derivation from the current `.env` private key without printing the key. Expected: the derived address equals `0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d`.\n4. Query Status RPC for chain id and address balance. Expected: chain id `1660990954` and a nonzero or at least queryable balance for the deployer address."
       },
-      "status": "DOING",
+      "status": "DONE",
       "tags": [
         "code"
       ],
@@ -9959,6 +9976,472 @@
         "state": "ok",
         "updated_at": "2026-04-06T17:32:59.611Z",
         "updated_by": "REVIEWER"
+      },
+      "verify": []
+    },
+    {
+      "comments": [],
+      "commit": null,
+      "depends_on": [
+        "202604061735-2CPW0M"
+      ],
+      "description": "Refactor base-wallet internals so operators can sign and broadcast on Status Sepolia while preserving temporary Base compatibility aliases. Tracking: 202604061614-XSEJDG.",
+      "dirty": false,
+      "doc": "## Summary\n\nMake base-wallet chain-aware for Status\n\nRefactor base-wallet internals so operators can sign and broadcast on Status Sepolia while preserving temporary Base compatibility aliases. Tracking: 202604061614-XSEJDG.\n\n## Scope\n\n- In scope: Refactor base-wallet internals so operators can sign and broadcast on Status Sepolia while preserving temporary Base compatibility aliases. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Make base-wallet chain-aware for Status\".\n\n## Plan\n\n1. Implement the change for \"Make base-wallet chain-aware for Status\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.\n\n## Verify Steps\n\n<!-- TODO: REPLACE WITH TASK-SPECIFIC ACCEPTANCE STEPS -->\n\n1. Review the changed artifact or behavior. Expected: the requested outcome is visible and matches the approved scope.\n2. Run the most relevant validation step for this task. Expected: it succeeds without unexpected regressions in touched scope.\n3. Compare the final result against the task summary and scope. Expected: any remaining follow-up is explicit in ## Findings.\n\n## Verification\n\n<!-- BEGIN VERIFICATION RESULTS -->\n<!-- END VERIFICATION RESULTS -->\n\n## Rollback Plan\n\n- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.\n\n## Findings",
+      "doc_updated_at": "2026-04-06T17:35:44.144Z",
+      "doc_updated_by": "CODER",
+      "doc_version": 3,
+      "events": [],
+      "id": "202604061735-2BWTA0",
+      "id_source": "generated",
+      "origin": {
+        "system": "manual"
+      },
+      "owner": "CODER",
+      "plan_approval": {
+        "note": null,
+        "state": "pending",
+        "updated_at": null,
+        "updated_by": null
+      },
+      "priority": "high",
+      "revision": 1,
+      "sections": {
+        "Findings": "",
+        "Plan": "1. Implement the change for \"Make base-wallet chain-aware for Status\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.",
+        "Rollback Plan": "- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.",
+        "Scope": "- In scope: Refactor base-wallet internals so operators can sign and broadcast on Status Sepolia while preserving temporary Base compatibility aliases. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Make base-wallet chain-aware for Status\".",
+        "Summary": "Make base-wallet chain-aware for Status\n\nRefactor base-wallet internals so operators can sign and broadcast on Status Sepolia while preserving temporary Base compatibility aliases. Tracking: 202604061614-XSEJDG.",
+        "Verification": "<!-- BEGIN VERIFICATION RESULTS -->\n<!-- END VERIFICATION RESULTS -->",
+        "Verify Steps": "<!-- TODO: REPLACE WITH TASK-SPECIFIC ACCEPTANCE STEPS -->\n\n1. Review the changed artifact or behavior. Expected: the requested outcome is visible and matches the approved scope.\n2. Run the most relevant validation step for this task. Expected: it succeeds without unexpected regressions in touched scope.\n3. Compare the final result against the task summary and scope. Expected: any remaining follow-up is explicit in ## Findings."
+      },
+      "status": "TODO",
+      "tags": [
+        "code"
+      ],
+      "title": "Make base-wallet chain-aware for Status",
+      "verification": {
+        "note": null,
+        "state": "pending",
+        "updated_at": null,
+        "updated_by": null
+      },
+      "verify": []
+    },
+    {
+      "comments": [],
+      "commit": null,
+      "depends_on": [
+        "202604061735-5SVEY0"
+      ],
+      "description": "Adapt Foundry RPC aliases and deployment key resolution so Solvera contracts can be broadcast to Status Sepolia without Base-only env assumptions. Tracking: 202604061614-XSEJDG.",
+      "dirty": false,
+      "doc": "## Summary\n\nMake the repository-native Foundry deploy path usable on Status Sepolia. This step must add a Status RPC alias and remove the hard dependency on `BASE_DEPLOYER_PRIVATE_KEY` by introducing generic/Status-aware deployer key resolution.\n\n## Scope\n\n- In scope: `contracts/foundry.toml`, `contracts/script/DeployIntentMarketplace.s.sol`, `contracts/README.md`, and any env-example surface directly required to document the new deploy path.\n- Out of scope: the actual Status broadcast, contract verification, or downstream backend/frontend/indexer rewiring.\n\n## Plan\n\n1. Implement the change for \"Make Foundry deploy path Status-aware\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.\n\n## Risks\n\n- If key precedence is wrong, future deploys may silently use the wrong operator wallet. Mitigation: use a strict fallback order and document it in `contracts/README.md`.\n- If the Status RPC alias is misnamed, later deploy commands and docs will diverge. Mitigation: standardize on `status_sepolia` now and reuse it everywhere.\n- If the simulation path depends on secrets printed to stdout, verification becomes unsafe. Mitigation: source env locally but never echo private values.\n\n## Verify Steps\n\n1. Run `cd contracts && forge build`. Expected: contracts compile successfully with the new Foundry config.\n2. Run `cd contracts && set -a; source ../.env; source ../.env.status-sepolia; set +a; forge script script/DeployIntentMarketplace.s.sol:DeployIntentMarketplace --rpc-url status_sepolia`. Expected: Foundry resolves the Status alias and simulates the deployment path without requiring `BASE_DEPLOYER_PRIVATE_KEY` as the only valid key source.\n3. Run `rg -n \"status_sepolia|DEPLOYER_PRIVATE_KEY|STATUS_DEPLOYER_PRIVATE_KEY|BASE_DEPLOYER_PRIVATE_KEY\" contracts/README.md contracts/foundry.toml contracts/script/DeployIntentMarketplace.s.sol env.example`. Expected: alias and key precedence are documented consistently.\n\n## Verification\n\n<!-- BEGIN VERIFICATION RESULTS -->\n<!-- END VERIFICATION RESULTS -->\n\n## Rollback Plan\n\n1. Revert the Foundry config, deploy script, docs, and env-example changes from this task.\n2. Re-run `forge build` to confirm the repository returns to the previous deploy surface.\n3. If the generic key path proves confusing, fall back temporarily to the legacy Base-only variable while keeping Status work blocked until a better abstraction is ready.\n\n## Findings",
+      "doc_updated_at": "2026-04-06T17:39:17.179Z",
+      "doc_updated_by": "CODER",
+      "doc_version": 3,
+      "events": [],
+      "id": "202604061735-2CPW0M",
+      "id_source": "generated",
+      "origin": {
+        "system": "manual"
+      },
+      "owner": "CODER",
+      "plan_approval": {
+        "note": "Approved: implement only the Foundry/contract deploy-surface changes needed to unlock Status Sepolia broadcast.",
+        "state": "approved",
+        "updated_at": "2026-04-06T17:39:18.125Z",
+        "updated_by": "ORCHESTRATOR"
+      },
+      "priority": "high",
+      "revision": 7,
+      "sections": {
+        "Findings": "",
+        "Plan": "1. Implement the change for \"Make Foundry deploy path Status-aware\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.",
+        "Risks": "- If key precedence is wrong, future deploys may silently use the wrong operator wallet. Mitigation: use a strict fallback order and document it in `contracts/README.md`.\n- If the Status RPC alias is misnamed, later deploy commands and docs will diverge. Mitigation: standardize on `status_sepolia` now and reuse it everywhere.\n- If the simulation path depends on secrets printed to stdout, verification becomes unsafe. Mitigation: source env locally but never echo private values.",
+        "Rollback Plan": "1. Revert the Foundry config, deploy script, docs, and env-example changes from this task.\n2. Re-run `forge build` to confirm the repository returns to the previous deploy surface.\n3. If the generic key path proves confusing, fall back temporarily to the legacy Base-only variable while keeping Status work blocked until a better abstraction is ready.",
+        "Scope": "- In scope: `contracts/foundry.toml`, `contracts/script/DeployIntentMarketplace.s.sol`, `contracts/README.md`, and any env-example surface directly required to document the new deploy path.\n- Out of scope: the actual Status broadcast, contract verification, or downstream backend/frontend/indexer rewiring.",
+        "Summary": "Make the repository-native Foundry deploy path usable on Status Sepolia. This step must add a Status RPC alias and remove the hard dependency on `BASE_DEPLOYER_PRIVATE_KEY` by introducing generic/Status-aware deployer key resolution.",
+        "Verification": "<!-- BEGIN VERIFICATION RESULTS -->\n<!-- END VERIFICATION RESULTS -->",
+        "Verify Steps": "1. Run `cd contracts && forge build`. Expected: contracts compile successfully with the new Foundry config.\n2. Run `cd contracts && set -a; source ../.env; source ../.env.status-sepolia; set +a; forge script script/DeployIntentMarketplace.s.sol:DeployIntentMarketplace --rpc-url status_sepolia`. Expected: Foundry resolves the Status alias and simulates the deployment path without requiring `BASE_DEPLOYER_PRIVATE_KEY` as the only valid key source.\n3. Run `rg -n \"status_sepolia|DEPLOYER_PRIVATE_KEY|STATUS_DEPLOYER_PRIVATE_KEY|BASE_DEPLOYER_PRIVATE_KEY\" contracts/README.md contracts/foundry.toml contracts/script/DeployIntentMarketplace.s.sol env.example`. Expected: alias and key precedence are documented consistently."
+      },
+      "status": "TODO",
+      "tags": [
+        "code"
+      ],
+      "title": "Make Foundry deploy path Status-aware",
+      "verification": {
+        "note": null,
+        "state": "pending",
+        "updated_at": null,
+        "updated_by": null
+      },
+      "verify": []
+    },
+    {
+      "comments": [],
+      "commit": null,
+      "depends_on": [
+        "202604061735-RF7VW9"
+      ],
+      "description": "Update backend config surfaces and tests so Status chain metadata and contract/indexer endpoints can be used without Base-only assumptions. Tracking: 202604061614-XSEJDG.",
+      "dirty": false,
+      "doc": "## Summary\n\nSwitch backend defaults to Status-ready config\n\nUpdate backend config surfaces and tests so Status chain metadata and contract/indexer endpoints can be used without Base-only assumptions. Tracking: 202604061614-XSEJDG.\n\n## Scope\n\n- In scope: Update backend config surfaces and tests so Status chain metadata and contract/indexer endpoints can be used without Base-only assumptions. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Switch backend defaults to Status-ready config\".\n\n## Plan\n\n1. Implement the change for \"Switch backend defaults to Status-ready config\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.\n\n## Verify Steps\n\n<!-- TODO: REPLACE WITH TASK-SPECIFIC ACCEPTANCE STEPS -->\n\n1. <Action>. Expected: <observable result>.\n2. <Action>. Expected: <observable result>.\n3. <Action>. Expected: <observable result>.\n\n## Verification\n\n<!-- BEGIN VERIFICATION RESULTS -->\n<!-- END VERIFICATION RESULTS -->\n\n## Rollback Plan\n\n- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.\n\n## Findings",
+      "doc_updated_at": "2026-04-06T17:35:44.164Z",
+      "doc_updated_by": "CODER",
+      "doc_version": 3,
+      "events": [],
+      "id": "202604061735-3JCAD3",
+      "id_source": "generated",
+      "origin": {
+        "system": "manual"
+      },
+      "owner": "CODER",
+      "plan_approval": {
+        "note": null,
+        "state": "pending",
+        "updated_at": null,
+        "updated_by": null
+      },
+      "priority": "high",
+      "revision": 1,
+      "sections": {
+        "Findings": "",
+        "Plan": "1. Implement the change for \"Switch backend defaults to Status-ready config\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.",
+        "Rollback Plan": "- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.",
+        "Scope": "- In scope: Update backend config surfaces and tests so Status chain metadata and contract/indexer endpoints can be used without Base-only assumptions. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Switch backend defaults to Status-ready config\".",
+        "Summary": "Switch backend defaults to Status-ready config\n\nUpdate backend config surfaces and tests so Status chain metadata and contract/indexer endpoints can be used without Base-only assumptions. Tracking: 202604061614-XSEJDG.",
+        "Verification": "<!-- BEGIN VERIFICATION RESULTS -->\n<!-- END VERIFICATION RESULTS -->",
+        "Verify Steps": "<!-- TODO: REPLACE WITH TASK-SPECIFIC ACCEPTANCE STEPS -->\n\n1. <Action>. Expected: <observable result>.\n2. <Action>. Expected: <observable result>.\n3. <Action>. Expected: <observable result>."
+      },
+      "status": "TODO",
+      "tags": [
+        "backend"
+      ],
+      "title": "Switch backend defaults to Status-ready config",
+      "verification": {
+        "note": null,
+        "state": "pending",
+        "updated_at": null,
+        "updated_by": null
+      },
+      "verify": []
+    },
+    {
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: publish the canonical Status execution roadmap with explicit downstream task IDs and dependency order so implementation can proceed deterministically."
+        }
+      ],
+      "commit": null,
+      "depends_on": [],
+      "description": "Write STATUS_ROADMAP.md with atomic sequential execution tasks for deploying Solvera on Status Network and align the task graph with the approved Status migration scope. Tracking: 202604061614-XSEJDG.",
+      "dirty": false,
+      "doc": "## Summary\n\nWrite the canonical in-repo execution roadmap for shipping Solvera on Status Sepolia. The roadmap must enumerate atomic downstream tasks, their agent owners, and strict task dependencies so execution can proceed in one deterministic sequence.\n\n## Scope\n\n- In scope: Write STATUS_ROADMAP.md with atomic sequential execution tasks for deploying Solvera on Status Network and align the task graph with the approved Status migration scope. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Create Status execution roadmap\".\n\n## Plan\n\n1. Create downstream Status execution tasks for roadmap, Foundry, deploy, indexer, backend, frontend, wallet, smoke, and docs.\n2. Set a strict dependency chain in `agentplane` so the later tasks cannot start before their prerequisites exist.\n3. Write `STATUS_ROADMAP.md` with IDs, owners, goals, and done-criteria for each atomic task.\n4. Verify that the file and task graph match the same execution order.\n5. Commit the roadmap artifact and task-graph export.\n\n## Risks\n\n- If the roadmap order is wrong, later tasks will start against missing prerequisites. Mitigation: derive dependencies from real technical blockers, not from document order alone.\n- If task IDs are omitted from the roadmap, the file becomes non-actionable. Mitigation: include every downstream task ID explicitly.\n\n## Verify Steps\n\n1. Run `test -f STATUS_ROADMAP.md`. Expected: the roadmap file exists at repo root.\n2. Run `rg -n \"202604061735-5SVEY0|202604061735-2CPW0M|202604061735-NPQ61C|202604061735-RF7VW9|202604061735-3JCAD3|202604061735-WDW5JH|202604061735-2BWTA0|202604061735-XM276Y|202604061735-GH834T\" STATUS_ROADMAP.md`. Expected: all execution task IDs are present in the roadmap.\n3. Run `agentplane task show 202604061735-XM276Y` and inspect dependencies. Expected: smoke depends on deploy, indexer, backend, frontend, and wallet tasks.\n\n## Verification\n\n<!-- BEGIN VERIFICATION RESULTS -->\n### 2026-04-06T17:39:48.403Z — VERIFY — ok\n\nBy: REVIEWER\n\nNote: STATUS_ROADMAP.md exists, includes all nine Status execution task IDs, and matches the dependency graph recorded in agentplane, including the smoke-task fan-in on deploy, indexer, backend, frontend, and wallet tasks.\n\nVerifyStepsRef: doc_version=3, doc_updated_at=2026-04-06T17:39:47.803Z, excerpt_hash=sha256:06c1ae7456c9fd225c6accda5f218599ca94e13d6a1166faeadf9c2bbb8bdce4\n\n<!-- END VERIFICATION RESULTS -->\n\n## Rollback Plan\n\n1. Revert `STATUS_ROADMAP.md` if the execution graph is wrong or misleading.\n2. Remove or correct the downstream task dependency links before any dependent implementation proceeds.\n3. Re-export task state after rollback so `.agentplane/tasks.json` matches the restored graph.\n\n## Findings\n\nDecision: use `STATUS_ROADMAP.md` as the canonical execution graph for the Status migration.\nKey findings: nine downstream tasks now exist with explicit IDs and ordered dependencies; the roadmap file mirrors the same graph; the first real execution task is `202604061735-2CPW0M`, because deploy must precede real indexer rewiring and all later layers depend on the live Status contract.",
+      "doc_updated_at": "2026-04-06T17:39:48.411Z",
+      "doc_updated_by": "DOCS",
+      "doc_version": 3,
+      "events": [
+        {
+          "at": "2026-04-06T17:39:47.784Z",
+          "author": "DOCS",
+          "from": "TODO",
+          "note": "Start: publish the canonical Status execution roadmap with explicit downstream task IDs and dependency order so implementation can proceed deterministically.",
+          "to": "DOING",
+          "type": "status"
+        },
+        {
+          "at": "2026-04-06T17:39:48.403Z",
+          "author": "REVIEWER",
+          "note": "STATUS_ROADMAP.md exists, includes all nine Status execution task IDs, and matches the dependency graph recorded in agentplane, including the smoke-task fan-in on deploy, indexer, backend, frontend, and wallet tasks.",
+          "state": "ok",
+          "type": "verify"
+        }
+      ],
+      "id": "202604061735-5SVEY0",
+      "id_source": "generated",
+      "origin": {
+        "system": "manual"
+      },
+      "owner": "DOCS",
+      "plan_approval": {
+        "note": "Approved: finalize the Status execution roadmap and unblock the first code task.",
+        "state": "approved",
+        "updated_at": "2026-04-06T17:39:47.246Z",
+        "updated_by": "ORCHESTRATOR"
+      },
+      "priority": "high",
+      "revision": 10,
+      "sections": {
+        "Findings": "Decision: use `STATUS_ROADMAP.md` as the canonical execution graph for the Status migration.\nKey findings: nine downstream tasks now exist with explicit IDs and ordered dependencies; the roadmap file mirrors the same graph; the first real execution task is `202604061735-2CPW0M`, because deploy must precede real indexer rewiring and all later layers depend on the live Status contract.",
+        "Plan": "1. Create downstream Status execution tasks for roadmap, Foundry, deploy, indexer, backend, frontend, wallet, smoke, and docs.\n2. Set a strict dependency chain in `agentplane` so the later tasks cannot start before their prerequisites exist.\n3. Write `STATUS_ROADMAP.md` with IDs, owners, goals, and done-criteria for each atomic task.\n4. Verify that the file and task graph match the same execution order.\n5. Commit the roadmap artifact and task-graph export.",
+        "Risks": "- If the roadmap order is wrong, later tasks will start against missing prerequisites. Mitigation: derive dependencies from real technical blockers, not from document order alone.\n- If task IDs are omitted from the roadmap, the file becomes non-actionable. Mitigation: include every downstream task ID explicitly.",
+        "Rollback Plan": "1. Revert `STATUS_ROADMAP.md` if the execution graph is wrong or misleading.\n2. Remove or correct the downstream task dependency links before any dependent implementation proceeds.\n3. Re-export task state after rollback so `.agentplane/tasks.json` matches the restored graph.",
+        "Scope": "- In scope: Write STATUS_ROADMAP.md with atomic sequential execution tasks for deploying Solvera on Status Network and align the task graph with the approved Status migration scope. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Create Status execution roadmap\".",
+        "Summary": "Write the canonical in-repo execution roadmap for shipping Solvera on Status Sepolia. The roadmap must enumerate atomic downstream tasks, their agent owners, and strict task dependencies so execution can proceed in one deterministic sequence.",
+        "Verification": "<!-- BEGIN VERIFICATION RESULTS -->\n### 2026-04-06T17:39:48.403Z — VERIFY — ok\n\nBy: REVIEWER\n\nNote: STATUS_ROADMAP.md exists, includes all nine Status execution task IDs, and matches the dependency graph recorded in agentplane, including the smoke-task fan-in on deploy, indexer, backend, frontend, and wallet tasks.\n\nVerifyStepsRef: doc_version=3, doc_updated_at=2026-04-06T17:39:47.803Z, excerpt_hash=sha256:06c1ae7456c9fd225c6accda5f218599ca94e13d6a1166faeadf9c2bbb8bdce4\n\n<!-- END VERIFICATION RESULTS -->",
+        "Verify Steps": "1. Run `test -f STATUS_ROADMAP.md`. Expected: the roadmap file exists at repo root.\n2. Run `rg -n \"202604061735-5SVEY0|202604061735-2CPW0M|202604061735-NPQ61C|202604061735-RF7VW9|202604061735-3JCAD3|202604061735-WDW5JH|202604061735-2BWTA0|202604061735-XM276Y|202604061735-GH834T\" STATUS_ROADMAP.md`. Expected: all execution task IDs are present in the roadmap.\n3. Run `agentplane task show 202604061735-XM276Y` and inspect dependencies. Expected: smoke depends on deploy, indexer, backend, frontend, and wallet tasks."
+      },
+      "status": "DOING",
+      "tags": [
+        "docs"
+      ],
+      "title": "Create Status execution roadmap",
+      "verification": {
+        "note": "STATUS_ROADMAP.md exists, includes all nine Status execution task IDs, and matches the dependency graph recorded in agentplane, including the smoke-task fan-in on deploy, indexer, backend, frontend, and wallet tasks.",
+        "state": "ok",
+        "updated_at": "2026-04-06T17:39:48.403Z",
+        "updated_by": "REVIEWER"
+      },
+      "verify": []
+    },
+    {
+      "comments": [],
+      "commit": null,
+      "depends_on": [
+        "202604061735-XM276Y"
+      ],
+      "description": "Update deployment docs, runbooks, and records so Status Sepolia becomes a first-class Solvera target with explicit Base-history preservation. Tracking: 202604061614-XSEJDG.",
+      "dirty": false,
+      "doc": "## Summary\n\nPublish Status operator docs and deployment records\n\nUpdate deployment docs, runbooks, and records so Status Sepolia becomes a first-class Solvera target with explicit Base-history preservation. Tracking: 202604061614-XSEJDG.\n\n## Scope\n\n- In scope: Update deployment docs, runbooks, and records so Status Sepolia becomes a first-class Solvera target with explicit Base-history preservation. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Publish Status operator docs and deployment records\".\n\n## Plan\n\n1. Implement the change for \"Publish Status operator docs and deployment records\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.\n\n## Verify Steps\n\n<!-- TODO: REPLACE WITH TASK-SPECIFIC ACCEPTANCE STEPS -->\n\n1. <Action>. Expected: <observable result>.\n2. <Action>. Expected: <observable result>.\n3. <Action>. Expected: <observable result>.\n\n## Verification\n\n<!-- BEGIN VERIFICATION RESULTS -->\n<!-- END VERIFICATION RESULTS -->\n\n## Rollback Plan\n\n- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.\n\n## Findings",
+      "doc_updated_at": "2026-04-06T17:35:44.164Z",
+      "doc_updated_by": "DOCS",
+      "doc_version": 3,
+      "events": [],
+      "id": "202604061735-GH834T",
+      "id_source": "generated",
+      "origin": {
+        "system": "manual"
+      },
+      "owner": "DOCS",
+      "plan_approval": {
+        "note": null,
+        "state": "pending",
+        "updated_at": null,
+        "updated_by": null
+      },
+      "priority": "high",
+      "revision": 1,
+      "sections": {
+        "Findings": "",
+        "Plan": "1. Implement the change for \"Publish Status operator docs and deployment records\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.",
+        "Rollback Plan": "- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.",
+        "Scope": "- In scope: Update deployment docs, runbooks, and records so Status Sepolia becomes a first-class Solvera target with explicit Base-history preservation. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Publish Status operator docs and deployment records\".",
+        "Summary": "Publish Status operator docs and deployment records\n\nUpdate deployment docs, runbooks, and records so Status Sepolia becomes a first-class Solvera target with explicit Base-history preservation. Tracking: 202604061614-XSEJDG.",
+        "Verification": "<!-- BEGIN VERIFICATION RESULTS -->\n<!-- END VERIFICATION RESULTS -->",
+        "Verify Steps": "<!-- TODO: REPLACE WITH TASK-SPECIFIC ACCEPTANCE STEPS -->\n\n1. <Action>. Expected: <observable result>.\n2. <Action>. Expected: <observable result>.\n3. <Action>. Expected: <observable result>."
+      },
+      "status": "TODO",
+      "tags": [
+        "docs"
+      ],
+      "title": "Publish Status operator docs and deployment records",
+      "verification": {
+        "note": null,
+        "state": "pending",
+        "updated_at": null,
+        "updated_by": null
+      },
+      "verify": []
+    },
+    {
+      "comments": [],
+      "commit": null,
+      "depends_on": [
+        "202604061735-2CPW0M"
+      ],
+      "description": "Broadcast IntentMarketplace to Status Sepolia using the funded deployer and record canonical deployment artifacts. Tracking: 202604061614-XSEJDG.",
+      "dirty": false,
+      "doc": "## Summary\n\nDeploy IntentMarketplace to Status Sepolia\n\nBroadcast IntentMarketplace to Status Sepolia using the funded deployer and record canonical deployment artifacts. Tracking: 202604061614-XSEJDG.\n\n## Scope\n\n- In scope: Broadcast IntentMarketplace to Status Sepolia using the funded deployer and record canonical deployment artifacts. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Deploy IntentMarketplace to Status Sepolia\".\n\n## Plan\n\n1. Implement the change for \"Deploy IntentMarketplace to Status Sepolia\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.\n\n## Verify Steps\n\n<!-- TODO: REPLACE WITH TASK-SPECIFIC ACCEPTANCE STEPS -->\n\n1. Review the changed artifact or behavior. Expected: the requested outcome is visible and matches the approved scope.\n2. Run the most relevant validation step for this task. Expected: it succeeds without unexpected regressions in touched scope.\n3. Compare the final result against the task summary and scope. Expected: any remaining follow-up is explicit in ## Findings.\n\n## Verification\n\n<!-- BEGIN VERIFICATION RESULTS -->\n<!-- END VERIFICATION RESULTS -->\n\n## Rollback Plan\n\n- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.\n\n## Findings",
+      "doc_updated_at": "2026-04-06T17:35:26.800Z",
+      "doc_updated_by": "CODER",
+      "doc_version": 3,
+      "events": [],
+      "id": "202604061735-NPQ61C",
+      "id_source": "generated",
+      "origin": {
+        "system": "manual"
+      },
+      "owner": "CODER",
+      "plan_approval": {
+        "note": null,
+        "state": "pending",
+        "updated_at": null,
+        "updated_by": null
+      },
+      "priority": "high",
+      "revision": 1,
+      "sections": {
+        "Findings": "",
+        "Plan": "1. Implement the change for \"Deploy IntentMarketplace to Status Sepolia\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.",
+        "Rollback Plan": "- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.",
+        "Scope": "- In scope: Broadcast IntentMarketplace to Status Sepolia using the funded deployer and record canonical deployment artifacts. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Deploy IntentMarketplace to Status Sepolia\".",
+        "Summary": "Deploy IntentMarketplace to Status Sepolia\n\nBroadcast IntentMarketplace to Status Sepolia using the funded deployer and record canonical deployment artifacts. Tracking: 202604061614-XSEJDG.",
+        "Verification": "<!-- BEGIN VERIFICATION RESULTS -->\n<!-- END VERIFICATION RESULTS -->",
+        "Verify Steps": "<!-- TODO: REPLACE WITH TASK-SPECIFIC ACCEPTANCE STEPS -->\n\n1. Review the changed artifact or behavior. Expected: the requested outcome is visible and matches the approved scope.\n2. Run the most relevant validation step for this task. Expected: it succeeds without unexpected regressions in touched scope.\n3. Compare the final result against the task summary and scope. Expected: any remaining follow-up is explicit in ## Findings."
+      },
+      "status": "TODO",
+      "tags": [
+        "code"
+      ],
+      "title": "Deploy IntentMarketplace to Status Sepolia",
+      "verification": {
+        "note": null,
+        "state": "pending",
+        "updated_at": null,
+        "updated_by": null
+      },
+      "verify": []
+    },
+    {
+      "comments": [],
+      "commit": null,
+      "depends_on": [
+        "202604061735-NPQ61C"
+      ],
+      "description": "Promote the Status Graph spike artifacts into a real Status indexing path with actual contract address/startBlock placeholders and ops guidance. Tracking: 202604061614-XSEJDG.",
+      "dirty": false,
+      "doc": "## Summary\n\nPrepare real Status indexer manifest\n\nPromote the Status Graph spike artifacts into a real Status indexing path with actual contract address/startBlock placeholders and ops guidance. Tracking: 202604061614-XSEJDG.\n\n## Scope\n\n- In scope: Promote the Status Graph spike artifacts into a real Status indexing path with actual contract address/startBlock placeholders and ops guidance. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Prepare real Status indexer manifest\".\n\n## Plan\n\n1. Implement the change for \"Prepare real Status indexer manifest\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.\n\n## Verify Steps\n\n<!-- TODO: REPLACE WITH TASK-SPECIFIC ACCEPTANCE STEPS -->\n\n1. <Action>. Expected: <observable result>.\n2. <Action>. Expected: <observable result>.\n3. <Action>. Expected: <observable result>.\n\n## Verification\n\n<!-- BEGIN VERIFICATION RESULTS -->\n<!-- END VERIFICATION RESULTS -->\n\n## Rollback Plan\n\n- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.\n\n## Findings",
+      "doc_updated_at": "2026-04-06T17:35:26.792Z",
+      "doc_updated_by": "CODER",
+      "doc_version": 3,
+      "events": [],
+      "id": "202604061735-RF7VW9",
+      "id_source": "generated",
+      "origin": {
+        "system": "manual"
+      },
+      "owner": "CODER",
+      "plan_approval": {
+        "note": null,
+        "state": "pending",
+        "updated_at": null,
+        "updated_by": null
+      },
+      "priority": "high",
+      "revision": 1,
+      "sections": {
+        "Findings": "",
+        "Plan": "1. Implement the change for \"Prepare real Status indexer manifest\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.",
+        "Rollback Plan": "- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.",
+        "Scope": "- In scope: Promote the Status Graph spike artifacts into a real Status indexing path with actual contract address/startBlock placeholders and ops guidance. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Prepare real Status indexer manifest\".",
+        "Summary": "Prepare real Status indexer manifest\n\nPromote the Status Graph spike artifacts into a real Status indexing path with actual contract address/startBlock placeholders and ops guidance. Tracking: 202604061614-XSEJDG.",
+        "Verification": "<!-- BEGIN VERIFICATION RESULTS -->\n<!-- END VERIFICATION RESULTS -->",
+        "Verify Steps": "<!-- TODO: REPLACE WITH TASK-SPECIFIC ACCEPTANCE STEPS -->\n\n1. <Action>. Expected: <observable result>.\n2. <Action>. Expected: <observable result>.\n3. <Action>. Expected: <observable result>."
+      },
+      "status": "TODO",
+      "tags": [
+        "backend"
+      ],
+      "title": "Prepare real Status indexer manifest",
+      "verification": {
+        "note": null,
+        "state": "pending",
+        "updated_at": null,
+        "updated_by": null
+      },
+      "verify": []
+    },
+    {
+      "comments": [],
+      "commit": null,
+      "depends_on": [
+        "202604061735-3JCAD3"
+      ],
+      "description": "Update explorer links, network labels, and token assumptions so the frontend can present Status Sepolia data without Base-only semantics. Tracking: 202604061614-XSEJDG.",
+      "dirty": false,
+      "doc": "## Summary\n\nSwitch frontend chain surfaces to Status\n\nUpdate explorer links, network labels, and token assumptions so the frontend can present Status Sepolia data without Base-only semantics. Tracking: 202604061614-XSEJDG.\n\n## Scope\n\n- In scope: Update explorer links, network labels, and token assumptions so the frontend can present Status Sepolia data without Base-only semantics. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Switch frontend chain surfaces to Status\".\n\n## Plan\n\n1. Implement the change for \"Switch frontend chain surfaces to Status\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.\n\n## Verify Steps\n\n<!-- TODO: REPLACE WITH TASK-SPECIFIC ACCEPTANCE STEPS -->\n\n1. <Action>. Expected: <observable result>.\n2. <Action>. Expected: <observable result>.\n3. <Action>. Expected: <observable result>.\n\n## Verification\n\n<!-- BEGIN VERIFICATION RESULTS -->\n<!-- END VERIFICATION RESULTS -->\n\n## Rollback Plan\n\n- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.\n\n## Findings",
+      "doc_updated_at": "2026-04-06T17:35:44.188Z",
+      "doc_updated_by": "CODER",
+      "doc_version": 3,
+      "events": [],
+      "id": "202604061735-WDW5JH",
+      "id_source": "generated",
+      "origin": {
+        "system": "manual"
+      },
+      "owner": "CODER",
+      "plan_approval": {
+        "note": null,
+        "state": "pending",
+        "updated_at": null,
+        "updated_by": null
+      },
+      "priority": "high",
+      "revision": 1,
+      "sections": {
+        "Findings": "",
+        "Plan": "1. Implement the change for \"Switch frontend chain surfaces to Status\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.",
+        "Rollback Plan": "- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.",
+        "Scope": "- In scope: Update explorer links, network labels, and token assumptions so the frontend can present Status Sepolia data without Base-only semantics. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Switch frontend chain surfaces to Status\".",
+        "Summary": "Switch frontend chain surfaces to Status\n\nUpdate explorer links, network labels, and token assumptions so the frontend can present Status Sepolia data without Base-only semantics. Tracking: 202604061614-XSEJDG.",
+        "Verification": "<!-- BEGIN VERIFICATION RESULTS -->\n<!-- END VERIFICATION RESULTS -->",
+        "Verify Steps": "<!-- TODO: REPLACE WITH TASK-SPECIFIC ACCEPTANCE STEPS -->\n\n1. <Action>. Expected: <observable result>.\n2. <Action>. Expected: <observable result>.\n3. <Action>. Expected: <observable result>."
+      },
+      "status": "TODO",
+      "tags": [
+        "frontend"
+      ],
+      "title": "Switch frontend chain surfaces to Status",
+      "verification": {
+        "note": null,
+        "state": "pending",
+        "updated_at": null,
+        "updated_by": null
+      },
+      "verify": []
+    },
+    {
+      "comments": [],
+      "commit": null,
+      "depends_on": [
+        "202604061735-NPQ61C",
+        "202604061735-RF7VW9",
+        "202604061735-3JCAD3",
+        "202604061735-WDW5JH",
+        "202604061735-2BWTA0"
+      ],
+      "description": "Execute and record the first end-to-end Solvera smoke on Status Sepolia across contract, indexer, backend, frontend, and wallet tooling. Tracking: 202604061614-XSEJDG.",
+      "dirty": false,
+      "doc": "## Summary\n\nRun Status end-to-end smoke\n\nExecute and record the first end-to-end Solvera smoke on Status Sepolia across contract, indexer, backend, frontend, and wallet tooling. Tracking: 202604061614-XSEJDG.\n\n## Scope\n\n- In scope: Execute and record the first end-to-end Solvera smoke on Status Sepolia across contract, indexer, backend, frontend, and wallet tooling. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Run Status end-to-end smoke\".\n\n## Plan\n\n1. Implement the change for \"Run Status end-to-end smoke\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.\n\n## Verify Steps\n\n<!-- TODO: REPLACE WITH TASK-SPECIFIC ACCEPTANCE STEPS -->\n\n1. Review the changed artifact or behavior. Expected: the requested outcome is visible and matches the approved scope.\n2. Run the most relevant validation step for this task. Expected: it succeeds without unexpected regressions in touched scope.\n3. Compare the final result against the task summary and scope. Expected: any remaining follow-up is explicit in ## Findings.\n\n## Verification\n\n<!-- BEGIN VERIFICATION RESULTS -->\n<!-- END VERIFICATION RESULTS -->\n\n## Rollback Plan\n\n- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.\n\n## Findings",
+      "doc_updated_at": "2026-04-06T17:35:44.149Z",
+      "doc_updated_by": "TESTER",
+      "doc_version": 3,
+      "events": [],
+      "id": "202604061735-XM276Y",
+      "id_source": "generated",
+      "origin": {
+        "system": "manual"
+      },
+      "owner": "TESTER",
+      "plan_approval": {
+        "note": null,
+        "state": "pending",
+        "updated_at": null,
+        "updated_by": null
+      },
+      "priority": "high",
+      "revision": 1,
+      "sections": {
+        "Findings": "",
+        "Plan": "1. Implement the change for \"Run Status end-to-end smoke\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.",
+        "Rollback Plan": "- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.",
+        "Scope": "- In scope: Execute and record the first end-to-end Solvera smoke on Status Sepolia across contract, indexer, backend, frontend, and wallet tooling. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Run Status end-to-end smoke\".",
+        "Summary": "Run Status end-to-end smoke\n\nExecute and record the first end-to-end Solvera smoke on Status Sepolia across contract, indexer, backend, frontend, and wallet tooling. Tracking: 202604061614-XSEJDG.",
+        "Verification": "<!-- BEGIN VERIFICATION RESULTS -->\n<!-- END VERIFICATION RESULTS -->",
+        "Verify Steps": "<!-- TODO: REPLACE WITH TASK-SPECIFIC ACCEPTANCE STEPS -->\n\n1. Review the changed artifact or behavior. Expected: the requested outcome is visible and matches the approved scope.\n2. Run the most relevant validation step for this task. Expected: it succeeds without unexpected regressions in touched scope.\n3. Compare the final result against the task summary and scope. Expected: any remaining follow-up is explicit in ## Findings."
+      },
+      "status": "TODO",
+      "tags": [
+        "code"
+      ],
+      "title": "Run Status end-to-end smoke",
+      "verification": {
+        "note": null,
+        "state": "pending",
+        "updated_at": null,
+        "updated_by": null
       },
       "verify": []
     }
