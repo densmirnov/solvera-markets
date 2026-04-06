@@ -1,10 +1,12 @@
 ---
 id: "202604061735-WDW5JH"
 title: "Switch frontend chain surfaces to Status"
-status: "DOING"
+result_summary: "Switched the React frontend's chain surfaces from Base defaults to runtime Status metadata and verified tests/build/lint."
+risk_level: "med"
+status: "DONE"
 priority: "high"
 owner: "CODER"
-revision: 7
+revision: 8
 origin:
   system: "manual"
 depends_on:
@@ -22,11 +24,16 @@ verification:
   updated_at: "2026-04-06T18:30:04.297Z"
   updated_by: "REVIEWER"
   note: "Frontend Status chain surfaces verified"
-commit: null
+commit:
+  hash: "dcc62fb1c33a36bc41fa19e8a90fbc783c69da53"
+  message: "🚧 WDW5JH frontend: switch chain surfaces to Status"
 comments:
   -
     author: "CODER"
     body: "Start: replace Base-only explorer and token assumptions with config-driven Status chain metadata before any future push can publish incorrect links to solvera.markets."
+  -
+    author: "INTEGRATOR"
+    body: "Verified: the frontend now renders Status-driven explorer URLs and chain metadata while leaving remaining Base-markdown cleanup to the wallet/docs follow-up tasks."
 events:
   -
     type: "status"
@@ -41,9 +48,16 @@ events:
     author: "REVIEWER"
     state: "ok"
     note: "Frontend Status chain surfaces verified"
+  -
+    type: "status"
+    at: "2026-04-06T18:30:36.801Z"
+    author: "INTEGRATOR"
+    from: "DOING"
+    to: "DONE"
+    note: "Verified: the frontend now renders Status-driven explorer URLs and chain metadata while leaving remaining Base-markdown cleanup to the wallet/docs follow-up tasks."
 doc_version: 3
-doc_updated_at: "2026-04-06T18:30:04.311Z"
-doc_updated_by: "CODER"
+doc_updated_at: "2026-04-06T18:30:36.802Z"
+doc_updated_by: "INTEGRATOR"
 description: "Update explorer links, network labels, and token assumptions so the frontend can present Status Sepolia data without Base-only semantics. Tracking: 202604061614-XSEJDG."
 sections:
   Summary: |-
