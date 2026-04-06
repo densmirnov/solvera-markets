@@ -24,6 +24,9 @@ interface PageInfo {
   hasNext: boolean;
 }
 
+const DEFAULT_NETWORK_NAME = "status-sepolia";
+const DEFAULT_CHAIN_ID = 1660990954;
+
 @Controller("api")
 export class IntentsController {
   constructor(
@@ -251,8 +254,10 @@ export class IntentsController {
     return {
       data: {
         contractAddress: process.env.CONTRACT_ADDRESS || null,
-        network: process.env.NETWORK_NAME || null,
-        chainId: process.env.CHAIN_ID ? Number(process.env.CHAIN_ID) : null,
+        network: process.env.NETWORK_NAME || DEFAULT_NETWORK_NAME,
+        chainId: process.env.CHAIN_ID
+          ? Number(process.env.CHAIN_ID)
+          : DEFAULT_CHAIN_ID,
         feeBpsOnAccept: process.env.FEE_BPS_ON_ACCEPT || null,
         fixedFeeOnExpire: process.env.FIXED_FEE_ON_EXPIRE || null,
         bondBpsOfReward: process.env.BOND_BPS_OF_REWARD || null,
@@ -305,7 +310,7 @@ export class IntentsController {
       next_steps: [
         {
           action: "sign_and_send",
-          network: process.env.NETWORK_NAME || "base",
+          network: process.env.NETWORK_NAME || DEFAULT_NETWORK_NAME,
         },
       ],
     };
@@ -323,7 +328,7 @@ export class IntentsController {
       next_steps: [
         {
           action: "sign_and_send",
-          network: process.env.NETWORK_NAME || "base",
+          network: process.env.NETWORK_NAME || DEFAULT_NETWORK_NAME,
         },
       ],
     };
@@ -345,7 +350,7 @@ export class IntentsController {
       next_steps: [
         {
           action: "sign_and_send",
-          network: process.env.NETWORK_NAME || "base",
+          network: process.env.NETWORK_NAME || DEFAULT_NETWORK_NAME,
         },
       ],
     };
@@ -359,7 +364,7 @@ export class IntentsController {
       next_steps: [
         {
           action: "sign_and_send",
-          network: process.env.NETWORK_NAME || "base",
+          network: process.env.NETWORK_NAME || DEFAULT_NETWORK_NAME,
         },
       ],
     };
@@ -373,7 +378,7 @@ export class IntentsController {
       next_steps: [
         {
           action: "sign_and_send",
-          network: process.env.NETWORK_NAME || "base",
+          network: process.env.NETWORK_NAME || DEFAULT_NETWORK_NAME,
         },
       ],
     };

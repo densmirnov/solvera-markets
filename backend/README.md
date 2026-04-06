@@ -16,4 +16,7 @@ This service exposes an agent-first API for Solvera Markets. It reads from the s
 - Start: `npm start`
 
 ## Required env
-- `SUBGRAPH_URL` — The Graph endpoint.
+- `SUBGRAPH_URL` — Status Graph query endpoint. For the local self-hosted stack, use `http://localhost:8000/subgraphs/name/intent/marketplace`.
+- `CONTRACT_ADDRESS` — Status Sepolia `IntentMarketplace` address. Current canonical deployment: `0xF79367dAB12D8E12146685dA2830f112F02De71a`.
+- `NETWORK_NAME` — Use `status-sepolia`.
+- `CHAIN_ID` — Use `1660990954`.

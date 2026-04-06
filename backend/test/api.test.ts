@@ -17,9 +17,9 @@ describe("backend API", () => {
   let queryImpl: (gql: string) => Promise<Record<string, unknown>>;
 
   before(async () => {
-    process.env.CONTRACT_ADDRESS = "0x0000000000000000000000000000000000000001";
-    process.env.NETWORK_NAME = "base";
-    process.env.CHAIN_ID = "8453";
+    process.env.CONTRACT_ADDRESS = "0xF79367dAB12D8E12146685dA2830f112F02De71a";
+    process.env.NETWORK_NAME = "status-sepolia";
+    process.env.CHAIN_ID = "1660990954";
 
     queryImpl = async (gql: string) => {
       if (gql.includes("intents(") && !gql.includes("intent(id")) {
@@ -133,8 +133,10 @@ describe("backend API", () => {
     assert.equal(res.status, 200);
     assert.equal(
       res.body.data.contractAddress,
-      "0x0000000000000000000000000000000000000001",
+      "0xF79367dAB12D8E12146685dA2830f112F02De71a",
     );
+    assert.equal(res.body.data.network, "status-sepolia");
+    assert.equal(res.body.data.chainId, 1660990954);
   });
 
   test("GET /api/intents returns next_steps", async () => {
@@ -196,6 +198,7 @@ describe("backend API", () => {
     assert.equal(res.status, 201, JSON.stringify(res.body));
     assert.ok(res.body.data.calldata);
     assert.ok(res.body.next_steps.length > 0);
+    assert.equal(res.body.next_steps[0].network, "status-sepolia");
   });
 
   test("POST /api/intents/:id/offers returns calldata", async () => {
