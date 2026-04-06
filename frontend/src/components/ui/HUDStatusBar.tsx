@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { apiGet } from "../../lib/api";
+import { formatNetworkChip, useRuntimeConfig } from "../../lib/config";
 import { PixelStatusChip } from "./PixelStatus";
 
 type ApiHealth = "checking" | "online" | "offline";
@@ -18,6 +19,7 @@ function valueForApi(health: ApiHealth) {
 
 export function HUDStatusBar() {
   const [api, setApi] = useState<ApiHealth>("checking");
+  const runtimeConfig = useRuntimeConfig();
   const [netOnline, setNetOnline] = useState<boolean>(() =>
     typeof navigator === "undefined" ? true : navigator.onLine,
   );
@@ -63,9 +65,13 @@ export function HUDStatusBar() {
 
   return (
     <div className="hud-strip">
+      <PixelStatusChip
+        k="CHAIN"
+        v={formatNetworkChip(runtimeConfig.network)}
+        tone="ok"
+      />
       <PixelStatusChip k="NET" v={netValue} tone={netTone} />
       <PixelStatusChip k="API" v={valueForApi(api)} tone={toneForApi(api)} />
     </div>
   );
 }
-

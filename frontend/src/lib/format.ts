@@ -4,17 +4,26 @@ export function formatAddress(value: string | null | undefined): string {
   return `${value.slice(0, 6)}...${value.slice(-4)}`;
 }
 
-const BASESCAN = "https://basescan.org";
-const USDC_BASE = "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913";
+export const DEFAULT_EXPLORER_BASE_URL = "https://sepoliascan.status.network";
 
-export function explorerAddressUrl(value: string | null | undefined): string {
+const KNOWN_TOKEN_METADATA: Record<string, { symbol: string; decimals: number }> = {
+  "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913": { symbol: "USDC", decimals: 6 },
+};
+
+export function explorerAddressUrl(
+  value: string | null | undefined,
+  explorerBaseUrl = DEFAULT_EXPLORER_BASE_URL,
+): string {
   if (!value) return "";
-  return `${BASESCAN}/address/${value}`;
+  return `${explorerBaseUrl}/address/${value}`;
 }
 
-export function explorerTxUrl(value: string | null | undefined): string {
+export function explorerTxUrl(
+  value: string | null | undefined,
+  explorerBaseUrl = DEFAULT_EXPLORER_BASE_URL,
+): string {
   if (!value) return "";
-  return `${BASESCAN}/tx/${value}`;
+  return `${explorerBaseUrl}/tx/${value}`;
 }
 
 function formatUnits(raw: string, decimals: number): string {
@@ -38,20 +47,21 @@ export function formatTokenAmount(
   }
   const rawValue = typeof raw === "number" ? raw.toString() : raw;
   const normalized = tokenAddress ? tokenAddress.toLowerCase() : "";
+  const tokenMetadata = normalized ? KNOWN_TOKEN_METADATA[normalized] : null;
 
-  if (normalized === USDC_BASE) {
-    const human = formatUnits(rawValue, 6);
+  if (tokenMetadata) {
+    const human = formatUnits(rawValue, tokenMetadata.decimals);
     return {
-      primary: `${human} USDC`,
-      secondary: `raw ${rawValue} (6 decimals)`,
+      primary: `${human} ${tokenMetadata.symbol}`,
+      secondary: `raw ${rawValue} (${tokenMetadata.decimals} decimals)`,
     };
   }
 
   if (tokenAddress) {
     const human = formatUnits(rawValue, 18);
     return {
-      primary: `${human} (assumes 18 decimals)`,
-      secondary: `raw ${rawValue}`,
+      primary: human,
+      secondary: `${formatAddress(tokenAddress)} • assumes 18 decimals`,
     };
   }
 

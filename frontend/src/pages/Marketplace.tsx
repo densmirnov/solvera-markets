@@ -12,6 +12,7 @@ import { Button } from "../components/ui/Button";
 import { cn } from "../lib/utils";
 import { PixelStatusChip, toneForIntentState } from "../components/ui/PixelStatus";
 import { MarketplaceHudRail } from "../components/marketplace/MarketplaceHudRail";
+import { formatNetworkLabel, useRuntimeConfig } from "../lib/config";
 
 interface Intent {
   id: string;
@@ -32,6 +33,7 @@ interface IntentResponse {
 
 export default function MarketplacePage() {
   const navigate = useNavigate();
+  const runtimeConfig = useRuntimeConfig();
   const [data, setData] = useState<Intent[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -84,7 +86,7 @@ export default function MarketplacePage() {
       <div className="section-stack-tight reveal delay-1">
         <H1 className="hero-title hero-glint">Marketplace</H1>
         <P className="hero-copy text-muted-foreground max-w-2xl">
-          Discover and bid on active intents.
+          Discover and bid on active intents on {formatNetworkLabel(runtimeConfig.network)}.
         </P>
       </div>
 
@@ -229,7 +231,10 @@ export default function MarketplacePage() {
                       </td>
                       <td className="px-3 py-2 align-middle font-mono text-[11px]">
                         <a
-                          href={explorerAddressUrl(intent.initiator)}
+                          href={explorerAddressUrl(
+                            intent.initiator,
+                            runtimeConfig.explorerBaseUrl,
+                          )}
                           target="_blank"
                           rel="noreferrer"
                           className="hover:underline"

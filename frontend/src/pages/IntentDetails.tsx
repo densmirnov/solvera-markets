@@ -10,6 +10,7 @@ import {
 import { useEnsNames } from "../lib/ens";
 import { H1, P } from "../components/ui/Typography";
 import { PixelStatusChip, toneForIntentState } from "../components/ui/PixelStatus";
+import { formatNetworkLabel, useRuntimeConfig } from "../lib/config";
 
 interface IntentDetail {
   id: string;
@@ -35,6 +36,7 @@ interface IntentDetailResponse {
 
 export default function IntentDetailsPage() {
   const { id } = useParams();
+  const runtimeConfig = useRuntimeConfig();
   const [data, setData] = useState<IntentDetail | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -87,8 +89,12 @@ export default function IntentDetailsPage() {
   const ensNames = useEnsNames(participantAddresses);
   const isTxHash = (value: string | null | undefined) =>
     Boolean(value && value.startsWith("0x") && value.length === 66);
-  const intentTxUrl = isTxHash(data?.id) ? explorerTxUrl(data?.id) : "";
-  const txUrl = data?.txHash ? explorerTxUrl(data.txHash) : "";
+  const intentTxUrl = isTxHash(data?.id)
+    ? explorerTxUrl(data?.id, runtimeConfig.explorerBaseUrl)
+    : "";
+  const txUrl = data?.txHash
+    ? explorerTxUrl(data.txHash, runtimeConfig.explorerBaseUrl)
+    : "";
   const renderEns = (address: string) => {
     const ens = ensNames[address.toLowerCase()];
     if (!ens) return formatAddress(address);
@@ -120,7 +126,8 @@ export default function IntentDetailsPage() {
           {data?.id ? formatAddress(data.id) : "Intent"}
         </H1>
         <P className="hero-copy text-muted-foreground max-w-2xl">
-          Detailed view of the intent, participants, and on-chain metadata.
+          Detailed view of the intent, participants, and on-chain metadata on{" "}
+          {formatNetworkLabel(runtimeConfig.network)}.
         </P>
       </div>
 
@@ -196,7 +203,10 @@ export default function IntentDetailsPage() {
                     Initiator:{" "}
                     <a
                       className="hover:underline"
-                      href={explorerAddressUrl(data.initiator)}
+                      href={explorerAddressUrl(
+                        data.initiator,
+                        runtimeConfig.explorerBaseUrl,
+                      )}
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -207,7 +217,10 @@ export default function IntentDetailsPage() {
                     Payer:{" "}
                     <a
                       className="hover:underline"
-                      href={explorerAddressUrl(data.payer)}
+                      href={explorerAddressUrl(
+                        data.payer,
+                        runtimeConfig.explorerBaseUrl,
+                      )}
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -219,7 +232,10 @@ export default function IntentDetailsPage() {
                       Verifier:{" "}
                       <a
                         className="hover:underline"
-                        href={explorerAddressUrl(data.verifier)}
+                        href={explorerAddressUrl(
+                          data.verifier,
+                          runtimeConfig.explorerBaseUrl,
+                        )}
                         target="_blank"
                         rel="noreferrer"
                       >
@@ -232,7 +248,10 @@ export default function IntentDetailsPage() {
                       Winner:{" "}
                       <a
                         className="hover:underline"
-                        href={explorerAddressUrl(data.winner)}
+                        href={explorerAddressUrl(
+                          data.winner,
+                          runtimeConfig.explorerBaseUrl,
+                        )}
                         target="_blank"
                         rel="noreferrer"
                       >
