@@ -1,10 +1,12 @@
 ---
 id: "202604061644-8Q1433"
 title: "Spike self-hosted Graph Node on Status testnet"
-status: "TODO"
+result_summary: "Self-hosted Graph Node on Status Sepolia validated; keep Graph architecture and rerun with real contract address."
+risk_level: "med"
+status: "DONE"
 priority: "high"
 owner: "CODER"
-revision: 9
+revision: 13
 origin:
   system: "manual"
 depends_on:
@@ -21,15 +23,43 @@ plan_approval:
   updated_by: "ORCHESTRATOR"
   note: "Approved: run Graph Node spike only after workflow artifacts are normalized."
 verification:
-  state: "pending"
-  updated_at: null
-  updated_by: null
-  note: null
-commit: null
-comments: []
-events: []
+  state: "ok"
+  updated_at: "2026-04-06T17:11:49.178Z"
+  updated_by: "REVIEWER"
+  note: "Spike complete: compose validates, `npx graph build subgraph.status-spike.yaml` succeeds, and the local Graph Node deployment `intent/status-spike` reports `health=healthy`, `synced=true`, and `network=status` against Status Sepolia RPC. Caveats captured in Findings: Postgres locale must be `C`, public RPC lacks `eth_getBlockReceipts`, and real entity ingestion still needs the actual Status contract address/start block."
+commit:
+  hash: "5933b6ffcf9f576c6974b5017a2303c7d768fd73"
+  message: "✅ 8Q1433 indexer: spike Graph Node on Status"
+comments:
+  -
+    author: "CODER"
+    body: "Start: validate the existing Solvera subgraph on a local Graph Node stack using Status Sepolia RPC before considering any custom indexing fallback."
+  -
+    author: "CODER"
+    body: "Verified: the current Solvera subgraph architecture is viable on a self-hosted Graph Node over Status Sepolia. Added a local Graph stack compose file plus a Status-specific spike manifest, confirmed successful build/deploy/sync to head, and captured the remaining caveats around Postgres locale, missing `eth_getBlockReceipts`, and the need to rerun with the real Status deployment address."
+events:
+  -
+    type: "status"
+    at: "2026-04-06T16:56:42.641Z"
+    author: "CODER"
+    from: "TODO"
+    to: "DOING"
+    note: "Start: validate the existing Solvera subgraph on a local Graph Node stack using Status Sepolia RPC before considering any custom indexing fallback."
+  -
+    type: "verify"
+    at: "2026-04-06T17:11:49.178Z"
+    author: "REVIEWER"
+    state: "ok"
+    note: "Spike complete: compose validates, `npx graph build subgraph.status-spike.yaml` succeeds, and the local Graph Node deployment `intent/status-spike` reports `health=healthy`, `synced=true`, and `network=status` against Status Sepolia RPC. Caveats captured in Findings: Postgres locale must be `C`, public RPC lacks `eth_getBlockReceipts`, and real entity ingestion still needs the actual Status contract address/start block."
+  -
+    type: "status"
+    at: "2026-04-06T17:12:32.338Z"
+    author: "CODER"
+    from: "DOING"
+    to: "DONE"
+    note: "Verified: the current Solvera subgraph architecture is viable on a self-hosted Graph Node over Status Sepolia. Added a local Graph stack compose file plus a Status-specific spike manifest, confirmed successful build/deploy/sync to head, and captured the remaining caveats around Postgres locale, missing `eth_getBlockReceipts`, and the need to rerun with the real Status deployment address."
 doc_version: 3
-doc_updated_at: "2026-04-06T16:48:49.096Z"
+doc_updated_at: "2026-04-06T17:12:32.339Z"
 doc_updated_by: "CODER"
 description: "Validate whether the current Solvera subgraph can be built and deployed against a local Graph Node stack using Status Network Sepolia RPC before considering a custom indexer. Tracking: 202604061614-XSEJDG."
 sections:
@@ -53,15 +83,24 @@ sections:
     4. Record a binary decision in ## Findings. Expected: one of `viable as-is`, `viable with local infra changes`, or `not viable -> custom indexer fallback` is explicitly justified.
   Verification: |-
     <!-- BEGIN VERIFICATION RESULTS -->
+    ### 2026-04-06T17:11:49.178Z — VERIFY — ok
+    
+    By: REVIEWER
+    
+    Note: Spike complete: compose validates, `npx graph build subgraph.status-spike.yaml` succeeds, and the local Graph Node deployment `intent/status-spike` reports `health=healthy`, `synced=true`, and `network=status` against Status Sepolia RPC. Caveats captured in Findings: Postgres locale must be `C`, public RPC lacks `eth_getBlockReceipts`, and real entity ingestion still needs the actual Status contract address/start block.
+    
+    VerifyStepsRef: doc_version=3, doc_updated_at=2026-04-06T17:11:42.672Z, excerpt_hash=sha256:2cfd10282f4d0cad0893520e700592a1e4156b73e7942b196ac7d0551bc0adfc
+    
     <!-- END VERIFICATION RESULTS -->
   Rollback Plan: |-
     1. Remove the temporary spike compose/config artifacts or revert the commit that introduced them.
     2. Confirm the repository returns to the original indexer path with `git diff -- indexer docker-compose*`.
     3. Keep only documentary findings if the technical spike is abandoned.
   Findings: |-
-    Decision: pending spike execution.
-    Expected outcome shape: classify the result as `viable as-is`, `viable with local infra changes`, or `not viable -> custom indexer fallback`.
-    Next steps: update this section with the actual decision, the blocking layer, and the recommended indexing path for Status.
+    Decision: viable with local infra changes.
+    Key findings: the Solvera subgraph builds successfully from `subgraph.status-spike.yaml`, deploys to a self-hosted Graph Node, and the deployment `intent/status-spike` reaches `health=healthy` and `synced=true` on Status Sepolia via `https://public.sepolia.rpc.status.network`. Graph Node accepts `network: status` and indexes blocks to head, so Status is not blocked at the chain-ingestion layer.
+    Operational caveats: Graph Node requires Postgres initialized with locale `C`; the public Status RPC does not support `eth_getBlockReceipts`, so Graph Node falls back to block/log-based indexing; the spike used a temporary contract address, so entity creation against real Solvera events still requires a real Status deployment address plus start block.
+    Recommended path: keep the current Graph-based architecture, run a second pass with the actual Status-deployed `IntentMarketplace` address, and only consider a custom indexer if real-event sync proves unstable under Status RPC constraints.
 id_source: "generated"
 ---
 ## Summary
@@ -96,6 +135,14 @@ Run a narrow compatibility spike for the existing Solvera subgraph on a local Gr
 ## Verification
 
 <!-- BEGIN VERIFICATION RESULTS -->
+### 2026-04-06T17:11:49.178Z — VERIFY — ok
+
+By: REVIEWER
+
+Note: Spike complete: compose validates, `npx graph build subgraph.status-spike.yaml` succeeds, and the local Graph Node deployment `intent/status-spike` reports `health=healthy`, `synced=true`, and `network=status` against Status Sepolia RPC. Caveats captured in Findings: Postgres locale must be `C`, public RPC lacks `eth_getBlockReceipts`, and real entity ingestion still needs the actual Status contract address/start block.
+
+VerifyStepsRef: doc_version=3, doc_updated_at=2026-04-06T17:11:42.672Z, excerpt_hash=sha256:2cfd10282f4d0cad0893520e700592a1e4156b73e7942b196ac7d0551bc0adfc
+
 <!-- END VERIFICATION RESULTS -->
 
 ## Rollback Plan
@@ -106,6 +153,7 @@ Run a narrow compatibility spike for the existing Solvera subgraph on a local Gr
 
 ## Findings
 
-Decision: pending spike execution.
-Expected outcome shape: classify the result as `viable as-is`, `viable with local infra changes`, or `not viable -> custom indexer fallback`.
-Next steps: update this section with the actual decision, the blocking layer, and the recommended indexing path for Status.
+Decision: viable with local infra changes.
+Key findings: the Solvera subgraph builds successfully from `subgraph.status-spike.yaml`, deploys to a self-hosted Graph Node, and the deployment `intent/status-spike` reaches `health=healthy` and `synced=true` on Status Sepolia via `https://public.sepolia.rpc.status.network`. Graph Node accepts `network: status` and indexes blocks to head, so Status is not blocked at the chain-ingestion layer.
+Operational caveats: Graph Node requires Postgres initialized with locale `C`; the public Status RPC does not support `eth_getBlockReceipts`, so Graph Node falls back to block/log-based indexing; the spike used a temporary contract address, so entity creation against real Solvera events still requires a real Status deployment address plus start block.
+Recommended path: keep the current Graph-based architecture, run a second pass with the actual Status-deployed `IntentMarketplace` address, and only consider a custom indexer if real-event sync proves unstable under Status RPC constraints.
