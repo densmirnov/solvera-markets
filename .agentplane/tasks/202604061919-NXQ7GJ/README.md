@@ -1,10 +1,12 @@
 ---
 id: "202604061919-NXQ7GJ"
 title: "Add frontend network switcher for Base and Status Sepolia"
-status: "DOING"
+result_summary: "Added a frontend network switcher with MetaMask auto-switch support."
+risk_level: "med"
+status: "DONE"
 priority: "high"
 owner: "CODER"
-revision: 7
+revision: 8
 origin:
   system: "manual"
 depends_on: []
@@ -21,11 +23,16 @@ verification:
   updated_at: "2026-04-06T19:27:30.318Z"
   updated_by: "CODER"
   note: "Frontend network switcher, runtime config, and MetaMask helpers passed verification"
-commit: null
+commit:
+  hash: "4d209b4f558ff0d7b70f7d1ca99c9a76ab18fcfe"
+  message: "✅ NXQ7GJ meta: done"
 comments:
   -
     author: "CODER"
     body: "Start: add a site-wide Base/Status network selector, keep frontend runtime state in sync with the selected network, and trigger MetaMask switch/add-network flows without pushing production."
+  -
+    author: "INTEGRATOR"
+    body: "Verified: added a site-wide Base/Status network selector, wired frontend runtime state to the selected network, and implemented MetaMask switch/add-network requests without pushing production."
 events:
   -
     type: "status"
@@ -40,9 +47,16 @@ events:
     author: "CODER"
     state: "ok"
     note: "Frontend network switcher, runtime config, and MetaMask helpers passed verification"
+  -
+    type: "status"
+    at: "2026-04-06T19:27:46.220Z"
+    author: "INTEGRATOR"
+    from: "DOING"
+    to: "DONE"
+    note: "Verified: added a site-wide Base/Status network selector, wired frontend runtime state to the selected network, and implemented MetaMask switch/add-network requests without pushing production."
 doc_version: 3
-doc_updated_at: "2026-04-06T19:27:30.330Z"
-doc_updated_by: "CODER"
+doc_updated_at: "2026-04-06T19:27:46.221Z"
+doc_updated_by: "INTEGRATOR"
 description: "Add a user-facing network selector to the main site, switch frontend runtime between Base and Status Sepolia, and trigger MetaMask network switching/add-network flows without pushing production. Tracking: 202604061614-XSEJDG."
 sections:
   Summary: |-
