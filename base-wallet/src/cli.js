@@ -1,6 +1,5 @@
 #!/usr/bin/env node
-import { formatEther, formatUnits, parseEther, parseUnits } from "viem";
-import { parseAbi } from "viem";
+import { parseAbi, formatEther, formatUnits, parseEther, parseUnits } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import {
   parseArgs,
@@ -23,46 +22,50 @@ import {
 } from "./lib/wallet.js";
 import { getPublicClient, getWalletClient } from "./lib/clients.js";
 import { erc20Abi } from "./lib/erc20.js";
-import { BASE_CHAIN } from "./lib/config.js";
+import {
+  DEFAULT_CHAIN_KEY,
+  normalizeChainKey,
+  resolveChainConfig,
+} from "./lib/config.js";
+import { getChainKeyFromEnv, getPrivateKeyFromEnv } from "./lib/env.js";
 
-function printHelp() {
-  console.log(`Base Wallet CLI
+function resolveChainKey(flags) {
+  return normalizeChainKey(flags.chain || getChainKeyFromEnv() || DEFAULT_CHAIN_KEY);
+}
+
+function printHelp(chain) {
+  console.log(`Solvera Wallet CLI
 
 Commands:
-  setup [--force] [--wallet <path>] [--json]
-  address [--wallet <path>] [--private-key <hex>] [--json]
-  balance [token] [--address <addr>] [--wallet <path>] [--private-key <hex>] [--json] [--rpc <url>]
-  send <to> <amount> [--token <addr>] [--wallet <path>] [--private-key <hex>] [--json] [--rpc <url>]
-  tx --to <addr> --data <hex> [--value <eth>] [--value-wei <wei>] [--wallet <path>] [--private-key <hex>] [--json] [--rpc <url>]
-  contract <contract> <signature> [args...] [--read] [--value <eth>] [--wallet <path>] [--private-key <hex>] [--json] [--rpc <url>]
-  pack [--out <dir>] [--wallet <path>] [--private-key <hex>] [--json]
+  setup [--force] [--wallet <path>] [--json] [--chain <status-sepolia|base>]
+  address [--wallet <path>] [--private-key <hex>] [--json] [--chain <status-sepolia|base>]
+  balance [token] [--address <addr>] [--wallet <path>] [--private-key <hex>] [--json] [--rpc <url>] [--chain <status-sepolia|base>]
+  send <to> <amount> [--token <addr>] [--wallet <path>] [--private-key <hex>] [--json] [--rpc <url>] [--chain <status-sepolia|base>]
+  tx --to <addr> --data <hex> [--value <eth>] [--value-wei <wei>] [--wallet <path>] [--private-key <hex>] [--json] [--rpc <url>] [--chain <status-sepolia|base>]
+  contract <contract> <signature> [args...] [--read] [--value <eth>] [--wallet <path>] [--private-key <hex>] [--json] [--rpc <url>] [--chain <status-sepolia|base>]
+  pack [--out <dir>] [--wallet <path>] [--private-key <hex>] [--json] [--chain <status-sepolia|base>]
 
 Notes:
-  - Default chain: Base (chainId ${BASE_CHAIN.id})
-  - Wallet file default: ~/.solvera-base-wallet.json (chmod 600)
+  - Default chain: ${chain.name} (chainId ${chain.id})
+  - Wallet file default: ~/.solvera-wallet.json (legacy ~/.solvera-base-wallet.json still supported)
   - Wallet pack default: ~/.solvera-wallet-pack
-  - Private key overrides: --private-key, BASE_PRIVATE_KEY, PRIVATE_KEY
+  - Private key overrides: --private-key, DEPLOYER_PRIVATE_KEY, STATUS_PRIVATE_KEY, STATUS_DEPLOYER_PRIVATE_KEY, BASE_DEPLOYER_PRIVATE_KEY, BASE_PRIVATE_KEY, PRIVATE_KEY
 `);
 }
 
 function getFunctionName(signature) {
   const cleaned = signature.replace(/^function\s+/, "").trim();
-  const name = cleaned.split("(")[0];
-  return name;
+  return cleaned.split("(")[0];
 }
 
 function resolvePrivateKey(flags) {
-  const inline =
-    flags["private-key"] ||
-    process.env.BASE_PRIVATE_KEY ||
-    process.env.PRIVATE_KEY;
+  const inline = flags["private-key"] || getPrivateKeyFromEnv(resolveChainKey(flags));
   if (!inline) return null;
-  if (!inline.startsWith("0x") || inline.length !== 66) {
-    throw new Error(
-      "Invalid private key format. Expected 0x-prefixed 32-byte hex.",
-    );
+  const normalized = inline.startsWith("0x") ? inline : `0x${inline}`;
+  if (!normalized.startsWith("0x") || normalized.length !== 66) {
+    throw new Error("Invalid private key format. Expected 0x-prefixed 32-byte hex.");
   }
-  return inline;
+  return normalized;
 }
 
 function resolveAccountOrThrow(flags, walletPath) {
@@ -73,9 +76,7 @@ function resolveAccountOrThrow(flags, walletPath) {
   if (hasWallet(walletPath)) {
     return getAccount(walletPath);
   }
-  throw new Error(
-    "Wallet not found. Run setup first or provide --private-key.",
-  );
+  throw new Error("Wallet not found. Run setup first or provide --private-key.");
 }
 
 function resolveAddress(flags, walletPath) {
@@ -91,11 +92,13 @@ async function main() {
   const command = positionals[0];
   const args = positionals.slice(1);
   const json = Boolean(flags.json);
+  const chainKey = resolveChainKey(flags);
+  const chain = resolveChainConfig(chainKey);
   const rpcOverride = flags.rpc;
   const walletPath = resolveWalletPath(flags.wallet);
 
   if (!command || command === "help" || flags.help) {
-    printHelp();
+    printHelp(chain);
     return;
   }
 
@@ -122,6 +125,7 @@ async function main() {
     persistWallet(walletPath, wallet);
     const output = {
       ok: true,
+      chain: chain.name,
       wallet: {
         address: wallet.address,
         createdAt: wallet.createdAt,
@@ -132,6 +136,7 @@ async function main() {
       console.log(formatJson(output));
     } else {
       console.log("Wallet created.");
+      console.log(`Chain: ${chain.name}`);
       console.log(`Address: ${wallet.address}`);
       console.log(`Created: ${wallet.createdAt}`);
       console.log(`Path: ${walletPath}`);
@@ -143,6 +148,7 @@ async function main() {
     const outDir = resolveWalletPackDir(flags.out);
     const privateKey = resolvePrivateKey(flags);
     let wallet = null;
+
     if (privateKey) {
       const account = privateKeyToAccount(privateKey);
       wallet = {
@@ -161,9 +167,11 @@ async function main() {
     } else {
       wallet = createWallet();
     }
+
     const savedPath = writeWalletPack(outDir, wallet);
     const payload = {
       ok: true,
+      chain: chain.name,
       outDir,
       wallet: {
         address: wallet.address,
@@ -176,6 +184,7 @@ async function main() {
       console.log(formatJson(payload));
     } else {
       console.log("Wallet pack created.");
+      console.log(`Chain: ${chain.name}`);
       console.log(`Address: ${wallet.address}`);
       console.log(`Created: ${wallet.createdAt}`);
       console.log(`Path: ${savedPath}`);
@@ -187,12 +196,10 @@ async function main() {
   if (command === "address") {
     const address = resolveAddress(flags, walletPath);
     if (!address) {
-      throw new Error(
-        "Wallet not found. Run setup first or provide --private-key.",
-      );
+      throw new Error("Wallet not found. Run setup first or provide --private-key.");
     }
     if (json) {
-      console.log(formatJson({ ok: true, address }));
+      console.log(formatJson({ ok: true, address, chain: chain.name }));
     } else {
       console.log(address);
     }
@@ -207,15 +214,17 @@ async function main() {
         "No address provided. Use --address, --private-key, or create a wallet first.",
       );
     }
+
     ensureAddress(address, "Address");
-    const { client, rpcUrl } = await getPublicClient(rpcOverride);
+    const { client, rpcUrl, chain } = await getPublicClient(chainKey, rpcOverride);
 
     if (!token) {
       const balance = await client.getBalance({ address });
       const payload = {
         ok: true,
         address,
-        chain: BASE_CHAIN.name,
+        chain: chain.name,
+        chainId: chain.id,
         rpcUrl,
         balance: {
           wei: balance.toString(),
@@ -225,6 +234,7 @@ async function main() {
       if (json) {
         console.log(formatJson(payload));
       } else {
+        console.log(`Chain: ${chain.name}`);
         console.log(`Address: ${address}`);
         console.log(`Balance: ${formatEther(balance)} ETH`);
       }
@@ -255,7 +265,8 @@ async function main() {
       ok: true,
       address,
       token,
-      chain: BASE_CHAIN.name,
+      chain: chain.name,
+      chainId: chain.id,
       rpcUrl,
       balance: {
         raw: rawBalance.toString(),
@@ -267,6 +278,7 @@ async function main() {
     if (json) {
       console.log(formatJson(payload));
     } else {
+      console.log(`Chain: ${chain.name}`);
       console.log(`Address: ${address}`);
       console.log(`Token: ${symbol}`);
       console.log(`Balance: ${formatUnits(rawBalance, decimals)}`);
@@ -285,28 +297,25 @@ async function main() {
     ensureAddress(to, "Recipient");
 
     const account = resolveAccountOrThrow(flags, walletPath);
-    const { client: publicClient } = await getPublicClient(rpcOverride);
-    const { client: walletClient } = await getWalletClient(
+    const { client: publicClient } = await getPublicClient(chainKey, rpcOverride);
+    const { client: walletClient, chain } = await getWalletClient(
       account,
+      chainKey,
       rpcOverride,
     );
 
     if (!token) {
       const value = parseEther(amount);
-      const balance = await publicClient.getBalance({
-        address: account.address,
-      });
+      const balance = await publicClient.getBalance({ address: account.address });
       if (balance < value) {
         throw new Error("Insufficient ETH balance.");
       }
-      const hash = await walletClient.sendTransaction({
-        to,
-        value,
-      });
+      const hash = await walletClient.sendTransaction({ to, value });
       const payload = {
         ok: true,
+        chain: chain.name,
         hash,
-        explorer: `${BASE_CHAIN.blockExplorers.default.url}/tx/${hash}`,
+        explorer: `${chain.blockExplorers.default.url}/tx/${hash}`,
       };
       if (json) {
         console.log(formatJson(payload));
@@ -343,8 +352,9 @@ async function main() {
     });
     const payload = {
       ok: true,
+      chain: chain.name,
       hash,
-      explorer: `${BASE_CHAIN.blockExplorers.default.url}/tx/${hash}`,
+      explorer: `${chain.blockExplorers.default.url}/tx/${hash}`,
     };
     if (json) {
       console.log(formatJson(payload));
@@ -367,8 +377,9 @@ async function main() {
     ensureAddress(to, "Recipient");
 
     const account = resolveAccountOrThrow(flags, walletPath);
-    const { client: walletClient } = await getWalletClient(
+    const { client: walletClient, chain } = await getWalletClient(
       account,
+      chainKey,
       rpcOverride,
     );
 
@@ -379,15 +390,12 @@ async function main() {
       value = parseEther(String(valueEth));
     }
 
-    const hash = await walletClient.sendTransaction({
-      to,
-      data,
-      value,
-    });
+    const hash = await walletClient.sendTransaction({ to, data, value });
     const payload = {
       ok: true,
+      chain: chain.name,
       hash,
-      explorer: `${BASE_CHAIN.blockExplorers.default.url}/tx/${hash}`,
+      explorer: `${chain.blockExplorers.default.url}/tx/${hash}`,
     };
     if (json) {
       console.log(formatJson(payload));
@@ -416,7 +424,7 @@ async function main() {
     const readOnly = Boolean(flags.read || flags.view);
 
     if (readOnly) {
-      const { client } = await getPublicClient(rpcOverride);
+      const { client } = await getPublicClient(chainKey, rpcOverride);
       const result = await client.readContract({
         address: contract,
         abi,
@@ -424,7 +432,7 @@ async function main() {
         args: callArgs,
       });
       if (json) {
-        console.log(formatJson({ ok: true, result }));
+        console.log(formatJson({ ok: true, chain: chain.name, result }));
       } else {
         console.log(result);
       }
@@ -432,8 +440,9 @@ async function main() {
     }
 
     const account = resolveAccountOrThrow(flags, walletPath);
-    const { client: walletClient } = await getWalletClient(
+    const { client: walletClient, chain } = await getWalletClient(
       account,
+      chainKey,
       rpcOverride,
     );
 
@@ -451,8 +460,9 @@ async function main() {
     });
     const payload = {
       ok: true,
+      chain: chain.name,
       hash,
-      explorer: `${BASE_CHAIN.blockExplorers.default.url}/tx/${hash}`,
+      explorer: `${chain.blockExplorers.default.url}/tx/${hash}`,
     };
     if (json) {
       console.log(formatJson(payload));

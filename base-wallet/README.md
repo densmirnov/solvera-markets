@@ -1,6 +1,6 @@
-# Base Wallet (Agent Utilities)
+# Solvera Wallet (Agent Utilities)
 
-Local, self-custodied wallet helpers for Base. Keys are generated and stored on the machine running the agent. No third-party custody, no API keys.
+Local, self-custodied wallet helpers for Solvera operators. Status Sepolia is the default target chain, while legacy Base aliases remain supported for backwards compatibility. Keys are generated and stored on the machine running the agent. No third-party custody, no API keys.
 
 ## Security
 - Never share the wallet file contents.
@@ -41,8 +41,9 @@ node src/cli.js contract 0xContract "balanceOf(address)" 0xWallet --read
 ```
 
 ## Wallet file
-- Default path: `~/.solvera-base-wallet.json`
-- Override with: `BASE_WALLET_PATH=/path/to/file`
+- Default path: `~/.solvera-wallet.json`
+- Legacy fallback path: `~/.solvera-base-wallet.json`
+- Override with: `SOLVERA_WALLET_PATH=/path/to/file` or `BASE_WALLET_PATH=/path/to/file`
 
 ## Wallet pack (for agents without file access)
 If the agent cannot write to the filesystem, create a wallet pack and share it securely. Do not push the pack to git; use a secure channel or private artifact.
@@ -52,7 +53,7 @@ If the agent cannot write to the filesystem, create a wallet pack and share it s
 node src/cli.js pack
 
 # Use the pack
-BASE_WALLET_PATH=~/.solvera-wallet-pack/wallet.json node src/cli.js address
+SOLVERA_WALLET_PATH=~/.solvera-wallet-pack/wallet.json node src/cli.js address
 ```
 
 The default pack lives in `~/.solvera-wallet-pack`. Treat it as a secret.
@@ -61,11 +62,12 @@ The default pack lives in `~/.solvera-wallet-pack`. Treat it as a secret.
 If you already have a private key, you can use it without generating a new wallet.
 
 Command: `node src/cli.js address --private-key 0x...`
-Env: `BASE_PRIVATE_KEY=0x...` or `PRIVATE_KEY=0x...`
+Env: `DEPLOYER_PRIVATE_KEY=0x...`, `STATUS_PRIVATE_KEY=0x...`, `STATUS_DEPLOYER_PRIVATE_KEY=0x...`, `BASE_DEPLOYER_PRIVATE_KEY=0x...`, `BASE_PRIVATE_KEY=0x...`, or `PRIVATE_KEY=0x...`
 
 ## RPC configuration
-- Default RPC list is embedded.
-- Override with `BASE_RPC_URL` or `BASE_RPC_URLS` (comma-separated).
+- Default chain: Status Sepolia.
+- Override chain with `--chain base` or `SOLVERA_CHAIN=base`.
+- Override RPC with `STATUS_RPC_URL`, `STATUS_RPC_URLS`, `SOLVERA_RPC_URL`, `SOLVERA_RPC_URLS`, or legacy `BASE_RPC_URL`, `BASE_RPC_URLS`.
 
 ## JSON output
 All commands accept `--json` for structured output.

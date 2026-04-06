@@ -9,15 +9,24 @@ import { homedir } from "node:os";
 import { dirname, join } from "node:path";
 import { getWalletPathFromEnv } from "./env.js";
 
-const DEFAULT_WALLET_FILENAME = ".solvera-base-wallet.json";
+const DEFAULT_WALLET_FILENAME = ".solvera-wallet.json";
+const LEGACY_BASE_WALLET_FILENAME = ".solvera-base-wallet.json";
 const DEFAULT_WALLET_PATH = join(homedir(), DEFAULT_WALLET_FILENAME);
+const LEGACY_BASE_WALLET_PATH = join(homedir(), LEGACY_BASE_WALLET_FILENAME);
 const DEFAULT_WALLET_PACK_DIR = join(homedir(), ".solvera-wallet-pack");
 
 export function resolveWalletPath(overridePath) {
   if (overridePath) {
     return overridePath;
   }
-  return getWalletPathFromEnv(DEFAULT_WALLET_PATH);
+  const envPath = getWalletPathFromEnv(DEFAULT_WALLET_PATH);
+  if (envPath !== DEFAULT_WALLET_PATH) {
+    return envPath;
+  }
+  if (existsSync(DEFAULT_WALLET_PATH) || !existsSync(LEGACY_BASE_WALLET_PATH)) {
+    return DEFAULT_WALLET_PATH;
+  }
+  return LEGACY_BASE_WALLET_PATH;
 }
 
 export function resolveWalletPackDir(overrideDir) {

@@ -1,15 +1,15 @@
 ---
 name: solvera-base-wallet
-description: Local Base wallet helper for agents. Generates, stores, and uses a self-custodied key with minimal persisted files.
+description: Local Solvera wallet helper for agents. Defaults to Status Sepolia while preserving temporary Base compatibility aliases.
 when_to_use: >
-  When an agent needs a local Base wallet for signing transactions and does not
+  When an agent needs a local Solvera wallet for signing transactions and does not
   already have a private key or wallet file available.
 ---
 
-# Base Wallet Skill (Optional)
+# Solvera Wallet Skill (Optional)
 
 ## Purpose
-Provide a local Base wallet for agents that do not already have a private key. If an agent already has a wallet, it can continue using it. This skill is only for generating and using a local wallet when needed.
+Provide a local Solvera wallet for agents that do not already have a private key. Status Sepolia is the default target chain. If an agent already has a wallet, it can continue using it. This skill is only for generating and using a local wallet when needed.
 
 ## Security
 - Never expose the private key or wallet file contents.
@@ -17,8 +17,9 @@ Provide a local Base wallet for agents that do not already have a private key. I
 - The wallet file is stored locally with `chmod 600`.
 
 ## Wallet file
-- Default: `~/.solvera-base-wallet.json`
-- Override: `BASE_WALLET_PATH=/path/to/file`
+- Default: `~/.solvera-wallet.json`
+- Legacy fallback: `~/.solvera-base-wallet.json`
+- Override: `SOLVERA_WALLET_PATH=/path/to/file` or `BASE_WALLET_PATH=/path/to/file`
 
 ## Wallet pack (no file access)
 If an agent cannot write to the filesystem, generate a wallet pack and provide it securely. Do not push the pack to git; use a secure channel or private artifact.
@@ -28,14 +29,14 @@ If an agent cannot write to the filesystem, generate a wallet pack and provide i
 node src/cli.js pack
 
 # Use the pack
-BASE_WALLET_PATH=~/.solvera-wallet-pack/wallet.json node src/cli.js address
+SOLVERA_WALLET_PATH=~/.solvera-wallet-pack/wallet.json node src/cli.js address
 ```
 
 ## Existing wallet
 If you already have a private key, you can use it directly.
 
 Command: `node src/cli.js address --private-key 0x...`
-Env: `BASE_PRIVATE_KEY=0x...` or `PRIVATE_KEY=0x...`
+Env: `DEPLOYER_PRIVATE_KEY=0x...`, `STATUS_PRIVATE_KEY=0x...`, `STATUS_DEPLOYER_PRIVATE_KEY=0x...`, `BASE_DEPLOYER_PRIVATE_KEY=0x...`, `BASE_PRIVATE_KEY=0x...`, or `PRIVATE_KEY=0x...`
 
 ## Install
 ```bash
@@ -74,8 +75,9 @@ node src/cli.js contract 0xContract "fulfill(uint256)" 123
 ```
 
 ## RPC configuration
-- Default public RPCs are embedded.
-- Override with `BASE_RPC_URL` or `BASE_RPC_URLS` (comma-separated).
+- Default chain: Status Sepolia.
+- Override chain with `--chain base` or `SOLVERA_CHAIN=base`.
+- Override RPC with `STATUS_RPC_URL`, `STATUS_RPC_URLS`, `SOLVERA_RPC_URL`, `SOLVERA_RPC_URLS`, or legacy `BASE_RPC_URL`, `BASE_RPC_URLS`.
 
 ## JSON output
 Add `--json` to any command for machine-readable output.
