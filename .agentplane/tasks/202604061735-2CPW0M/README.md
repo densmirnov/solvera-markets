@@ -1,10 +1,12 @@
 ---
 id: "202604061735-2CPW0M"
 title: "Make Foundry deploy path Status-aware"
-status: "DOING"
+result_summary: "Enabled a Status-aware Foundry deploy path and documented the working local script invocation for Status Sepolia."
+risk_level: "low"
+status: "DONE"
 priority: "high"
 owner: "CODER"
-revision: 12
+revision: 13
 origin:
   system: "manual"
 depends_on:
@@ -22,11 +24,16 @@ verification:
   updated_at: "2026-04-06T17:52:02.800Z"
   updated_by: "REVIEWER"
   note: "Verified: Status-aware deploy path compiles and the working Foundry invocation now simulates on Status Sepolia."
-commit: null
+commit:
+  hash: "1e98713b632d938044d2e4583d749f476a2aaaad"
+  message: "✅ 2CPW0M contracts: document working Status Foundry invocation"
 comments:
   -
     author: "CODER"
     body: "Start: make Foundry deployment Status-aware by adding a Status RPC alias, generic deployer-key resolution, and matching contract docs/env guidance before the first real Status broadcast."
+  -
+    author: "INTEGRATOR"
+    body: "Verified: Foundry now has a Status-aware deploy surface, and the canonical local invocation for `DeployIntentMarketplace` simulates successfully against Status Sepolia."
 events:
   -
     type: "status"
@@ -41,9 +48,16 @@ events:
     author: "REVIEWER"
     state: "ok"
     note: "Verified: Status-aware deploy path compiles and the working Foundry invocation now simulates on Status Sepolia."
+  -
+    type: "status"
+    at: "2026-04-06T17:52:34.111Z"
+    author: "INTEGRATOR"
+    from: "DOING"
+    to: "DONE"
+    note: "Verified: Foundry now has a Status-aware deploy surface, and the canonical local invocation for `DeployIntentMarketplace` simulates successfully against Status Sepolia."
 doc_version: 3
-doc_updated_at: "2026-04-06T17:52:02.808Z"
-doc_updated_by: "CODER"
+doc_updated_at: "2026-04-06T17:52:34.112Z"
+doc_updated_by: "INTEGRATOR"
 description: "Adapt Foundry RPC aliases and deployment key resolution so Solvera contracts can be broadcast to Status Sepolia without Base-only env assumptions. Tracking: 202604061614-XSEJDG."
 sections:
   Summary: "Make the repository-native Foundry deploy path usable on Status Sepolia. This step must add a Status RPC alias and remove the hard dependency on `BASE_DEPLOYER_PRIVATE_KEY` by introducing generic/Status-aware deployer key resolution."
