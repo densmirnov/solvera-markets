@@ -1,10 +1,12 @@
 ---
 id: "202604061735-2BWTA0"
 title: "Make base-wallet chain-aware for Status"
-status: "DOING"
+result_summary: "Made the wallet helper Status-aware with Base compatibility aliases and verified help/address/balance flows against Status Sepolia."
+risk_level: "med"
+status: "DONE"
 priority: "high"
 owner: "CODER"
-revision: 7
+revision: 8
 origin:
   system: "manual"
 depends_on:
@@ -22,11 +24,16 @@ verification:
   updated_at: "2026-04-06T18:43:17.011Z"
   updated_by: "REVIEWER"
   note: "Status wallet helper verified"
-commit: null
+commit:
+  hash: "13f9ca9ac6b853dbf9c952bf9a81cb0da704eaad"
+  message: "🚧 2BWTA0 wallet: make helper Status-aware"
 comments:
   -
     author: "CODER"
     body: "Start: make the wallet helper default to Status Sepolia, preserve Base aliases for compatibility, and verify against the funded Status deployer before touching the published markdown docs."
+  -
+    author: "INTEGRATOR"
+    body: "Verified: the wallet helper now defaults to Status Sepolia, preserves Base compatibility aliases, and successfully resolves the funded deployer plus live Status balance through the updated runtime path."
 events:
   -
     type: "status"
@@ -41,9 +48,16 @@ events:
     author: "REVIEWER"
     state: "ok"
     note: "Status wallet helper verified"
+  -
+    type: "status"
+    at: "2026-04-06T18:43:52.018Z"
+    author: "INTEGRATOR"
+    from: "DOING"
+    to: "DONE"
+    note: "Verified: the wallet helper now defaults to Status Sepolia, preserves Base compatibility aliases, and successfully resolves the funded deployer plus live Status balance through the updated runtime path."
 doc_version: 3
-doc_updated_at: "2026-04-06T18:43:17.036Z"
-doc_updated_by: "CODER"
+doc_updated_at: "2026-04-06T18:43:52.019Z"
+doc_updated_by: "INTEGRATOR"
 description: "Refactor base-wallet internals so operators can sign and broadcast on Status Sepolia while preserving temporary Base compatibility aliases. Tracking: 202604061614-XSEJDG."
 sections:
   Summary: |-
