@@ -1,10 +1,12 @@
 ---
 id: "202604061735-GH834T"
 title: "Publish Status operator docs and deployment records"
-status: "DOING"
+result_summary: "Updated public docs and deployment records to make Status Sepolia the canonical live target."
+risk_level: "low"
+status: "DONE"
 priority: "high"
 owner: "DOCS"
-revision: 6
+revision: 7
 origin:
   system: "manual"
 depends_on:
@@ -22,11 +24,16 @@ verification:
   updated_at: "2026-04-06T19:02:44.020Z"
   updated_by: "DOCS"
   note: "Status-facing docs and public skill surfaces were updated and rebuilt"
-commit: null
+commit:
+  hash: "e9d7c6c9e9352cb1541c30a0bded8e0aa35a545e"
+  message: "✅ GH834T docs: done"
 comments:
   -
     author: "DOCS"
     body: "Start: publish the Status Sepolia operator docs, deployment records, and public skill surfaces so the next site deployment does not regress to Base-first instructions."
+  -
+    author: "INTEGRATOR"
+    body: "Verified: published the Status Sepolia deployment records and rebuilt the public skill/docs surfaces so the next site deploy will no longer regress to Base-first instructions."
 events:
   -
     type: "status"
@@ -41,9 +48,16 @@ events:
     author: "DOCS"
     state: "ok"
     note: "Status-facing docs and public skill surfaces were updated and rebuilt"
+  -
+    type: "status"
+    at: "2026-04-06T19:03:08.123Z"
+    author: "INTEGRATOR"
+    from: "DOING"
+    to: "DONE"
+    note: "Verified: published the Status Sepolia deployment records and rebuilt the public skill/docs surfaces so the next site deploy will no longer regress to Base-first instructions."
 doc_version: 3
-doc_updated_at: "2026-04-06T19:02:44.027Z"
-doc_updated_by: "DOCS"
+doc_updated_at: "2026-04-06T19:03:08.124Z"
+doc_updated_by: "INTEGRATOR"
 description: "Update deployment docs, runbooks, and records so Status Sepolia becomes a first-class Solvera target with explicit Base-history preservation. Tracking: 202604061614-XSEJDG."
 sections:
   Summary: |-
