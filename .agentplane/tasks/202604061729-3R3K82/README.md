@@ -1,10 +1,12 @@
 ---
 id: "202604061729-3R3K82"
 title: "Add multi-network env profiles and validate Status deployer"
-status: "DOING"
+result_summary: "Added local network env profiles and validated the funded Status deployer address."
+risk_level: "low"
+status: "DONE"
 priority: "high"
 owner: "CODER"
-revision: 11
+revision: 12
 origin:
   system: "manual"
 depends_on: []
@@ -21,11 +23,16 @@ verification:
   updated_at: "2026-04-06T17:32:59.611Z"
   updated_by: "REVIEWER"
   note: "Created local multi-network env overlays for Base mainnet, Base Sepolia, and Status Sepolia; updated env.example to document the overlay model; confirmed that the private key from the current .env derives to 0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d; and confirmed live Status RPC visibility with chain id 1660990954 and balance 0.01 ETH."
-commit: null
+commit:
+  hash: "cacddb33b9195bc3a7a49b03105a97f9b9d694c6"
+  message: "✅ 3R3K82 env: add network profiles and validate Status deployer"
 comments:
   -
     author: "CODER"
     body: "Start: create local multi-network env profiles, keep the existing deployer key as the primary Status deployer without secret duplication, and validate that the funded Status address is derivable and reachable over Status RPC."
+  -
+    author: "CODER"
+    body: "Verified: created local multi-network env overlays for Base mainnet, Base Sepolia, and Status Sepolia; updated env.example to document the overlay model; kept the existing private key as the single secret source instead of duplicating it; and confirmed that the key derives to the funded Status deployer address `0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d` with live Status RPC access."
 events:
   -
     type: "status"
@@ -40,8 +47,15 @@ events:
     author: "REVIEWER"
     state: "ok"
     note: "Created local multi-network env overlays for Base mainnet, Base Sepolia, and Status Sepolia; updated env.example to document the overlay model; confirmed that the private key from the current .env derives to 0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d; and confirmed live Status RPC visibility with chain id 1660990954 and balance 0.01 ETH."
+  -
+    type: "status"
+    at: "2026-04-06T17:33:27.858Z"
+    author: "CODER"
+    from: "DOING"
+    to: "DONE"
+    note: "Verified: created local multi-network env overlays for Base mainnet, Base Sepolia, and Status Sepolia; updated env.example to document the overlay model; kept the existing private key as the single secret source instead of duplicating it; and confirmed that the key derives to the funded Status deployer address `0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d` with live Status RPC access."
 doc_version: 3
-doc_updated_at: "2026-04-06T17:32:59.616Z"
+doc_updated_at: "2026-04-06T17:33:27.859Z"
 doc_updated_by: "CODER"
 description: "Create network-specific env files for Base/Base Sepolia/Status Sepolia, preserve current Base deployer key as the primary Status deployer, and validate that the private key from the current .env derives to 0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d with usable Status RPC access. Tracking: 202604061614-XSEJDG."
 sections:
