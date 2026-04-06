@@ -55,12 +55,25 @@ flowchart LR
 - Demo: https://solvera.markets
 - Docs: https://docs.solvera.markets
 - API base: https://solvera.markets/api
-- Subgraph: https://api.studio.thegraph.com/query/17884/solvera/version/latest
+- Status explorer: https://sepoliascan.status.network
 
 ## Contracts
 
+- Status Sepolia `IntentMarketplace`: `0xF79367dAB12D8E12146685dA2830f112F02De71a`
 - Base mainnet `IntentMarketplace`: `0x442D68de43B37a0B2F975dc8dEfEfC349070Fb3A`
 - Base Sepolia `IntentMarketplace`: `0x758eF66c27Ed02620a30552eAf1F0AC141f1E361`
+
+## Status Sepolia proof
+
+- Verified contract on StatusScan: `0xF79367dAB12D8E12146685dA2830f112F02De71a`
+- Smoke reward token `SRWD`: `0xc793472fDFcBcd6FFC66867201427c02ebc17D49`
+- Smoke output token `SOUT`: `0x0fbcDC77D0c28a0809716bcaB1adb4cbcE705e4C`
+- Proven intent lifecycle:
+  - intent id `0x17a2ce8fc15c805ff7828be8ad9b2d8de4029cfe26605c6b848e17a128c3bfb0`
+  - create `0xf2821597930f48d83e5537a6d7437fb97bd32de940a404696ee7974bd32c5067`
+  - offer `0x64a5c1ed67fad0d4cf173ce31d0707ddbcc63ad0800ac0b857f40ef826ad5b67`
+  - select winner `0xea729b975f79e0f6ae4b5aa7e4c58002462e16f941bdf645a2f38a1c9a736c07`
+  - fulfill + accept `0x7ff814c030dda1d0ead58ef29b58232ed07fea2ed133a09b0d10301509cb5f35`
 
 ## Quickstart for judges
 

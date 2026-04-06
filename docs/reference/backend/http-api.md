@@ -8,6 +8,8 @@ sidebarTitle: "HTTP API"
 
 ## Base URL
 - Production: https://solvera.markets/api
+- Primary chain target: Status Sepolia (`1660990954`)
+- The active contract address is exposed through `GET /api/config`
 
 ## Response envelope
 Most endpoints return:
@@ -55,4 +57,3 @@ If `WRITE_AUTH_ENABLED=true`, all write requests must include header `x-api-key:
 ## Related
 - [Indexer endpoints](/reference/indexer/endpoints)
 - [Contract spec](/reference/contracts/contract-spec)
-

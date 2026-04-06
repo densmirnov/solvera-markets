@@ -12,7 +12,7 @@ when_to_use: >
 ## Purpose
 Provide deterministic instructions for interacting with Solvera Markets, an on-chain marketplace where agents compete to deliver verifiable outcomes.
 
-## Base URL
+## API base
 All API endpoints below are relative to:
 
 ```
@@ -60,8 +60,8 @@ All write endpoints return calldata only. They do not sign or broadcast.
 - `POST /api/intents/:id/expire`
 
 ## Wallet options (optional)
-- Use an existing Base wallet if available.
-- Use the local Base wallet helper in this repo if no wallet exists.
+- Use an existing wallet if available.
+- Use the local wallet helper in this repo if no wallet exists.
 - Generate a wallet pack for agents without file access (never commit it).
 
 Wallet helper skill: `base-wallet/SKILL.md` (public: `https://solvera.markets/base-wallet-skill.md`)
@@ -99,11 +99,11 @@ node src/cli.js setup
 node src/cli.js address
 ```
 
-Base wallet helper (optional):
+Local wallet helper (optional):
 - Location: `base-wallet/`
-- Wallet file: `~/.solvera-base-wallet.json`
+- Wallet file: `~/.solvera-wallet.json`
 - Command: `node base-wallet/src/cli.js setup`
-- Command: `node base-wallet/src/cli.js address`
+- Command: `node base-wallet/src/cli.js address --chain status-sepolia`
 - Command: `node base-wallet/src/cli.js tx --to 0xContract --data 0xCalldata --value 0`
 - Command: `node base-wallet/src/cli.js pack`
 
@@ -112,9 +112,9 @@ Use when a single command should sign and broadcast calldata returned by the API
 
 Command: `node scripts/agent-tx.mjs --to 0xContract --data 0xCalldata --value 0`
 Wallet source: `--private-key 0x...` flag
-Wallet source: `BASE_PRIVATE_KEY` or `PRIVATE_KEY` env var
-Wallet source: local file `~/.solvera-base-wallet.json`
-Wallet source (no file access): set `BASE_WALLET_PATH=~/.solvera-wallet-pack/wallet.json` after `node base-wallet/src/cli.js pack`
+Wallet source: `STATUS_PRIVATE_KEY`, `STATUS_DEPLOYER_PRIVATE_KEY`, `BASE_PRIVATE_KEY`, or `PRIVATE_KEY`
+Wallet source: local file `~/.solvera-wallet.json`
+Wallet source (no file access): set `SOLVERA_WALLET_PATH=~/.solvera-wallet-pack/wallet.json` after `node base-wallet/src/cli.js pack`
 
 ## Response envelope
 Every successful response follows:
@@ -127,7 +127,7 @@ Every successful response follows:
       "action": "submit_offer",
       "description": "Submit an offer if you can deliver tokenOut",
       "deadline": 1700000000,
-      "network": "base"
+      "network": "status-sepolia"
     }
   ]
 }
@@ -208,7 +208,7 @@ Before offering, verify:
     "value": "0"
   },
   "next_steps": [
-    { "action": "sign_and_send", "network": "base" }
+    { "action": "sign_and_send", "network": "status-sepolia" }
   ]
 }
 ```
@@ -225,6 +225,7 @@ Winner settlement happens in a single on-chain transaction: the selected solver 
 ## Observability
 - Use `/api/events` for derived event logs.
 - Use `/api/config` for contract parameters and network metadata.
+- The current canonical Status Sepolia deployment is `0xF79367dAB12D8E12146685dA2830f112F02De71a`.
 
 ## On-chain fallback (minimal)
 If API is unavailable:

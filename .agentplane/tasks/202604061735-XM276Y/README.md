@@ -1,10 +1,12 @@
 ---
 id: "202604061735-XM276Y"
 title: "Run Status end-to-end smoke"
-status: "DOING"
+result_summary: "Recorded a complete live Status smoke and supporting tooling assets."
+risk_level: "med"
+status: "DONE"
 priority: "high"
 owner: "TESTER"
-revision: 6
+revision: 7
 origin:
   system: "manual"
 depends_on:
@@ -26,11 +28,16 @@ verification:
   updated_at: "2026-04-06T19:01:30.263Z"
   updated_by: "TESTER"
   note: "Status smoke lifecycle, local Graph indexing, and backend reads succeeded"
-commit: null
+commit:
+  hash: "0e590860433acc97a8c271d941a29565e3eac833"
+  message: "✅ XM276Y code: done"
 comments:
   -
     author: "TESTER"
     body: "Start: run the first full Status Sepolia lifecycle smoke across onchain txs, local subgraph indexing, and backend reads against the live marketplace deployment."
+  -
+    author: "INTEGRATOR"
+    body: "Verified: completed the first full Status Sepolia smoke with live marketplace transactions, local Graph indexing, and backend reads against the canonical deployment."
 events:
   -
     type: "status"
@@ -45,9 +52,16 @@ events:
     author: "TESTER"
     state: "ok"
     note: "Status smoke lifecycle, local Graph indexing, and backend reads succeeded"
+  -
+    type: "status"
+    at: "2026-04-06T19:01:37.262Z"
+    author: "INTEGRATOR"
+    from: "DOING"
+    to: "DONE"
+    note: "Verified: completed the first full Status Sepolia smoke with live marketplace transactions, local Graph indexing, and backend reads against the canonical deployment."
 doc_version: 3
-doc_updated_at: "2026-04-06T19:01:30.267Z"
-doc_updated_by: "TESTER"
+doc_updated_at: "2026-04-06T19:01:37.263Z"
+doc_updated_by: "INTEGRATOR"
 description: "Execute and record the first end-to-end Solvera smoke on Status Sepolia across contract, indexer, backend, frontend, and wallet tooling. Tracking: 202604061614-XSEJDG."
 sections:
   Summary: |-

@@ -25,3 +25,5 @@ Base URL: https://solvera.markets/api
 ## Notes
 - Write endpoints return calldata only; clients must sign and broadcast.
 - Contract network and address are published via /api/config.
+- Primary live target is Status Sepolia.
+- Current canonical Status Sepolia `IntentMarketplace`: `0xF79367dAB12D8E12146685dA2830f112F02De71a`.

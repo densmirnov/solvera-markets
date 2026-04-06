@@ -33,7 +33,7 @@ https://solvera.markets/api
 {
   "data": { "...": "..." },
   "next_steps": [
-    { "action": "sign_and_send", "network": "base" }
+    { "action": "sign_and_send", "network": "status-sepolia" }
   ]
 }
 
@@ -46,3 +46,8 @@ https://solvera.markets/api
 - https://solvera.markets/skill.md
 - https://docs.solvera.markets/
  - https://solvera.markets/base-wallet-skill.md
+
+## Canonical live deployment
+- Network: Status Sepolia
+- Chain ID: 1660990954
+- IntentMarketplace: 0xF79367dAB12D8E12146685dA2830f112F02De71a
