@@ -4,7 +4,7 @@ title: "Plan Status Network deployment adaptation"
 status: "DOING"
 priority: "high"
 owner: "ORCHESTRATOR"
-revision: 12
+revision: 13
 origin:
   system: "manual"
 depends_on: []
@@ -35,8 +35,8 @@ events:
     to: "DOING"
     note: "Start: track Status deployment planning, approved cleanup, and final roadmap delivery in solvera-markets."
 doc_version: 3
-doc_updated_at: "2026-04-06T16:26:47.528Z"
-doc_updated_by: "REVIEWER"
+doc_updated_at: "2026-04-06T16:35:01.152Z"
+doc_updated_by: "ORCHESTRATOR"
 description: "Top-level tracking task for repository cleanup, Status Network readiness analysis, and STATUS_DEPLOY.md roadmap for adapting Solvera Markets to Status Network testnet."
 sections:
   Summary: |-
@@ -61,9 +61,7 @@ sections:
     1. Run `git status --short`. Expected: `simpleclaw/*` is removed by intent, `.agentplane/cache` and backup artifacts are gone, and `skills/status-network-web3` remains present.
     2. Run `test -f STATUS_DEPLOY.md` and `rg -n "Status Network|contracts|backend|frontend|indexer|base-wallet|faucet|deploy" STATUS_DEPLOY.md`. Expected: the roadmap exists and covers all required subsystems and operations.
     3. Review `STATUS_DEPLOY.md`. Expected: it is sequential, repository-specific, and explicitly marks weak links or unverified dependencies.
-  Verification: |-
-    <!-- BEGIN VERIFICATION RESULTS -->
-    <!-- END VERIFICATION RESULTS -->
+  Verification: "- Manual verification note after plumbing fix."
   Rollback Plan: |-
     - Revert the task commit(s) that remove repo noise or add `STATUS_DEPLOY.md`.
     - If cleanup removed anything beyond the approved scope, restore those paths before re-running verification.
@@ -122,8 +120,7 @@ Top-level tracking task for repository cleanup, Status Network readiness analysi
 
 ## Verification
 
-<!-- BEGIN VERIFICATION RESULTS -->
-<!-- END VERIFICATION RESULTS -->
+- Manual verification note after plumbing fix.
 
 ## Rollback Plan
 

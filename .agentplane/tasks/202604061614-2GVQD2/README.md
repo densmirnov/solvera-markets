@@ -4,7 +4,7 @@ title: "Adapt Solvera repo for Status deployment planning"
 status: "DOING"
 priority: "high"
 owner: "CODER"
-revision: 12
+revision: 13
 origin:
   system: "manual"
 depends_on: []
@@ -35,8 +35,8 @@ events:
     to: "DOING"
     note: "Start: remove approved repo noise, analyze Status migration impact across Solvera, and write STATUS_DEPLOY.md."
 doc_version: 3
-doc_updated_at: "2026-04-06T16:26:47.528Z"
-doc_updated_by: "REVIEWER"
+doc_updated_at: "2026-04-06T16:35:01.152Z"
+doc_updated_by: "CODER"
 description: "Analyze contracts, backend, frontend, indexer, base-wallet, and local Status skill; clean simpleclaw/untracked noise as approved; produce STATUS_DEPLOY.md roadmap for Status Network testnet. Tracking: 202604061614-XSEJDG."
 sections:
   Summary: |-
@@ -62,9 +62,7 @@ sections:
     1. Run `git status --short`. Expected: no extra untracked noise remains outside `skills/status-network-web3`, and the diff is limited to approved cleanup, task artifacts, and `STATUS_DEPLOY.md`.
     2. Run `test -f STATUS_DEPLOY.md && rg -n "Status Network Testnet|1660990954|public.sepolia.rpc.status.network|faucet|linea_estimateGas|contracts|backend|frontend|indexer|base-wallet" STATUS_DEPLOY.md`. Expected: the document captures the Status constants and every repo subsystem in scope.
     3. Review `sed -n "1,260p" STATUS_DEPLOY.md`. Expected: the roadmap is atomic, ordered, and includes caveats, verification points, and rollback checkpoints.
-  Verification: |-
-    <!-- BEGIN VERIFICATION RESULTS -->
-    <!-- END VERIFICATION RESULTS -->
+  Verification: "- Manual verification note after plumbing fix."
   Rollback Plan: |-
     - Revert the task commit(s) that remove `simpleclaw`, untracked noise, or add `STATUS_DEPLOY.md`.
     - If the cleanup scope was too broad, restore the affected files and re-check `git status --short`.
@@ -125,8 +123,7 @@ Analyze contracts, backend, frontend, indexer, base-wallet, and local Status ski
 
 ## Verification
 
-<!-- BEGIN VERIFICATION RESULTS -->
-<!-- END VERIFICATION RESULTS -->
+- Manual verification note after plumbing fix.
 
 ## Rollback Plan
 
