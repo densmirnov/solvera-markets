@@ -1,10 +1,12 @@
 ---
 id: "202604061735-5SVEY0"
 title: "Create Status execution roadmap"
-status: "DOING"
+result_summary: "Published the Status execution roadmap and task dependency graph."
+risk_level: "low"
+status: "DONE"
 priority: "high"
 owner: "DOCS"
-revision: 10
+revision: 11
 origin:
   system: "manual"
 depends_on: []
@@ -21,11 +23,16 @@ verification:
   updated_at: "2026-04-06T17:39:48.403Z"
   updated_by: "REVIEWER"
   note: "STATUS_ROADMAP.md exists, includes all nine Status execution task IDs, and matches the dependency graph recorded in agentplane, including the smoke-task fan-in on deploy, indexer, backend, frontend, and wallet tasks."
-commit: null
+commit:
+  hash: "df440337b95465e76a685d2c5c63412d9c7bf11a"
+  message: "✅ 5SVEY0 docs: add Status execution roadmap"
 comments:
   -
     author: "DOCS"
     body: "Start: publish the canonical Status execution roadmap with explicit downstream task IDs and dependency order so implementation can proceed deterministically."
+  -
+    author: "DOCS"
+    body: "Verified: published STATUS_ROADMAP.md as the canonical execution graph for the Status migration, created downstream execution tasks with explicit IDs and dependencies, and aligned the agentplane graph so the first code task is the Foundry Status-enablement step."
 events:
   -
     type: "status"
@@ -40,8 +47,15 @@ events:
     author: "REVIEWER"
     state: "ok"
     note: "STATUS_ROADMAP.md exists, includes all nine Status execution task IDs, and matches the dependency graph recorded in agentplane, including the smoke-task fan-in on deploy, indexer, backend, frontend, and wallet tasks."
+  -
+    type: "status"
+    at: "2026-04-06T17:40:18.280Z"
+    author: "DOCS"
+    from: "DOING"
+    to: "DONE"
+    note: "Verified: published STATUS_ROADMAP.md as the canonical execution graph for the Status migration, created downstream execution tasks with explicit IDs and dependencies, and aligned the agentplane graph so the first code task is the Foundry Status-enablement step."
 doc_version: 3
-doc_updated_at: "2026-04-06T17:39:48.411Z"
+doc_updated_at: "2026-04-06T17:40:18.283Z"
 doc_updated_by: "DOCS"
 description: "Write STATUS_ROADMAP.md with atomic sequential execution tasks for deploying Solvera on Status Network and align the task graph with the approved Status migration scope. Tracking: 202604061614-XSEJDG."
 sections:
