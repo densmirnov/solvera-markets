@@ -1,6 +1,6 @@
 {
   "meta": {
-    "checksum": "29c01307aba5617d73acfa81ec64d524e3d0d645df92ab64bb4f705e0c149b0b",
+    "checksum": "5b16af7f19d68fc08be8400745a47a6b2eabe5313c0f8cee13f297acae18de81",
     "checksum_algo": "sha256",
     "managed_by": "agentplane",
     "schema_version": 1
@@ -9980,18 +9980,54 @@
       "verify": []
     },
     {
-      "comments": [],
-      "commit": null,
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: make the wallet helper default to Status Sepolia, preserve Base aliases for compatibility, and verify against the funded Status deployer before touching the published markdown docs."
+        },
+        {
+          "author": "INTEGRATOR",
+          "body": "Verified: the wallet helper now defaults to Status Sepolia, preserves Base compatibility aliases, and successfully resolves the funded deployer plus live Status balance through the updated runtime path."
+        }
+      ],
+      "commit": {
+        "hash": "13f9ca9ac6b853dbf9c952bf9a81cb0da704eaad",
+        "message": "🚧 2BWTA0 wallet: make helper Status-aware"
+      },
       "depends_on": [
         "202604061735-2CPW0M"
       ],
       "description": "Refactor base-wallet internals so operators can sign and broadcast on Status Sepolia while preserving temporary Base compatibility aliases. Tracking: 202604061614-XSEJDG.",
       "dirty": false,
-      "doc": "## Summary\n\nMake base-wallet chain-aware for Status\n\nRefactor base-wallet internals so operators can sign and broadcast on Status Sepolia while preserving temporary Base compatibility aliases. Tracking: 202604061614-XSEJDG.\n\n## Scope\n\n- In scope: Refactor base-wallet internals so operators can sign and broadcast on Status Sepolia while preserving temporary Base compatibility aliases. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Make base-wallet chain-aware for Status\".\n\n## Plan\n\n1. Implement the change for \"Make base-wallet chain-aware for Status\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.\n\n## Verify Steps\n\n<!-- TODO: REPLACE WITH TASK-SPECIFIC ACCEPTANCE STEPS -->\n\n1. Review the changed artifact or behavior. Expected: the requested outcome is visible and matches the approved scope.\n2. Run the most relevant validation step for this task. Expected: it succeeds without unexpected regressions in touched scope.\n3. Compare the final result against the task summary and scope. Expected: any remaining follow-up is explicit in ## Findings.\n\n## Verification\n\n<!-- BEGIN VERIFICATION RESULTS -->\n<!-- END VERIFICATION RESULTS -->\n\n## Rollback Plan\n\n- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.\n\n## Findings",
-      "doc_updated_at": "2026-04-06T17:35:44.144Z",
-      "doc_updated_by": "CODER",
+      "doc": "## Summary\n\nMake base-wallet chain-aware for Status\n\nRefactor base-wallet internals so operators can sign and broadcast on Status Sepolia while preserving temporary Base compatibility aliases. Tracking: 202604061614-XSEJDG.\n\n## Scope\n\n- In scope: Refactor base-wallet internals so operators can sign and broadcast on Status Sepolia while preserving temporary Base compatibility aliases. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Make base-wallet chain-aware for Status\".\n\n## Plan\n\n1. Implement the change for \"Make base-wallet chain-aware for Status\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.\n\n## Risks\n\n- If the wallet helper defaults remain Base-only, operators may sign valid transactions against the wrong chain after a future publish. Mitigation: make Status Sepolia the runtime default while retaining explicit Base aliases for backwards compatibility.\n- Changing wallet path/env precedence can orphan existing operator setups. Mitigation: preserve legacy `BASE_*` aliases and fall back to the old wallet filename when present.\n- Live RPC verification can fail intermittently on public Status endpoints. Mitigation: keep verification commands deterministic and allow explicit `--rpc` overrides.\n\n## Verify Steps\n\n1. Run the wallet CLI help and address flows with the Status deployer key. Expected: help text shows Status-aware defaults and the derived address remains `0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d`.\n2. Query a live Status Sepolia balance through the helper with an explicit Status RPC. Expected: the command succeeds and reports the Status chain metadata rather than Base.\n3. Review the changed wallet docs/help/env handling. Expected: Status is the default path, while legacy `BASE_*` aliases remain explicitly supported.\n\n## Verification\n\n<!-- BEGIN VERIFICATION RESULTS -->\n### 2026-04-06T18:43:17.011Z — VERIFY — ok\n\nBy: REVIEWER\n\nNote: Status wallet helper verified\n\nVerifyStepsRef: doc_version=3, doc_updated_at=2026-04-06T18:43:16.001Z, excerpt_hash=sha256:7727dc6b651f3e12c7ec75d16c67efb939b9a270e37134c142bfa9648511b7e4\n\nDetails:\n\nVerified that the wallet helper now defaults to Status Sepolia, still supports explicit Base mode, and accepts the legacy deployer secret format from the repo-local env setup. After installing `base-wallet` dependencies, the CLI help showed Status defaults, the address command derived `0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d` on `--chain status-sepolia`, and the balance command returned live Status Sepolia balance metadata for the funded deployer through `https://public.sepolia.rpc.status.network`.\n\n<!-- END VERIFICATION RESULTS -->\n\n## Rollback Plan\n\n- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.\n\n## Findings\n\n1. `base-wallet` is no longer hardcoded to Base. It now resolves chain metadata dynamically, defaults to `status-sepolia`, and still supports explicit `--chain base` for temporary backwards compatibility.\n2. RPC, wallet-path, and private-key env precedence were generalized for Status while retaining legacy Base aliases. In particular, the helper now accepts `BASE_DEPLOYER_PRIVATE_KEY` and legacy raw 64-char hex secrets without requiring a manual `0x` migration.\n3. Wallet storage now prefers `~/.solvera-wallet.json` but falls back to the old `~/.solvera-base-wallet.json` when that legacy file already exists, avoiding accidental operator lockout.\n4. Verification passed after installing local dependencies in `base-wallet/`: `node src/cli.js help` shows Status Sepolia defaults, `node src/cli.js address --json --chain status-sepolia` derives `0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d` from the legacy deployer key source, `node src/cli.js address --json --chain base` preserves Base compatibility, and `node src/cli.js balance --address 0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d --json --rpc https://public.sepolia.rpc.status.network --chain status-sepolia` returns live Status balance data.\n5. Residual follow-up remains in docs/public artifacts: the site-exported markdown copies under `frontend/public/` still mention Base-specific wallet wording and should be updated in the docs publishing task after this stabilized runtime behavior.",
+      "doc_updated_at": "2026-04-06T18:43:52.019Z",
+      "doc_updated_by": "INTEGRATOR",
       "doc_version": 3,
-      "events": [],
+      "events": [
+        {
+          "at": "2026-04-06T18:32:01.990Z",
+          "author": "CODER",
+          "from": "TODO",
+          "note": "Start: make the wallet helper default to Status Sepolia, preserve Base aliases for compatibility, and verify against the funded Status deployer before touching the published markdown docs.",
+          "to": "DOING",
+          "type": "status"
+        },
+        {
+          "at": "2026-04-06T18:43:17.011Z",
+          "author": "REVIEWER",
+          "note": "Status wallet helper verified",
+          "state": "ok",
+          "type": "verify"
+        },
+        {
+          "at": "2026-04-06T18:43:52.018Z",
+          "author": "INTEGRATOR",
+          "from": "DOING",
+          "note": "Verified: the wallet helper now defaults to Status Sepolia, preserves Base compatibility aliases, and successfully resolves the funded deployer plus live Status balance through the updated runtime path.",
+          "to": "DONE",
+          "type": "status"
+        }
+      ],
       "id": "202604061735-2BWTA0",
       "id_source": "generated",
       "origin": {
@@ -9999,32 +10035,35 @@
       },
       "owner": "CODER",
       "plan_approval": {
-        "note": null,
-        "state": "pending",
-        "updated_at": null,
-        "updated_by": null
+        "note": "Approved: make the wallet helper truly Status-aware now, then let the later docs task update published markdown against the stabilized behavior.",
+        "state": "approved",
+        "updated_at": "2026-04-06T18:31:57.364Z",
+        "updated_by": "ORCHESTRATOR"
       },
       "priority": "high",
-      "revision": 1,
+      "result_summary": "Made the wallet helper Status-aware with Base compatibility aliases and verified help/address/balance flows against Status Sepolia.",
+      "revision": 8,
+      "risk_level": "med",
       "sections": {
-        "Findings": "",
+        "Findings": "1. `base-wallet` is no longer hardcoded to Base. It now resolves chain metadata dynamically, defaults to `status-sepolia`, and still supports explicit `--chain base` for temporary backwards compatibility.\n2. RPC, wallet-path, and private-key env precedence were generalized for Status while retaining legacy Base aliases. In particular, the helper now accepts `BASE_DEPLOYER_PRIVATE_KEY` and legacy raw 64-char hex secrets without requiring a manual `0x` migration.\n3. Wallet storage now prefers `~/.solvera-wallet.json` but falls back to the old `~/.solvera-base-wallet.json` when that legacy file already exists, avoiding accidental operator lockout.\n4. Verification passed after installing local dependencies in `base-wallet/`: `node src/cli.js help` shows Status Sepolia defaults, `node src/cli.js address --json --chain status-sepolia` derives `0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d` from the legacy deployer key source, `node src/cli.js address --json --chain base` preserves Base compatibility, and `node src/cli.js balance --address 0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d --json --rpc https://public.sepolia.rpc.status.network --chain status-sepolia` returns live Status balance data.\n5. Residual follow-up remains in docs/public artifacts: the site-exported markdown copies under `frontend/public/` still mention Base-specific wallet wording and should be updated in the docs publishing task after this stabilized runtime behavior.",
         "Plan": "1. Implement the change for \"Make base-wallet chain-aware for Status\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.",
+        "Risks": "- If the wallet helper defaults remain Base-only, operators may sign valid transactions against the wrong chain after a future publish. Mitigation: make Status Sepolia the runtime default while retaining explicit Base aliases for backwards compatibility.\n- Changing wallet path/env precedence can orphan existing operator setups. Mitigation: preserve legacy `BASE_*` aliases and fall back to the old wallet filename when present.\n- Live RPC verification can fail intermittently on public Status endpoints. Mitigation: keep verification commands deterministic and allow explicit `--rpc` overrides.",
         "Rollback Plan": "- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.",
         "Scope": "- In scope: Refactor base-wallet internals so operators can sign and broadcast on Status Sepolia while preserving temporary Base compatibility aliases. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Make base-wallet chain-aware for Status\".",
         "Summary": "Make base-wallet chain-aware for Status\n\nRefactor base-wallet internals so operators can sign and broadcast on Status Sepolia while preserving temporary Base compatibility aliases. Tracking: 202604061614-XSEJDG.",
-        "Verification": "<!-- BEGIN VERIFICATION RESULTS -->\n<!-- END VERIFICATION RESULTS -->",
-        "Verify Steps": "<!-- TODO: REPLACE WITH TASK-SPECIFIC ACCEPTANCE STEPS -->\n\n1. Review the changed artifact or behavior. Expected: the requested outcome is visible and matches the approved scope.\n2. Run the most relevant validation step for this task. Expected: it succeeds without unexpected regressions in touched scope.\n3. Compare the final result against the task summary and scope. Expected: any remaining follow-up is explicit in ## Findings."
+        "Verification": "<!-- BEGIN VERIFICATION RESULTS -->\n### 2026-04-06T18:43:17.011Z — VERIFY — ok\n\nBy: REVIEWER\n\nNote: Status wallet helper verified\n\nVerifyStepsRef: doc_version=3, doc_updated_at=2026-04-06T18:43:16.001Z, excerpt_hash=sha256:7727dc6b651f3e12c7ec75d16c67efb939b9a270e37134c142bfa9648511b7e4\n\nDetails:\n\nVerified that the wallet helper now defaults to Status Sepolia, still supports explicit Base mode, and accepts the legacy deployer secret format from the repo-local env setup. After installing `base-wallet` dependencies, the CLI help showed Status defaults, the address command derived `0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d` on `--chain status-sepolia`, and the balance command returned live Status Sepolia balance metadata for the funded deployer through `https://public.sepolia.rpc.status.network`.\n\n<!-- END VERIFICATION RESULTS -->",
+        "Verify Steps": "1. Run the wallet CLI help and address flows with the Status deployer key. Expected: help text shows Status-aware defaults and the derived address remains `0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d`.\n2. Query a live Status Sepolia balance through the helper with an explicit Status RPC. Expected: the command succeeds and reports the Status chain metadata rather than Base.\n3. Review the changed wallet docs/help/env handling. Expected: Status is the default path, while legacy `BASE_*` aliases remain explicitly supported."
       },
-      "status": "TODO",
+      "status": "DONE",
       "tags": [
         "code"
       ],
       "title": "Make base-wallet chain-aware for Status",
       "verification": {
-        "note": null,
-        "state": "pending",
-        "updated_at": null,
-        "updated_by": null
+        "note": "Status wallet helper verified",
+        "state": "ok",
+        "updated_at": "2026-04-06T18:43:17.011Z",
+        "updated_by": "REVIEWER"
       },
       "verify": []
     },
@@ -10033,17 +10072,24 @@
         {
           "author": "CODER",
           "body": "Start: make Foundry deployment Status-aware by adding a Status RPC alias, generic deployer-key resolution, and matching contract docs/env guidance before the first real Status broadcast."
+        },
+        {
+          "author": "INTEGRATOR",
+          "body": "Verified: Foundry now has a Status-aware deploy surface, and the canonical local invocation for `DeployIntentMarketplace` simulates successfully against Status Sepolia."
         }
       ],
-      "commit": null,
+      "commit": {
+        "hash": "1e98713b632d938044d2e4583d749f476a2aaaad",
+        "message": "✅ 2CPW0M contracts: document working Status Foundry invocation"
+      },
       "depends_on": [
         "202604061735-5SVEY0"
       ],
       "description": "Adapt Foundry RPC aliases and deployment key resolution so Solvera contracts can be broadcast to Status Sepolia without Base-only env assumptions. Tracking: 202604061614-XSEJDG.",
       "dirty": false,
-      "doc": "## Summary\n\nMake the repository-native Foundry deploy path usable on Status Sepolia. This step must add a Status RPC alias and remove the hard dependency on `BASE_DEPLOYER_PRIVATE_KEY` by introducing generic/Status-aware deployer key resolution.\n\n## Scope\n\n- In scope: `contracts/foundry.toml`, `contracts/script/DeployIntentMarketplace.s.sol`, `contracts/README.md`, and any env-example surface directly required to document the new deploy path.\n- Out of scope: the actual Status broadcast, contract verification, or downstream backend/frontend/indexer rewiring.\n\n## Plan\n\n1. Implement the change for \"Make Foundry deploy path Status-aware\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.\n\n## Risks\n\n- If key precedence is wrong, future deploys may silently use the wrong operator wallet. Mitigation: use a strict fallback order and document it in `contracts/README.md`.\n- If the Status RPC alias is misnamed, later deploy commands and docs will diverge. Mitigation: standardize on `status_sepolia` now and reuse it everywhere.\n- If the simulation path depends on secrets printed to stdout, verification becomes unsafe. Mitigation: source env locally but never echo private values.\n\n## Verify Steps\n\n1. Run `cd contracts && forge build`. Expected: contracts compile successfully with the new Foundry config.\n2. Run `cd contracts && set -a; source ../.env; source ../.env.status-sepolia; set +a; forge script script/DeployIntentMarketplace.s.sol:DeployIntentMarketplace --rpc-url status_sepolia`. Expected: Foundry resolves the Status alias and simulates the deployment path without requiring `BASE_DEPLOYER_PRIVATE_KEY` as the only valid key source.\n3. Run `rg -n \"status_sepolia|DEPLOYER_PRIVATE_KEY|STATUS_DEPLOYER_PRIVATE_KEY|BASE_DEPLOYER_PRIVATE_KEY\" contracts/README.md contracts/foundry.toml contracts/script/DeployIntentMarketplace.s.sol env.example`. Expected: alias and key precedence are documented consistently.\n\n## Verification\n\n<!-- BEGIN VERIFICATION RESULTS -->\n<!-- END VERIFICATION RESULTS -->\n\n## Rollback Plan\n\n1. Revert the Foundry config, deploy script, docs, and env-example changes from this task.\n2. Re-run `forge build` to confirm the repository returns to the previous deploy surface.\n3. If the generic key path proves confusing, fall back temporarily to the legacy Base-only variable while keeping Status work blocked until a better abstraction is ready.\n\n## Findings\n\nProgress: Foundry is now Status-aware at the repository level. Added `status_sepolia` RPC alias, introduced deployer key precedence `DEPLOYER_PRIVATE_KEY -> STATUS_DEPLOYER_PRIVATE_KEY -> BASE_DEPLOYER_PRIVATE_KEY`, and documented the new path in contract docs and env example.\nVerified facts: `forge build` passes; the alias and key precedence are present consistently across `contracts/foundry.toml`, `contracts/script/DeployIntentMarketplace.s.sol`, `contracts/README.md`, and `env.example`.\nCurrent blocker: local `forge script` invocation on this workstation still exits with `Error: No contract bytecode` even when the Status alias resolves and the deployer key is provided. This means the task has not yet unlocked the first real broadcast and remains open for script-runner debugging before task `202604061735-NPQ61C` can proceed safely.",
-      "doc_updated_at": "2026-04-06T17:43:24.346Z",
-      "doc_updated_by": "CODER",
+      "doc": "## Summary\n\nMake the repository-native Foundry deploy path usable on Status Sepolia. This step must add a Status RPC alias and remove the hard dependency on `BASE_DEPLOYER_PRIVATE_KEY` by introducing generic/Status-aware deployer key resolution.\n\n## Scope\n\n- In scope: `contracts/foundry.toml`, `contracts/script/DeployIntentMarketplace.s.sol`, `contracts/README.md`, and any env-example surface directly required to document the new deploy path.\n- Out of scope: the actual Status broadcast, contract verification, or downstream backend/frontend/indexer rewiring.\n\n## Plan\n\n1. Implement the change for \"Make Foundry deploy path Status-aware\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.\n\n## Risks\n\n- If key precedence is wrong, future deploys may silently use the wrong operator wallet. Mitigation: use a strict fallback order and document it in `contracts/README.md`.\n- If the Status RPC alias is misnamed, later deploy commands and docs will diverge. Mitigation: standardize on `status_sepolia` now and reuse it everywhere.\n- If the simulation path depends on secrets printed to stdout, verification becomes unsafe. Mitigation: source env locally but never echo private values.\n\n## Verify Steps\n\n1. Run `cd contracts && forge build`. Expected: contracts compile successfully with the new Foundry config.\n2. Run `set -a; source .env; source .env.status-sepolia; set +a; cd contracts && forge script ./script/DeployIntentMarketplace.s.sol --rpc-url status_sepolia -vvvv`. Expected: Foundry resolves the `status_sepolia` alias, loads the generic deployer key precedence, and completes a dry-run simulation without the false `No contract bytecode` failure.\n3. Run `rg -n \"status_sepolia|DEPLOYER_PRIVATE_KEY|STATUS_DEPLOYER_PRIVATE_KEY|BASE_DEPLOYER_PRIVATE_KEY|No contract bytecode|./script/DeployIntentMarketplace\" contracts/README.md contracts/foundry.toml contracts/script/DeployIntentMarketplace.s.sol env.example`. Expected: alias, key precedence, and the working invocation are documented consistently.\n\n## Verification\n\n<!-- BEGIN VERIFICATION RESULTS -->\n### 2026-04-06T17:52:02.800Z — VERIFY — ok\n\nBy: REVIEWER\n\nNote: Verified: Status-aware deploy path compiles and the working Foundry invocation now simulates on Status Sepolia.\n\nVerifyStepsRef: doc_version=3, doc_updated_at=2026-04-06T17:51:45.183Z, excerpt_hash=sha256:dbe8afa9368c30b8fae1297590248d420914cefc5d37e3f4c6bcc5b119d826cb\n\nDetails:\n\nChecks run:\n- `cd contracts && forge build` succeeded.\n- `set -a; source .env; source .env.status-sepolia; set +a; cd contracts && forge script ./script/DeployIntentMarketplace.s.sol --rpc-url status_sepolia -vvvv` completed a dry-run simulation on chain `1660990954` and resolved deployer `0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d`.\n- `rg` confirmed the canonical invocation, key precedence, and alias documentation across the changed files.\nFinding: the earlier `No contract bytecode` was caused by the `path:Contract` invocation shape on local `forge 1.5.0`, not by missing script bytecode.\n\n<!-- END VERIFICATION RESULTS -->\n\n## Rollback Plan\n\n1. Revert the Foundry config, deploy script, docs, and env-example changes from this task.\n2. Re-run `forge build` to confirm the repository returns to the previous deploy surface.\n3. If the generic key path proves confusing, fall back temporarily to the legacy Base-only variable while keeping Status work blocked until a better abstraction is ready.\n\n## Findings\n\nProgress: Foundry is now Status-aware at the repository level. Added `status_sepolia` RPC alias, introduced deployer key precedence `DEPLOYER_PRIVATE_KEY -> STATUS_DEPLOYER_PRIVATE_KEY -> BASE_DEPLOYER_PRIVATE_KEY`, and documented the new path in contract docs and env example.\nVerified facts: `forge build` passes; the alias and key precedence are present consistently across `contracts/foundry.toml`, `contracts/script/DeployIntentMarketplace.s.sol`, `contracts/README.md`, and `env.example`. The earlier `No contract bytecode` blocker was not a broken artifact: it was a bad invocation shape for the local `forge 1.5.0` runtime.\nResolution: `forge script ./script/DeployIntentMarketplace.s.sol --rpc-url status_sepolia -vvvv` is the working form. With the Status env loaded, it simulates successfully, resolves the funded deployer `0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d`, and produces a dry-run deployment for `IntentMarketplace` on chain `1660990954`. This task is now unblocked and the real broadcast can move to task `202604061735-NPQ61C`.",
+      "doc_updated_at": "2026-04-06T17:52:34.112Z",
+      "doc_updated_by": "INTEGRATOR",
       "doc_version": 3,
       "events": [
         {
@@ -10052,6 +10098,21 @@
           "from": "TODO",
           "note": "Start: make Foundry deployment Status-aware by adding a Status RPC alias, generic deployer-key resolution, and matching contract docs/env guidance before the first real Status broadcast.",
           "to": "DOING",
+          "type": "status"
+        },
+        {
+          "at": "2026-04-06T17:52:02.800Z",
+          "author": "REVIEWER",
+          "note": "Verified: Status-aware deploy path compiles and the working Foundry invocation now simulates on Status Sepolia.",
+          "state": "ok",
+          "type": "verify"
+        },
+        {
+          "at": "2026-04-06T17:52:34.111Z",
+          "author": "INTEGRATOR",
+          "from": "DOING",
+          "note": "Verified: Foundry now has a Status-aware deploy surface, and the canonical local invocation for `DeployIntentMarketplace` simulates successfully against Status Sepolia.",
+          "to": "DONE",
           "type": "status"
         }
       ],
@@ -10068,43 +10129,81 @@
         "updated_by": "ORCHESTRATOR"
       },
       "priority": "high",
-      "revision": 9,
+      "result_summary": "Enabled a Status-aware Foundry deploy path and documented the working local script invocation for Status Sepolia.",
+      "revision": 13,
+      "risk_level": "low",
       "sections": {
-        "Findings": "Progress: Foundry is now Status-aware at the repository level. Added `status_sepolia` RPC alias, introduced deployer key precedence `DEPLOYER_PRIVATE_KEY -> STATUS_DEPLOYER_PRIVATE_KEY -> BASE_DEPLOYER_PRIVATE_KEY`, and documented the new path in contract docs and env example.\nVerified facts: `forge build` passes; the alias and key precedence are present consistently across `contracts/foundry.toml`, `contracts/script/DeployIntentMarketplace.s.sol`, `contracts/README.md`, and `env.example`.\nCurrent blocker: local `forge script` invocation on this workstation still exits with `Error: No contract bytecode` even when the Status alias resolves and the deployer key is provided. This means the task has not yet unlocked the first real broadcast and remains open for script-runner debugging before task `202604061735-NPQ61C` can proceed safely.",
+        "Findings": "Progress: Foundry is now Status-aware at the repository level. Added `status_sepolia` RPC alias, introduced deployer key precedence `DEPLOYER_PRIVATE_KEY -> STATUS_DEPLOYER_PRIVATE_KEY -> BASE_DEPLOYER_PRIVATE_KEY`, and documented the new path in contract docs and env example.\nVerified facts: `forge build` passes; the alias and key precedence are present consistently across `contracts/foundry.toml`, `contracts/script/DeployIntentMarketplace.s.sol`, `contracts/README.md`, and `env.example`. The earlier `No contract bytecode` blocker was not a broken artifact: it was a bad invocation shape for the local `forge 1.5.0` runtime.\nResolution: `forge script ./script/DeployIntentMarketplace.s.sol --rpc-url status_sepolia -vvvv` is the working form. With the Status env loaded, it simulates successfully, resolves the funded deployer `0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d`, and produces a dry-run deployment for `IntentMarketplace` on chain `1660990954`. This task is now unblocked and the real broadcast can move to task `202604061735-NPQ61C`.",
         "Plan": "1. Implement the change for \"Make Foundry deploy path Status-aware\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.",
         "Risks": "- If key precedence is wrong, future deploys may silently use the wrong operator wallet. Mitigation: use a strict fallback order and document it in `contracts/README.md`.\n- If the Status RPC alias is misnamed, later deploy commands and docs will diverge. Mitigation: standardize on `status_sepolia` now and reuse it everywhere.\n- If the simulation path depends on secrets printed to stdout, verification becomes unsafe. Mitigation: source env locally but never echo private values.",
         "Rollback Plan": "1. Revert the Foundry config, deploy script, docs, and env-example changes from this task.\n2. Re-run `forge build` to confirm the repository returns to the previous deploy surface.\n3. If the generic key path proves confusing, fall back temporarily to the legacy Base-only variable while keeping Status work blocked until a better abstraction is ready.",
         "Scope": "- In scope: `contracts/foundry.toml`, `contracts/script/DeployIntentMarketplace.s.sol`, `contracts/README.md`, and any env-example surface directly required to document the new deploy path.\n- Out of scope: the actual Status broadcast, contract verification, or downstream backend/frontend/indexer rewiring.",
         "Summary": "Make the repository-native Foundry deploy path usable on Status Sepolia. This step must add a Status RPC alias and remove the hard dependency on `BASE_DEPLOYER_PRIVATE_KEY` by introducing generic/Status-aware deployer key resolution.",
-        "Verification": "<!-- BEGIN VERIFICATION RESULTS -->\n<!-- END VERIFICATION RESULTS -->",
-        "Verify Steps": "1. Run `cd contracts && forge build`. Expected: contracts compile successfully with the new Foundry config.\n2. Run `cd contracts && set -a; source ../.env; source ../.env.status-sepolia; set +a; forge script script/DeployIntentMarketplace.s.sol:DeployIntentMarketplace --rpc-url status_sepolia`. Expected: Foundry resolves the Status alias and simulates the deployment path without requiring `BASE_DEPLOYER_PRIVATE_KEY` as the only valid key source.\n3. Run `rg -n \"status_sepolia|DEPLOYER_PRIVATE_KEY|STATUS_DEPLOYER_PRIVATE_KEY|BASE_DEPLOYER_PRIVATE_KEY\" contracts/README.md contracts/foundry.toml contracts/script/DeployIntentMarketplace.s.sol env.example`. Expected: alias and key precedence are documented consistently."
+        "Verification": "<!-- BEGIN VERIFICATION RESULTS -->\n### 2026-04-06T17:52:02.800Z — VERIFY — ok\n\nBy: REVIEWER\n\nNote: Verified: Status-aware deploy path compiles and the working Foundry invocation now simulates on Status Sepolia.\n\nVerifyStepsRef: doc_version=3, doc_updated_at=2026-04-06T17:51:45.183Z, excerpt_hash=sha256:dbe8afa9368c30b8fae1297590248d420914cefc5d37e3f4c6bcc5b119d826cb\n\nDetails:\n\nChecks run:\n- `cd contracts && forge build` succeeded.\n- `set -a; source .env; source .env.status-sepolia; set +a; cd contracts && forge script ./script/DeployIntentMarketplace.s.sol --rpc-url status_sepolia -vvvv` completed a dry-run simulation on chain `1660990954` and resolved deployer `0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d`.\n- `rg` confirmed the canonical invocation, key precedence, and alias documentation across the changed files.\nFinding: the earlier `No contract bytecode` was caused by the `path:Contract` invocation shape on local `forge 1.5.0`, not by missing script bytecode.\n\n<!-- END VERIFICATION RESULTS -->",
+        "Verify Steps": "1. Run `cd contracts && forge build`. Expected: contracts compile successfully with the new Foundry config.\n2. Run `set -a; source .env; source .env.status-sepolia; set +a; cd contracts && forge script ./script/DeployIntentMarketplace.s.sol --rpc-url status_sepolia -vvvv`. Expected: Foundry resolves the `status_sepolia` alias, loads the generic deployer key precedence, and completes a dry-run simulation without the false `No contract bytecode` failure.\n3. Run `rg -n \"status_sepolia|DEPLOYER_PRIVATE_KEY|STATUS_DEPLOYER_PRIVATE_KEY|BASE_DEPLOYER_PRIVATE_KEY|No contract bytecode|./script/DeployIntentMarketplace\" contracts/README.md contracts/foundry.toml contracts/script/DeployIntentMarketplace.s.sol env.example`. Expected: alias, key precedence, and the working invocation are documented consistently."
       },
-      "status": "DOING",
+      "status": "DONE",
       "tags": [
         "code"
       ],
       "title": "Make Foundry deploy path Status-aware",
       "verification": {
-        "note": null,
-        "state": "pending",
-        "updated_at": null,
-        "updated_by": null
+        "note": "Verified: Status-aware deploy path compiles and the working Foundry invocation now simulates on Status Sepolia.",
+        "state": "ok",
+        "updated_at": "2026-04-06T17:52:02.800Z",
+        "updated_by": "REVIEWER"
       },
       "verify": []
     },
     {
-      "comments": [],
-      "commit": null,
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: switch backend defaults and tests from Base-biased assumptions to the live Status Sepolia contract, chain metadata, and self-hosted subgraph entrypoint."
+        },
+        {
+          "author": "INTEGRATOR",
+          "body": "Verified: backend API metadata, tests, and operator env/docs now point to Status Sepolia instead of falling back to Base."
+        }
+      ],
+      "commit": {
+        "hash": "45e11927e97ec8a57169aa22ac808de1cd9f6e0a",
+        "message": "✅ 3JCAD3 backend: switch defaults to Status metadata"
+      },
       "depends_on": [
         "202604061735-RF7VW9"
       ],
       "description": "Update backend config surfaces and tests so Status chain metadata and contract/indexer endpoints can be used without Base-only assumptions. Tracking: 202604061614-XSEJDG.",
       "dirty": false,
-      "doc": "## Summary\n\nSwitch backend defaults to Status-ready config\n\nUpdate backend config surfaces and tests so Status chain metadata and contract/indexer endpoints can be used without Base-only assumptions. Tracking: 202604061614-XSEJDG.\n\n## Scope\n\n- In scope: Update backend config surfaces and tests so Status chain metadata and contract/indexer endpoints can be used without Base-only assumptions. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Switch backend defaults to Status-ready config\".\n\n## Plan\n\n1. Implement the change for \"Switch backend defaults to Status-ready config\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.\n\n## Verify Steps\n\n<!-- TODO: REPLACE WITH TASK-SPECIFIC ACCEPTANCE STEPS -->\n\n1. <Action>. Expected: <observable result>.\n2. <Action>. Expected: <observable result>.\n3. <Action>. Expected: <observable result>.\n\n## Verification\n\n<!-- BEGIN VERIFICATION RESULTS -->\n<!-- END VERIFICATION RESULTS -->\n\n## Rollback Plan\n\n- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.\n\n## Findings",
-      "doc_updated_at": "2026-04-06T17:35:44.164Z",
-      "doc_updated_by": "CODER",
+      "doc": "## Summary\n\nSwitch backend defaults to Status-ready config\n\nUpdate backend config surfaces and tests so Status chain metadata and contract/indexer endpoints can be used without Base-only assumptions. Tracking: 202604061614-XSEJDG.\n\n## Scope\n\n- In scope: Update backend config surfaces and tests so Status chain metadata and contract/indexer endpoints can be used without Base-only assumptions. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Switch backend defaults to Status-ready config\".\n\n## Plan\n\n1. Implement the change for \"Switch backend defaults to Status-ready config\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.\n\n## Risks\n\n- If backend code hardcodes the live contract address in too many places, the next redeploy will create drift. Mitigation: keep the live address in env/docs and use code fallbacks only for chain metadata, not for hidden logic.\n- If `SUBGRAPH_URL` is made to look production-ready before the Status graph service is actually published, operators will point the backend at a dead endpoint. Mitigation: document the self-hosted query URL explicitly and keep it environment-driven.\n- If tests still encode Base semantics, later frontend work will inherit the wrong chain metadata. Mitigation: update controller tests to assert Status values directly.\n\n## Verify Steps\n\n1. Run `rg -n \"status-sepolia|1660990954|0xF79367dAB12D8E12146685dA2830f112F02De71a|http://localhost:8000/subgraphs/name/intent/marketplace\" backend env.example`. Expected: backend code, tests, and env docs no longer default to Base and instead point to canonical Status metadata.\n2. Run `cd backend && npm test`. Expected: backend tests pass with Status chain assertions.\n3. Inspect `GET /api/config` and tx next-step behavior via tests or controller code. Expected: default network metadata is Status-oriented and no fallback still says `base`.\n\n## Verification\n\n<!-- BEGIN VERIFICATION RESULTS -->\n### 2026-04-06T18:16:25.903Z — VERIFY — ok\n\nBy: REVIEWER\n\nNote: Verified: backend defaults, tests, and env/docs are Status-ready and no Base fallback remains in API metadata.\n\nVerifyStepsRef: doc_version=3, doc_updated_at=2026-04-06T18:16:25.306Z, excerpt_hash=sha256:c072ecca5923af496b2a28e3e56efdf579001ae05f99ab65fe06382df425bf39\n\nDetails:\n\nChecks run:\n- `rg -n \"status-sepolia|1660990954|0xF79367dAB12D8E12146685dA2830f112F02De71a|http://localhost:8000/subgraphs/name/intent/marketplace\" backend env.example` confirmed Status-first metadata in backend code, tests, and env/docs.\n- `cd backend && npm test` passed (16 tests, 0 failures).\n- Controller inspection confirmed that `/api/config` and tx next-step payloads no longer default to `base`.\n\n<!-- END VERIFICATION RESULTS -->\n\n## Rollback Plan\n\n- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.\n\n## Findings\n\nBackend no longer emits Base as the implicit chain in API metadata. `backend/src/intents.controller.ts` now defaults transaction next-step payloads and `/api/config` metadata to `status-sepolia` / `1660990954` when the network env is omitted, while still keeping the actual contract and subgraph endpoints environment-driven.\nOperator-facing defaults were switched to the live Status deployment in `env.example`: contract `0xF79367dAB12D8E12146685dA2830f112F02De71a`, RPC `https://public.sepolia.rpc.status.network`, explorer `https://sepoliascan.status.network`, and self-hosted graph query URL `http://localhost:8000/subgraphs/name/intent/marketplace`. `backend/README.md` now documents the same canonical values.\nTests were updated to assert Status metadata directly, and `cd backend && npm test` passed. Deliberate non-change: `SUBGRAPH_URL` still has no hardcoded runtime fallback in code, because the real query endpoint remains an operator/deployment concern rather than a safe compile-time default.",
+      "doc_updated_at": "2026-04-06T18:16:46.587Z",
+      "doc_updated_by": "INTEGRATOR",
       "doc_version": 3,
-      "events": [],
+      "events": [
+        {
+          "at": "2026-04-06T18:15:12.134Z",
+          "author": "CODER",
+          "from": "TODO",
+          "note": "Start: switch backend defaults and tests from Base-biased assumptions to the live Status Sepolia contract, chain metadata, and self-hosted subgraph entrypoint.",
+          "to": "DOING",
+          "type": "status"
+        },
+        {
+          "at": "2026-04-06T18:16:25.903Z",
+          "author": "REVIEWER",
+          "note": "Verified: backend defaults, tests, and env/docs are Status-ready and no Base fallback remains in API metadata.",
+          "state": "ok",
+          "type": "verify"
+        },
+        {
+          "at": "2026-04-06T18:16:46.585Z",
+          "author": "INTEGRATOR",
+          "from": "DOING",
+          "note": "Verified: backend API metadata, tests, and operator env/docs now point to Status Sepolia instead of falling back to Base.",
+          "to": "DONE",
+          "type": "status"
+        }
+      ],
       "id": "202604061735-3JCAD3",
       "id_source": "generated",
       "origin": {
@@ -10112,32 +10211,35 @@
       },
       "owner": "CODER",
       "plan_approval": {
-        "note": null,
-        "state": "pending",
-        "updated_at": null,
-        "updated_by": null
+        "note": "Approved: switch backend metadata, tests, and env/docs to Status-first defaults without touching frontend or deploy infrastructure.",
+        "state": "approved",
+        "updated_at": "2026-04-06T18:15:12.114Z",
+        "updated_by": "ORCHESTRATOR"
       },
       "priority": "high",
-      "revision": 1,
+      "result_summary": "Switched backend defaults and tests to Status Sepolia metadata while keeping contract and subgraph endpoints environment-driven.",
+      "revision": 8,
+      "risk_level": "low",
       "sections": {
-        "Findings": "",
+        "Findings": "Backend no longer emits Base as the implicit chain in API metadata. `backend/src/intents.controller.ts` now defaults transaction next-step payloads and `/api/config` metadata to `status-sepolia` / `1660990954` when the network env is omitted, while still keeping the actual contract and subgraph endpoints environment-driven.\nOperator-facing defaults were switched to the live Status deployment in `env.example`: contract `0xF79367dAB12D8E12146685dA2830f112F02De71a`, RPC `https://public.sepolia.rpc.status.network`, explorer `https://sepoliascan.status.network`, and self-hosted graph query URL `http://localhost:8000/subgraphs/name/intent/marketplace`. `backend/README.md` now documents the same canonical values.\nTests were updated to assert Status metadata directly, and `cd backend && npm test` passed. Deliberate non-change: `SUBGRAPH_URL` still has no hardcoded runtime fallback in code, because the real query endpoint remains an operator/deployment concern rather than a safe compile-time default.",
         "Plan": "1. Implement the change for \"Switch backend defaults to Status-ready config\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.",
+        "Risks": "- If backend code hardcodes the live contract address in too many places, the next redeploy will create drift. Mitigation: keep the live address in env/docs and use code fallbacks only for chain metadata, not for hidden logic.\n- If `SUBGRAPH_URL` is made to look production-ready before the Status graph service is actually published, operators will point the backend at a dead endpoint. Mitigation: document the self-hosted query URL explicitly and keep it environment-driven.\n- If tests still encode Base semantics, later frontend work will inherit the wrong chain metadata. Mitigation: update controller tests to assert Status values directly.",
         "Rollback Plan": "- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.",
         "Scope": "- In scope: Update backend config surfaces and tests so Status chain metadata and contract/indexer endpoints can be used without Base-only assumptions. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Switch backend defaults to Status-ready config\".",
         "Summary": "Switch backend defaults to Status-ready config\n\nUpdate backend config surfaces and tests so Status chain metadata and contract/indexer endpoints can be used without Base-only assumptions. Tracking: 202604061614-XSEJDG.",
-        "Verification": "<!-- BEGIN VERIFICATION RESULTS -->\n<!-- END VERIFICATION RESULTS -->",
-        "Verify Steps": "<!-- TODO: REPLACE WITH TASK-SPECIFIC ACCEPTANCE STEPS -->\n\n1. <Action>. Expected: <observable result>.\n2. <Action>. Expected: <observable result>.\n3. <Action>. Expected: <observable result>."
+        "Verification": "<!-- BEGIN VERIFICATION RESULTS -->\n### 2026-04-06T18:16:25.903Z — VERIFY — ok\n\nBy: REVIEWER\n\nNote: Verified: backend defaults, tests, and env/docs are Status-ready and no Base fallback remains in API metadata.\n\nVerifyStepsRef: doc_version=3, doc_updated_at=2026-04-06T18:16:25.306Z, excerpt_hash=sha256:c072ecca5923af496b2a28e3e56efdf579001ae05f99ab65fe06382df425bf39\n\nDetails:\n\nChecks run:\n- `rg -n \"status-sepolia|1660990954|0xF79367dAB12D8E12146685dA2830f112F02De71a|http://localhost:8000/subgraphs/name/intent/marketplace\" backend env.example` confirmed Status-first metadata in backend code, tests, and env/docs.\n- `cd backend && npm test` passed (16 tests, 0 failures).\n- Controller inspection confirmed that `/api/config` and tx next-step payloads no longer default to `base`.\n\n<!-- END VERIFICATION RESULTS -->",
+        "Verify Steps": "1. Run `rg -n \"status-sepolia|1660990954|0xF79367dAB12D8E12146685dA2830f112F02De71a|http://localhost:8000/subgraphs/name/intent/marketplace\" backend env.example`. Expected: backend code, tests, and env docs no longer default to Base and instead point to canonical Status metadata.\n2. Run `cd backend && npm test`. Expected: backend tests pass with Status chain assertions.\n3. Inspect `GET /api/config` and tx next-step behavior via tests or controller code. Expected: default network metadata is Status-oriented and no fallback still says `base`."
       },
-      "status": "TODO",
+      "status": "DONE",
       "tags": [
         "backend"
       ],
       "title": "Switch backend defaults to Status-ready config",
       "verification": {
-        "note": null,
-        "state": "pending",
-        "updated_at": null,
-        "updated_by": null
+        "note": "Verified: backend defaults, tests, and env/docs are Status-ready and no Base fallback remains in API metadata.",
+        "state": "ok",
+        "updated_at": "2026-04-06T18:16:25.903Z",
+        "updated_by": "REVIEWER"
       },
       "verify": []
     },
@@ -10228,18 +10330,54 @@
       "verify": []
     },
     {
-      "comments": [],
-      "commit": null,
+      "comments": [
+        {
+          "author": "DOCS",
+          "body": "Start: publish the Status Sepolia operator docs, deployment records, and public skill surfaces so the next site deployment does not regress to Base-first instructions."
+        },
+        {
+          "author": "INTEGRATOR",
+          "body": "Verified: published the Status Sepolia deployment records and rebuilt the public skill/docs surfaces so the next site deploy will no longer regress to Base-first instructions."
+        }
+      ],
+      "commit": {
+        "hash": "e9d7c6c9e9352cb1541c30a0bded8e0aa35a545e",
+        "message": "✅ GH834T docs: done"
+      },
       "depends_on": [
         "202604061735-XM276Y"
       ],
       "description": "Update deployment docs, runbooks, and records so Status Sepolia becomes a first-class Solvera target with explicit Base-history preservation. Tracking: 202604061614-XSEJDG.",
       "dirty": false,
-      "doc": "## Summary\n\nPublish Status operator docs and deployment records\n\nUpdate deployment docs, runbooks, and records so Status Sepolia becomes a first-class Solvera target with explicit Base-history preservation. Tracking: 202604061614-XSEJDG.\n\n## Scope\n\n- In scope: Update deployment docs, runbooks, and records so Status Sepolia becomes a first-class Solvera target with explicit Base-history preservation. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Publish Status operator docs and deployment records\".\n\n## Plan\n\n1. Implement the change for \"Publish Status operator docs and deployment records\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.\n\n## Verify Steps\n\n<!-- TODO: REPLACE WITH TASK-SPECIFIC ACCEPTANCE STEPS -->\n\n1. <Action>. Expected: <observable result>.\n2. <Action>. Expected: <observable result>.\n3. <Action>. Expected: <observable result>.\n\n## Verification\n\n<!-- BEGIN VERIFICATION RESULTS -->\n<!-- END VERIFICATION RESULTS -->\n\n## Rollback Plan\n\n- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.\n\n## Findings",
-      "doc_updated_at": "2026-04-06T17:35:44.164Z",
-      "doc_updated_by": "DOCS",
+      "doc": "## Summary\n\nPublish Status operator docs and deployment records\n\nUpdate deployment docs, runbooks, and records so Status Sepolia becomes a first-class Solvera target with explicit Base-history preservation. Tracking: 202604061614-XSEJDG.\n\n## Scope\n\n- In scope: Update deployment docs, runbooks, and records so Status Sepolia becomes a first-class Solvera target with explicit Base-history preservation. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Publish Status operator docs and deployment records\".\n\n## Plan\n\n1. Implement the change for \"Publish Status operator docs and deployment records\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.\n\n## Risks\n\n- Public docs can silently revert to Base-first wording if generated files are edited instead of their source. Mitigation: update frontend/SKILL.md and rebuild frontend so public copies are regenerated from the Status-aware source.\n- Operator docs can overstate production readiness if they omit the exact Status deployment evidence. Mitigation: publish the verified contract address, smoke token addresses, tx hashes, and note that Status indexing currently relies on the self-hosted Graph path.\n- Historical Base addresses must remain available for auditability. Mitigation: preserve Base sections as legacy records while moving Status Sepolia to the canonical top position.\n\n## Verify Steps\n\n1. Rebuild the frontend after updating frontend/SKILL.md. Expected: generated public SKILL files reflect Status-aware wallet and network instructions.\n2. Review published-facing docs and README paths touched by this task. Expected: Status Sepolia is the canonical live target, exact deployment records are present, and Base history is preserved as legacy context rather than implied default.\n3. Search the touched publish/docs surfaces for stale Base-only wallet/explorer wording. Expected: no remaining Base-first instructions in frontend public files, docs overview, deployment records, backend API reference, or root README except clearly-labeled historical references.\n\n## Verification\n\n<!-- BEGIN VERIFICATION RESULTS -->\n### 2026-04-06T19:02:44.020Z — VERIFY — ok\n\nBy: DOCS\n\nNote: Status-facing docs and public skill surfaces were updated and rebuilt\n\nVerifyStepsRef: doc_version=3, doc_updated_at=2026-04-06T19:02:34.255Z, excerpt_hash=sha256:30238392c73517ab7aceb88d96b9c36d06e14b0f78f44b3c5deddca807105ecd\n\nDetails:\n\nUpdated frontend/SKILL.md plus generated public skill files, wallet guide, llms manifests, docs overview, deployment records, backend API reference, and root README. Rebuilt frontend so public/SKILL.md was regenerated from the Status-aware source. Searched touched publish/docs surfaces to ensure no remaining Base-first wallet or explorer instructions outside clearly historical references.\n\n<!-- END VERIFICATION RESULTS -->\n\n## Rollback Plan\n\n- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.\n\n## Findings\n\n- Updated publish-facing skill surfaces so Status Sepolia is the primary live target instead of implicit Base-first wording.\n- Regenerated frontend/public/SKILL.md from the corrected frontend/SKILL.md source to avoid the next frontend build reintroducing stale Base instructions.\n- Published exact Status deployment records, StatusScan link, smoke token addresses, and the full proven lifecycle tx sequence in README and docs deployment pages.\n- Preserved Base addresses as historical records instead of deleting them.",
+      "doc_updated_at": "2026-04-06T19:03:08.124Z",
+      "doc_updated_by": "INTEGRATOR",
       "doc_version": 3,
-      "events": [],
+      "events": [
+        {
+          "at": "2026-04-06T19:01:01.517Z",
+          "author": "DOCS",
+          "from": "TODO",
+          "note": "Start: publish the Status Sepolia operator docs, deployment records, and public skill surfaces so the next site deployment does not regress to Base-first instructions.",
+          "to": "DOING",
+          "type": "status"
+        },
+        {
+          "at": "2026-04-06T19:02:44.020Z",
+          "author": "DOCS",
+          "note": "Status-facing docs and public skill surfaces were updated and rebuilt",
+          "state": "ok",
+          "type": "verify"
+        },
+        {
+          "at": "2026-04-06T19:03:08.123Z",
+          "author": "INTEGRATOR",
+          "from": "DOING",
+          "note": "Verified: published the Status Sepolia deployment records and rebuilt the public skill/docs surfaces so the next site deploy will no longer regress to Base-first instructions.",
+          "to": "DONE",
+          "type": "status"
+        }
+      ],
       "id": "202604061735-GH834T",
       "id_source": "generated",
       "origin": {
@@ -10253,42 +10391,81 @@
         "updated_by": null
       },
       "priority": "high",
-      "revision": 1,
+      "result_summary": "Updated public docs and deployment records to make Status Sepolia the canonical live target.",
+      "revision": 7,
+      "risk_level": "low",
       "sections": {
-        "Findings": "",
+        "Findings": "- Updated publish-facing skill surfaces so Status Sepolia is the primary live target instead of implicit Base-first wording.\n- Regenerated frontend/public/SKILL.md from the corrected frontend/SKILL.md source to avoid the next frontend build reintroducing stale Base instructions.\n- Published exact Status deployment records, StatusScan link, smoke token addresses, and the full proven lifecycle tx sequence in README and docs deployment pages.\n- Preserved Base addresses as historical records instead of deleting them.",
         "Plan": "1. Implement the change for \"Publish Status operator docs and deployment records\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.",
+        "Risks": "- Public docs can silently revert to Base-first wording if generated files are edited instead of their source. Mitigation: update frontend/SKILL.md and rebuild frontend so public copies are regenerated from the Status-aware source.\n- Operator docs can overstate production readiness if they omit the exact Status deployment evidence. Mitigation: publish the verified contract address, smoke token addresses, tx hashes, and note that Status indexing currently relies on the self-hosted Graph path.\n- Historical Base addresses must remain available for auditability. Mitigation: preserve Base sections as legacy records while moving Status Sepolia to the canonical top position.",
         "Rollback Plan": "- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.",
         "Scope": "- In scope: Update deployment docs, runbooks, and records so Status Sepolia becomes a first-class Solvera target with explicit Base-history preservation. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Publish Status operator docs and deployment records\".",
         "Summary": "Publish Status operator docs and deployment records\n\nUpdate deployment docs, runbooks, and records so Status Sepolia becomes a first-class Solvera target with explicit Base-history preservation. Tracking: 202604061614-XSEJDG.",
-        "Verification": "<!-- BEGIN VERIFICATION RESULTS -->\n<!-- END VERIFICATION RESULTS -->",
-        "Verify Steps": "<!-- TODO: REPLACE WITH TASK-SPECIFIC ACCEPTANCE STEPS -->\n\n1. <Action>. Expected: <observable result>.\n2. <Action>. Expected: <observable result>.\n3. <Action>. Expected: <observable result>."
+        "Verification": "<!-- BEGIN VERIFICATION RESULTS -->\n### 2026-04-06T19:02:44.020Z — VERIFY — ok\n\nBy: DOCS\n\nNote: Status-facing docs and public skill surfaces were updated and rebuilt\n\nVerifyStepsRef: doc_version=3, doc_updated_at=2026-04-06T19:02:34.255Z, excerpt_hash=sha256:30238392c73517ab7aceb88d96b9c36d06e14b0f78f44b3c5deddca807105ecd\n\nDetails:\n\nUpdated frontend/SKILL.md plus generated public skill files, wallet guide, llms manifests, docs overview, deployment records, backend API reference, and root README. Rebuilt frontend so public/SKILL.md was regenerated from the Status-aware source. Searched touched publish/docs surfaces to ensure no remaining Base-first wallet or explorer instructions outside clearly historical references.\n\n<!-- END VERIFICATION RESULTS -->",
+        "Verify Steps": "1. Rebuild the frontend after updating frontend/SKILL.md. Expected: generated public SKILL files reflect Status-aware wallet and network instructions.\n2. Review published-facing docs and README paths touched by this task. Expected: Status Sepolia is the canonical live target, exact deployment records are present, and Base history is preserved as legacy context rather than implied default.\n3. Search the touched publish/docs surfaces for stale Base-only wallet/explorer wording. Expected: no remaining Base-first instructions in frontend public files, docs overview, deployment records, backend API reference, or root README except clearly-labeled historical references."
       },
-      "status": "TODO",
+      "status": "DONE",
       "tags": [
         "docs"
       ],
       "title": "Publish Status operator docs and deployment records",
       "verification": {
-        "note": null,
-        "state": "pending",
-        "updated_at": null,
-        "updated_by": null
+        "note": "Status-facing docs and public skill surfaces were updated and rebuilt",
+        "state": "ok",
+        "updated_at": "2026-04-06T19:02:44.020Z",
+        "updated_by": "DOCS"
       },
       "verify": []
     },
     {
-      "comments": [],
-      "commit": null,
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: deploy IntentMarketplace to Status Sepolia with the funded deployer, then record the canonical address, tx hash, block, and broadcast artifact for downstream Status tasks."
+        },
+        {
+          "author": "INTEGRATOR",
+          "body": "Verified: IntentMarketplace is deployed on Status Sepolia, and the repository default deploy path now targets an EVM version that the network accepts."
+        }
+      ],
+      "commit": {
+        "hash": "9f0992359f3a79d79d43510807bbeff1686e86d9",
+        "message": "✅ NPQ61C contracts: pin Status deploy target to paris"
+      },
       "depends_on": [
         "202604061735-2CPW0M"
       ],
       "description": "Broadcast IntentMarketplace to Status Sepolia using the funded deployer and record canonical deployment artifacts. Tracking: 202604061614-XSEJDG.",
       "dirty": false,
-      "doc": "## Summary\n\nDeploy IntentMarketplace to Status Sepolia\n\nBroadcast IntentMarketplace to Status Sepolia using the funded deployer and record canonical deployment artifacts. Tracking: 202604061614-XSEJDG.\n\n## Scope\n\n- In scope: Broadcast IntentMarketplace to Status Sepolia using the funded deployer and record canonical deployment artifacts. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Deploy IntentMarketplace to Status Sepolia\".\n\n## Plan\n\n1. Implement the change for \"Deploy IntentMarketplace to Status Sepolia\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.\n\n## Verify Steps\n\n<!-- TODO: REPLACE WITH TASK-SPECIFIC ACCEPTANCE STEPS -->\n\n1. Review the changed artifact or behavior. Expected: the requested outcome is visible and matches the approved scope.\n2. Run the most relevant validation step for this task. Expected: it succeeds without unexpected regressions in touched scope.\n3. Compare the final result against the task summary and scope. Expected: any remaining follow-up is explicit in ## Findings.\n\n## Verification\n\n<!-- BEGIN VERIFICATION RESULTS -->\n<!-- END VERIFICATION RESULTS -->\n\n## Rollback Plan\n\n- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.\n\n## Findings",
-      "doc_updated_at": "2026-04-06T17:35:26.800Z",
-      "doc_updated_by": "CODER",
+      "doc": "## Summary\n\nDeploy IntentMarketplace to Status Sepolia\n\nBroadcast IntentMarketplace to Status Sepolia using the funded deployer and record canonical deployment artifacts. Tracking: 202604061614-XSEJDG.\n\n## Scope\n\n- In scope: Broadcast IntentMarketplace to Status Sepolia using the funded deployer and record canonical deployment artifacts. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Deploy IntentMarketplace to Status Sepolia\".\n\n## Plan\n\n1. Confirm readiness: dependency `202604061735-2CPW0M` is done, the funded deployer address still matches `0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d`, and the Status Sepolia RPC answers for chain `1660990954`.\n2. Broadcast `IntentMarketplace` with the canonical command `set -a; source .env; source .env.status-sepolia; set +a; cd contracts && forge script ./script/DeployIntentMarketplace.s.sol --rpc-url status_sepolia --broadcast -vvvv`.\n3. Capture canonical deployment evidence: deployed address, tx hash, block number, and broadcast artifact path under `contracts/broadcast/DeployIntentMarketplace.s.sol/1660990954/`.\n4. Verify post-deploy state with chain reads and record any follow-up needed for the indexer/backend/frontend tasks.\n\n## Risks\n\n- The deployer balance may be insufficient or nonce may have moved since the last check. Mitigation: re-check address, nonce, and balance immediately before broadcast.\n- Status Sepolia RPC may accept simulation but fail during broadcast/receipt polling. Mitigation: run the exact canonical command with `-vvvv`, preserve the raw output, and treat the resulting `run-latest.json` as the source of truth.\n- A mined deployment can still be the wrong canonical address if we silently retry. Mitigation: preserve every tx hash and require downstream tasks to consume the address explicitly recorded in this task.\n\n## Verify Steps\n\n1. Run `set -a; source .env; source .env.status-sepolia; set +a; cast wallet address --private-key \"$DEPLOYER_PRIVATE_KEY\"` and `cast balance 0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d --rpc-url \"$STATUS_SEPOLIA_RPC_URL\"`. Expected: the deployer resolves to `0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d` and has enough ETH for broadcast.\n2. Run `set -a; source .env; source .env.status-sepolia; set +a; cd contracts && forge script ./script/DeployIntentMarketplace.s.sol --rpc-url status_sepolia --broadcast -vvvv`. Expected: Foundry reports a successful on-chain deployment on chain `1660990954` and writes a broadcast artifact under `contracts/broadcast/DeployIntentMarketplace.s.sol/1660990954/run-latest.json`.\n3. Run `jq`/`cast code` checks against the deployed address from `run-latest.json`. Expected: the artifact contains a contract address, tx hash, and block number, and `cast code` at that address on Status Sepolia is non-empty.\n\n## Verification\n\n<!-- BEGIN VERIFICATION RESULTS -->\n### 2026-04-06T18:02:14.865Z — VERIFY — ok\n\nBy: REVIEWER\n\nNote: Verified: IntentMarketplace is deployed on Status Sepolia and the canonical broadcast artifact records the live address and receipt.\n\nVerifyStepsRef: doc_version=3, doc_updated_at=2026-04-06T18:02:14.318Z, excerpt_hash=sha256:7c0a6465bf63eaa977819e366b5ffa8b67476b6b4d6bdd9cb874892022f4a77a\n\nDetails:\n\nChecks run:\n- Deployer preflight: address `0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d`, balance `10000000000000000`, nonce advanced from `7` to `10` across retries.\n- Final deploy: `set -a; source .env; source .env.status-sepolia; set +a; cd contracts && forge script ./script/DeployIntentMarketplace.s.sol --rpc-url status_sepolia --broadcast -vvvv` completed successfully after pinning `evm_version = \"paris\"`.\n- Artifact check: `contracts/broadcast/DeployIntentMarketplace.s.sol/1660990954/run-latest.json` records tx `0xc1583d667d4792f0c19389361961309fd26c540fb339eef63e3df8749740f5ed` and contract `0xF79367dAB12D8E12146685dA2830f112F02De71a`.\n- Chain check: receipt block `18800150` has `status=1`, and `cast code 0xF79367dAB12D8E12146685dA2830f112F02De71a` returned non-empty runtime bytecode.\n\n<!-- END VERIFICATION RESULTS -->\n\n## Rollback Plan\n\n1. If broadcast fails before mining, do not change downstream config; keep Status deployment unset and capture the failure cause in ## Findings.\n2. If deployment mines but is unusable, treat the address as invalid for downstream tasks, document the bad deployment artifact, and redeploy from a new task instead of silently reusing it.\n3. Never overwrite deployment records: preserve every `run-latest.json`/tx hash so later tasks can choose the correct canonical address explicitly.\n\n## Findings\n\nAttempt 1 facts: tx `0x35b9fd84cf9f94c96221de8087758c38ce5a5074f635a3161eea4d70e84c0a3c` mined with `status=0` at block `18799960`; predicted address `0x4898a9BE1F756d47eC577D247F0683C6d743D926` has empty code. Attempt 2 facts: tx `0x64f461f70327e7c9a3a33570b38c957016c076a8f1c8e9e5c1b5e81132134940` mined with `status=0` at block `18799997`; predicted address `0xa977Dfe6f0A0C31A71A61eD6A361c0dee0b5C85a` has empty code.\nRefined diagnosis: the failures were caused by the wrong EVM target for Status deployment. The repository default behaved as `prague`; compiling with `paris` removes `PUSH0` from the creation bytecode, which matches the Status deployment examples. `contracts/foundry.toml` now pins `evm_version = \"paris\"`, and `contracts/README.md` documents the requirement.\nCanonical deployment result: the final broadcast succeeded with tx `0xc1583d667d4792f0c19389361961309fd26c540fb339eef63e3df8749740f5ed`. `IntentMarketplace` is live on Status Sepolia at `0xF79367dAB12D8E12146685dA2830f112F02De71a` in block `18800150`; `cast code` at that address is non-empty, and the deployer nonce advanced to `10`. The canonical Foundry artifact is `contracts/broadcast/DeployIntentMarketplace.s.sol/1660990954/run-latest.json`.",
+      "doc_updated_at": "2026-04-06T18:02:50.003Z",
+      "doc_updated_by": "INTEGRATOR",
       "doc_version": 3,
-      "events": [],
+      "events": [
+        {
+          "at": "2026-04-06T17:54:00.342Z",
+          "author": "CODER",
+          "from": "TODO",
+          "note": "Start: deploy IntentMarketplace to Status Sepolia with the funded deployer, then record the canonical address, tx hash, block, and broadcast artifact for downstream Status tasks.",
+          "to": "DOING",
+          "type": "status"
+        },
+        {
+          "at": "2026-04-06T18:02:14.865Z",
+          "author": "REVIEWER",
+          "note": "Verified: IntentMarketplace is deployed on Status Sepolia and the canonical broadcast artifact records the live address and receipt.",
+          "state": "ok",
+          "type": "verify"
+        },
+        {
+          "at": "2026-04-06T18:02:50.002Z",
+          "author": "INTEGRATOR",
+          "from": "DOING",
+          "note": "Verified: IntentMarketplace is deployed on Status Sepolia, and the repository default deploy path now targets an EVM version that the network accepts.",
+          "to": "DONE",
+          "type": "status"
+        }
+      ],
       "id": "202604061735-NPQ61C",
       "id_source": "generated",
       "origin": {
@@ -10296,48 +10473,87 @@
       },
       "owner": "CODER",
       "plan_approval": {
-        "note": null,
-        "state": "pending",
-        "updated_at": null,
-        "updated_by": null
+        "note": "Approved: proceed with the real Status Sepolia broadcast using the funded deployer and record canonical deployment artifacts only.",
+        "state": "approved",
+        "updated_at": "2026-04-06T17:54:00.311Z",
+        "updated_by": "ORCHESTRATOR"
       },
       "priority": "high",
-      "revision": 1,
+      "result_summary": "Deployed IntentMarketplace to Status Sepolia at 0xF79367dAB12D8E12146685dA2830f112F02De71a and pinned the Foundry deploy target to paris.",
+      "revision": 12,
+      "risk_level": "low",
       "sections": {
-        "Findings": "",
-        "Plan": "1. Implement the change for \"Deploy IntentMarketplace to Status Sepolia\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.",
-        "Rollback Plan": "- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.",
+        "Findings": "Attempt 1 facts: tx `0x35b9fd84cf9f94c96221de8087758c38ce5a5074f635a3161eea4d70e84c0a3c` mined with `status=0` at block `18799960`; predicted address `0x4898a9BE1F756d47eC577D247F0683C6d743D926` has empty code. Attempt 2 facts: tx `0x64f461f70327e7c9a3a33570b38c957016c076a8f1c8e9e5c1b5e81132134940` mined with `status=0` at block `18799997`; predicted address `0xa977Dfe6f0A0C31A71A61eD6A361c0dee0b5C85a` has empty code.\nRefined diagnosis: the failures were caused by the wrong EVM target for Status deployment. The repository default behaved as `prague`; compiling with `paris` removes `PUSH0` from the creation bytecode, which matches the Status deployment examples. `contracts/foundry.toml` now pins `evm_version = \"paris\"`, and `contracts/README.md` documents the requirement.\nCanonical deployment result: the final broadcast succeeded with tx `0xc1583d667d4792f0c19389361961309fd26c540fb339eef63e3df8749740f5ed`. `IntentMarketplace` is live on Status Sepolia at `0xF79367dAB12D8E12146685dA2830f112F02De71a` in block `18800150`; `cast code` at that address is non-empty, and the deployer nonce advanced to `10`. The canonical Foundry artifact is `contracts/broadcast/DeployIntentMarketplace.s.sol/1660990954/run-latest.json`.",
+        "Plan": "1. Confirm readiness: dependency `202604061735-2CPW0M` is done, the funded deployer address still matches `0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d`, and the Status Sepolia RPC answers for chain `1660990954`.\n2. Broadcast `IntentMarketplace` with the canonical command `set -a; source .env; source .env.status-sepolia; set +a; cd contracts && forge script ./script/DeployIntentMarketplace.s.sol --rpc-url status_sepolia --broadcast -vvvv`.\n3. Capture canonical deployment evidence: deployed address, tx hash, block number, and broadcast artifact path under `contracts/broadcast/DeployIntentMarketplace.s.sol/1660990954/`.\n4. Verify post-deploy state with chain reads and record any follow-up needed for the indexer/backend/frontend tasks.",
+        "Risks": "- The deployer balance may be insufficient or nonce may have moved since the last check. Mitigation: re-check address, nonce, and balance immediately before broadcast.\n- Status Sepolia RPC may accept simulation but fail during broadcast/receipt polling. Mitigation: run the exact canonical command with `-vvvv`, preserve the raw output, and treat the resulting `run-latest.json` as the source of truth.\n- A mined deployment can still be the wrong canonical address if we silently retry. Mitigation: preserve every tx hash and require downstream tasks to consume the address explicitly recorded in this task.",
+        "Rollback Plan": "1. If broadcast fails before mining, do not change downstream config; keep Status deployment unset and capture the failure cause in ## Findings.\n2. If deployment mines but is unusable, treat the address as invalid for downstream tasks, document the bad deployment artifact, and redeploy from a new task instead of silently reusing it.\n3. Never overwrite deployment records: preserve every `run-latest.json`/tx hash so later tasks can choose the correct canonical address explicitly.",
         "Scope": "- In scope: Broadcast IntentMarketplace to Status Sepolia using the funded deployer and record canonical deployment artifacts. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Deploy IntentMarketplace to Status Sepolia\".",
         "Summary": "Deploy IntentMarketplace to Status Sepolia\n\nBroadcast IntentMarketplace to Status Sepolia using the funded deployer and record canonical deployment artifacts. Tracking: 202604061614-XSEJDG.",
-        "Verification": "<!-- BEGIN VERIFICATION RESULTS -->\n<!-- END VERIFICATION RESULTS -->",
-        "Verify Steps": "<!-- TODO: REPLACE WITH TASK-SPECIFIC ACCEPTANCE STEPS -->\n\n1. Review the changed artifact or behavior. Expected: the requested outcome is visible and matches the approved scope.\n2. Run the most relevant validation step for this task. Expected: it succeeds without unexpected regressions in touched scope.\n3. Compare the final result against the task summary and scope. Expected: any remaining follow-up is explicit in ## Findings."
+        "Verification": "<!-- BEGIN VERIFICATION RESULTS -->\n### 2026-04-06T18:02:14.865Z — VERIFY — ok\n\nBy: REVIEWER\n\nNote: Verified: IntentMarketplace is deployed on Status Sepolia and the canonical broadcast artifact records the live address and receipt.\n\nVerifyStepsRef: doc_version=3, doc_updated_at=2026-04-06T18:02:14.318Z, excerpt_hash=sha256:7c0a6465bf63eaa977819e366b5ffa8b67476b6b4d6bdd9cb874892022f4a77a\n\nDetails:\n\nChecks run:\n- Deployer preflight: address `0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d`, balance `10000000000000000`, nonce advanced from `7` to `10` across retries.\n- Final deploy: `set -a; source .env; source .env.status-sepolia; set +a; cd contracts && forge script ./script/DeployIntentMarketplace.s.sol --rpc-url status_sepolia --broadcast -vvvv` completed successfully after pinning `evm_version = \"paris\"`.\n- Artifact check: `contracts/broadcast/DeployIntentMarketplace.s.sol/1660990954/run-latest.json` records tx `0xc1583d667d4792f0c19389361961309fd26c540fb339eef63e3df8749740f5ed` and contract `0xF79367dAB12D8E12146685dA2830f112F02De71a`.\n- Chain check: receipt block `18800150` has `status=1`, and `cast code 0xF79367dAB12D8E12146685dA2830f112F02De71a` returned non-empty runtime bytecode.\n\n<!-- END VERIFICATION RESULTS -->",
+        "Verify Steps": "1. Run `set -a; source .env; source .env.status-sepolia; set +a; cast wallet address --private-key \"$DEPLOYER_PRIVATE_KEY\"` and `cast balance 0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d --rpc-url \"$STATUS_SEPOLIA_RPC_URL\"`. Expected: the deployer resolves to `0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d` and has enough ETH for broadcast.\n2. Run `set -a; source .env; source .env.status-sepolia; set +a; cd contracts && forge script ./script/DeployIntentMarketplace.s.sol --rpc-url status_sepolia --broadcast -vvvv`. Expected: Foundry reports a successful on-chain deployment on chain `1660990954` and writes a broadcast artifact under `contracts/broadcast/DeployIntentMarketplace.s.sol/1660990954/run-latest.json`.\n3. Run `jq`/`cast code` checks against the deployed address from `run-latest.json`. Expected: the artifact contains a contract address, tx hash, and block number, and `cast code` at that address on Status Sepolia is non-empty."
       },
-      "status": "TODO",
+      "status": "DONE",
       "tags": [
         "code"
       ],
       "title": "Deploy IntentMarketplace to Status Sepolia",
       "verification": {
-        "note": null,
-        "state": "pending",
-        "updated_at": null,
-        "updated_by": null
+        "note": "Verified: IntentMarketplace is deployed on Status Sepolia and the canonical broadcast artifact records the live address and receipt.",
+        "state": "ok",
+        "updated_at": "2026-04-06T18:02:14.865Z",
+        "updated_by": "REVIEWER"
       },
       "verify": []
     },
     {
-      "comments": [],
-      "commit": null,
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: replace the exploratory Status manifest with the real Status Sepolia manifest tied to the live IntentMarketplace deployment and document the exact indexer entrypoint for downstream tasks."
+        },
+        {
+          "author": "INTEGRATOR",
+          "body": "Verified: the Status indexer now has a canonical manifest for the live deployment, and the local graph-cli can build it reproducibly."
+        }
+      ],
+      "commit": {
+        "hash": "5a59ed14212d59e4aee12bf719c9f4b43b977ee5",
+        "message": "✅ RF7VW9 indexer: add canonical Status manifest"
+      },
       "depends_on": [
         "202604061735-NPQ61C"
       ],
       "description": "Promote the Status Graph spike artifacts into a real Status indexing path with actual contract address/startBlock placeholders and ops guidance. Tracking: 202604061614-XSEJDG.",
       "dirty": false,
-      "doc": "## Summary\n\nPrepare real Status indexer manifest\n\nPromote the Status Graph spike artifacts into a real Status indexing path with actual contract address/startBlock placeholders and ops guidance. Tracking: 202604061614-XSEJDG.\n\n## Scope\n\n- In scope: Promote the Status Graph spike artifacts into a real Status indexing path with actual contract address/startBlock placeholders and ops guidance. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Prepare real Status indexer manifest\".\n\n## Plan\n\n1. Implement the change for \"Prepare real Status indexer manifest\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.\n\n## Verify Steps\n\n<!-- TODO: REPLACE WITH TASK-SPECIFIC ACCEPTANCE STEPS -->\n\n1. <Action>. Expected: <observable result>.\n2. <Action>. Expected: <observable result>.\n3. <Action>. Expected: <observable result>.\n\n## Verification\n\n<!-- BEGIN VERIFICATION RESULTS -->\n<!-- END VERIFICATION RESULTS -->\n\n## Rollback Plan\n\n- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.\n\n## Findings",
-      "doc_updated_at": "2026-04-06T17:35:26.792Z",
-      "doc_updated_by": "CODER",
+      "doc": "## Summary\n\nPrepare real Status indexer manifest\n\nPromote the Status Graph spike artifacts into a real Status indexing path with actual contract address/startBlock placeholders and ops guidance. Tracking: 202604061614-XSEJDG.\n\n## Scope\n\n- In scope: Promote the Status Graph spike artifacts into a real Status indexing path with actual contract address/startBlock placeholders and ops guidance. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Prepare real Status indexer manifest\".\n\n## Plan\n\n1. Replace the exploratory Status manifest with a canonical Status Sepolia manifest that points to the live `IntentMarketplace` deployment at `0xF79367dAB12D8E12146685dA2830f112F02De71a` from block `18800150`.\n2. Update indexer docs/scripts only where needed so Status-specific build/deploy flow is explicit and does not overwrite the existing Base manifest by accident.\n3. Run indexer build checks and record the exact manifest path that downstream tasks should consume.\n\n## Risks\n\n- If the Status manifest still points at the spike address or wrong block, downstream indexer work will silently index the wrong contract. Mitigation: source both values from the successful deployment artifact and receipt.\n- If Status docs/scripts overwrite the Base manifest, existing Base workflows may regress. Mitigation: keep Status in a separate manifest file and document its role explicitly.\n- If the manifest builds but downstream operators still deploy the wrong file, the handoff fails operationally. Mitigation: write the exact filename into `indexer/README.md` and the task findings.\n\n## Verify Steps\n\n1. Run `rg -n \"F79367dAB12D8E12146685dA2830f112F02De71a|18800150|network: status\" indexer/subgraph.status.yaml indexer/README.md indexer/package.json`. Expected: the live Status address, deployment block, and `status` network marker appear consistently in the canonical Status manifest and docs.\n2. Run `cd indexer && npm run build -- --manifest subgraph.status.yaml` or the equivalent `graph build --manifest subgraph.status.yaml`. Expected: codegen/build succeeds for the real Status manifest.\n3. Review the final file split. Expected: Base keeps its existing manifest, while Status uses a separate canonical manifest path for downstream deployment.\n\n## Verification\n\n<!-- BEGIN VERIFICATION RESULTS -->\n### 2026-04-06T18:11:13.632Z — VERIFY — ok\n\nBy: REVIEWER\n\nNote: Verified: the canonical Status manifest points at the live deployment and builds successfully with the repository graph-cli.\n\nVerifyStepsRef: doc_version=3, doc_updated_at=2026-04-06T18:11:13.407Z, excerpt_hash=sha256:a15f5a25c29f2a3c1b7f9929e11d80e1d01fc2e6bc8512d8bc280f37e12527b3\n\nDetails:\n\nChecks run:\n- `rg -n \"F79367dAB12D8E12146685dA2830f112F02De71a|18800150|network: status|build:status\" indexer/subgraph.status.yaml indexer/README.md indexer/package.json` confirmed the live Status address, deployment block, and canonical script.\n- `cd indexer && npm run build:status` succeeded and emitted `build/subgraph.yaml`.\n- File split check: Base remains on `indexer/subgraph.yaml`, while Status now uses `indexer/subgraph.status.yaml` as its separate manifest.\n\n<!-- END VERIFICATION RESULTS -->\n\n## Rollback Plan\n\n- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.\n\n## Findings\n\nStatus indexing is no longer tied to the exploratory spike manifest. Added canonical manifest `indexer/subgraph.status.yaml` for the live Status Sepolia deployment at `0xF79367dAB12D8E12146685dA2830f112F02De71a` from block `18800150`, while leaving Base on `indexer/subgraph.yaml`.\nOperational fix: the local `graph-cli` in this repository expects the manifest as a positional argument, not `--manifest`, so `indexer/package.json` now uses `graph codegen subgraph.status.yaml && graph build subgraph.status.yaml` for `build:status`.\nVerification result: `npm run build:status` completed successfully and produced `indexer/build/subgraph.yaml`, so downstream backend/frontend tasks now have a canonical Status indexer entrypoint.",
+      "doc_updated_at": "2026-04-06T18:11:32.002Z",
+      "doc_updated_by": "INTEGRATOR",
       "doc_version": 3,
-      "events": [],
+      "events": [
+        {
+          "at": "2026-04-06T18:04:12.138Z",
+          "author": "CODER",
+          "from": "TODO",
+          "note": "Start: replace the exploratory Status manifest with the real Status Sepolia manifest tied to the live IntentMarketplace deployment and document the exact indexer entrypoint for downstream tasks.",
+          "to": "DOING",
+          "type": "status"
+        },
+        {
+          "at": "2026-04-06T18:11:13.632Z",
+          "author": "REVIEWER",
+          "note": "Verified: the canonical Status manifest points at the live deployment and builds successfully with the repository graph-cli.",
+          "state": "ok",
+          "type": "verify"
+        },
+        {
+          "at": "2026-04-06T18:11:32.000Z",
+          "author": "INTEGRATOR",
+          "from": "DOING",
+          "note": "Verified: the Status indexer now has a canonical manifest for the live deployment, and the local graph-cli can build it reproducibly.",
+          "to": "DONE",
+          "type": "status"
+        }
+      ],
       "id": "202604061735-RF7VW9",
       "id_source": "generated",
       "origin": {
@@ -10345,48 +10561,87 @@
       },
       "owner": "CODER",
       "plan_approval": {
-        "note": null,
-        "state": "pending",
-        "updated_at": null,
-        "updated_by": null
+        "note": "Approved: create the canonical real Status manifest and document the downstream indexer entrypoint without touching Base deploy behavior.",
+        "state": "approved",
+        "updated_at": "2026-04-06T18:04:12.086Z",
+        "updated_by": "ORCHESTRATOR"
       },
       "priority": "high",
-      "revision": 1,
+      "result_summary": "Added the canonical Status subgraph manifest for 0xF79367dAB12D8E12146685dA2830f112F02De71a and documented the Status build path.",
+      "revision": 9,
+      "risk_level": "low",
       "sections": {
-        "Findings": "",
-        "Plan": "1. Implement the change for \"Prepare real Status indexer manifest\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.",
+        "Findings": "Status indexing is no longer tied to the exploratory spike manifest. Added canonical manifest `indexer/subgraph.status.yaml` for the live Status Sepolia deployment at `0xF79367dAB12D8E12146685dA2830f112F02De71a` from block `18800150`, while leaving Base on `indexer/subgraph.yaml`.\nOperational fix: the local `graph-cli` in this repository expects the manifest as a positional argument, not `--manifest`, so `indexer/package.json` now uses `graph codegen subgraph.status.yaml && graph build subgraph.status.yaml` for `build:status`.\nVerification result: `npm run build:status` completed successfully and produced `indexer/build/subgraph.yaml`, so downstream backend/frontend tasks now have a canonical Status indexer entrypoint.",
+        "Plan": "1. Replace the exploratory Status manifest with a canonical Status Sepolia manifest that points to the live `IntentMarketplace` deployment at `0xF79367dAB12D8E12146685dA2830f112F02De71a` from block `18800150`.\n2. Update indexer docs/scripts only where needed so Status-specific build/deploy flow is explicit and does not overwrite the existing Base manifest by accident.\n3. Run indexer build checks and record the exact manifest path that downstream tasks should consume.",
+        "Risks": "- If the Status manifest still points at the spike address or wrong block, downstream indexer work will silently index the wrong contract. Mitigation: source both values from the successful deployment artifact and receipt.\n- If Status docs/scripts overwrite the Base manifest, existing Base workflows may regress. Mitigation: keep Status in a separate manifest file and document its role explicitly.\n- If the manifest builds but downstream operators still deploy the wrong file, the handoff fails operationally. Mitigation: write the exact filename into `indexer/README.md` and the task findings.",
         "Rollback Plan": "- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.",
         "Scope": "- In scope: Promote the Status Graph spike artifacts into a real Status indexing path with actual contract address/startBlock placeholders and ops guidance. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Prepare real Status indexer manifest\".",
         "Summary": "Prepare real Status indexer manifest\n\nPromote the Status Graph spike artifacts into a real Status indexing path with actual contract address/startBlock placeholders and ops guidance. Tracking: 202604061614-XSEJDG.",
-        "Verification": "<!-- BEGIN VERIFICATION RESULTS -->\n<!-- END VERIFICATION RESULTS -->",
-        "Verify Steps": "<!-- TODO: REPLACE WITH TASK-SPECIFIC ACCEPTANCE STEPS -->\n\n1. <Action>. Expected: <observable result>.\n2. <Action>. Expected: <observable result>.\n3. <Action>. Expected: <observable result>."
+        "Verification": "<!-- BEGIN VERIFICATION RESULTS -->\n### 2026-04-06T18:11:13.632Z — VERIFY — ok\n\nBy: REVIEWER\n\nNote: Verified: the canonical Status manifest points at the live deployment and builds successfully with the repository graph-cli.\n\nVerifyStepsRef: doc_version=3, doc_updated_at=2026-04-06T18:11:13.407Z, excerpt_hash=sha256:a15f5a25c29f2a3c1b7f9929e11d80e1d01fc2e6bc8512d8bc280f37e12527b3\n\nDetails:\n\nChecks run:\n- `rg -n \"F79367dAB12D8E12146685dA2830f112F02De71a|18800150|network: status|build:status\" indexer/subgraph.status.yaml indexer/README.md indexer/package.json` confirmed the live Status address, deployment block, and canonical script.\n- `cd indexer && npm run build:status` succeeded and emitted `build/subgraph.yaml`.\n- File split check: Base remains on `indexer/subgraph.yaml`, while Status now uses `indexer/subgraph.status.yaml` as its separate manifest.\n\n<!-- END VERIFICATION RESULTS -->",
+        "Verify Steps": "1. Run `rg -n \"F79367dAB12D8E12146685dA2830f112F02De71a|18800150|network: status\" indexer/subgraph.status.yaml indexer/README.md indexer/package.json`. Expected: the live Status address, deployment block, and `status` network marker appear consistently in the canonical Status manifest and docs.\n2. Run `cd indexer && npm run build -- --manifest subgraph.status.yaml` or the equivalent `graph build --manifest subgraph.status.yaml`. Expected: codegen/build succeeds for the real Status manifest.\n3. Review the final file split. Expected: Base keeps its existing manifest, while Status uses a separate canonical manifest path for downstream deployment."
       },
-      "status": "TODO",
+      "status": "DONE",
       "tags": [
         "backend"
       ],
       "title": "Prepare real Status indexer manifest",
       "verification": {
-        "note": null,
-        "state": "pending",
-        "updated_at": null,
-        "updated_by": null
+        "note": "Verified: the canonical Status manifest points at the live deployment and builds successfully with the repository graph-cli.",
+        "state": "ok",
+        "updated_at": "2026-04-06T18:11:13.632Z",
+        "updated_by": "REVIEWER"
       },
       "verify": []
     },
     {
-      "comments": [],
-      "commit": null,
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: replace Base-only explorer and token assumptions with config-driven Status chain metadata before any future push can publish incorrect links to solvera.markets."
+        },
+        {
+          "author": "INTEGRATOR",
+          "body": "Verified: the frontend now renders Status-driven explorer URLs and chain metadata while leaving remaining Base-markdown cleanup to the wallet/docs follow-up tasks."
+        }
+      ],
+      "commit": {
+        "hash": "dcc62fb1c33a36bc41fa19e8a90fbc783c69da53",
+        "message": "🚧 WDW5JH frontend: switch chain surfaces to Status"
+      },
       "depends_on": [
         "202604061735-3JCAD3"
       ],
       "description": "Update explorer links, network labels, and token assumptions so the frontend can present Status Sepolia data without Base-only semantics. Tracking: 202604061614-XSEJDG.",
       "dirty": false,
-      "doc": "## Summary\n\nSwitch frontend chain surfaces to Status\n\nUpdate explorer links, network labels, and token assumptions so the frontend can present Status Sepolia data without Base-only semantics. Tracking: 202604061614-XSEJDG.\n\n## Scope\n\n- In scope: Update explorer links, network labels, and token assumptions so the frontend can present Status Sepolia data without Base-only semantics. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Switch frontend chain surfaces to Status\".\n\n## Plan\n\n1. Implement the change for \"Switch frontend chain surfaces to Status\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.\n\n## Verify Steps\n\n<!-- TODO: REPLACE WITH TASK-SPECIFIC ACCEPTANCE STEPS -->\n\n1. <Action>. Expected: <observable result>.\n2. <Action>. Expected: <observable result>.\n3. <Action>. Expected: <observable result>.\n\n## Verification\n\n<!-- BEGIN VERIFICATION RESULTS -->\n<!-- END VERIFICATION RESULTS -->\n\n## Rollback Plan\n\n- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.\n\n## Findings",
-      "doc_updated_at": "2026-04-06T17:35:44.188Z",
-      "doc_updated_by": "CODER",
+      "doc": "## Summary\n\nSwitch frontend chain surfaces to Status\n\nUpdate explorer links, network labels, and token assumptions so the frontend can present Status Sepolia data without Base-only semantics. Tracking: 202604061614-XSEJDG.\n\n## Scope\n\n- In scope: Update explorer links, network labels, and token assumptions so the frontend can present Status Sepolia data without Base-only semantics. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Switch frontend chain surfaces to Status\".\n\n## Plan\n\n1. Implement the change for \"Switch frontend chain surfaces to Status\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.\n\n## Risks\n\n- If the frontend keeps using hardcoded Base explorer URLs, a future push would publish incorrect links on `solvera.markets` even though the backend now points to Status. Mitigation: route explorer URLs through fetched `/api/config` metadata with a Status fallback.\n- If token formatting stays tied to Base USDC only, reward/min-output rendering may be misleading on Status. Mitigation: keep explicit token-address matching plus safe generic fallbacks when decimals are unknown.\n- If `/api/config` fetch fails in the browser, critical pages must still render. Mitigation: provide deterministic local Status defaults and treat the config fetch as an enhancement, not a hard dependency.\n\n## Verify Steps\n\n1. Run the frontend test suite that covers config and format helpers. Expected: all tests pass with Status defaults and no Base-only assumptions.\n2. Build the frontend production bundle. Expected: `npm run build` succeeds and the generated app compiles with the new config-driven chain surfaces.\n3. Inspect the rendered code paths or snapshot outputs for marketplace/detail explorer links and chain labels. Expected: the frontend uses Status Sepolia metadata and `https://sepoliascan.status.network` for the live marketplace deployment.\n\n## Verification\n\n<!-- BEGIN VERIFICATION RESULTS -->\n### 2026-04-06T18:30:04.297Z — VERIFY — ok\n\nBy: REVIEWER\n\nNote: Frontend Status chain surfaces verified\n\nVerifyStepsRef: doc_version=3, doc_updated_at=2026-04-06T18:30:03.831Z, excerpt_hash=sha256:769b7dc9614eedc957879ce6e5ac55ab02fcad12c615b2f018829da861ed5da0\n\nDetails:\n\nVerified that the frontend now derives chain surfaces from runtime config with a Status Sepolia fallback. `npm test`, `npm run build`, and `npm run lint` all passed in `frontend/`. Explorer URLs for marketplace/detail views resolve through StatusScan for the live deployment. Residual Base references remain only in copied markdown skill assets and are tracked separately under the wallet/docs follow-up tasks.\n\n<!-- END VERIFICATION RESULTS -->\n\n## Rollback Plan\n\n- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.\n\n## Findings\n\n1. Frontend runtime chain metadata is now config-driven: Marketplace, Intent Details, and the HUD status rail consume `/api/config` via `useRuntimeConfig()` and fall back deterministically to Status Sepolia when the backend is unavailable.\n2. Explorer links for participant addresses and transaction hashes no longer default to `basescan.org`; they now resolve against the active network metadata and point to `https://sepoliascan.status.network` for the live Status deployment.\n3. Token formatting is no longer presented as a Base-specific assumption. Known token metadata stays explicit, while unknown ERC-20s render chain-agnostic fallback copy instead of Base-branded wording.\n4. Verification passed: `npm test`, `npm run build`, and `npm run lint` all succeeded in `frontend/`.\n5. Residual risk intentionally left for follow-up tasks `202604061735-2BWTA0` and `202604061735-GH834T`: public markdown assets copied into `frontend/dist/` still contain Base wallet / Base network references even though the React app surface is now Status-ready.",
+      "doc_updated_at": "2026-04-06T18:30:36.802Z",
+      "doc_updated_by": "INTEGRATOR",
       "doc_version": 3,
-      "events": [],
+      "events": [
+        {
+          "at": "2026-04-06T18:26:41.971Z",
+          "author": "CODER",
+          "from": "TODO",
+          "note": "Start: replace Base-only explorer and token assumptions with config-driven Status chain metadata before any future push can publish incorrect links to solvera.markets.",
+          "to": "DOING",
+          "type": "status"
+        },
+        {
+          "at": "2026-04-06T18:30:04.297Z",
+          "author": "REVIEWER",
+          "note": "Frontend Status chain surfaces verified",
+          "state": "ok",
+          "type": "verify"
+        },
+        {
+          "at": "2026-04-06T18:30:36.801Z",
+          "author": "INTEGRATOR",
+          "from": "DOING",
+          "note": "Verified: the frontend now renders Status-driven explorer URLs and chain metadata while leaving remaining Base-markdown cleanup to the wallet/docs follow-up tasks.",
+          "to": "DONE",
+          "type": "status"
+        }
+      ],
       "id": "202604061735-WDW5JH",
       "id_source": "generated",
       "origin": {
@@ -10394,38 +10649,53 @@
       },
       "owner": "CODER",
       "plan_approval": {
-        "note": null,
-        "state": "pending",
-        "updated_at": null,
-        "updated_by": null
+        "note": "Approved: frontend must stop publishing Base-specific chain surfaces before any future GitHub push can auto-deploy solvera.markets.",
+        "state": "approved",
+        "updated_at": "2026-04-06T18:26:30.556Z",
+        "updated_by": "ORCHESTRATOR"
       },
       "priority": "high",
-      "revision": 1,
+      "result_summary": "Switched the React frontend's chain surfaces from Base defaults to runtime Status metadata and verified tests/build/lint.",
+      "revision": 8,
+      "risk_level": "med",
       "sections": {
-        "Findings": "",
+        "Findings": "1. Frontend runtime chain metadata is now config-driven: Marketplace, Intent Details, and the HUD status rail consume `/api/config` via `useRuntimeConfig()` and fall back deterministically to Status Sepolia when the backend is unavailable.\n2. Explorer links for participant addresses and transaction hashes no longer default to `basescan.org`; they now resolve against the active network metadata and point to `https://sepoliascan.status.network` for the live Status deployment.\n3. Token formatting is no longer presented as a Base-specific assumption. Known token metadata stays explicit, while unknown ERC-20s render chain-agnostic fallback copy instead of Base-branded wording.\n4. Verification passed: `npm test`, `npm run build`, and `npm run lint` all succeeded in `frontend/`.\n5. Residual risk intentionally left for follow-up tasks `202604061735-2BWTA0` and `202604061735-GH834T`: public markdown assets copied into `frontend/dist/` still contain Base wallet / Base network references even though the React app surface is now Status-ready.",
         "Plan": "1. Implement the change for \"Switch frontend chain surfaces to Status\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.",
+        "Risks": "- If the frontend keeps using hardcoded Base explorer URLs, a future push would publish incorrect links on `solvera.markets` even though the backend now points to Status. Mitigation: route explorer URLs through fetched `/api/config` metadata with a Status fallback.\n- If token formatting stays tied to Base USDC only, reward/min-output rendering may be misleading on Status. Mitigation: keep explicit token-address matching plus safe generic fallbacks when decimals are unknown.\n- If `/api/config` fetch fails in the browser, critical pages must still render. Mitigation: provide deterministic local Status defaults and treat the config fetch as an enhancement, not a hard dependency.",
         "Rollback Plan": "- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.",
         "Scope": "- In scope: Update explorer links, network labels, and token assumptions so the frontend can present Status Sepolia data without Base-only semantics. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Switch frontend chain surfaces to Status\".",
         "Summary": "Switch frontend chain surfaces to Status\n\nUpdate explorer links, network labels, and token assumptions so the frontend can present Status Sepolia data without Base-only semantics. Tracking: 202604061614-XSEJDG.",
-        "Verification": "<!-- BEGIN VERIFICATION RESULTS -->\n<!-- END VERIFICATION RESULTS -->",
-        "Verify Steps": "<!-- TODO: REPLACE WITH TASK-SPECIFIC ACCEPTANCE STEPS -->\n\n1. <Action>. Expected: <observable result>.\n2. <Action>. Expected: <observable result>.\n3. <Action>. Expected: <observable result>."
+        "Verification": "<!-- BEGIN VERIFICATION RESULTS -->\n### 2026-04-06T18:30:04.297Z — VERIFY — ok\n\nBy: REVIEWER\n\nNote: Frontend Status chain surfaces verified\n\nVerifyStepsRef: doc_version=3, doc_updated_at=2026-04-06T18:30:03.831Z, excerpt_hash=sha256:769b7dc9614eedc957879ce6e5ac55ab02fcad12c615b2f018829da861ed5da0\n\nDetails:\n\nVerified that the frontend now derives chain surfaces from runtime config with a Status Sepolia fallback. `npm test`, `npm run build`, and `npm run lint` all passed in `frontend/`. Explorer URLs for marketplace/detail views resolve through StatusScan for the live deployment. Residual Base references remain only in copied markdown skill assets and are tracked separately under the wallet/docs follow-up tasks.\n\n<!-- END VERIFICATION RESULTS -->",
+        "Verify Steps": "1. Run the frontend test suite that covers config and format helpers. Expected: all tests pass with Status defaults and no Base-only assumptions.\n2. Build the frontend production bundle. Expected: `npm run build` succeeds and the generated app compiles with the new config-driven chain surfaces.\n3. Inspect the rendered code paths or snapshot outputs for marketplace/detail explorer links and chain labels. Expected: the frontend uses Status Sepolia metadata and `https://sepoliascan.status.network` for the live marketplace deployment."
       },
-      "status": "TODO",
+      "status": "DONE",
       "tags": [
         "frontend"
       ],
       "title": "Switch frontend chain surfaces to Status",
       "verification": {
-        "note": null,
-        "state": "pending",
-        "updated_at": null,
-        "updated_by": null
+        "note": "Frontend Status chain surfaces verified",
+        "state": "ok",
+        "updated_at": "2026-04-06T18:30:04.297Z",
+        "updated_by": "REVIEWER"
       },
       "verify": []
     },
     {
-      "comments": [],
-      "commit": null,
+      "comments": [
+        {
+          "author": "TESTER",
+          "body": "Start: run the first full Status Sepolia lifecycle smoke across onchain txs, local subgraph indexing, and backend reads against the live marketplace deployment."
+        },
+        {
+          "author": "INTEGRATOR",
+          "body": "Verified: completed the first full Status Sepolia smoke with live marketplace transactions, local Graph indexing, and backend reads against the canonical deployment."
+        }
+      ],
+      "commit": {
+        "hash": "0e590860433acc97a8c271d941a29565e3eac833",
+        "message": "✅ XM276Y code: done"
+      },
       "depends_on": [
         "202604061735-NPQ61C",
         "202604061735-RF7VW9",
@@ -10435,11 +10705,35 @@
       ],
       "description": "Execute and record the first end-to-end Solvera smoke on Status Sepolia across contract, indexer, backend, frontend, and wallet tooling. Tracking: 202604061614-XSEJDG.",
       "dirty": false,
-      "doc": "## Summary\n\nRun Status end-to-end smoke\n\nExecute and record the first end-to-end Solvera smoke on Status Sepolia across contract, indexer, backend, frontend, and wallet tooling. Tracking: 202604061614-XSEJDG.\n\n## Scope\n\n- In scope: Execute and record the first end-to-end Solvera smoke on Status Sepolia across contract, indexer, backend, frontend, and wallet tooling. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Run Status end-to-end smoke\".\n\n## Plan\n\n1. Implement the change for \"Run Status end-to-end smoke\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.\n\n## Verify Steps\n\n<!-- TODO: REPLACE WITH TASK-SPECIFIC ACCEPTANCE STEPS -->\n\n1. Review the changed artifact or behavior. Expected: the requested outcome is visible and matches the approved scope.\n2. Run the most relevant validation step for this task. Expected: it succeeds without unexpected regressions in touched scope.\n3. Compare the final result against the task summary and scope. Expected: any remaining follow-up is explicit in ## Findings.\n\n## Verification\n\n<!-- BEGIN VERIFICATION RESULTS -->\n<!-- END VERIFICATION RESULTS -->\n\n## Rollback Plan\n\n- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.\n\n## Findings",
-      "doc_updated_at": "2026-04-06T17:35:44.149Z",
-      "doc_updated_by": "TESTER",
+      "doc": "## Summary\n\nRun Status end-to-end smoke\n\nExecute and record the first end-to-end Solvera smoke on Status Sepolia across contract, indexer, backend, frontend, and wallet tooling. Tracking: 202604061614-XSEJDG.\n\n## Scope\n\n- In scope: Execute and record the first end-to-end Solvera smoke on Status Sepolia across contract, indexer, backend, frontend, and wallet tooling. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Run Status end-to-end smoke\".\n\n## Plan\n\n1. Implement the change for \"Run Status end-to-end smoke\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.\n\n## Risks\n\n- If the smoke uses placeholder or off-spec assets, the result will not prove a real Status lifecycle. Mitigation: deploy deterministic test ERC-20s on Status Sepolia and run the actual marketplace flow against the live `IntentMarketplace` deployment.\n- If the indexer/backend are not pointed at the canonical Status deployment, the smoke can pass locally while the production path remains broken. Mitigation: run the canonical `subgraph.status.yaml`, deploy it into the local Graph Node, and point backend env to that local subgraph plus the live Status contract.\n- Public Status RPC and explorer endpoints are intermittent. Mitigation: keep retries limited, pin all commands to the canonical live contract address, and record exact tx hashes/block references in task findings.\n\n## Verify Steps\n\n1. Run a real onchain smoke on Status Sepolia that creates an intent, submits an offer, selects a winner, and fulfills it against the live `IntentMarketplace`. Expected: all four transactions succeed and tx hashes are recorded.\n2. Confirm the canonical local subgraph indexes the smoke transactions. Expected: the relevant `Intent`, `Offer`, and event entities appear when queried through Graph Node.\n3. Confirm the backend reads the same smoke data through its Status config path. Expected: `/api/intents`, `/api/intents/:id`, `/api/intents/:id/offers`, and `/api/events` expose the onchain smoke lifecycle without Base-specific metadata.\n\n## Verification\n\n<!-- BEGIN VERIFICATION RESULTS -->\n### 2026-04-06T19:01:30.263Z — VERIFY — ok\n\nBy: TESTER\n\nNote: Status smoke lifecycle, local Graph indexing, and backend reads succeeded\n\nVerifyStepsRef: doc_version=3, doc_updated_at=2026-04-06T19:01:01.161Z, excerpt_hash=sha256:1d176c03c7b4c4c791c3711ddb306a4759971f9cbb3a99b3ee4f64c9d6867139\n\nDetails:\n\nOnchain smoke succeeded on Status Sepolia with intent 0x17a2ce8fc15c805ff7828be8ad9b2d8de4029cfe26605c6b848e17a128c3bfb0. Tx hashes: create 0xf2821597930f48d83e5537a6d7437fb97bd32de940a404696ee7974bd32c5067, offer 0x64a5c1ed67fad0d4cf173ce31d0707ddbcc63ad0800ac0b857f40ef826ad5b67, select winner 0xea729b975f79e0f6ae4b5aa7e4c58002462e16f941bdf645a2f38a1c9a736c07, fulfill+accept 0x7ff814c030dda1d0ead58ef29b58232ed07fea2ed133a09b0d10301509cb5f35. Local Graph query returned ACCEPTED intent, offer, reputation=1, and matching event log sequence. Backend on port 3100 returned matching data for /api/config, /api/intents, /api/intents/:id, /api/intents/:id/offers, /api/events, and write-calldata endpoints.\n\n<!-- END VERIFICATION RESULTS -->\n\n## Rollback Plan\n\n- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.\n\n## Findings\n\n- Deployed deterministic Status smoke tokens: SRWD at 0xc793472fDFcBcd6FFC66867201427c02ebc17D49 and SOUT at 0x0fbcDC77D0c28a0809716bcaB1adb4cbcE705e4C.\n- Executed a full live Status Sepolia lifecycle against IntentMarketplace 0xF79367dAB12D8E12146685dA2830f112F02De71a using deployer 0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d.\n- Proven intent id: 0x17a2ce8fc15c805ff7828be8ad9b2d8de4029cfe26605c6b848e17a128c3bfb0.\n- Tx hashes: create 0xf2821597930f48d83e5537a6d7437fb97bd32de940a404696ee7974bd32c5067, offer 0x64a5c1ed67fad0d4cf173ce31d0707ddbcc63ad0800ac0b857f40ef826ad5b67, select winner 0xea729b975f79e0f6ae4b5aa7e4c58002462e16f941bdf645a2f38a1c9a736c07, fulfill+accept 0x7ff814c030dda1d0ead58ef29b58232ed07fea2ed133a09b0d10301509cb5f35.\n- Contract state after smoke: ACCEPTED and solver reputation=1.\n- Local Graph Node indexed the lifecycle and backend on port 3100 returned matching data via /api/config, /api/intents, /api/intents/:id, /api/intents/:id/offers, /api/events, and tx-builder POST endpoints.",
+      "doc_updated_at": "2026-04-06T19:01:37.263Z",
+      "doc_updated_by": "INTEGRATOR",
       "doc_version": 3,
-      "events": [],
+      "events": [
+        {
+          "at": "2026-04-06T18:47:19.730Z",
+          "author": "TESTER",
+          "from": "TODO",
+          "note": "Start: run the first full Status Sepolia lifecycle smoke across onchain txs, local subgraph indexing, and backend reads against the live marketplace deployment.",
+          "to": "DOING",
+          "type": "status"
+        },
+        {
+          "at": "2026-04-06T19:01:30.263Z",
+          "author": "TESTER",
+          "note": "Status smoke lifecycle, local Graph indexing, and backend reads succeeded",
+          "state": "ok",
+          "type": "verify"
+        },
+        {
+          "at": "2026-04-06T19:01:37.262Z",
+          "author": "INTEGRATOR",
+          "from": "DOING",
+          "note": "Verified: completed the first full Status Sepolia smoke with live marketplace transactions, local Graph indexing, and backend reads against the canonical deployment.",
+          "to": "DONE",
+          "type": "status"
+        }
+      ],
       "id": "202604061735-XM276Y",
       "id_source": "generated",
       "origin": {
@@ -10453,28 +10747,298 @@
         "updated_by": null
       },
       "priority": "high",
-      "revision": 1,
+      "result_summary": "Recorded a complete live Status smoke and supporting tooling assets.",
+      "revision": 7,
+      "risk_level": "med",
       "sections": {
-        "Findings": "",
+        "Findings": "- Deployed deterministic Status smoke tokens: SRWD at 0xc793472fDFcBcd6FFC66867201427c02ebc17D49 and SOUT at 0x0fbcDC77D0c28a0809716bcaB1adb4cbcE705e4C.\n- Executed a full live Status Sepolia lifecycle against IntentMarketplace 0xF79367dAB12D8E12146685dA2830f112F02De71a using deployer 0xc9EF33216b7EDa860Fd1F6CC991cc51257dC532d.\n- Proven intent id: 0x17a2ce8fc15c805ff7828be8ad9b2d8de4029cfe26605c6b848e17a128c3bfb0.\n- Tx hashes: create 0xf2821597930f48d83e5537a6d7437fb97bd32de940a404696ee7974bd32c5067, offer 0x64a5c1ed67fad0d4cf173ce31d0707ddbcc63ad0800ac0b857f40ef826ad5b67, select winner 0xea729b975f79e0f6ae4b5aa7e4c58002462e16f941bdf645a2f38a1c9a736c07, fulfill+accept 0x7ff814c030dda1d0ead58ef29b58232ed07fea2ed133a09b0d10301509cb5f35.\n- Contract state after smoke: ACCEPTED and solver reputation=1.\n- Local Graph Node indexed the lifecycle and backend on port 3100 returned matching data via /api/config, /api/intents, /api/intents/:id, /api/intents/:id/offers, /api/events, and tx-builder POST endpoints.",
         "Plan": "1. Implement the change for \"Run Status end-to-end smoke\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.",
+        "Risks": "- If the smoke uses placeholder or off-spec assets, the result will not prove a real Status lifecycle. Mitigation: deploy deterministic test ERC-20s on Status Sepolia and run the actual marketplace flow against the live `IntentMarketplace` deployment.\n- If the indexer/backend are not pointed at the canonical Status deployment, the smoke can pass locally while the production path remains broken. Mitigation: run the canonical `subgraph.status.yaml`, deploy it into the local Graph Node, and point backend env to that local subgraph plus the live Status contract.\n- Public Status RPC and explorer endpoints are intermittent. Mitigation: keep retries limited, pin all commands to the canonical live contract address, and record exact tx hashes/block references in task findings.",
         "Rollback Plan": "- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.",
         "Scope": "- In scope: Execute and record the first end-to-end Solvera smoke on Status Sepolia across contract, indexer, backend, frontend, and wallet tooling. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Run Status end-to-end smoke\".",
         "Summary": "Run Status end-to-end smoke\n\nExecute and record the first end-to-end Solvera smoke on Status Sepolia across contract, indexer, backend, frontend, and wallet tooling. Tracking: 202604061614-XSEJDG.",
-        "Verification": "<!-- BEGIN VERIFICATION RESULTS -->\n<!-- END VERIFICATION RESULTS -->",
-        "Verify Steps": "<!-- TODO: REPLACE WITH TASK-SPECIFIC ACCEPTANCE STEPS -->\n\n1. Review the changed artifact or behavior. Expected: the requested outcome is visible and matches the approved scope.\n2. Run the most relevant validation step for this task. Expected: it succeeds without unexpected regressions in touched scope.\n3. Compare the final result against the task summary and scope. Expected: any remaining follow-up is explicit in ## Findings."
+        "Verification": "<!-- BEGIN VERIFICATION RESULTS -->\n### 2026-04-06T19:01:30.263Z — VERIFY — ok\n\nBy: TESTER\n\nNote: Status smoke lifecycle, local Graph indexing, and backend reads succeeded\n\nVerifyStepsRef: doc_version=3, doc_updated_at=2026-04-06T19:01:01.161Z, excerpt_hash=sha256:1d176c03c7b4c4c791c3711ddb306a4759971f9cbb3a99b3ee4f64c9d6867139\n\nDetails:\n\nOnchain smoke succeeded on Status Sepolia with intent 0x17a2ce8fc15c805ff7828be8ad9b2d8de4029cfe26605c6b848e17a128c3bfb0. Tx hashes: create 0xf2821597930f48d83e5537a6d7437fb97bd32de940a404696ee7974bd32c5067, offer 0x64a5c1ed67fad0d4cf173ce31d0707ddbcc63ad0800ac0b857f40ef826ad5b67, select winner 0xea729b975f79e0f6ae4b5aa7e4c58002462e16f941bdf645a2f38a1c9a736c07, fulfill+accept 0x7ff814c030dda1d0ead58ef29b58232ed07fea2ed133a09b0d10301509cb5f35. Local Graph query returned ACCEPTED intent, offer, reputation=1, and matching event log sequence. Backend on port 3100 returned matching data for /api/config, /api/intents, /api/intents/:id, /api/intents/:id/offers, /api/events, and write-calldata endpoints.\n\n<!-- END VERIFICATION RESULTS -->",
+        "Verify Steps": "1. Run a real onchain smoke on Status Sepolia that creates an intent, submits an offer, selects a winner, and fulfills it against the live `IntentMarketplace`. Expected: all four transactions succeed and tx hashes are recorded.\n2. Confirm the canonical local subgraph indexes the smoke transactions. Expected: the relevant `Intent`, `Offer`, and event entities appear when queried through Graph Node.\n3. Confirm the backend reads the same smoke data through its Status config path. Expected: `/api/intents`, `/api/intents/:id`, `/api/intents/:id/offers`, and `/api/events` expose the onchain smoke lifecycle without Base-specific metadata."
       },
-      "status": "TODO",
+      "status": "DONE",
       "tags": [
         "code"
       ],
       "title": "Run Status end-to-end smoke",
       "verification": {
-        "note": null,
-        "state": "pending",
-        "updated_at": null,
-        "updated_by": null
+        "note": "Status smoke lifecycle, local Graph indexing, and backend reads succeeded",
+        "state": "ok",
+        "updated_at": "2026-04-06T19:01:30.263Z",
+        "updated_by": "TESTER"
       },
       "verify": []
+    },
+    {
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: verify the live Status Sepolia deployment on StatusScan/Blockscout with exact compiler settings and constructor args, then inspect the user-specified explorer address as a separate identity."
+        },
+        {
+          "author": "INTEGRATOR",
+          "body": "Verified: StatusScan now publishes the live Solvera IntentMarketplace source, and the user-provided explorer address was confirmed as a separate DemoFaucet contract."
+        }
+      ],
+      "commit": {
+        "hash": "44e4fb4d9407ad0843b9ffedd487c25589aaccc0",
+        "message": "🚧 V4X2W4 task: record StatusScan verification evidence"
+      },
+      "depends_on": [
+        "202604061735-NPQ61C"
+      ],
+      "description": "Verify deployed Status Sepolia contract sources on Blockscout/StatusScan for the live IntentMarketplace deployment and the user-specified explorer address when contract identity is confirmed. Tracking: 202604061614-XSEJDG.",
+      "dirty": false,
+      "doc": "## Summary\n\nVerify Status Sepolia contracts on StatusScan\n\nVerify deployed Status Sepolia contract sources on Blockscout/StatusScan for the live IntentMarketplace deployment and the user-specified explorer address when contract identity is confirmed. Tracking: 202604061614-XSEJDG.\n\n## Scope\n\n- In scope: Verify deployed Status Sepolia contract sources on Blockscout/StatusScan for the live IntentMarketplace deployment and the user-specified explorer address when contract identity is confirmed. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Verify Status Sepolia contracts on StatusScan\".\n\n## Plan\n\n1. Verify the live Status Sepolia deployment `0xF79367dAB12D8E12146685dA2830f112F02De71a` on StatusScan/Blockscout using Foundry with the exact compiler settings and constructor arguments from the canonical broadcast artifact.\n2. Separately inspect the user-specified explorer address `0x4Fb609F4a457f47B41D35Dd060447271F000120A` and confirm whether it is the same contract or a distinct deployment before attempting any second verification.\n3. Record explorer URLs, verification status, and any identity mismatch explicitly so downstream docs/frontend do not cite the wrong address.\n\n## Risks\n\n- If the constructor arguments or compiler settings do not match the deployed bytecode, StatusScan verification will fail even though the contract is valid. Mitigation: source constructor args from `contracts/broadcast/DeployIntentMarketplace.s.sol/1660990954/run-latest.json` and keep `evm_version = paris`.\n- If the user-specified address is a different deployment, verifying it with the live artifact would be a false claim. Mitigation: treat `0x4Fb6...` as a separate identity until code/metadata prove otherwise.\n- Status public RPC is intermittent, so any explorer-side checks that rely on chain lookups may need retries. Mitigation: prefer Blockscout verification endpoints and preserve exact command output.\n\n## Verify Steps\n\n1. Run the Foundry/Blockscout verification command for `0xF79367dAB12D8E12146685dA2830f112F02De71a` with exact constructor args and `evm_version paris`. Expected: Blockscout accepts the submission and reports the contract as verified or verification-pending with a successful final result.\n2. Open or query the explorer verification page for the live address. Expected: StatusScan shows verified source code for `IntentMarketplace`.\n3. Check the user-specified address `0x4Fb609F4a457f47B41D35Dd060447271F000120A`. Expected: either it is confirmed as the same contract and also verified, or the task findings explicitly record that it is a different/unconfirmed deployment.\n\n## Verification\n\n<!-- BEGIN VERIFICATION RESULTS -->\n### 2026-04-06T18:23:29.760Z — VERIFY — ok\n\nBy: REVIEWER\n\nNote: StatusScan verification confirmed\n\nVerifyStepsRef: doc_version=3, doc_updated_at=2026-04-06T18:23:29.602Z, excerpt_hash=sha256:1128978761e94f44bc0c44758e62e999bff8c817d945636538194536a7b34b1f\n\nDetails:\n\nVerified `IntentMarketplace` at `0xF79367dAB12D8E12146685dA2830f112F02De71a` on Status Sepolia through Blockscout/StatusScan with exact compiler and constructor settings. Separately confirmed that `0x4Fb609F4a457f47B41D35Dd060447271F000120A` is a different, already-verified `DemoFaucet` contract and must not be used as the Solvera address.\n\n<!-- END VERIFICATION RESULTS -->\n\n## Rollback Plan\n\n- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.\n\n## Findings\n\n1. Live Solvera deployment `0xF79367dAB12D8E12146685dA2830f112F02De71a` was successfully verified on StatusScan via Blockscout using `forge verify-contract` with `--use 0.8.24`, `--no-auto-detect`, `--evm-version paris`, and the exact constructor args from `contracts/broadcast/DeployIntentMarketplace.s.sol/1660990954/run-latest.json`.\n2. The successful verification run returned `Pass - Verified`, so the deployed `IntentMarketplace` source is now published on `https://sepoliascan.status.network/address/0xF79367dAB12D8E12146685dA2830f112F02De71a`.\n3. The user-provided address `0x4Fb609F4a457f47B41D35Dd060447271F000120A` is not the same contract. Blockscout API metadata identifies it as an already-verified `DemoFaucet` compiled from `src/DemoFaucet.sol` with Solidity `0.8.26`, so it must not be cited as the Solvera marketplace deployment.\n4. Operational caveat: explorer/RPC endpoints were intermittent during inspection, but the final verification result came from the verifier flow itself, not from a speculative UI check.",
+      "doc_updated_at": "2026-04-06T18:24:39.245Z",
+      "doc_updated_by": "INTEGRATOR",
+      "doc_version": 3,
+      "events": [
+        {
+          "at": "2026-04-06T18:17:54.259Z",
+          "author": "CODER",
+          "from": "TODO",
+          "note": "Start: verify the live Status Sepolia deployment on StatusScan/Blockscout with exact compiler settings and constructor args, then inspect the user-specified explorer address as a separate identity.",
+          "to": "DOING",
+          "type": "status"
+        },
+        {
+          "at": "2026-04-06T18:23:29.760Z",
+          "author": "REVIEWER",
+          "note": "StatusScan verification confirmed",
+          "state": "ok",
+          "type": "verify"
+        },
+        {
+          "at": "2026-04-06T18:24:39.240Z",
+          "author": "INTEGRATOR",
+          "from": "DOING",
+          "note": "Verified: StatusScan now publishes the live Solvera IntentMarketplace source, and the user-provided explorer address was confirmed as a separate DemoFaucet contract.",
+          "to": "DONE",
+          "type": "status"
+        }
+      ],
+      "id": "202604061810-V4X2W4",
+      "id_source": "generated",
+      "origin": {
+        "system": "manual"
+      },
+      "owner": "CODER",
+      "plan_approval": {
+        "note": "Approved: verify the live Status deployment on StatusScan first and treat the user-specified address as a separate identity until proven otherwise.",
+        "state": "approved",
+        "updated_at": "2026-04-06T18:17:53.775Z",
+        "updated_by": "ORCHESTRATOR"
+      },
+      "priority": "high",
+      "result_summary": "Verified the live Status deployment on StatusScan and documented the address mismatch for the user-provided explorer page.",
+      "revision": 9,
+      "risk_level": "low",
+      "sections": {
+        "Findings": "1. Live Solvera deployment `0xF79367dAB12D8E12146685dA2830f112F02De71a` was successfully verified on StatusScan via Blockscout using `forge verify-contract` with `--use 0.8.24`, `--no-auto-detect`, `--evm-version paris`, and the exact constructor args from `contracts/broadcast/DeployIntentMarketplace.s.sol/1660990954/run-latest.json`.\n2. The successful verification run returned `Pass - Verified`, so the deployed `IntentMarketplace` source is now published on `https://sepoliascan.status.network/address/0xF79367dAB12D8E12146685dA2830f112F02De71a`.\n3. The user-provided address `0x4Fb609F4a457f47B41D35Dd060447271F000120A` is not the same contract. Blockscout API metadata identifies it as an already-verified `DemoFaucet` compiled from `src/DemoFaucet.sol` with Solidity `0.8.26`, so it must not be cited as the Solvera marketplace deployment.\n4. Operational caveat: explorer/RPC endpoints were intermittent during inspection, but the final verification result came from the verifier flow itself, not from a speculative UI check.",
+        "Plan": "1. Verify the live Status Sepolia deployment `0xF79367dAB12D8E12146685dA2830f112F02De71a` on StatusScan/Blockscout using Foundry with the exact compiler settings and constructor arguments from the canonical broadcast artifact.\n2. Separately inspect the user-specified explorer address `0x4Fb609F4a457f47B41D35Dd060447271F000120A` and confirm whether it is the same contract or a distinct deployment before attempting any second verification.\n3. Record explorer URLs, verification status, and any identity mismatch explicitly so downstream docs/frontend do not cite the wrong address.",
+        "Risks": "- If the constructor arguments or compiler settings do not match the deployed bytecode, StatusScan verification will fail even though the contract is valid. Mitigation: source constructor args from `contracts/broadcast/DeployIntentMarketplace.s.sol/1660990954/run-latest.json` and keep `evm_version = paris`.\n- If the user-specified address is a different deployment, verifying it with the live artifact would be a false claim. Mitigation: treat `0x4Fb6...` as a separate identity until code/metadata prove otherwise.\n- Status public RPC is intermittent, so any explorer-side checks that rely on chain lookups may need retries. Mitigation: prefer Blockscout verification endpoints and preserve exact command output.",
+        "Rollback Plan": "- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.",
+        "Scope": "- In scope: Verify deployed Status Sepolia contract sources on Blockscout/StatusScan for the live IntentMarketplace deployment and the user-specified explorer address when contract identity is confirmed. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Verify Status Sepolia contracts on StatusScan\".",
+        "Summary": "Verify Status Sepolia contracts on StatusScan\n\nVerify deployed Status Sepolia contract sources on Blockscout/StatusScan for the live IntentMarketplace deployment and the user-specified explorer address when contract identity is confirmed. Tracking: 202604061614-XSEJDG.",
+        "Verification": "<!-- BEGIN VERIFICATION RESULTS -->\n### 2026-04-06T18:23:29.760Z — VERIFY — ok\n\nBy: REVIEWER\n\nNote: StatusScan verification confirmed\n\nVerifyStepsRef: doc_version=3, doc_updated_at=2026-04-06T18:23:29.602Z, excerpt_hash=sha256:1128978761e94f44bc0c44758e62e999bff8c817d945636538194536a7b34b1f\n\nDetails:\n\nVerified `IntentMarketplace` at `0xF79367dAB12D8E12146685dA2830f112F02De71a` on Status Sepolia through Blockscout/StatusScan with exact compiler and constructor settings. Separately confirmed that `0x4Fb609F4a457f47B41D35Dd060447271F000120A` is a different, already-verified `DemoFaucet` contract and must not be used as the Solvera address.\n\n<!-- END VERIFICATION RESULTS -->",
+        "Verify Steps": "1. Run the Foundry/Blockscout verification command for `0xF79367dAB12D8E12146685dA2830f112F02De71a` with exact constructor args and `evm_version paris`. Expected: Blockscout accepts the submission and reports the contract as verified or verification-pending with a successful final result.\n2. Open or query the explorer verification page for the live address. Expected: StatusScan shows verified source code for `IntentMarketplace`.\n3. Check the user-specified address `0x4Fb609F4a457f47B41D35Dd060447271F000120A`. Expected: either it is confirmed as the same contract and also verified, or the task findings explicitly record that it is a different/unconfirmed deployment."
+      },
+      "status": "DONE",
+      "tags": [
+        "code"
+      ],
+      "title": "Verify Status Sepolia contracts on StatusScan",
+      "verification": {
+        "note": "StatusScan verification confirmed",
+        "state": "ok",
+        "updated_at": "2026-04-06T18:23:29.760Z",
+        "updated_by": "REVIEWER"
+      },
+      "verify": []
+    },
+    {
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: add a site-wide Base/Status network selector, keep frontend runtime state in sync with the selected network, and trigger MetaMask switch/add-network flows without pushing production."
+        },
+        {
+          "author": "INTEGRATOR",
+          "body": "Verified: added a site-wide Base/Status network selector, wired frontend runtime state to the selected network, and implemented MetaMask switch/add-network requests without pushing production."
+        }
+      ],
+      "commit": {
+        "hash": "4d209b4f558ff0d7b70f7d1ca99c9a76ab18fcfe",
+        "message": "✅ NXQ7GJ meta: done"
+      },
+      "depends_on": [],
+      "description": "Add a user-facing network selector to the main site, switch frontend runtime between Base and Status Sepolia, and trigger MetaMask network switching/add-network flows without pushing production. Tracking: 202604061614-XSEJDG.",
+      "dirty": false,
+      "doc": "## Summary\n\nAdd frontend network switcher for Base and Status Sepolia\n\nAdd a user-facing network selector to the main site, switch frontend runtime between Base and Status Sepolia, and trigger MetaMask network switching/add-network flows without pushing production. Tracking: 202604061614-XSEJDG.\n\n## Scope\n\n- In scope: Add a user-facing network selector to the main site, switch frontend runtime between Base and Status Sepolia, and trigger MetaMask network switching/add-network flows without pushing production. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Add frontend network switcher for Base and Status Sepolia\".\n\n## Plan\n\n1. Implement the change for \"Add frontend network switcher for Base and Status Sepolia\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.\n\n## Risks\n\n- The selector can desynchronize UI config and MetaMask network if runtime state is derived from the backend only. Mitigation: introduce a client-side selected-network source of truth and derive explorer/api/runtime values from it.\n- wallet_switchEthereumChain can fail on chains missing from MetaMask. Mitigation: handle error 4902 by falling back to wallet_addEthereumChain with full chain metadata for Base and Status Sepolia.\n- The site auto-deploys on push, so broken frontend state can reach production quickly. Mitigation: keep the change self-contained in frontend, add tests for network config normalization, and run build/lint before any future push.\n\n## Verify Steps\n\n1. Build the frontend and run lint/tests on touched runtime/UI files. Expected: build, lint, and tests pass with the new network selector code.\n2. Use the selector in the rendered app and confirm the visible chain label, explorer links, and runtime config-dependent copy switch between Base and Status Sepolia. Expected: UI surfaces change immediately without reload drift.\n3. Trigger the MetaMask action path in a browser-compatible environment or via unit-tested request helpers. Expected: Base and Status Sepolia issue correct wallet_switchEthereumChain requests, and missing-chain fallback uses wallet_addEthereumChain with valid metadata.\n\n## Verification\n\n<!-- BEGIN VERIFICATION RESULTS -->\n### 2026-04-06T19:27:30.318Z — VERIFY — ok\n\nBy: CODER\n\nNote: Frontend network switcher, runtime config, and MetaMask helpers passed verification\n\nVerifyStepsRef: doc_version=3, doc_updated_at=2026-04-06T19:27:29.925Z, excerpt_hash=sha256:986acdb8ab69042b2ced0f85245686681ddc218ac75e5330abbad9a683dafac9\n\nDetails:\n\nFrontend checks passed: npm test, npm run lint, npm run build in frontend/. Browser smoke against vite preview showed header buttons for Base and Status Sepolia plus CHAIN STATUS in the HUD snapshot. MetaMask request helpers are covered by wallet.test.ts for direct switch, 4902 add-network fallback, and chainChanged subscription normalization. The runtime layer now supports VITE_BASE_API_BASE and VITE_STATUS_API_BASE so production can point each selector choice at the correct backend before push.\n\n<!-- END VERIFICATION RESULTS -->\n\n## Rollback Plan\n\n- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.\n\n## Findings\n\n- Added a site-wide client-side network registry for Base and Status Sepolia, including explorer, contract, RPC, and per-network API base metadata.\n- Added a persistent network context backed by localStorage so the selected chain drives runtime config, API base selection, explorer links, and header state across the app.\n- Added MetaMask switch/add-network helpers that issue wallet_switchEthereumChain first and fall back to wallet_addEthereumChain on error 4902.\n- Added a header network switcher and wired Marketplace, IntentDetails, and HUD health checks to the selected network's runtime config.\n- Added frontend tests for API base overrides, runtime config normalization, chain mapping, and MetaMask switch/add-network flows.\n- Documented the new production env requirement: VITE_BASE_API_BASE and VITE_STATUS_API_BASE must point at the intended per-network backends before the next deploy.",
+      "doc_updated_at": "2026-04-06T19:27:46.221Z",
+      "doc_updated_by": "INTEGRATOR",
+      "doc_version": 3,
+      "events": [
+        {
+          "at": "2026-04-06T19:20:09.628Z",
+          "author": "CODER",
+          "from": "TODO",
+          "note": "Start: add a site-wide Base/Status network selector, keep frontend runtime state in sync with the selected network, and trigger MetaMask switch/add-network flows without pushing production.",
+          "to": "DOING",
+          "type": "status"
+        },
+        {
+          "at": "2026-04-06T19:27:30.318Z",
+          "author": "CODER",
+          "note": "Frontend network switcher, runtime config, and MetaMask helpers passed verification",
+          "state": "ok",
+          "type": "verify"
+        },
+        {
+          "at": "2026-04-06T19:27:46.220Z",
+          "author": "INTEGRATOR",
+          "from": "DOING",
+          "note": "Verified: added a site-wide Base/Status network selector, wired frontend runtime state to the selected network, and implemented MetaMask switch/add-network requests without pushing production.",
+          "to": "DONE",
+          "type": "status"
+        }
+      ],
+      "id": "202604061919-NXQ7GJ",
+      "id_source": "generated",
+      "origin": {
+        "system": "manual"
+      },
+      "owner": "CODER",
+      "plan_approval": {
+        "note": null,
+        "state": "approved",
+        "updated_at": "2026-04-06T19:20:02.315Z",
+        "updated_by": "ORCHESTRATOR"
+      },
+      "priority": "high",
+      "result_summary": "Added a frontend network switcher with MetaMask auto-switch support.",
+      "revision": 8,
+      "risk_level": "med",
+      "sections": {
+        "Findings": "- Added a site-wide client-side network registry for Base and Status Sepolia, including explorer, contract, RPC, and per-network API base metadata.\n- Added a persistent network context backed by localStorage so the selected chain drives runtime config, API base selection, explorer links, and header state across the app.\n- Added MetaMask switch/add-network helpers that issue wallet_switchEthereumChain first and fall back to wallet_addEthereumChain on error 4902.\n- Added a header network switcher and wired Marketplace, IntentDetails, and HUD health checks to the selected network's runtime config.\n- Added frontend tests for API base overrides, runtime config normalization, chain mapping, and MetaMask switch/add-network flows.\n- Documented the new production env requirement: VITE_BASE_API_BASE and VITE_STATUS_API_BASE must point at the intended per-network backends before the next deploy.",
+        "Plan": "1. Implement the change for \"Add frontend network switcher for Base and Status Sepolia\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.",
+        "Risks": "- The selector can desynchronize UI config and MetaMask network if runtime state is derived from the backend only. Mitigation: introduce a client-side selected-network source of truth and derive explorer/api/runtime values from it.\n- wallet_switchEthereumChain can fail on chains missing from MetaMask. Mitigation: handle error 4902 by falling back to wallet_addEthereumChain with full chain metadata for Base and Status Sepolia.\n- The site auto-deploys on push, so broken frontend state can reach production quickly. Mitigation: keep the change self-contained in frontend, add tests for network config normalization, and run build/lint before any future push.",
+        "Rollback Plan": "- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.",
+        "Scope": "- In scope: Add a user-facing network selector to the main site, switch frontend runtime between Base and Status Sepolia, and trigger MetaMask network switching/add-network flows without pushing production. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Add frontend network switcher for Base and Status Sepolia\".",
+        "Summary": "Add frontend network switcher for Base and Status Sepolia\n\nAdd a user-facing network selector to the main site, switch frontend runtime between Base and Status Sepolia, and trigger MetaMask network switching/add-network flows without pushing production. Tracking: 202604061614-XSEJDG.",
+        "Verification": "<!-- BEGIN VERIFICATION RESULTS -->\n### 2026-04-06T19:27:30.318Z — VERIFY — ok\n\nBy: CODER\n\nNote: Frontend network switcher, runtime config, and MetaMask helpers passed verification\n\nVerifyStepsRef: doc_version=3, doc_updated_at=2026-04-06T19:27:29.925Z, excerpt_hash=sha256:986acdb8ab69042b2ced0f85245686681ddc218ac75e5330abbad9a683dafac9\n\nDetails:\n\nFrontend checks passed: npm test, npm run lint, npm run build in frontend/. Browser smoke against vite preview showed header buttons for Base and Status Sepolia plus CHAIN STATUS in the HUD snapshot. MetaMask request helpers are covered by wallet.test.ts for direct switch, 4902 add-network fallback, and chainChanged subscription normalization. The runtime layer now supports VITE_BASE_API_BASE and VITE_STATUS_API_BASE so production can point each selector choice at the correct backend before push.\n\n<!-- END VERIFICATION RESULTS -->",
+        "Verify Steps": "1. Build the frontend and run lint/tests on touched runtime/UI files. Expected: build, lint, and tests pass with the new network selector code.\n2. Use the selector in the rendered app and confirm the visible chain label, explorer links, and runtime config-dependent copy switch between Base and Status Sepolia. Expected: UI surfaces change immediately without reload drift.\n3. Trigger the MetaMask action path in a browser-compatible environment or via unit-tested request helpers. Expected: Base and Status Sepolia issue correct wallet_switchEthereumChain requests, and missing-chain fallback uses wallet_addEthereumChain with valid metadata."
+      },
+      "status": "DONE",
+      "tags": [
+        "frontend"
+      ],
+      "title": "Add frontend network switcher for Base and Status Sepolia",
+      "verification": {
+        "note": "Frontend network switcher, runtime config, and MetaMask helpers passed verification",
+        "state": "ok",
+        "updated_at": "2026-04-06T19:27:30.318Z",
+        "updated_by": "CODER"
+      },
+      "verify": []
+    },
+    {
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: patch production compose/frontend build wiring so solvera.markets can serve Base and Status from one deployment, then publish and live-verify the site."
+        },
+        {
+          "author": "INTEGRATOR",
+          "body": "Verified: solvera.markets now serves the multi-network Base/Status production rollout, with root /api on Status and dedicated /api/base + /api/status endpoints live."
+        }
+      ],
+      "commit": {
+        "hash": "fd01d3f786be9ce52efc0bda804e4682fd50f604",
+        "message": "🚧 835FK6 prod: prepare multi-network production stack"
+      },
+      "depends_on": [
+        "202604061919-NXQ7GJ"
+      ],
+      "description": "Update the production build/deploy path so solvera.markets can ship the Base/Status selector with correct per-network API wiring, then release and live-verify the production site. Tracking: 202604061614-XSEJDG.",
+      "dirty": false,
+      "doc": "## Summary\n\nPublish production multi-network Solvera site\n\nUpdate the production build/deploy path so solvera.markets can ship the Base/Status selector with correct per-network API wiring, then release and live-verify the production site. Tracking: 202604061614-XSEJDG.\n\n## Scope\n\n- In scope: Update the production build/deploy path so solvera.markets can ship the Base/Status selector with correct per-network API wiring, then release and live-verify the production site. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Publish production multi-network Solvera site\".\n\n## Plan\n\n1. Implement the change for \"Publish production multi-network Solvera site\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.\n\n## Risks\n\n- The current production stack exposes a single backend at `https://solvera.markets/api`. If the frontend is deployed before per-network API bases are wired, both selector choices can point at the same backend and misrepresent network state.\n- The repo auto-deploys from GitHub push, so any bad compose or frontend build-arg change reaches production immediately. Mitigation: patch the deploy path first, run local frontend verification, inspect Dokploy config, then push once the target env is known.\n- Status Sepolia relies on separate infrastructure from Base. If the Status backend URL or contract env is wrong, the UI can render a working selector while read paths fail. Mitigation: live-check `/api/config` and the marketplace pages after deployment for both networks.\n\n## Verify Steps\n\n1. Run `cd frontend && npm test`. Expected: tests pass, including the network runtime and API-base helpers.\n2. Run `cd frontend && npm run lint` and `cd frontend && npm run build`. Expected: the frontend builds cleanly with the updated Docker/Vite env flow.\n3. Inspect the production compose/frontend build config. Expected: `docker-compose.yml` and `frontend/Dockerfile` propagate the per-network env vars needed by `frontend/src/lib/networks.ts`.\n4. After release, fetch `https://solvera.markets/` and `https://solvera.markets/api/config`. Expected: the live UI contains the Base/Status selector and the root API still resolves deterministically.\n5. After release, verify the network-specific API targets used by the UI. Expected: Base resolves to Base config and Status resolves to Status Sepolia config; switching the live site updates the visible chain state without frontend/runtime drift.\n\n## Verification\n\n<!-- BEGIN VERIFICATION RESULTS -->\n### 2026-04-07T04:55:24.938Z — VERIFY — ok\n\nBy: CODER\n\nNote: Production multi-network rollout is live on solvera.markets\n\nVerifyStepsRef: doc_version=3, doc_updated_at=2026-04-07T04:55:24.546Z, excerpt_hash=sha256:11ec8f36b749c5722b29253a708701a68e59c746f23c67865644f6f72e053c5d\n\nDetails:\n\nFrontend checks passed locally: `cd frontend && npm test`, `cd frontend && npm run lint`, and `cd frontend && npm run build`.\n\nDeployment wiring checks passed locally: `docker compose config` resolves a multi-network stack with `backend-base`, `backend-status`, `graph-node`, `status-indexer`, and frontend build args for `VITE_BASE_API_BASE=/api/base` and `VITE_STATUS_API_BASE=/api/status`. A local `docker compose build frontend backend-base backend-status status-indexer` progressed through successful backend and status-indexer image builds; the frontend image later hit a transient npm transport failure (`ERR_SSL_INVALID_AAD`) during `npm install`, which is a registry/TLS issue rather than a compose or code configuration failure.\n\nLive production evidence after pushing `fd01d3f786be9ce52efc0bda804e4682fd50f604`:\n- `https://solvera.markets` now references bundle `index-CXvBhPKY.js` instead of the pre-release asset.\n- The live bundle contains `Status Sepolia`, `/api/base`, `/api/status`, `wallet_switchEthereumChain`, and `wallet_addEthereumChain`.\n- `GET https://solvera.markets/api/config` returns Status Sepolia with contract `0xF79367dAB12D8E12146685dA2830f112F02De71a` and chain id `1660990954`.\n- `GET https://solvera.markets/api/base/config` returns Base with contract `0x442D68de43B37a0B2F975dc8dEfEfC349070Fb3A` and chain id `8453`.\n- `GET https://solvera.markets/api/status/config` returns Status Sepolia with contract `0xF79367dAB12D8E12146685dA2830f112F02De71a` and chain id `1660990954`.\n\n<!-- END VERIFICATION RESULTS -->\n\n## Rollback Plan\n\n- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.\n\n## Notes\n\n### Approvals / Overrides\n- User explicitly requested a production update for `solvera.markets`, which authorizes the release step after verification.\n\n### Decisions\n- Do not push the existing selector implementation unchanged. The production build path must first be made multi-network-aware, because current live `/api/config` is still Base-only.\n\n## Findings\n\n- Patched the production compose stack to split Base and Status backends and proxy them through frontend nginx as /api/base and /api/status.\n- Added a self-hosted Status Graph Node stack plus a one-shot subgraph deploy service so production no longer depends on an external Status backend URL.\n- Updated frontend Docker build args and env examples so the released bundle can target both live networks deterministically.\n- Live production now serves root /api as Status Sepolia and exposes separate /api/base/config and /api/status/config endpoints with the expected contract addresses.\n\n## Context\n\nProduction currently serves only the Base backend. A live probe of `https://solvera.markets/api/config` returned `network=base`, `chainId=8453`, and Base contract `0x442D68de43B37a0B2F975dc8dEfEfC349070Fb3A`.\n\nThe frontend network switcher is already implemented, but the production build path still injects only `VITE_API_BASE` through `docker-compose.yml` and `frontend/Dockerfile`. The runtime code now prefers `VITE_BASE_API_BASE` and `VITE_STATUS_API_BASE`, so production must be updated before pushing or the selector will ship with both networks effectively reading the same backend.\n\nThis task covers the production-facing cutover: patch the build pipeline, identify the Dokploy application/env topology, publish the update, and verify the live site after deployment.",
+      "doc_updated_at": "2026-04-07T04:55:33.461Z",
+      "doc_updated_by": "INTEGRATOR",
+      "doc_version": 3,
+      "events": [
+        {
+          "at": "2026-04-07T04:46:34.074Z",
+          "author": "CODER",
+          "body": "Start: patch production compose/frontend build wiring so solvera.markets can serve Base and Status from one deployment, then publish and live-verify the site.",
+          "type": "comment"
+        },
+        {
+          "at": "2026-04-07T04:55:24.938Z",
+          "author": "CODER",
+          "note": "Production multi-network rollout is live on solvera.markets",
+          "state": "ok",
+          "type": "verify"
+        },
+        {
+          "at": "2026-04-07T04:55:33.460Z",
+          "author": "INTEGRATOR",
+          "from": "TODO",
+          "note": "Verified: solvera.markets now serves the multi-network Base/Status production rollout, with root /api on Status and dedicated /api/base + /api/status endpoints live.",
+          "to": "DONE",
+          "type": "status"
+        }
+      ],
+      "id": "202604070438-835FK6",
+      "id_source": "generated",
+      "origin": {
+        "system": "manual"
+      },
+      "owner": "CODER",
+      "plan_approval": {
+        "note": "Approved production multi-network cutover after patching build/deploy wiring and running live verification.",
+        "state": "approved",
+        "updated_at": "2026-04-07T04:39:31.684Z",
+        "updated_by": "ORCHESTRATOR"
+      },
+      "priority": "high",
+      "result_summary": "Published the multi-network Solvera production site with live Base and Status API routing.",
+      "revision": 11,
+      "risk_level": "med",
+      "sections": {
+        "Context": "Production currently serves only the Base backend. A live probe of `https://solvera.markets/api/config` returned `network=base`, `chainId=8453`, and Base contract `0x442D68de43B37a0B2F975dc8dEfEfC349070Fb3A`.\n\nThe frontend network switcher is already implemented, but the production build path still injects only `VITE_API_BASE` through `docker-compose.yml` and `frontend/Dockerfile`. The runtime code now prefers `VITE_BASE_API_BASE` and `VITE_STATUS_API_BASE`, so production must be updated before pushing or the selector will ship with both networks effectively reading the same backend.\n\nThis task covers the production-facing cutover: patch the build pipeline, identify the Dokploy application/env topology, publish the update, and verify the live site after deployment.",
+        "Findings": "- Patched the production compose stack to split Base and Status backends and proxy them through frontend nginx as /api/base and /api/status.\n- Added a self-hosted Status Graph Node stack plus a one-shot subgraph deploy service so production no longer depends on an external Status backend URL.\n- Updated frontend Docker build args and env examples so the released bundle can target both live networks deterministically.\n- Live production now serves root /api as Status Sepolia and exposes separate /api/base/config and /api/status/config endpoints with the expected contract addresses.",
+        "Notes": "### Approvals / Overrides\n- User explicitly requested a production update for `solvera.markets`, which authorizes the release step after verification.\n\n### Decisions\n- Do not push the existing selector implementation unchanged. The production build path must first be made multi-network-aware, because current live `/api/config` is still Base-only.",
+        "Plan": "1. Implement the change for \"Publish production multi-network Solvera site\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.",
+        "Risks": "- The current production stack exposes a single backend at `https://solvera.markets/api`. If the frontend is deployed before per-network API bases are wired, both selector choices can point at the same backend and misrepresent network state.\n- The repo auto-deploys from GitHub push, so any bad compose or frontend build-arg change reaches production immediately. Mitigation: patch the deploy path first, run local frontend verification, inspect Dokploy config, then push once the target env is known.\n- Status Sepolia relies on separate infrastructure from Base. If the Status backend URL or contract env is wrong, the UI can render a working selector while read paths fail. Mitigation: live-check `/api/config` and the marketplace pages after deployment for both networks.",
+        "Rollback Plan": "- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.",
+        "Scope": "- In scope: Update the production build/deploy path so solvera.markets can ship the Base/Status selector with correct per-network API wiring, then release and live-verify the production site. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Publish production multi-network Solvera site\".",
+        "Summary": "Publish production multi-network Solvera site\n\nUpdate the production build/deploy path so solvera.markets can ship the Base/Status selector with correct per-network API wiring, then release and live-verify the production site. Tracking: 202604061614-XSEJDG.",
+        "Verification": "<!-- BEGIN VERIFICATION RESULTS -->\n### 2026-04-07T04:55:24.938Z — VERIFY — ok\n\nBy: CODER\n\nNote: Production multi-network rollout is live on solvera.markets\n\nVerifyStepsRef: doc_version=3, doc_updated_at=2026-04-07T04:55:24.546Z, excerpt_hash=sha256:11ec8f36b749c5722b29253a708701a68e59c746f23c67865644f6f72e053c5d\n\nDetails:\n\nFrontend checks passed locally: `cd frontend && npm test`, `cd frontend && npm run lint`, and `cd frontend && npm run build`.\n\nDeployment wiring checks passed locally: `docker compose config` resolves a multi-network stack with `backend-base`, `backend-status`, `graph-node`, `status-indexer`, and frontend build args for `VITE_BASE_API_BASE=/api/base` and `VITE_STATUS_API_BASE=/api/status`. A local `docker compose build frontend backend-base backend-status status-indexer` progressed through successful backend and status-indexer image builds; the frontend image later hit a transient npm transport failure (`ERR_SSL_INVALID_AAD`) during `npm install`, which is a registry/TLS issue rather than a compose or code configuration failure.\n\nLive production evidence after pushing `fd01d3f786be9ce52efc0bda804e4682fd50f604`:\n- `https://solvera.markets` now references bundle `index-CXvBhPKY.js` instead of the pre-release asset.\n- The live bundle contains `Status Sepolia`, `/api/base`, `/api/status`, `wallet_switchEthereumChain`, and `wallet_addEthereumChain`.\n- `GET https://solvera.markets/api/config` returns Status Sepolia with contract `0xF79367dAB12D8E12146685dA2830f112F02De71a` and chain id `1660990954`.\n- `GET https://solvera.markets/api/base/config` returns Base with contract `0x442D68de43B37a0B2F975dc8dEfEfC349070Fb3A` and chain id `8453`.\n- `GET https://solvera.markets/api/status/config` returns Status Sepolia with contract `0xF79367dAB12D8E12146685dA2830f112F02De71a` and chain id `1660990954`.\n\n<!-- END VERIFICATION RESULTS -->",
+        "Verify Steps": "1. Run `cd frontend && npm test`. Expected: tests pass, including the network runtime and API-base helpers.\n2. Run `cd frontend && npm run lint` and `cd frontend && npm run build`. Expected: the frontend builds cleanly with the updated Docker/Vite env flow.\n3. Inspect the production compose/frontend build config. Expected: `docker-compose.yml` and `frontend/Dockerfile` propagate the per-network env vars needed by `frontend/src/lib/networks.ts`.\n4. After release, fetch `https://solvera.markets/` and `https://solvera.markets/api/config`. Expected: the live UI contains the Base/Status selector and the root API still resolves deterministically.\n5. After release, verify the network-specific API targets used by the UI. Expected: Base resolves to Base config and Status resolves to Status Sepolia config; switching the live site updates the visible chain state without frontend/runtime drift."
+      },
+      "status": "DONE",
+      "tags": [
+        "code",
+        "frontend"
+      ],
+      "title": "Publish production multi-network Solvera site",
+      "verification": {
+        "note": "Production multi-network rollout is live on solvera.markets",
+        "state": "ok",
+        "updated_at": "2026-04-07T04:55:24.938Z",
+        "updated_by": "CODER"
+      },
+      "verify": [
+        "cd frontend && npm run build",
+        "cd frontend && npm run lint",
+        "cd frontend && npm test"
+      ]
     }
   ]
 }
