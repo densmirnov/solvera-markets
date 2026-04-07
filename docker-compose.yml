@@ -65,9 +65,9 @@ services:
       [
         "/bin/sh",
         "-c",
-        "until wget -q -O - http://graph-node:8030/ >/dev/null 2>&1; do sleep 2; done && until wget -q -O - http://ipfs:5001/api/v0/version >/dev/null 2>&1; do sleep 2; done && npx graph deploy --node http://graph-node:8020 --ipfs http://ipfs:5001 intent/marketplace subgraph.status.yaml --version-label status-sepolia",
+        "until wget -q -O - http://graph-node:8030/ >/dev/null 2>&1; do sleep 2; done && until wget -q -O - http://ipfs:5001/api/v0/version >/dev/null 2>&1; do sleep 2; done && until npx graph deploy --node http://graph-node:8020 --ipfs http://ipfs:5001 intent/marketplace subgraph.status.yaml --version-label status-sepolia; do echo 'graph deploy failed; retrying in 5s'; sleep 5; done && tail -f /dev/null",
       ]
-    restart: on-failure
+    restart: unless-stopped
 
   backend-status:
     build:
