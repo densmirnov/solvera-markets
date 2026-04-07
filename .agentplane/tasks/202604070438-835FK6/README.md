@@ -1,10 +1,12 @@
 ---
 id: "202604070438-835FK6"
 title: "Publish production multi-network Solvera site"
-status: "TODO"
+result_summary: "Published the multi-network Solvera production site with live Base and Status API routing."
+risk_level: "med"
+status: "DONE"
 priority: "high"
 owner: "CODER"
-revision: 8
+revision: 11
 origin:
   system: "manual"
 depends_on:
@@ -22,24 +24,42 @@ plan_approval:
   updated_by: "ORCHESTRATOR"
   note: "Approved production multi-network cutover after patching build/deploy wiring and running live verification."
 verification:
-  state: "pending"
-  updated_at: null
-  updated_by: null
-  note: null
-commit: null
+  state: "ok"
+  updated_at: "2026-04-07T04:55:24.938Z"
+  updated_by: "CODER"
+  note: "Production multi-network rollout is live on solvera.markets"
+commit:
+  hash: "fd01d3f786be9ce52efc0bda804e4682fd50f604"
+  message: "🚧 835FK6 prod: prepare multi-network production stack"
 comments:
   -
     author: "CODER"
     body: "Start: patch production compose/frontend build wiring so solvera.markets can serve Base and Status from one deployment, then publish and live-verify the site."
+  -
+    author: "INTEGRATOR"
+    body: "Verified: solvera.markets now serves the multi-network Base/Status production rollout, with root /api on Status and dedicated /api/base + /api/status endpoints live."
 events:
   -
     type: "comment"
     at: "2026-04-07T04:46:34.074Z"
     author: "CODER"
     body: "Start: patch production compose/frontend build wiring so solvera.markets can serve Base and Status from one deployment, then publish and live-verify the site."
+  -
+    type: "verify"
+    at: "2026-04-07T04:55:24.938Z"
+    author: "CODER"
+    state: "ok"
+    note: "Production multi-network rollout is live on solvera.markets"
+  -
+    type: "status"
+    at: "2026-04-07T04:55:33.460Z"
+    author: "INTEGRATOR"
+    from: "TODO"
+    to: "DONE"
+    note: "Verified: solvera.markets now serves the multi-network Base/Status production rollout, with root /api on Status and dedicated /api/base + /api/status endpoints live."
 doc_version: 3
-doc_updated_at: "2026-04-07T04:47:38.633Z"
-doc_updated_by: "CODER"
+doc_updated_at: "2026-04-07T04:55:33.461Z"
+doc_updated_by: "INTEGRATOR"
 description: "Update the production build/deploy path so solvera.markets can ship the Base/Status selector with correct per-network API wiring, then release and live-verify the production site. Tracking: 202604061614-XSEJDG."
 sections:
   Summary: |-
@@ -65,6 +85,27 @@ sections:
     5. After release, verify the network-specific API targets used by the UI. Expected: Base resolves to Base config and Status resolves to Status Sepolia config; switching the live site updates the visible chain state without frontend/runtime drift.
   Verification: |-
     <!-- BEGIN VERIFICATION RESULTS -->
+    ### 2026-04-07T04:55:24.938Z — VERIFY — ok
+    
+    By: CODER
+    
+    Note: Production multi-network rollout is live on solvera.markets
+    
+    VerifyStepsRef: doc_version=3, doc_updated_at=2026-04-07T04:55:24.546Z, excerpt_hash=sha256:11ec8f36b749c5722b29253a708701a68e59c746f23c67865644f6f72e053c5d
+    
+    Details:
+    
+    Frontend checks passed locally: `cd frontend && npm test`, `cd frontend && npm run lint`, and `cd frontend && npm run build`.
+    
+    Deployment wiring checks passed locally: `docker compose config` resolves a multi-network stack with `backend-base`, `backend-status`, `graph-node`, `status-indexer`, and frontend build args for `VITE_BASE_API_BASE=/api/base` and `VITE_STATUS_API_BASE=/api/status`. A local `docker compose build frontend backend-base backend-status status-indexer` progressed through successful backend and status-indexer image builds; the frontend image later hit a transient npm transport failure (`ERR_SSL_INVALID_AAD`) during `npm install`, which is a registry/TLS issue rather than a compose or code configuration failure.
+    
+    Live production evidence after pushing `fd01d3f786be9ce52efc0bda804e4682fd50f604`:
+    - `https://solvera.markets` now references bundle `index-CXvBhPKY.js` instead of the pre-release asset.
+    - The live bundle contains `Status Sepolia`, `/api/base`, `/api/status`, `wallet_switchEthereumChain`, and `wallet_addEthereumChain`.
+    - `GET https://solvera.markets/api/config` returns Status Sepolia with contract `0xF79367dAB12D8E12146685dA2830f112F02De71a` and chain id `1660990954`.
+    - `GET https://solvera.markets/api/base/config` returns Base with contract `0x442D68de43B37a0B2F975dc8dEfEfC349070Fb3A` and chain id `8453`.
+    - `GET https://solvera.markets/api/status/config` returns Status Sepolia with contract `0xF79367dAB12D8E12146685dA2830f112F02De71a` and chain id `1660990954`.
+    
     <!-- END VERIFICATION RESULTS -->
   Rollback Plan: |-
     - Revert task-related commit(s).
@@ -79,6 +120,7 @@ sections:
     - Patched the production compose stack to split Base and Status backends and proxy them through frontend nginx as /api/base and /api/status.
     - Added a self-hosted Status Graph Node stack plus a one-shot subgraph deploy service so production no longer depends on an external Status backend URL.
     - Updated frontend Docker build args and env examples so the released bundle can target both live networks deterministically.
+    - Live production now serves root /api as Status Sepolia and exposes separate /api/base/config and /api/status/config endpoints with the expected contract addresses.
   Context: |-
     Production currently serves only the Base backend. A live probe of `https://solvera.markets/api/config` returned `network=base`, `chainId=8453`, and Base contract `0x442D68de43B37a0B2F975dc8dEfEfC349070Fb3A`.
     
@@ -121,6 +163,27 @@ Update the production build/deploy path so solvera.markets can ship the Base/Sta
 ## Verification
 
 <!-- BEGIN VERIFICATION RESULTS -->
+### 2026-04-07T04:55:24.938Z — VERIFY — ok
+
+By: CODER
+
+Note: Production multi-network rollout is live on solvera.markets
+
+VerifyStepsRef: doc_version=3, doc_updated_at=2026-04-07T04:55:24.546Z, excerpt_hash=sha256:11ec8f36b749c5722b29253a708701a68e59c746f23c67865644f6f72e053c5d
+
+Details:
+
+Frontend checks passed locally: `cd frontend && npm test`, `cd frontend && npm run lint`, and `cd frontend && npm run build`.
+
+Deployment wiring checks passed locally: `docker compose config` resolves a multi-network stack with `backend-base`, `backend-status`, `graph-node`, `status-indexer`, and frontend build args for `VITE_BASE_API_BASE=/api/base` and `VITE_STATUS_API_BASE=/api/status`. A local `docker compose build frontend backend-base backend-status status-indexer` progressed through successful backend and status-indexer image builds; the frontend image later hit a transient npm transport failure (`ERR_SSL_INVALID_AAD`) during `npm install`, which is a registry/TLS issue rather than a compose or code configuration failure.
+
+Live production evidence after pushing `fd01d3f786be9ce52efc0bda804e4682fd50f604`:
+- `https://solvera.markets` now references bundle `index-CXvBhPKY.js` instead of the pre-release asset.
+- The live bundle contains `Status Sepolia`, `/api/base`, `/api/status`, `wallet_switchEthereumChain`, and `wallet_addEthereumChain`.
+- `GET https://solvera.markets/api/config` returns Status Sepolia with contract `0xF79367dAB12D8E12146685dA2830f112F02De71a` and chain id `1660990954`.
+- `GET https://solvera.markets/api/base/config` returns Base with contract `0x442D68de43B37a0B2F975dc8dEfEfC349070Fb3A` and chain id `8453`.
+- `GET https://solvera.markets/api/status/config` returns Status Sepolia with contract `0xF79367dAB12D8E12146685dA2830f112F02De71a` and chain id `1660990954`.
+
 <!-- END VERIFICATION RESULTS -->
 
 ## Rollback Plan
@@ -141,6 +204,7 @@ Update the production build/deploy path so solvera.markets can ship the Base/Sta
 - Patched the production compose stack to split Base and Status backends and proxy them through frontend nginx as /api/base and /api/status.
 - Added a self-hosted Status Graph Node stack plus a one-shot subgraph deploy service so production no longer depends on an external Status backend URL.
 - Updated frontend Docker build args and env examples so the released bundle can target both live networks deterministically.
+- Live production now serves root /api as Status Sepolia and exposes separate /api/base/config and /api/status/config endpoints with the expected contract addresses.
 
 ## Context
 
