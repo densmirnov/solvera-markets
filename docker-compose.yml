@@ -4,14 +4,16 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     environment:
-      - SUBGRAPH_URL=${BASE_SUBGRAPH_URL:-https://api.studio.thegraph.com/query/17884/solvera/version/latest}
+      - SUBGRAPH_URL=${STATUS_SUBGRAPH_URL:-http://graph-node:8000/subgraphs/name/intent/marketplace}
       - SUBGRAPH_CACHE_TTL_MS=${SUBGRAPH_CACHE_TTL_MS:-5000}
       - RATE_LIMIT_WINDOW_MS=${RATE_LIMIT_WINDOW_MS:-60000}
       - RATE_LIMIT_MAX=${RATE_LIMIT_MAX:-120}
       - CORS_ORIGIN=${CORS_ORIGIN:-*}
-      - CONTRACT_ADDRESS=${BASE_CONTRACT_ADDRESS:-0x442D68de43B37a0B2F975dc8dEfEfC349070Fb3A}
-      - NETWORK_NAME=${BASE_NETWORK_NAME:-base}
-      - CHAIN_ID=${BASE_CHAIN_ID:-8453}
+      - CONTRACT_ADDRESS=${STATUS_CONTRACT_ADDRESS:-0xF79367dAB12D8E12146685dA2830f112F02De71a}
+      - CONTRACT_START_BLOCK=${STATUS_CONTRACT_START_BLOCK:-18800150}
+      - NETWORK_NAME=${STATUS_NETWORK_NAME:-status-sepolia}
+      - CHAIN_ID=${STATUS_CHAIN_ID:-1660990954}
+      - RPC_URL=${STATUS_RPC_URL:-https://public.sepolia.rpc.status.network}
       - FEE_BPS_ON_ACCEPT=${FEE_BPS_ON_ACCEPT:-50}
       - FIXED_FEE_ON_EXPIRE=${FIXED_FEE_ON_EXPIRE:-1000000}
       - BOND_BPS_OF_REWARD=${BOND_BPS_OF_REWARD:-500}
@@ -77,16 +79,14 @@ services:
       - graph-node
       - status-indexer
     environment:
-      - SUBGRAPH_URL=${STATUS_SUBGRAPH_URL:-http://graph-node:8000/subgraphs/name/intent/marketplace}
+      - SUBGRAPH_URL=${BASE_SUBGRAPH_URL:-https://api.studio.thegraph.com/query/17884/solvera/version/latest}
       - SUBGRAPH_CACHE_TTL_MS=${SUBGRAPH_CACHE_TTL_MS:-5000}
       - RATE_LIMIT_WINDOW_MS=${RATE_LIMIT_WINDOW_MS:-60000}
       - RATE_LIMIT_MAX=${RATE_LIMIT_MAX:-120}
       - CORS_ORIGIN=${CORS_ORIGIN:-*}
-      - CONTRACT_ADDRESS=${STATUS_CONTRACT_ADDRESS:-0xF79367dAB12D8E12146685dA2830f112F02De71a}
-      - CONTRACT_START_BLOCK=${STATUS_CONTRACT_START_BLOCK:-18800150}
-      - NETWORK_NAME=${STATUS_NETWORK_NAME:-status-sepolia}
-      - CHAIN_ID=${STATUS_CHAIN_ID:-1660990954}
-      - RPC_URL=${STATUS_RPC_URL:-https://public.sepolia.rpc.status.network}
+      - CONTRACT_ADDRESS=${BASE_CONTRACT_ADDRESS:-0x442D68de43B37a0B2F975dc8dEfEfC349070Fb3A}
+      - NETWORK_NAME=${BASE_NETWORK_NAME:-base}
+      - CHAIN_ID=${BASE_CHAIN_ID:-8453}
       - FEE_BPS_ON_ACCEPT=${FEE_BPS_ON_ACCEPT:-50}
       - FIXED_FEE_ON_EXPIRE=${FIXED_FEE_ON_EXPIRE:-1000000}
       - BOND_BPS_OF_REWARD=${BOND_BPS_OF_REWARD:-500}
