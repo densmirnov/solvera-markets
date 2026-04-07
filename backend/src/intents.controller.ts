@@ -8,6 +8,7 @@ import {
   Post,
   Query,
 } from "@nestjs/common";
+import { MarketReadService } from "./market-read.service.js";
 import { SubgraphService } from "./subgraph.service.js";
 import { TxBuilderService } from "./tx-builder.service.js";
 
@@ -31,6 +32,7 @@ const DEFAULT_CHAIN_ID = 1660990954;
 export class IntentsController {
   constructor(
     private readonly subgraph: SubgraphService,
+    private readonly marketRead: MarketReadService,
     private readonly txBuilder: TxBuilderService,
   ) {}
 
@@ -87,13 +89,18 @@ export class IntentsController {
       }
     `;
 
-    const payload = await this.subgraph.query<{
-      intents: Record<string, unknown>[];
-    }>(gql, {
-      limit,
-      where,
-    });
-    const intents = payload.intents || [];
+    const intents = await this.readWithFallback(
+      async () => {
+        const payload = await this.subgraph.query<{
+          intents: Record<string, unknown>[];
+        }>(gql, {
+          limit,
+          where,
+        });
+        return payload.intents || [];
+      },
+      () => this.marketRead.listIntents(where, limit),
+    );
     const pageInfo: PageInfo = {
       cursor: intents.length ? String(intents[intents.length - 1].id) : null,
       hasNext: intents.length === limit,
@@ -131,12 +138,17 @@ export class IntentsController {
         }
       }
     `;
-    const payload = await this.subgraph.query<{
-      intent: Record<string, unknown> | null;
-    }>(gql, {
-      id,
-    });
-    const intent = payload.intent;
+    const intent = await this.readWithFallback(
+      async () => {
+        const payload = await this.subgraph.query<{
+          intent: Record<string, unknown> | null;
+        }>(gql, {
+          id,
+        });
+        return payload.intent;
+      },
+      () => this.marketRead.getIntent(id),
+    );
     const nextSteps = this.nextStepsForIntent(intent);
     return { data: intent, next_steps: nextSteps };
   }
@@ -158,13 +170,18 @@ export class IntentsController {
         }
       }
     `;
-    const payload = await this.subgraph.query<{
-      offers: Record<string, unknown>[];
-    }>(gql, {
-      intent: id,
-      limit,
-    });
-    const offers = payload.offers || [];
+    const offers = await this.readWithFallback(
+      async () => {
+        const payload = await this.subgraph.query<{
+          offers: Record<string, unknown>[];
+        }>(gql, {
+          intent: id,
+          limit,
+        });
+        return payload.offers || [];
+      },
+      () => this.marketRead.getOffers(id, limit),
+    );
     const pageInfo: PageInfo = {
       cursor: offers.length ? String(offers[offers.length - 1].id) : null,
       hasNext: offers.length === limit,
@@ -191,13 +208,19 @@ export class IntentsController {
         }
       }
     `;
-    const payload = await this.subgraph.query<{
-      reputation: Record<string, unknown> | null;
-    }>(gql, {
-      id: address.toLowerCase(),
-    });
+    const reputation = await this.readWithFallback(
+      async () => {
+        const payload = await this.subgraph.query<{
+          reputation: Record<string, unknown> | null;
+        }>(gql, {
+          id: address.toLowerCase(),
+        });
+        return payload.reputation;
+      },
+      () => this.marketRead.getReputation(address),
+    );
     return {
-      data: payload.reputation,
+      data: reputation,
       next_steps: [
         {
           role: "solver",
@@ -235,13 +258,18 @@ export class IntentsController {
         }
       }
     `;
-    const payload = await this.subgraph.query<{
-      eventLogs: Record<string, unknown>[];
-    }>(gql, {
-      limit,
-      where,
-    });
-    const events = payload.eventLogs || [];
+    const events = await this.readWithFallback(
+      async () => {
+        const payload = await this.subgraph.query<{
+          eventLogs: Record<string, unknown>[];
+        }>(gql, {
+          limit,
+          where,
+        });
+        return payload.eventLogs || [];
+      },
+      () => this.marketRead.getEvents(query, limit),
+    );
     const pageInfo: PageInfo = {
       cursor: events.length ? String(events[events.length - 1].id) : null,
       hasNext: events.length === limit,
@@ -437,6 +465,20 @@ export class IntentsController {
         },
         HttpStatus.BAD_REQUEST,
       );
+    }
+  }
+
+  private async readWithFallback<T>(
+    primary: () => Promise<T>,
+    fallback: () => Promise<T>,
+  ): Promise<T> {
+    try {
+      return await primary();
+    } catch (error) {
+      if (!this.marketRead.canServeFallback()) {
+        throw error;
+      }
+      return fallback();
     }
   }
 }

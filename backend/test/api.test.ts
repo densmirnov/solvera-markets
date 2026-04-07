@@ -5,15 +5,21 @@ import request from "supertest";
 import { Test } from "@nestjs/testing";
 import { INestApplication } from "@nestjs/common";
 import { IntentsController } from "../src/intents.controller.js";
+import { MarketReadService } from "../src/market-read.service.js";
 import { SubgraphService } from "../src/subgraph.service.js";
 import { TxBuilderService } from "../src/tx-builder.service.js";
 import { ApiErrorFilter } from "../src/api-error.filter.js";
 
 type SubgraphMock = Pick<SubgraphService, "query" | "normalizeLimit">;
+type MarketReadMock = Pick<
+  MarketReadService,
+  "canServeFallback" | "listIntents" | "getIntent" | "getOffers" | "getReputation" | "getEvents"
+>;
 
 describe("backend API", () => {
   let app: INestApplication;
   let subgraph: SubgraphMock;
+  let marketRead: MarketReadMock;
   let queryImpl: (gql: string) => Promise<Record<string, unknown>>;
 
   before(async () => {
@@ -78,6 +84,77 @@ describe("backend API", () => {
       normalizeLimit: () => 50,
       query: async (gql: string) => queryImpl(gql),
     };
+    marketRead = {
+      canServeFallback: () => true,
+      listIntents: async () => [
+        {
+          id: "0xfallback-intent",
+          state: "OPEN",
+          tokenOut: "0xtoken",
+          rewardToken: "0xreward",
+          minAmountOut: "100",
+          rewardAmount: "10",
+          initiator: "0xinit",
+          payer: "0xpayer",
+          verifier: "0xverifier",
+          winner: "0x0000000000000000000000000000000000000000",
+          winnerAmountOut: "0",
+          bondAmount: "0",
+          updatedAt: "1710000000",
+          createdAt: "1710000000",
+          txHash: "0xhash",
+        },
+      ],
+      getIntent: async () => ({
+        id: "0xfallback-intent",
+        state: "OPEN",
+        tokenOut: "0xtoken",
+        rewardToken: "0xreward",
+        minAmountOut: "100",
+        rewardAmount: "10",
+        initiator: "0xinit",
+        payer: "0xpayer",
+        verifier: "0xverifier",
+        winner: "0x0000000000000000000000000000000000000000",
+        winnerAmountOut: "0",
+        bondAmount: "0",
+        updatedAt: "1710000000",
+        createdAt: "1710000000",
+        txHash: "0xhash",
+      }),
+      getOffers: async () => [
+        {
+          id: "0xfallback-offer",
+          solver: "0xsolver",
+          amountOut: "110",
+          timestamp: "1710000000",
+          txHash: "0xofferhash",
+        },
+      ],
+      getReputation: async () => ({
+        id: "0xsolver",
+        value: "2",
+        updatedAt: "1710000000",
+        txHash: "0xrephash",
+      }),
+      getEvents: async () => [
+        {
+          id: "0xevent",
+          eventType: "IntentCreated",
+          intent: { id: "0xfallback-intent" },
+          solver: null,
+          amountOut: null,
+          feeAmount: null,
+          refundAmount: null,
+          bondAmount: null,
+          rewardAmount: "10",
+          reason: null,
+          blockNumber: "18800150",
+          blockTimestamp: "1710000000",
+          txHash: "0xhash",
+        },
+      ],
+    };
 
     const txBuilder = {
       buildCreateIntent: () => ({
@@ -101,7 +178,7 @@ describe("backend API", () => {
 
     Reflect.defineMetadata(
       "design:paramtypes",
-      [SubgraphService, TxBuilderService],
+      [SubgraphService, MarketReadService, TxBuilderService],
       IntentsController,
     );
 
@@ -109,6 +186,7 @@ describe("backend API", () => {
       controllers: [IntentsController],
       providers: [
         { provide: SubgraphService, useValue: subgraph },
+        { provide: MarketReadService, useValue: marketRead },
         { provide: TxBuilderService, useValue: txBuilder },
       ],
     }).compile();
@@ -235,12 +313,26 @@ describe("backend API", () => {
 
   test("handles subgraph errors with error payload", async () => {
     const original = queryImpl;
+    const originalFallback = marketRead.canServeFallback;
+    marketRead.canServeFallback = () => false;
     queryImpl = async () => {
       throw new Error("Subgraph failure");
     };
     const res = await request(app.getHttpServer()).get("/api/intents");
     assert.equal(res.status, 500);
     assert.equal(res.body.error.code, "INTERNAL_ERROR");
+    queryImpl = original;
+    marketRead.canServeFallback = originalFallback;
+  });
+
+  test("falls back to RPC read model when subgraph is unavailable", async () => {
+    const original = queryImpl;
+    queryImpl = async () => {
+      throw new Error("Subgraph error: deployment missing");
+    };
+    const res = await request(app.getHttpServer()).get("/api/intents");
+    assert.equal(res.status, 200, JSON.stringify(res.body));
+    assert.equal(res.body.data[0].id, "0xfallback-intent");
     queryImpl = original;
   });
 });
