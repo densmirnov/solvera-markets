@@ -2,7 +2,7 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-COPY package.json package-lock.json* tsconfig.json subgraph.yaml schema.graphql ./
+COPY package.json package-lock.json* tsconfig.json subgraph.yaml subgraph.status.yaml schema.graphql ./
 COPY abis ./abis
 COPY src ./src
 

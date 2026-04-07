@@ -1,17 +1,17 @@
 services:
-  backend:
+  backend-base:
     build:
       context: ./backend
       dockerfile: Dockerfile
     environment:
-      - SUBGRAPH_URL=${SUBGRAPH_URL:-https://api.studio.thegraph.com/query/17884/solvera/version/latest}
+      - SUBGRAPH_URL=${BASE_SUBGRAPH_URL:-https://api.studio.thegraph.com/query/17884/solvera/version/latest}
       - SUBGRAPH_CACHE_TTL_MS=${SUBGRAPH_CACHE_TTL_MS:-5000}
       - RATE_LIMIT_WINDOW_MS=${RATE_LIMIT_WINDOW_MS:-60000}
       - RATE_LIMIT_MAX=${RATE_LIMIT_MAX:-120}
       - CORS_ORIGIN=${CORS_ORIGIN:-*}
-      - CONTRACT_ADDRESS=${CONTRACT_ADDRESS:-0x0000000000000000000000000000000000000001}
-      - NETWORK_NAME=${NETWORK_NAME:-base}
-      - CHAIN_ID=${CHAIN_ID:-8453}
+      - CONTRACT_ADDRESS=${BASE_CONTRACT_ADDRESS:-0x442D68de43B37a0B2F975dc8dEfEfC349070Fb3A}
+      - NETWORK_NAME=${BASE_NETWORK_NAME:-base}
+      - CHAIN_ID=${BASE_CHAIN_ID:-8453}
       - FEE_BPS_ON_ACCEPT=${FEE_BPS_ON_ACCEPT:-50}
       - FIXED_FEE_ON_EXPIRE=${FIXED_FEE_ON_EXPIRE:-1000000}
       - BOND_BPS_OF_REWARD=${BOND_BPS_OF_REWARD:-500}
@@ -21,14 +21,78 @@ services:
       - "3000"
     restart: unless-stopped
 
-  indexer:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: graph-node
+      POSTGRES_USER: graph-node
+      POSTGRES_PASSWORD: let-me-in
+      POSTGRES_INITDB_ARGS: --locale=C --encoding=UTF8
+    volumes:
+      - graph-node-postgres:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  ipfs:
+    image: ipfs/kubo:v0.29.0
+    restart: unless-stopped
+
+  graph-node:
+    image: graphprotocol/graph-node:v0.41.0
+    depends_on:
+      - postgres
+      - ipfs
+    environment:
+      postgres_host: postgres
+      postgres_user: graph-node
+      postgres_pass: let-me-in
+      postgres_db: graph-node
+      ipfs: ipfs:5001
+      ethereum: status:${STATUS_RPC_URL:-https://public.sepolia.rpc.status.network}
+      GRAPH_LOG: info
+      RUST_LOG: info
+    restart: unless-stopped
+
+  status-indexer:
     build:
       context: ./indexer
       dockerfile: Dockerfile
+    depends_on:
+      - graph-node
+      - ipfs
     environment:
       - NODE_ENV=production
-    command: ["/bin/sh", "-c", "npm run build"]
-    restart: "no"
+    command:
+      [
+        "/bin/sh",
+        "-c",
+        "until wget -q -O - http://graph-node:8030/ >/dev/null 2>&1; do sleep 2; done && until wget -q -O - http://ipfs:5001/api/v0/version >/dev/null 2>&1; do sleep 2; done && npx graph deploy --node http://graph-node:8020 --ipfs http://ipfs:5001 intent/status-marketplace subgraph.status.yaml --version-label status-sepolia",
+      ]
+    restart: on-failure
+
+  backend-status:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    depends_on:
+      - graph-node
+      - status-indexer
+    environment:
+      - SUBGRAPH_URL=${STATUS_SUBGRAPH_URL:-http://graph-node:8000/subgraphs/name/intent/status-marketplace}
+      - SUBGRAPH_CACHE_TTL_MS=${SUBGRAPH_CACHE_TTL_MS:-5000}
+      - RATE_LIMIT_WINDOW_MS=${RATE_LIMIT_WINDOW_MS:-60000}
+      - RATE_LIMIT_MAX=${RATE_LIMIT_MAX:-120}
+      - CORS_ORIGIN=${CORS_ORIGIN:-*}
+      - CONTRACT_ADDRESS=${STATUS_CONTRACT_ADDRESS:-0xF79367dAB12D8E12146685dA2830f112F02De71a}
+      - NETWORK_NAME=${STATUS_NETWORK_NAME:-status-sepolia}
+      - CHAIN_ID=${STATUS_CHAIN_ID:-1660990954}
+      - FEE_BPS_ON_ACCEPT=${FEE_BPS_ON_ACCEPT:-50}
+      - FIXED_FEE_ON_EXPIRE=${FIXED_FEE_ON_EXPIRE:-1000000}
+      - BOND_BPS_OF_REWARD=${BOND_BPS_OF_REWARD:-500}
+      - BOND_MIN=${BOND_MIN:-1000000}
+      - PORT=3000
+    expose:
+      - "3000"
+    restart: unless-stopped
 
   frontend:
     build:
@@ -36,8 +100,18 @@ services:
       dockerfile: Dockerfile
       args:
         VITE_API_BASE: ${VITE_API_BASE:-/api}
+        VITE_BASE_API_BASE: ${VITE_BASE_API_BASE:-/api/base}
+        VITE_STATUS_API_BASE: ${VITE_STATUS_API_BASE:-/api/status}
+        VITE_BASE_RPC_URL: ${VITE_BASE_RPC_URL:-https://mainnet.base.org}
+        VITE_STATUS_SEPOLIA_RPC_URL: ${VITE_STATUS_SEPOLIA_RPC_URL:-https://public.sepolia.rpc.status.network}
+        VITE_BASE_CONTRACT_ADDRESS: ${VITE_BASE_CONTRACT_ADDRESS:-0x442D68de43B37a0B2F975dc8dEfEfC349070Fb3A}
+        VITE_STATUS_CONTRACT_ADDRESS: ${VITE_STATUS_CONTRACT_ADDRESS:-0xF79367dAB12D8E12146685dA2830f112F02De71a}
     expose:
       - "80"
     depends_on:
-      - backend
+      - backend-base
+      - backend-status
     restart: unless-stopped
+
+volumes:
+  graph-node-postgres:
