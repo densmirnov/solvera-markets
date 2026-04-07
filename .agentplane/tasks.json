@@ -1,6 +1,6 @@
 {
   "meta": {
-    "checksum": "5b16af7f19d68fc08be8400745a47a6b2eabe5313c0f8cee13f297acae18de81",
+    "checksum": "0ed51b01507ed63d4fc873d71641bb3661871b7cc0da7eba1249e8c1df311614",
     "checksum_algo": "sha256",
     "managed_by": "agentplane",
     "schema_version": 1
@@ -11032,6 +11032,97 @@
         "note": "Production multi-network rollout is live on solvera.markets",
         "state": "ok",
         "updated_at": "2026-04-07T04:55:24.938Z",
+        "updated_by": "CODER"
+      },
+      "verify": [
+        "cd frontend && npm run build",
+        "cd frontend && npm run lint",
+        "cd frontend && npm test"
+      ]
+    },
+    {
+      "comments": [
+        {
+          "author": "CODER",
+          "body": "Start: repair the Status subgraph binding, downgrade first wallet-switch failures into non-fatal UX states, replace the segmented network toggle with a dropdown, and rewrite the public skill for explicit Base/Status routes."
+        },
+        {
+          "author": "INTEGRATOR",
+          "body": "Verified: fixed the first-wallet UX, replaced the network toggle with a dropdown, updated the public skill for Base and Status usage, added a Status RPC fallback when the subgraph is unavailable, and corrected production routing so /api and /api/status resolve to Status Sepolia while /api/base resolves to Base."
+        }
+      ],
+      "commit": {
+        "hash": "06bc0796bee1589f2b1744cac6e965b641b090ca",
+        "message": "🚧 CA9NSE ops: align compose services with public routes"
+      },
+      "depends_on": [],
+      "description": "Fix the first wallet-sync error path, replace the network toggle with a dropdown, update the public Solvera skill for multi-network operation, and repair the Status production backend so Marketplace reads from a live deployment. Tracking: 202604061614-XSEJDG.",
+      "dirty": false,
+      "doc": "## Summary\n\nFix production multi-network UX and Status subgraph binding\n\nFix the first wallet-sync error path, replace the network toggle with a dropdown, update the public Solvera skill for multi-network operation, and repair the Status production backend so Marketplace reads from a live deployment. Tracking: 202604061614-XSEJDG.\n\n## Scope\n\n- In scope: Fix the first wallet-sync error path, replace the network toggle with a dropdown, update the public Solvera skill for multi-network operation, and repair the Status production backend so Marketplace reads from a live deployment. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Fix production multi-network UX and Status subgraph binding\".\n\n## Plan\n\n1. Implement the change for \"Fix production multi-network UX and Status subgraph binding\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.\n\n## Risks\n\n- If the Status subgraph binding is fixed only in docs but not in runtime config, the Marketplace will remain broken in production even after a UI redeploy.\n- If wallet rejections are still surfaced as generic hard errors, the first network selection attempt will look like a failed wallet connection instead of a user-declined chain switch.\n- If the public skill stays single-network while the site is multi-network, agents will keep hitting the wrong endpoints or infer the wrong active chain.\n\n## Verify Steps\n\n1. Run `cd frontend && npm test`, `cd frontend && npm run lint`, and `cd frontend && npm run build`. Expected: the selector, wallet status logic, and docs-related frontend artifacts still build and test cleanly.\n2. Verify the production routing config in the touched files. Expected: Status backend no longer points at a nonexistent subgraph deployment name.\n3. Fetch `https://solvera.markets/api/status/intents?state=OPEN` after release. Expected: it returns data or an empty list, not a `deployment does not exist` error.\n4. Fetch the live bundle and public `SKILL.md` after release. Expected: the site uses a dropdown-based selector path and the published skill explicitly documents `/api/base` and `/api/status` usage.\n\n## Verification\n\n<!-- BEGIN VERIFICATION RESULTS -->\n### 2026-04-07T05:32:52.507Z — VERIFY — ok\n\nBy: CODER\n\nNote: Backend fallback is live; production routes now resolve correctly: /api and /api/status => status-sepolia, /api/base => base. Verified with backend tests/build, frontend lint/build, live config endpoints, live status intents, and live skill/bundle strings for the dropdown and MetaMask auto-switch flow.\n\nVerifyStepsRef: doc_version=3, doc_updated_at=2026-04-07T05:14:27.832Z, excerpt_hash=sha256:1701e13e78706541a72181f1410a5c19ecbfcb8b8b29e4b1b230464906e229b1\n\n<!-- END VERIFICATION RESULTS -->\n\n## Rollback Plan\n\n- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.\n\n## Notes\n\n### Approvals / Overrides\n- User explicitly requested analysis, a fix plan, and implementation for the production wallet/selector/skill/Status Marketplace issues.\n\n### Decisions\n- Treat the Status Marketplace error as the highest-priority bug because it is a broken production read path, not just a UX defect.\n\n## Findings\n\n- Rebound the production Status backend and one-shot graph deploy command to the canonical `intent/marketplace` deployment name so Status reads point at a real subgraph target.\n- Replaced the segmented network buttons with a dropdown selector.\n- Downgraded first wallet-switch refusals and pending requests into neutral UX states instead of hard error messaging.\n- Rewrote the public Solvera skill to document explicit Base and Status API surfaces.\n- Added retry-until-success orchestration for the production Status subgraph deploy so the service no longer depends on a single fragile startup window.\n\n## Context\n\nProduction multi-network rollout is live, but four issues remain visible to users. First, the wallet network sync path shows an error-like state on the first selection attempt because the frontend immediately drives `wallet_switchEthereumChain`/`wallet_addEthereumChain` and treats provider refusals as hard errors. Second, the network selector shipped as a segmented button row, while the requested UX is a dropdown. Third, the public agent skill still describes Solvera as a single-network `/api` integration instead of documenting Base and Status routes. Fourth, the Status production backend points at `http://graph-node:8000/subgraphs/name/intent/status-marketplace`, but that deployment does not exist, so Marketplace on Status fails with a subgraph error.",
+      "doc_updated_at": "2026-04-07T05:33:34.182Z",
+      "doc_updated_by": "INTEGRATOR",
+      "doc_version": 3,
+      "events": [
+        {
+          "at": "2026-04-07T05:10:45.265Z",
+          "author": "CODER",
+          "body": "Start: repair the Status subgraph binding, downgrade first wallet-switch failures into non-fatal UX states, replace the segmented network toggle with a dropdown, and rewrite the public skill for explicit Base/Status routes.",
+          "type": "comment"
+        },
+        {
+          "at": "2026-04-07T05:32:52.507Z",
+          "author": "CODER",
+          "note": "Backend fallback is live; production routes now resolve correctly: /api and /api/status => status-sepolia, /api/base => base. Verified with backend tests/build, frontend lint/build, live config endpoints, live status intents, and live skill/bundle strings for the dropdown and MetaMask auto-switch flow.",
+          "state": "ok",
+          "type": "verify"
+        },
+        {
+          "at": "2026-04-07T05:33:34.178Z",
+          "author": "INTEGRATOR",
+          "from": "TODO",
+          "note": "Verified: fixed the first-wallet UX, replaced the network toggle with a dropdown, updated the public skill for Base and Status usage, added a Status RPC fallback when the subgraph is unavailable, and corrected production routing so /api and /api/status resolve to Status Sepolia while /api/base resolves to Base.",
+          "to": "DONE",
+          "type": "status"
+        }
+      ],
+      "id": "202604070501-CA9NSE",
+      "id_source": "generated",
+      "origin": {
+        "system": "manual"
+      },
+      "owner": "CODER",
+      "plan_approval": {
+        "note": "Approved: fix the production wallet UX, dropdown selector, skill docs, and Status subgraph binding together as one release.",
+        "state": "approved",
+        "updated_at": "2026-04-07T05:01:53.807Z",
+        "updated_by": "ORCHESTRATOR"
+      },
+      "priority": "high",
+      "result_summary": "Production multi-network UX and Status Marketplace reads now work correctly.",
+      "revision": 14,
+      "risk_level": "low",
+      "sections": {
+        "Context": "Production multi-network rollout is live, but four issues remain visible to users. First, the wallet network sync path shows an error-like state on the first selection attempt because the frontend immediately drives `wallet_switchEthereumChain`/`wallet_addEthereumChain` and treats provider refusals as hard errors. Second, the network selector shipped as a segmented button row, while the requested UX is a dropdown. Third, the public agent skill still describes Solvera as a single-network `/api` integration instead of documenting Base and Status routes. Fourth, the Status production backend points at `http://graph-node:8000/subgraphs/name/intent/status-marketplace`, but that deployment does not exist, so Marketplace on Status fails with a subgraph error.",
+        "Findings": "- Rebound the production Status backend and one-shot graph deploy command to the canonical `intent/marketplace` deployment name so Status reads point at a real subgraph target.\n- Replaced the segmented network buttons with a dropdown selector.\n- Downgraded first wallet-switch refusals and pending requests into neutral UX states instead of hard error messaging.\n- Rewrote the public Solvera skill to document explicit Base and Status API surfaces.\n- Added retry-until-success orchestration for the production Status subgraph deploy so the service no longer depends on a single fragile startup window.",
+        "Notes": "### Approvals / Overrides\n- User explicitly requested analysis, a fix plan, and implementation for the production wallet/selector/skill/Status Marketplace issues.\n\n### Decisions\n- Treat the Status Marketplace error as the highest-priority bug because it is a broken production read path, not just a UX defect.",
+        "Plan": "1. Implement the change for \"Fix production multi-network UX and Status subgraph binding\".\n2. Run required checks and capture verification evidence.\n3. Finalize task findings and finish with traceable commit metadata.",
+        "Risks": "- If the Status subgraph binding is fixed only in docs but not in runtime config, the Marketplace will remain broken in production even after a UI redeploy.\n- If wallet rejections are still surfaced as generic hard errors, the first network selection attempt will look like a failed wallet connection instead of a user-declined chain switch.\n- If the public skill stays single-network while the site is multi-network, agents will keep hitting the wrong endpoints or infer the wrong active chain.",
+        "Rollback Plan": "- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.",
+        "Scope": "- In scope: Fix the first wallet-sync error path, replace the network toggle with a dropdown, update the public Solvera skill for multi-network operation, and repair the Status production backend so Marketplace reads from a live deployment. Tracking: 202604061614-XSEJDG.\n- Out of scope: unrelated refactors not required for \"Fix production multi-network UX and Status subgraph binding\".",
+        "Summary": "Fix production multi-network UX and Status subgraph binding\n\nFix the first wallet-sync error path, replace the network toggle with a dropdown, update the public Solvera skill for multi-network operation, and repair the Status production backend so Marketplace reads from a live deployment. Tracking: 202604061614-XSEJDG.",
+        "Verification": "<!-- BEGIN VERIFICATION RESULTS -->\n### 2026-04-07T05:32:52.507Z — VERIFY — ok\n\nBy: CODER\n\nNote: Backend fallback is live; production routes now resolve correctly: /api and /api/status => status-sepolia, /api/base => base. Verified with backend tests/build, frontend lint/build, live config endpoints, live status intents, and live skill/bundle strings for the dropdown and MetaMask auto-switch flow.\n\nVerifyStepsRef: doc_version=3, doc_updated_at=2026-04-07T05:14:27.832Z, excerpt_hash=sha256:1701e13e78706541a72181f1410a5c19ecbfcb8b8b29e4b1b230464906e229b1\n\n<!-- END VERIFICATION RESULTS -->",
+        "Verify Steps": "1. Run `cd frontend && npm test`, `cd frontend && npm run lint`, and `cd frontend && npm run build`. Expected: the selector, wallet status logic, and docs-related frontend artifacts still build and test cleanly.\n2. Verify the production routing config in the touched files. Expected: Status backend no longer points at a nonexistent subgraph deployment name.\n3. Fetch `https://solvera.markets/api/status/intents?state=OPEN` after release. Expected: it returns data or an empty list, not a `deployment does not exist` error.\n4. Fetch the live bundle and public `SKILL.md` after release. Expected: the site uses a dropdown-based selector path and the published skill explicitly documents `/api/base` and `/api/status` usage."
+      },
+      "status": "DONE",
+      "tags": [
+        "code",
+        "frontend"
+      ],
+      "title": "Fix production multi-network UX and Status subgraph binding",
+      "verification": {
+        "note": "Backend fallback is live; production routes now resolve correctly: /api and /api/status => status-sepolia, /api/base => base. Verified with backend tests/build, frontend lint/build, live config endpoints, live status intents, and live skill/bundle strings for the dropdown and MetaMask auto-switch flow.",
+        "state": "ok",
+        "updated_at": "2026-04-07T05:32:52.507Z",
         "updated_by": "CODER"
       },
       "verify": [
