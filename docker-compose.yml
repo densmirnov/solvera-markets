@@ -65,7 +65,7 @@ services:
       [
         "/bin/sh",
         "-c",
-        "until wget -q -O - http://graph-node:8030/ >/dev/null 2>&1; do sleep 2; done && until wget -q -O - http://ipfs:5001/api/v0/version >/dev/null 2>&1; do sleep 2; done && npx graph deploy --node http://graph-node:8020 --ipfs http://ipfs:5001 intent/status-marketplace subgraph.status.yaml --version-label status-sepolia",
+        "until wget -q -O - http://graph-node:8030/ >/dev/null 2>&1; do sleep 2; done && until wget -q -O - http://ipfs:5001/api/v0/version >/dev/null 2>&1; do sleep 2; done && npx graph deploy --node http://graph-node:8020 --ipfs http://ipfs:5001 intent/marketplace subgraph.status.yaml --version-label status-sepolia",
       ]
     restart: on-failure
 
@@ -77,7 +77,7 @@ services:
       - graph-node
       - status-indexer
     environment:
-      - SUBGRAPH_URL=${STATUS_SUBGRAPH_URL:-http://graph-node:8000/subgraphs/name/intent/status-marketplace}
+      - SUBGRAPH_URL=${STATUS_SUBGRAPH_URL:-http://graph-node:8000/subgraphs/name/intent/marketplace}
       - SUBGRAPH_CACHE_TTL_MS=${SUBGRAPH_CACHE_TTL_MS:-5000}
       - RATE_LIMIT_WINDOW_MS=${RATE_LIMIT_WINDOW_MS:-60000}
       - RATE_LIMIT_MAX=${RATE_LIMIT_MAX:-120}

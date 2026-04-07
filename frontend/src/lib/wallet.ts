@@ -18,7 +18,13 @@ declare global {
 
 export interface WalletSwitchResult {
   ok: boolean;
-  status: "ready" | "added" | "unavailable" | "error";
+  status:
+    | "ready"
+    | "added"
+    | "unavailable"
+    | "switching"
+    | "idle"
+    | "error";
   error?: string;
 }
 
@@ -58,7 +64,11 @@ export async function switchOrAddNetwork(
   provider = getEthereumProvider(),
 ): Promise<WalletSwitchResult> {
   if (!provider) {
-    return { ok: false, status: "unavailable", error: "MetaMask is not available" };
+    return {
+      ok: false,
+      status: "unavailable",
+      error: "No injected wallet detected; browsing still works",
+    };
   }
 
   const network = getNetworkDefinition(targetNetwork);
@@ -70,7 +80,33 @@ export async function switchOrAddNetwork(
     });
     return { ok: true, status: "ready" };
   } catch (error) {
-    if (parseProviderErrorCode(error) !== 4902) {
+    const code = parseProviderErrorCode(error);
+
+    if (code === 4001) {
+      return {
+        ok: false,
+        status: "idle",
+        error: "Wallet kept its current network",
+      };
+    }
+
+    if (code === 4100) {
+      return {
+        ok: false,
+        status: "idle",
+        error: "Unlock or connect your wallet to switch networks",
+      };
+    }
+
+    if (code === -32002) {
+      return {
+        ok: false,
+        status: "switching",
+        error: "Confirm the pending network request in your wallet",
+      };
+    }
+
+    if (code !== 4902) {
       return {
         ok: false,
         status: "error",
@@ -94,6 +130,16 @@ export async function switchOrAddNetwork(
     });
     return { ok: true, status: "added" };
   } catch (error) {
+    const code = parseProviderErrorCode(error);
+
+    if (code === 4001) {
+      return {
+        ok: false,
+        status: "idle",
+        error: "Wallet did not add the requested network",
+      };
+    }
+
     return {
       ok: false,
       status: "error",

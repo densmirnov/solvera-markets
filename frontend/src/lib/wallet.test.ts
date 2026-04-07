@@ -36,6 +36,34 @@ describe("wallet network helpers", () => {
     });
   });
 
+  it("treats a user-rejected switch as a non-fatal idle result", async () => {
+    const request = vi
+      .fn()
+      .mockRejectedValueOnce({ code: 4001, message: "User rejected the request" });
+
+    const result = await switchOrAddNetwork("status-sepolia", { request });
+
+    expect(result).toEqual({
+      ok: false,
+      status: "idle",
+      error: "Wallet kept its current network",
+    });
+  });
+
+  it("treats a pending wallet request as a switching status", async () => {
+    const request = vi
+      .fn()
+      .mockRejectedValueOnce({ code: -32002, message: "Request already pending" });
+
+    const result = await switchOrAddNetwork("base", { request });
+
+    expect(result).toEqual({
+      ok: false,
+      status: "switching",
+      error: "Confirm the pending network request in your wallet",
+    });
+  });
+
   it("subscribes to chainChanged and normalizes supported networks", () => {
     const listeners = new Map<string, (...args: unknown[]) => void>();
     const provider = {

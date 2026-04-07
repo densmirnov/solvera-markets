@@ -1,13 +1,14 @@
-import { Button } from "./Button";
 import { cn } from "../../lib/utils";
 import { getNetworkDefinition, type SupportedNetwork } from "../../lib/networks";
 import { useNetworkSelection } from "../../lib/network-context";
 
 function walletTone(status: string): string {
   if (status === "ready") return "text-[hsl(var(--hud-lime))]";
-  if (status === "unavailable" || status === "error") {
+  if (status === "unavailable") return "text-muted-foreground";
+  if (status === "error") {
     return "text-destructive";
   }
+  if (status === "switching") return "text-[hsl(var(--hud-amber))]";
   return "text-muted-foreground";
 }
 
@@ -15,37 +16,39 @@ export function NetworkSwitcher() {
   const { selectedNetwork, selectNetwork, walletSyncState, walletMessage } =
     useNetworkSelection();
 
-  const renderButton = (network: SupportedNetwork) => {
-    const definition = getNetworkDefinition(network);
-    const active = selectedNetwork === network;
-
-    return (
-      <Button
-        key={network}
-        type="button"
-        variant={active ? "secondary" : "ghost"}
-        size="sm"
-        className={cn(
-          "min-w-[94px] rounded-none border-l border-border/30 first:border-l-0",
-          active ? "text-foreground" : "text-foreground/70",
-        )}
-        onClick={() => void selectNetwork(network)}
-      >
-        {definition.label}
-      </Button>
-    );
-  };
-
   return (
-    <div className="pixel-frame surface-soft-muted marketplace-outline flex items-center overflow-hidden">
-      <div className="flex items-center">{(["base", "status-sepolia"] as const).map(renderButton)}</div>
-      <div className="border-l border-border/30 px-3 py-1.5 text-[10px] uppercase tracking-[0.14em]">
+    <div className="pixel-frame surface-soft-muted marketplace-outline flex items-center gap-3 px-3 py-1.5">
+      <label className="grid gap-1">
+        <span className="text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
+          Network
+        </span>
+        <select
+          className={cn(
+            "h-8 min-w-[168px] bg-background px-2 text-[12px] text-foreground",
+            "border border-border/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+          )}
+          value={selectedNetwork}
+          onChange={(event) =>
+            void selectNetwork(event.target.value as SupportedNetwork)
+          }
+        >
+          {(["base", "status-sepolia"] as const).map((network) => {
+            const definition = getNetworkDefinition(network);
+            return (
+              <option key={network} value={network}>
+                {definition.label}
+              </option>
+            );
+          })}
+        </select>
+      </label>
+      <div className="border-l border-border/30 pl-3 py-1.5 text-[10px] uppercase tracking-[0.14em]">
         <span className={walletTone(walletSyncState)}>
-          {walletSyncState === "switching" && "Wallet sync"}
-          {walletSyncState === "ready" && "Wallet ready"}
-          {walletSyncState === "unavailable" && "No wallet"}
+          {walletSyncState === "switching" && "Confirm in wallet"}
+          {walletSyncState === "ready" && "Wallet synced"}
+          {walletSyncState === "unavailable" && "Wallet optional"}
           {walletSyncState === "error" && "Wallet error"}
-          {walletSyncState === "idle" && "Wallet idle"}
+          {walletSyncState === "idle" && "Wallet unchanged"}
         </span>
         {walletMessage && (
           <div className="normal-case tracking-normal text-[11px] text-muted-foreground">
