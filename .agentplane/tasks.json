@@ -1,6 +1,6 @@
 {
   "meta": {
-    "checksum": "0ed51b01507ed63d4fc873d71641bb3661871b7cc0da7eba1249e8c1df311614",
+    "checksum": "31618ea4b86ea07408f8c9bf0018b10370b9a9d88656217e4af64f3271e40620",
     "checksum_algo": "sha256",
     "managed_by": "agentplane",
     "schema_version": 1
@@ -11129,6 +11129,85 @@
         "cd frontend && npm run build",
         "cd frontend && npm run lint",
         "cd frontend && npm test"
+      ]
+    },
+    {
+      "comments": [
+        {
+          "author": "INTEGRATOR",
+          "body": "Verified: added a non-technical Use Cases section to the Mintlify docs, explained practical scenarios across three maturity stages, wired the page into navigation, and published the update live on docs.solvera.markets."
+        }
+      ],
+      "commit": {
+        "hash": "a5cba55abe6f44bba87afae9a0d5708cbe51a112",
+        "message": "🚧 FQWW78 docs: add non-technical use cases page"
+      },
+      "depends_on": [],
+      "description": "Add a new Use Cases section to the Mintlify docs, explain practical intent-marketplace scenarios for non-technical readers across three maturity stages, wire it into navigation, and publish the documentation update to docs.solvera.markets.",
+      "dirty": false,
+      "doc": "## Summary\n\nAdd non-technical use cases page to docs and publish it\n\nAdd a new Use Cases section to the Mintlify docs, explain practical intent-marketplace scenarios for non-technical readers across three maturity stages, wire it into navigation, and publish the documentation update to docs.solvera.markets.\n\n## Scope\n\n- In scope: Add a new Use Cases section to the Mintlify docs, explain practical intent-marketplace scenarios for non-technical readers across three maturity stages, wire it into navigation, and publish the documentation update to docs.solvera.markets.\n- Out of scope: unrelated refactors not required for \"Add non-technical use cases page to docs and publish it\".\n\n## Plan\n\n1. Создать новую Mintlify-страницу с разделом Use Cases и описать практические сценарии простым языком.\n2. Разбить сценарии по трем этапам взросления: изменения балансов, любые ончейн-действия, любые действия включая оффчейн-события.\n3. Подключить страницу в docs navigation и при необходимости добавить ссылку с overview-страниц.\n4. Проверить наличие страницы и навигации локально по файловой структуре.\n5. Закоммитить, опубликовать и проверить live docs.\n\n## Risks\n\n- Если Use Cases будут описаны слишком технически, страница не решит задачу для нетехнической аудитории.\n- Если этапы взросления проекта будут смешаны, читатель не поймёт, что уже возможно сейчас, а что является следующим шагом.\n- Если страница не будет добавлена в docs navigation, обновление фактически не станет частью документации.\n\n## Verify Steps\n\n1. Проверить, что существует файл docs/use-cases/intent-marketplace-use-cases.md. Expected: страница создана и содержит frontmatter Mintlify.\n2. Проверить docs/docs.json. Expected: в navigation есть отдельная группа Use Cases со страницей use-cases/intent-marketplace-use-cases.\n3. Прочитать новую страницу. Expected: текст написан простым языком для нетехнических читателей и разделён на три этапа взросления проекта с практическими примерами.\n4. После push открыть https://docs.solvera.markets и страницу Use Cases. Expected: обновление доступно live.\n\n## Verification\n\n<!-- BEGIN VERIFICATION RESULTS -->\n### 2026-04-10T10:23:07.523Z — VERIFY — ok\n\nBy: DOCS\n\nNote: Created a new Mintlify Use Cases page, wired it into docs navigation, linked it from overview pages, pushed the docs update, and confirmed the live page returns 200 at https://docs.solvera.markets/use-cases/intent-marketplace-use-cases with the expected title and content.\n\nVerifyStepsRef: doc_version=3, doc_updated_at=2026-04-10T10:19:59.044Z, excerpt_hash=sha256:83bfbf1356bf270d1ec61bdb32112a759c4f9b52dfe9b24bca1e6455b6140c4b\n\n<!-- END VERIFICATION RESULTS -->\n\n## Rollback Plan\n\n- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.\n\n## Notes\n\n### Approvals / Overrides\n- Пользователь явно разрешил выполнить изменение и отдельно указал не создавать новую задачу agentplane для proposal-работы в предыдущем запросе; для текущего docs-изменения tracking task создана штатно.\n\n### Decisions\n- Раздел Use Cases будет отдельной навигационной группой, а не спрятан внутри reference или concepts, чтобы его легко находили нетехнические читатели.\n- Повествование будет построено вокруг трёх стадий взросления продукта: balances -> onchain actions -> any actions with oracle-backed resolution.\n\n## Findings\n\n\n## Context\n\nНужно добавить отдельный, понятный нетехническому читателю раздел Use Cases в Mintlify-документацию Solvera Markets. Раздел должен объяснять, как intent marketplace используется на практике и как меняются сценарии по мере взросления продукта: от простых изменений баланса кошелька к любым ончейн-действиям, а затем к любым действиям, включая оффчейн-события. Изменение должно публиковаться в live docs на https://docs.solvera.markets.",
+      "doc_updated_at": "2026-04-10T10:23:15.674Z",
+      "doc_updated_by": "INTEGRATOR",
+      "doc_version": 3,
+      "events": [
+        {
+          "at": "2026-04-10T10:23:07.523Z",
+          "author": "DOCS",
+          "note": "Created a new Mintlify Use Cases page, wired it into docs navigation, linked it from overview pages, pushed the docs update, and confirmed the live page returns 200 at https://docs.solvera.markets/use-cases/intent-marketplace-use-cases with the expected title and content.",
+          "state": "ok",
+          "type": "verify"
+        },
+        {
+          "at": "2026-04-10T10:23:15.673Z",
+          "author": "INTEGRATOR",
+          "from": "TODO",
+          "note": "Verified: added a non-technical Use Cases section to the Mintlify docs, explained practical scenarios across three maturity stages, wired the page into navigation, and published the update live on docs.solvera.markets.",
+          "to": "DONE",
+          "type": "status"
+        }
+      ],
+      "id": "202604101019-FQWW78",
+      "id_source": "generated",
+      "origin": {
+        "system": "manual"
+      },
+      "owner": "DOCS",
+      "plan_approval": {
+        "note": "Approved after verify steps were finalized; proceed with docs implementation and publication.",
+        "state": "approved",
+        "updated_at": "2026-04-10T10:22:53.722Z",
+        "updated_by": "ORCHESTRATOR"
+      },
+      "priority": "high",
+      "result_summary": "Use Cases docs page is live and linked in the documentation navigation.",
+      "revision": 9,
+      "risk_level": "low",
+      "sections": {
+        "Context": "Нужно добавить отдельный, понятный нетехническому читателю раздел Use Cases в Mintlify-документацию Solvera Markets. Раздел должен объяснять, как intent marketplace используется на практике и как меняются сценарии по мере взросления продукта: от простых изменений баланса кошелька к любым ончейн-действиям, а затем к любым действиям, включая оффчейн-события. Изменение должно публиковаться в live docs на https://docs.solvera.markets.",
+        "Findings": "",
+        "Notes": "### Approvals / Overrides\n- Пользователь явно разрешил выполнить изменение и отдельно указал не создавать новую задачу agentplane для proposal-работы в предыдущем запросе; для текущего docs-изменения tracking task создана штатно.\n\n### Decisions\n- Раздел Use Cases будет отдельной навигационной группой, а не спрятан внутри reference или concepts, чтобы его легко находили нетехнические читатели.\n- Повествование будет построено вокруг трёх стадий взросления продукта: balances -> onchain actions -> any actions with oracle-backed resolution.",
+        "Plan": "1. Создать новую Mintlify-страницу с разделом Use Cases и описать практические сценарии простым языком.\n2. Разбить сценарии по трем этапам взросления: изменения балансов, любые ончейн-действия, любые действия включая оффчейн-события.\n3. Подключить страницу в docs navigation и при необходимости добавить ссылку с overview-страниц.\n4. Проверить наличие страницы и навигации локально по файловой структуре.\n5. Закоммитить, опубликовать и проверить live docs.",
+        "Risks": "- Если Use Cases будут описаны слишком технически, страница не решит задачу для нетехнической аудитории.\n- Если этапы взросления проекта будут смешаны, читатель не поймёт, что уже возможно сейчас, а что является следующим шагом.\n- Если страница не будет добавлена в docs navigation, обновление фактически не станет частью документации.",
+        "Rollback Plan": "- Revert task-related commit(s).\n- Re-run required checks to confirm rollback safety.",
+        "Scope": "- In scope: Add a new Use Cases section to the Mintlify docs, explain practical intent-marketplace scenarios for non-technical readers across three maturity stages, wire it into navigation, and publish the documentation update to docs.solvera.markets.\n- Out of scope: unrelated refactors not required for \"Add non-technical use cases page to docs and publish it\".",
+        "Summary": "Add non-technical use cases page to docs and publish it\n\nAdd a new Use Cases section to the Mintlify docs, explain practical intent-marketplace scenarios for non-technical readers across three maturity stages, wire it into navigation, and publish the documentation update to docs.solvera.markets.",
+        "Verification": "<!-- BEGIN VERIFICATION RESULTS -->\n### 2026-04-10T10:23:07.523Z — VERIFY — ok\n\nBy: DOCS\n\nNote: Created a new Mintlify Use Cases page, wired it into docs navigation, linked it from overview pages, pushed the docs update, and confirmed the live page returns 200 at https://docs.solvera.markets/use-cases/intent-marketplace-use-cases with the expected title and content.\n\nVerifyStepsRef: doc_version=3, doc_updated_at=2026-04-10T10:19:59.044Z, excerpt_hash=sha256:83bfbf1356bf270d1ec61bdb32112a759c4f9b52dfe9b24bca1e6455b6140c4b\n\n<!-- END VERIFICATION RESULTS -->",
+        "Verify Steps": "1. Проверить, что существует файл docs/use-cases/intent-marketplace-use-cases.md. Expected: страница создана и содержит frontmatter Mintlify.\n2. Проверить docs/docs.json. Expected: в navigation есть отдельная группа Use Cases со страницей use-cases/intent-marketplace-use-cases.\n3. Прочитать новую страницу. Expected: текст написан простым языком для нетехнических читателей и разделён на три этапа взросления проекта с практическими примерами.\n4. После push открыть https://docs.solvera.markets и страницу Use Cases. Expected: обновление доступно live."
+      },
+      "status": "DONE",
+      "tags": [
+        "docs"
+      ],
+      "title": "Add non-technical use cases page to docs and publish it",
+      "verification": {
+        "note": "Created a new Mintlify Use Cases page, wired it into docs navigation, linked it from overview pages, pushed the docs update, and confirmed the live page returns 200 at https://docs.solvera.markets/use-cases/intent-marketplace-use-cases with the expected title and content.",
+        "state": "ok",
+        "updated_at": "2026-04-10T10:23:07.523Z",
+        "updated_by": "DOCS"
+      },
+      "verify": [
+        "jq -e '.navigation.groups[] | select(.group==\"Use Cases\") | .pages[] | select(.==\"use-cases/intent-marketplace-use-cases\")' docs/docs.json >/dev/null",
+        "test -f docs/use-cases/intent-marketplace-use-cases.md"
       ]
     }
   ]
