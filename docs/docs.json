@@ -23,6 +23,10 @@
         "pages": ["concepts/roles-and-intents", "concepts/state-machine", "concepts/economics-fees-and-bonds"]
       },
       {
+        "group": "Use Cases",
+        "pages": ["use-cases/intent-marketplace-use-cases"]
+      },
+      {
         "group": "Guides",
         "pages": ["guides/event-stream"]
       },

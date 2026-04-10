@@ -39,7 +39,7 @@ make check
 ```
 
 ## Next pages
+- Product: [Use Cases](/use-cases/intent-marketplace-use-cases)
 - Contracts: [Contract spec](/reference/contracts/contract-spec) and [ABI and events](/reference/contracts/abi-and-events)
 - APIs: [Backend HTTP API](/reference/backend/http-api) and [Indexer model](/reference/indexer/data-model)
 - Ops: [Deployments and addresses](/operations/deployments-and-addresses)
-
