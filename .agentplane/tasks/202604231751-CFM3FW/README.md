@@ -1,10 +1,12 @@
 ---
 id: "202604231751-CFM3FW"
 title: "Fix home brand typo and add whitelist signup"
-status: "DOING"
+result_summary: "Fixed the homepage brand typo and added a configurable whitelist signup block for Brevo-backed email collection."
+risk_level: "low"
+status: "DONE"
 priority: "med"
 owner: "CODER"
-revision: 9
+revision: 10
 origin:
   system: "manual"
 depends_on: []
@@ -21,11 +23,16 @@ verification:
   updated_at: "2026-04-23T17:55:03.507Z"
   updated_by: "CODER"
   note: "Validated homepage typo removal, whitelist signup UI wiring, eslint, and production build for the approved frontend scope."
-commit: null
+commit:
+  hash: "97e42fff288d2e60271cc645521c16bf441f986f"
+  message: "✅ CFM3FW meta: done"
 comments:
   -
     author: "CODER"
     body: "Start: implement the approved homepage typo fix and whitelist signup block without introducing backend persistence, keeping the diff limited to the frontend landing page and its styling."
+  -
+    author: "CODER"
+    body: "Verified: homepage branding now consistently uses Solvera, the whitelist signup block is live on the landing page with env-based Brevo handoff wiring, and the approved frontend checks passed."
 events:
   -
     type: "status"
@@ -40,8 +47,15 @@ events:
     author: "CODER"
     state: "ok"
     note: "Validated homepage typo removal, whitelist signup UI wiring, eslint, and production build for the approved frontend scope."
+  -
+    type: "status"
+    at: "2026-04-23T17:55:14.919Z"
+    author: "CODER"
+    from: "DOING"
+    to: "DONE"
+    note: "Verified: homepage branding now consistently uses Solvera, the whitelist signup block is live on the landing page with env-based Brevo handoff wiring, and the approved frontend checks passed."
 doc_version: 3
-doc_updated_at: "2026-04-23T17:55:03.513Z"
+doc_updated_at: "2026-04-23T17:55:14.921Z"
 doc_updated_by: "CODER"
 description: "Correct the Solvera home page brand typo and add a homepage whitelist signup block for future email updates using an external mailing-list provider integration point."
 sections:
