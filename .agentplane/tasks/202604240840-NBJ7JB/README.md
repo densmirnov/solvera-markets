@@ -1,10 +1,12 @@
 ---
 id: "202604240840-NBJ7JB"
 title: "Wire Brevo waitlist form into production deploy"
-status: "DOING"
+result_summary: "Wired the live Brevo waitlist endpoint into the frontend production build pipeline for Dokploy/GitHub deploys."
+risk_level: "low"
+status: "DONE"
 priority: "med"
 owner: "CODER"
-revision: 9
+revision: 10
 origin:
   system: "manual"
 depends_on: []
@@ -21,11 +23,16 @@ verification:
   updated_at: "2026-04-24T08:43:41.084Z"
   updated_by: "CODER"
   note: "Validated the frontend deploy wiring for the live Brevo waitlist endpoint with eslint, a production build using the real Brevo URL, and a scoped diff over the deploy surface."
-commit: null
+commit:
+  hash: "2f51ae034e78446c58ae21d42224ce84e305f594"
+  message: "✅ NBJ7JB meta: done"
 comments:
   -
     author: "CODER"
     body: "Start: wire the live Brevo waitlist endpoint through the approved frontend build and deployment surface, verify the production build locally, and attempt deployment only through the existing repository path."
+  -
+    author: "CODER"
+    body: "Verified: the production frontend build now receives the live Brevo waitlist endpoint through compose and Docker build args, and the deploy-surface checks passed with the real form URL."
 events:
   -
     type: "status"
@@ -40,8 +47,15 @@ events:
     author: "CODER"
     state: "ok"
     note: "Validated the frontend deploy wiring for the live Brevo waitlist endpoint with eslint, a production build using the real Brevo URL, and a scoped diff over the deploy surface."
+  -
+    type: "status"
+    at: "2026-04-24T08:43:48.817Z"
+    author: "CODER"
+    from: "DOING"
+    to: "DONE"
+    note: "Verified: the production frontend build now receives the live Brevo waitlist endpoint through compose and Docker build args, and the deploy-surface checks passed with the real form URL."
 doc_version: 3
-doc_updated_at: "2026-04-24T08:43:41.088Z"
+doc_updated_at: "2026-04-24T08:43:48.818Z"
 doc_updated_by: "CODER"
 description: "Add the real Brevo waitlist endpoint to the frontend deployment pipeline, update build-time env wiring, verify local production build with the live endpoint, and prepare or execute deployment through the repository's Dokploy/GitHub path."
 sections:
