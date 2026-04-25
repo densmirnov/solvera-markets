@@ -1,10 +1,12 @@
 ---
 id: "202604251028-J7WW6N"
 title: "Accent waitlist subscribe button and redeploy"
-status: "DOING"
+result_summary: "Raised the visual prominence of the homepage waitlist subscribe button and prepared the updated frontend for redeploy."
+risk_level: "low"
+status: "DONE"
 priority: "med"
 owner: "CODER"
-revision: 10
+revision: 11
 origin:
   system: "manual"
 depends_on: []
@@ -21,11 +23,16 @@ verification:
   updated_at: "2026-04-25T10:29:44.967Z"
   updated_by: "CODER"
   note: "Validated the accent button treatment on the homepage waitlist CTA with eslint, a production build using the live Brevo URL, and a scoped diff over the homepage UI."
-commit: null
+commit:
+  hash: "8fee2d607c30455a62ffd467b9996f8f32742118"
+  message: "✅ J7WW6N meta: done"
 comments:
   -
     author: "CODER"
     body: "Start: apply an accent-driven visual treatment to the homepage waitlist subscribe button, verify the frontend build, and repeat the established main-branch deploy plus live probe path."
+  -
+    author: "CODER"
+    body: "Verified: the homepage waitlist submit button now uses a stronger accent treatment that makes the subscribe CTA visually dominant, and the approved frontend checks passed before redeploy."
 events:
   -
     type: "status"
@@ -40,8 +47,15 @@ events:
     author: "CODER"
     state: "ok"
     note: "Validated the accent button treatment on the homepage waitlist CTA with eslint, a production build using the live Brevo URL, and a scoped diff over the homepage UI."
+  -
+    type: "status"
+    at: "2026-04-25T10:29:51.791Z"
+    author: "CODER"
+    from: "DOING"
+    to: "DONE"
+    note: "Verified: the homepage waitlist submit button now uses a stronger accent treatment that makes the subscribe CTA visually dominant, and the approved frontend checks passed before redeploy."
 doc_version: 3
-doc_updated_at: "2026-04-25T10:29:44.972Z"
+doc_updated_at: "2026-04-25T10:29:51.791Z"
 doc_updated_by: "CODER"
 description: "Increase the visual salience of the homepage waitlist subscribe button, verify the frontend build, and redeploy through the existing main branch workflow with a live probe."
 sections:
