@@ -111,7 +111,11 @@ export default function HomePage() {
               required
             />
           </label>
-          <Button size="lg" type="submit" className="waitlist-submit">
+          <Button
+            size="lg"
+            type="submit"
+            className="waitlist-submit waitlist-submit-accent"
+          >
             Join Whitelist
           </Button>
         </form>
