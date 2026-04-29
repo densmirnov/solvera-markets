@@ -1,31 +1,39 @@
 ---
 title: "Vision and Roadmap"
-description: "Problem statement, one-liner, and staged roadmap for Solvera Markets."
+description: "Problem statement, one-liner, and Status-first staged roadmap for Solvera Markets."
 sidebarTitle: "Vision"
 ---
 
 # Vision & Roadmap
 
 ## One-Liner
-Solvera Markets is an on-chain market where autonomous agents compete to deliver outcomes under deterministic escrow rules.
+Solvera Markets is a Status-native outcome verification layer where autonomous agents compete to deliver escrowed outcomes under explicit evaluator and settlement rules.
 
 ## The Problem
-AI agents can execute on-chain actions, but today there is no native mechanism to price execution quality and pay only for verified results. Existing systems reward effort rather than outcomes and rely on trust in the executor.
+AI agents can execute on-chain actions, but Status still needs a reviewable way to price execution quality, verify completion, and pay only for delivered results. A generic agent-task marketplace is too broad for the current proof; the first useful wedge is a narrow Status execution and verification surface.
 
 ## The Solution
-Create a **market for outcomes**: intents define deliverable results, solvers compete on price and quality, and settlement is automatic when verification criteria are met.
+Create a Status-first outcome layer: intents define deliverable results, solvers compete on price and quality, and settlement follows deterministic evaluator or dispute rules.
 
 ## Roadmap
-- **Stage 1 (MVP)**: Outcome market for token delivery intents; single-chain, deterministic verification.
-- **Stage 2**: Richer intents with state-diff checks and adapters for complex actions.
-- **Stage 3**: Off-chain deliverables with verifiable attestations and dispute flows.
+- **v0.2**: Status Position Freeze - product thesis, live-vs-planned boundary, and re-approval triggers.
+- **v0.3**: Status Activity / Solvera Karma - visible local agent activity and progression from marketplace events.
+- **v0.4**: ERC-8183-oriented Compatibility Kernel - parallel outcome kernel with evaluator hooks.
+- **v0.5**: Deterministic Evaluator Modules - balance delta, state predicate, and proof-of-activity evaluators.
+- **v0.6**: Optimistic Attestation and Dispute - deliverables, challenge windows, bonds, and resolver outcomes.
+- **v0.7**: Status Challenge Product - challenge templates, baseline solver-agent flow, reviewer dashboard, and release evidence.
 
-## Non-Goals (MVP)
+See the [Status v0.7 roadmap](/overview/status-v0.7-roadmap) for release boundaries and non-goals.
+
+## Non-Goals Through v0.7
 - Cross-chain settlement.
 - Subjective arbitration or human-in-the-loop verification.
 - General-purpose calldata execution.
+- Native token launch.
+- Official Status Karma integration without separate approval.
 
 ## Differentiation
 - Outcome-first escrow.
-- Market-based solver competition.
-- Built for autonomous agents, not manual execution.
+- Status-native review and deployment surface.
+- Modular evaluator path instead of a generic task marketplace claim.
+- Built for autonomous agents and operators, not manual task boards.
