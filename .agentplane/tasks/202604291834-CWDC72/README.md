@@ -1,10 +1,11 @@
 ---
 id: "202604291834-CWDC72"
 title: "Apply DESIGN.md visual refresh to site"
-status: "DOING"
+result_summary: "Applied DESIGN.md visual refresh to Solvera homepage and shared styling."
+status: "DONE"
 priority: "med"
 owner: "CODER"
-revision: 8
+revision: 10
 origin:
   system: "manual"
 depends_on: []
@@ -21,11 +22,16 @@ verification:
   updated_at: "2026-04-29T18:40:48.653Z"
   updated_by: "CODER"
   note: "Verified: DESIGN.md visual refresh applied to the Solvera homepage and shared styling. agentplane task verify-show, frontend lint, frontend production build, Playwright desktop/mobile preview smoke, and git diff whitespace check all passed; favicon.ico 404 remains an unrelated non-blocking preview observation."
-commit: null
+commit:
+  hash: "a4b902dc978b1bcbe38688a4a6af8e113fd3d73e"
+  message: "✨ CWDC72 task: apply design refresh"
 comments:
   -
     author: "CODER"
     body: "Start: Implement the approved DESIGN.md visual refresh on the Solvera frontend homepage and shared styling, preserving product identity and avoiding new runtime dependencies unless re-approved."
+  -
+    author: "CODER"
+    body: "Verified: DESIGN.md visual refresh is implemented on the Solvera homepage and shared frontend styling. Required verification passed: task verify-show, frontend lint, production build, desktop/mobile preview smoke, and git diff whitespace check."
 events:
   -
     type: "status"
@@ -40,8 +46,15 @@ events:
     author: "CODER"
     state: "ok"
     note: "Verified: DESIGN.md visual refresh applied to the Solvera homepage and shared styling. agentplane task verify-show, frontend lint, frontend production build, Playwright desktop/mobile preview smoke, and git diff whitespace check all passed; favicon.ico 404 remains an unrelated non-blocking preview observation."
+  -
+    type: "status"
+    at: "2026-04-29T18:41:24.372Z"
+    author: "CODER"
+    from: "DOING"
+    to: "DONE"
+    note: "Verified: DESIGN.md visual refresh is implemented on the Solvera homepage and shared frontend styling. Required verification passed: task verify-show, frontend lint, production build, desktop/mobile preview smoke, and git diff whitespace check."
 doc_version: 3
-doc_updated_at: "2026-04-29T18:40:48.659Z"
+doc_updated_at: "2026-04-29T18:41:54.836Z"
 doc_updated_by: "CODER"
 description: "Update the Solvera frontend to reflect the current root DESIGN.md: warm bounded glass system, square controls, dot-matrix hero atmosphere, and matching homepage surfaces while preserving Solvera product content."
 sections:
@@ -101,7 +114,9 @@ sections:
   Rollback Plan: |-
     - Revert task-related commit(s).
     - Re-run required checks to confirm rollback safety.
-  Findings: ""
+  Findings: |-
+    - The root DESIGN.md contains Auralis/auth-section identity and ThreeJS/WebGL implementation hints. This task intentionally applied visual tokens and motion semantics only, preserving Solvera content and avoiding new runtime dependencies.
+    - Browser smoke observed a favicon.ico 404 on the local preview server. It is outside the approved visual-refresh scope and was not changed in this task.
 id_source: "generated"
 ---
 ## Summary
@@ -175,3 +190,6 @@ VerifyStepsRef: doc_version=3, doc_updated_at=2026-04-29T18:40:43.845Z, excerpt_
 - Re-run required checks to confirm rollback safety.
 
 ## Findings
+
+- The root DESIGN.md contains Auralis/auth-section identity and ThreeJS/WebGL implementation hints. This task intentionally applied visual tokens and motion semantics only, preserving Solvera content and avoiding new runtime dependencies.
+- Browser smoke observed a favicon.ico 404 on the local preview server. It is outside the approved visual-refresh scope and was not changed in this task.
