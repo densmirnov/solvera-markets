@@ -1,10 +1,11 @@
 ---
 id: "202604290839-5JGZMT"
 title: "Extract current site design system"
-status: "DOING"
+result_summary: "Added root DESIGN.md design-system artifact and task verification evidence."
+status: "DONE"
 priority: "med"
 owner: "DOCS"
-revision: 7
+revision: 8
 origin:
   system: "manual"
 depends_on: []
@@ -21,11 +22,16 @@ verification:
   updated_at: "2026-04-29T08:43:04.807Z"
   updated_by: "DOCS"
   note: "Verified: DESIGN.md was created from current frontend CSS and component usage. Routing check passed, agentplane doctor passed with pre-existing shim warnings, and google-labs-code design.md lint passed with 0 errors; contrast/orphan warnings recorded in task findings."
-commit: null
+commit:
+  hash: "d3b4edda1f8987db771d67069cf1d67064fd6527"
+  message: "📝 docs: add design system artifact"
 comments:
   -
     author: "DOCS"
     body: "Start: Creating the root DESIGN.md artifact from confirmed frontend design tokens and component usage only, with scope limited to DESIGN.md plus required task traceability."
+  -
+    author: "DOCS"
+    body: "Verified: DESIGN.md was created from current frontend implementation and validated with routing, doctor, and google-labs-code design.md lint. The linter returned zero errors; current CTA contrast warnings were recorded as a design finding."
 events:
   -
     type: "status"
@@ -40,8 +46,15 @@ events:
     author: "DOCS"
     state: "ok"
     note: "Verified: DESIGN.md was created from current frontend CSS and component usage. Routing check passed, agentplane doctor passed with pre-existing shim warnings, and google-labs-code design.md lint passed with 0 errors; contrast/orphan warnings recorded in task findings."
+  -
+    type: "status"
+    at: "2026-04-29T08:43:46.742Z"
+    author: "DOCS"
+    from: "DOING"
+    to: "DONE"
+    note: "Verified: DESIGN.md was created from current frontend implementation and validated with routing, doctor, and google-labs-code design.md lint. The linter returned zero errors; current CTA contrast warnings were recorded as a design finding."
 doc_version: 3
-doc_updated_at: "2026-04-29T08:43:04.811Z"
+doc_updated_at: "2026-04-29T08:43:46.742Z"
 doc_updated_by: "DOCS"
 description: "Create a DESIGN.md artifact from the current Solvera Markets frontend design using the google-labs-code/design.md format."
 sections:
