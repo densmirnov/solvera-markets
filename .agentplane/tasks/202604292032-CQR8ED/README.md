@@ -1,10 +1,12 @@
 ---
 id: "202604292032-CQR8ED"
 title: "Document Status v0.7 roadmap"
-status: "DOING"
+result_summary: "Documented Status-first roadmap through v0.7 as dependent epics and aligned docs entrypoints/proposal language."
+risk_level: "low"
+status: "DONE"
 priority: "med"
 owner: "DOCS"
-revision: 11
+revision: 12
 origin:
   system: "manual"
 depends_on: []
@@ -21,11 +23,16 @@ verification:
   updated_at: "2026-04-29T20:39:00.059Z"
   updated_by: "DOCS"
   note: "Docs roadmap verified: policy routing passed, agentplane doctor passed with only pre-existing hook warnings, docs/docs.json parsed successfully, and the new Status v0.7 docs entrypoints were found. Updated ROADMAP.md, docs overview/navigation, and STATUS_PROPOSAL.md roadmap language."
-commit: null
+commit:
+  hash: "fbc1a442f0e9abdff473fd68ca129e1684e49904"
+  message: "✅ CQR8ED docs: done"
 comments:
   -
     author: "DOCS"
     body: "Start: document the Status-first version plan through v0.7, rewrite ROADMAP.md into dependent epics, and add docs navigation while keeping changes docs-only and leaving the existing DESIGN.md drift untouched."
+  -
+    author: "DOCS"
+    body: "Verified: Status v0.7 documentation roadmap updated and checked with routing validation, agentplane doctor, docs JSON parse, and docs entrypoint search."
 events:
   -
     type: "status"
@@ -40,8 +47,15 @@ events:
     author: "DOCS"
     state: "ok"
     note: "Docs roadmap verified: policy routing passed, agentplane doctor passed with only pre-existing hook warnings, docs/docs.json parsed successfully, and the new Status v0.7 docs entrypoints were found. Updated ROADMAP.md, docs overview/navigation, and STATUS_PROPOSAL.md roadmap language."
+  -
+    type: "status"
+    at: "2026-04-29T20:39:54.265Z"
+    author: "DOCS"
+    from: "DOING"
+    to: "DONE"
+    note: "Verified: Status v0.7 documentation roadmap updated and checked with routing validation, agentplane doctor, docs JSON parse, and docs entrypoint search."
 doc_version: 3
-doc_updated_at: "2026-04-29T20:39:00.062Z"
+doc_updated_at: "2026-04-29T20:39:54.266Z"
 doc_updated_by: "DOCS"
 description: "Fix the Status-first product strategy in docs and rewrite ROADMAP.md as epics of sequential atomic dependent tasks from the current baseline through v0.7."
 sections:
