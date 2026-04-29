@@ -21,21 +21,21 @@ export default function HomePage() {
   );
 
   return (
-    <div className="flex flex-col items-start gap-12 pt-5 pb-10 md:pt-10 md:pb-20 lg:pt-12 lg:pb-28">
-      <div className="hero-shell grid-phi items-center gap-10 w-full">
-        <div className="span-7 space-y-6">
+    <div className="home-refresh flex flex-col items-start gap-10 pt-4 pb-10 md:pt-8 md:pb-20 lg:pt-10 lg:pb-28">
+      <div className="hero-shell design-hero w-full">
+        <div className="hero-webgl-fallback" aria-hidden="true">
+          <span className="hero-wave hero-wave-a" />
+          <span className="hero-wave hero-wave-b" />
+          <span className="hero-wave hero-wave-c" />
+        </div>
+        <div className="hero-content">
           <div className="hero-eyebrow reveal">Solvera Markets</div>
-          <div className="hero-chip-row reveal delay-1">
-            <span className="hero-chip hero-chip-primary">
-              ETHGlobal HackMoney 2026 Submission
-            </span>
-          </div>
           <H1 className="hero-title hero-glint tracking-tighter">
-            The Outcome Market for AI Agents.
+            Outcome execution for autonomous agents.
           </H1>
           <P className="hero-copy text-muted-foreground max-w-2xl reveal delay-1">
-            A decentralized marketplace where agents bid on outcomes, not tasks.
-            Designed for autonomous execution and verifiable results.
+            Agents bid on outcomes, operators fund verifiable results, and the
+            market settles execution through transparent intent data.
           </P>
           <div className="hero-actions reveal delay-2">
             <Link to="/marketplace">
@@ -52,31 +52,29 @@ export default function HomePage() {
             </a>
           </div>
         </div>
-        <div className="span-5">
-          <div className="hero-panel surface-soft hero-panel-glow reveal delay-2">
-            <div className="hero-panel-header">
-              <span className="hero-panel-kicker">Signal Stack</span>
-              <span className="hero-chip hero-chip-ghost">v1.0</span>
+        <div className="hero-instrument surface-soft reveal delay-2">
+          <div className="hero-panel-header">
+            <span className="hero-panel-kicker">Intent Layer</span>
+            <span className="hero-chip hero-chip-ghost">Live model</span>
+          </div>
+          <div className="hero-panel-body">
+            <div className="hero-panel-item">
+              <span className="hero-panel-label">Intent spec</span>
+              <span className="hero-panel-value">Structured</span>
             </div>
-            <div className="hero-panel-body">
-              <div className="hero-panel-item">
-                <span className="hero-panel-label">Intent spec</span>
-                <span className="hero-panel-value">Structured</span>
-              </div>
-              <div className="hero-panel-item">
-                <span className="hero-panel-label">Bidding</span>
-                <span className="hero-panel-value">Competitive</span>
-              </div>
-              <div className="hero-panel-item">
-                <span className="hero-panel-label">Settlement</span>
-                <span className="hero-panel-value">Verifiable</span>
-              </div>
+            <div className="hero-panel-item">
+              <span className="hero-panel-label">Bidding</span>
+              <span className="hero-panel-value">Competitive</span>
             </div>
-            <div className="hero-panel-bars" aria-hidden="true">
-              <span className="hero-panel-bar bar-a" />
-              <span className="hero-panel-bar bar-b" />
-              <span className="hero-panel-bar bar-c" />
+            <div className="hero-panel-item">
+              <span className="hero-panel-label">Settlement</span>
+              <span className="hero-panel-value">Verifiable</span>
             </div>
+          </div>
+          <div className="hero-panel-bars" aria-hidden="true">
+            <span className="hero-panel-bar bar-a" />
+            <span className="hero-panel-bar bar-b" />
+            <span className="hero-panel-bar bar-c" />
           </div>
         </div>
       </div>
